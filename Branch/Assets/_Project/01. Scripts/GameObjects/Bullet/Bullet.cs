@@ -136,7 +136,8 @@ public class Bullet : MonoBehaviour
         // 3. 총알은 벽(또는 기타 오브젝트)에 닿으면 파괴된다.
 
         // 플레이어가 발사한 총알
-        if (From && other && From.CompareTag("Player") && other.CompareTag("Enemy"))
+        if (From && other && From.CompareTag("Player") && other.CompareTag("Enemy") &&
+            ((1 << other.gameObject.layer) & (1 << LayerMask.NameToLayer("MonsterDead"))) == 0)
         {
             ShootByPlayer(other);
             return;
@@ -165,7 +166,8 @@ public class Bullet : MonoBehaviour
         // 3. 총알은 벽(또는 기타 오브젝트)에 닿으면 파괴된다.
 
         // 플레이어가 발사한 총알
-        if (From.CompareTag("Player") && collision.gameObject.CompareTag("Enemy"))
+        if (From.CompareTag("Player") && collision.gameObject.CompareTag("Enemy") &&
+            ((1 << collision.gameObject.layer) & (1 << LayerMask.NameToLayer("MonsterDead"))) == 0)
         {
             ShootByPlayer(collision);
             return;
@@ -348,7 +350,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    protected void TakeDamage(Transform target, float coefficient = 1.0f)
+    protected virtual void TakeDamage(Transform target, float coefficient = 1.0f)
     {
         float hitZoneValue = 1.0f;
         PartialBlow partialBlow = target.GetComponent<PartialBlow>();
@@ -365,7 +367,7 @@ public class Bullet : MonoBehaviour
             _damagedTargets.Add(otherParent);
 
             enemy.ApplyDamage(_damage * coefficient * hitZoneValue, targetMask);
-            Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient * hitZoneValue}");
+            //Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient * hitZoneValue}");
 
             if (_from.CompareTag("Player"))
             {
@@ -382,7 +384,7 @@ public class Bullet : MonoBehaviour
                 _damagedTargets.Add(otherParent);
 
                 enemy.ApplyDamage(_damage * coefficient * hitZoneValue, targetMask);
-                Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient * hitZoneValue}");
+                //Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient * hitZoneValue}");
 
                 if (_from.CompareTag("Player"))
                 {

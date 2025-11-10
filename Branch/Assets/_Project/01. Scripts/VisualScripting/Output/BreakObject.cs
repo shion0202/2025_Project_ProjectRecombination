@@ -37,6 +37,8 @@ public class BreakObject : ProcessBase
         if (breakableObject == null) return;
 
         BreakWall();
+
+        IsOn = true;
     }
 
     public void BreakWall()

@@ -129,6 +129,39 @@ public class LegsEnhanced : PartBaseLegs
         JumpAttack();
     }
 
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        _currentSkillCount = 0;
+        _currentCooldownTime = 0.0f;
+        _currentVelocity = Vector3.zero;
+        _skateTime = 0.0f;
+        _isCooldown = false;
+        _isAttack = false;
+
+        _damagedTargets.Clear();
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetLegsSkillIcon(false);
+            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.SetLegsSkillCooldown(false);
+        }
+
+        GUIManager.Instance.SetLegsSkillTimer(Color.white);
+        GUIManager.Instance.RapidInfo.SetActive(false);
+
+        _audioSource.volume = 0.0f;
+        _audioSource.Play();
+    }
+
     protected void JumpAttack()
     {
         if (_currentCooldownTime > 0.0f || _isCooldown) return;

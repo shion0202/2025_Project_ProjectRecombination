@@ -297,8 +297,8 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  maxAmmo: 40
-  reloadTime: 0.025
+  maxAmmo: 30
+  reloadTime: 0.033
   muzzleFlashEffectPrefab: {fileID: 0}
   hitEffectPrefab: {fileID: 0}
   projectileEffectPrefab: {fileID: 0}
@@ -1747,7 +1747,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: -1, y: -1, z: -1}
+  m_DefaultVelocity: {x: 1, y: -1, z: -1}
 --- !u!82 &387769054366828555
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12936,7 +12936,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.3, y: 0.3, z: 0}
+  m_DefaultVelocity: {x: 0.1977001, y: 0.1977001, z: 0}
 --- !u!114 &4461618492491219984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12971,7 +12971,7 @@ MonoBehaviour:
   shootingRange: 100
   recoilX: 4
   recoilY: 2
-  minSpreadAngle: 20
+  minSpreadAngle: 10
   maxSpreadAngle: 40
   bulletPerShot: 5
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
@@ -13475,7 +13475,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.1, y: -0.1, z: 0}
+  m_DefaultVelocity: {x: -0.1, y: 0.1, z: 0}
 --- !u!114 &772492966113546240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13502,7 +13502,7 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  maxAmmo: 100
+  maxAmmo: 1000
   reloadTime: 0.001
   muzzleFlashEffectPrefab: {fileID: 0}
   hitEffectPrefab: {fileID: 100002, guid: c471ad8b46167e24582c34d4b5d5539f, type: 3}
@@ -19103,7 +19103,7 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  maxAmmo: 100
+  maxAmmo: 1000
   reloadTime: 0.001
   muzzleFlashEffectPrefab: {fileID: 0}
   hitEffectPrefab: {fileID: 0}
@@ -21719,7 +21719,7 @@ MonoBehaviour:
   baseTransform: {fileID: 0}
   Hips: {fileID: 2078838933849667625}
   ScaleReferenceMode: 3
-  finalScaleReference: 0.9814367
+  finalScaleReference: 0.9814358
   finalScaleReferenceSqrt: 0.1
   customScaleReferenceValue: 0.5
   DelayedInitialization: 0
@@ -22439,7 +22439,7 @@ MonoBehaviour:
   staticRotation: {x: 0, y: 0, z: 0}
   targetMask:
     serializedVersion: 2
-    m_Bits: 2629632
+    m_Bits: 2621440
   bulletPrefab: {fileID: 914363595772914150, guid: 54c0c4d3bf9e54547a040ca32ebbe207,
     type: 3}
   ignoreMask:
@@ -23594,6 +23594,7 @@ MonoBehaviour:
   maxSkillCount: 1
   skillRange: 20
   skillDamage: 400
+  subWheelObject: {fileID: 4797957332356373008}
   impactEffectPrefab: {fileID: 7868329102629265088, guid: bffdac939c0b4d948a72517bac5227df,
     type: 3}
   caterpillarMaterial: {fileID: 2100000, guid: 1dca80f331c7cc244b0e6e8833945693, type: 2}
@@ -24042,7 +24043,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: -0.05, y: -0.05, z: 0}
+  m_DefaultVelocity: {x: -0.05, y: 0.05, z: 0}
 --- !u!114 &8695153332083899129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24068,8 +24069,8 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
-  maxAmmo: 20
-  reloadTime: 0.05
+  maxAmmo: 10
+  reloadTime: 0.1
   muzzleFlashEffectPrefab: {fileID: 0}
   hitEffectPrefab: {fileID: 0}
   projectileEffectPrefab: {fileID: 0}
@@ -25138,7 +25139,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: -0.5, z: -1.5}
+  m_DefaultVelocity: {x: 0, y: 0.5, z: -1.5}
 --- !u!1 &8484758193034985672
 GameObject:
   m_ObjectHideFlags: 0

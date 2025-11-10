@@ -113,6 +113,38 @@ public class ShoulderLaser : PartBaseShoulder
         ShootLaser();
     }
 
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        noise.m_AmplitudeGain = 0.0f;
+        _currentTimer = 0.0f;
+        _owner.PlayerAnimator.SetBool("isPlayBackLaserAnim", false);
+        _owner.PlayerAnimator.SetBool("isPlayBackShootAnim", false);
+        _isShooting = false;
+        _owner.SetPlayerState(EPlayerState.Skilling, false);
+
+        if (beamStart) Utils.Destroy(beamStart);
+        if (beamEnd) Utils.Destroy(beamEnd);
+        if (beam) Utils.Destroy(beam);
+        line = null;
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        _damagedTargets.Clear();
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetBackSkillIcon(false);
+            GUIManager.Instance.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.SetBackSkillCooldown(false);
+        }
+    }
+
     protected void ShootLaser()
     {
         if (_isShooting || _skillCoroutine != null) return;

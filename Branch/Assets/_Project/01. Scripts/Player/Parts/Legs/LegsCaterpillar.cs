@@ -9,6 +9,7 @@ using Monster.AI.FSM;
 public class LegsCaterpillar : PartBaseLegs
 {
     [Header("캐터필러 설정")]
+    [SerializeField] protected GameObject subWheelObject;
     [SerializeField] protected GameObject impactEffectPrefab;
     [SerializeField] protected Material caterpillarMaterial;
     [SerializeField] protected GameObject bulletPrefab;
@@ -27,10 +28,14 @@ public class LegsCaterpillar : PartBaseLegs
     protected override void Awake()
     {
         base.Awake();
+
         _legsAnimType = EAnimationType.Caterpillar;
         _isAnimating = false;
         source = gameObject.GetComponent<CinemachineImpulseSource>();
         _audioSource = gameObject.GetComponent<AudioSource>();
+
+        _partModifiers.Add(new StatModifier(EStatType.IntervalBetweenShots, EStackType.PercentMul, -0.5f, this));
+        _partModifiers.Add(new StatModifier(EStatType.DamageReductionRate, EStackType.PercentMul, 0.5f, this));
     }
 
     protected void OnEnable()
@@ -40,9 +45,15 @@ public class LegsCaterpillar : PartBaseLegs
             _currentMoveDirection = _owner.transform.forward;
         }
 
+        if (subWheelObject)
+        {
+            subWheelObject.SetActive(true);
+        }
+
         _audioSource.volume = 0.0f;
         _audioSource.Play();
 
+        _owner.Stats.RemoveModifier(this);
         _damagedTargets.Clear();
     }
 
@@ -72,12 +83,51 @@ public class LegsCaterpillar : PartBaseLegs
             GUIManager.Instance.SetLegsSkillCooldown(false);
         }
 
+        _owner.Stats.RemoveModifier(this);
         _damagedTargets.Clear();
     }
 
     public override void UseAbility()
     {
         Impact(true);
+    }
+
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        _currentMoveDirection = _owner.transform.forward;
+        _audioSource.volume = 0.0f;
+        _audioSource.Play();
+
+        _currentSkillCount = 0;
+        _owner.SetMovable(true);
+        _owner.PlayerAnimator.SetBool("isPlayLegsAnim", false);
+        _owner.SetPlayerState(EPlayerState.Nuking, false);
+        GUIManager.Instance.SetLegsSkillIcon(false);
+        _owner.FollowCamera.SetCameraRotatable(true);
+        _isCooldown = false;
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetLegsSkillIcon(false);
+            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.SetLegsSkillCooldown(false);
+        }
+
+        if (subWheelObject)
+        {
+            subWheelObject.SetActive(true);
+        }
+
+        _owner.Stats.RemoveModifier(this);
+        _damagedTargets.Clear();
     }
 
     public override Vector3 GetMoveDirection(Vector2 moveInput, Transform characterTransform, Transform cameraTransform)
@@ -210,6 +260,11 @@ public class LegsCaterpillar : PartBaseLegs
         {
             LookCameraDirection();
 
+            if (subWheelObject)
+            {
+                subWheelObject.SetActive(false);
+            }
+
             _owner.PlayerAnimator.SetBool("isPlayLegsAnim", true);
             _owner.SetPlayerState(EPlayerState.Nuking, true);
             GUIManager.Instance.SetLegsSkillIcon(true);
@@ -219,6 +274,8 @@ public class LegsCaterpillar : PartBaseLegs
 
             _owner.FollowCamera.SetCameraRotatable(true);
             _owner.SetMovable(false, true);
+
+            _owner.Stats.AddModifier(_partModifiers);
 
             // N초간 바라보는 방향으로 누킹 딜
             float time = skillDuration;
@@ -254,12 +311,6 @@ public class LegsCaterpillar : PartBaseLegs
                 for (int i = 0; i < hitCount; i++)
                 {
                     var collider = hitResults[i];
-                    float hitZoneValue = 1.0f;
-                    PartialBlow partialBlow = collider.GetComponent<PartialBlow>();
-                    if (partialBlow)
-                    {
-                        hitZoneValue = partialBlow.fValue;
-                    }
 
                     IDamagable enemy = collider.transform.GetComponent<IDamagable>();
                     if (enemy != null)
@@ -267,7 +318,7 @@ public class LegsCaterpillar : PartBaseLegs
                         Transform otherParent = collider.transform;
                         if (_damagedTargets.Contains(otherParent)) continue;
                         _damagedTargets.Add(otherParent);
-                        enemy.ApplyDamage(skillDamage * hitZoneValue, targetMask);
+                        enemy.ApplyDamage(skillDamage, targetMask);
 
                         if (_owner.CompareTag("Player"))
                         {
@@ -282,7 +333,7 @@ public class LegsCaterpillar : PartBaseLegs
                             Transform otherParent = collider.transform.GetComponentInParent<FSM>().transform;
                             if (_damagedTargets.Contains(otherParent)) continue;
                             _damagedTargets.Add(otherParent);
-                            enemy.ApplyDamage(skillDamage * hitZoneValue, targetMask);
+                            enemy.ApplyDamage(skillDamage, targetMask);
 
                             if (_owner.CompareTag("Player"))
                             {
@@ -311,6 +362,13 @@ public class LegsCaterpillar : PartBaseLegs
             _owner.PlayerAnimator.SetBool("isPlayLegsAnim", false);
             _owner.SetMovable(false);
             yield return new WaitForSeconds(2.0f);
+
+            _owner.Stats.RemoveModifier(this);
+
+            if (subWheelObject)
+            {
+                subWheelObject.SetActive(true);
+            }
 
             _damagedTargets.Clear();
 

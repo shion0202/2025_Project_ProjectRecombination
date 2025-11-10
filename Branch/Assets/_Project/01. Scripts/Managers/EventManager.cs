@@ -72,7 +72,7 @@ public class EventManager : MonoBehaviour
         listeners[eventType] -= action;
         listeners[eventType] += action;
 
-        Debug.Log($"[EventManager] Added Listener for {eventType}. Total Listeners: {listeners[eventType]?.GetInvocationList().Length ?? 0}");
+        //Debug.Log($"[EventManager] Added Listener for {eventType}. Total Listeners: {listeners[eventType]?.GetInvocationList().Length ?? 0}");
     }
 
     // 특정 이벤트 타입에 등록된 리스너(액션)를 제거하는 함수
@@ -82,7 +82,7 @@ public class EventManager : MonoBehaviour
 
         listeners[eventType] -= action;
 
-        Debug.Log($"[EventManager] Removed Listener for {eventType}. Total Listeners: {listeners[eventType]?.GetInvocationList().Length ?? 0}");
+        //Debug.Log($"[EventManager] Removed Listener for {eventType}. Total Listeners: {listeners[eventType]?.GetInvocationList().Length ?? 0}");
     }
 
     // 인자로 주어진 이벤트 타입에 해당하는 모든 리스너를 호출하는 함수

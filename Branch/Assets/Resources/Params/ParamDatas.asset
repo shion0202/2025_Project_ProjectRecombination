@@ -278,7 +278,7 @@ MonoBehaviour:
         value:
           statType: 5
           stringValue: 
-          value: 6
+          value: 5
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 6
@@ -413,14 +413,14 @@ MonoBehaviour:
         value:
           statType: 4
           stringValue: 
-          value: 8
+          value: 5
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 5
         value:
           statType: 5
           stringValue: 
-          value: 10
+          value: 8
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 6
@@ -484,14 +484,14 @@ MonoBehaviour:
         value:
           statType: 4
           stringValue: 
-          value: 8
+          value: 5
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 5
         value:
           statType: 5
           stringValue: 
-          value: 10
+          value: 8
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 6
@@ -542,7 +542,7 @@ MonoBehaviour:
         value:
           statType: 2
           stringValue: 
-          value: 15000
+          value: 10000
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 3
@@ -613,14 +613,14 @@ MonoBehaviour:
         value:
           statType: 2
           stringValue: 
-          value: 11000
+          value: 8000
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 3
         value:
           statType: 3
           stringValue: 
-          value: 30
+          value: 20
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 4
@@ -684,14 +684,14 @@ MonoBehaviour:
         value:
           statType: 2
           stringValue: 
-          value: 20000
+          value: 15000
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 3
         value:
           statType: 3
           stringValue: 
-          value: 30
+          value: 20
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 4
@@ -2421,7 +2421,7 @@ MonoBehaviour:
         value:
           statType: 21
           stringValue: 
-          value: 0
+          value: 0.9
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 19
@@ -2435,7 +2435,7 @@ MonoBehaviour:
         value:
           statType: 16
           stringValue: 
-          value: 0
+          value: 1
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 22
@@ -2835,7 +2835,7 @@ MonoBehaviour:
         value:
           statType: 3
           stringValue: 
-          value: 80
+          value: 50
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 18
@@ -3345,7 +3345,7 @@ MonoBehaviour:
         value:
           statType: 3
           stringValue: 
-          value: 110
+          value: 100
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 18
@@ -3558,7 +3558,7 @@ MonoBehaviour:
         value:
           statType: 3
           stringValue: 
-          value: 150
+          value: 90
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 18
@@ -3622,7 +3622,7 @@ MonoBehaviour:
         value:
           statType: 20
           stringValue: 
-          value: 4
+          value: 3
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 3
@@ -3700,7 +3700,7 @@ MonoBehaviour:
         value:
           statType: 3
           stringValue: 
-          value: 50
+          value: 40
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 18

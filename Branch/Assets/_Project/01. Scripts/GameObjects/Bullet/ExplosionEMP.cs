@@ -45,7 +45,6 @@ public class ExplosionEMP : ExplosionMissile
 
             enemy.ApplyDamage(_damage * coefficient, targetMask);
             ApplyDeceleration(target);
-            Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient}");
 
             Managers.GUIManager.Instance.StartHitCrosshair();
         }
@@ -60,7 +59,6 @@ public class ExplosionEMP : ExplosionMissile
 
                 enemy.ApplyDamage(_damage * coefficient, targetMask);
                 ApplyDeceleration(target);
-                Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient}");
 
                 Managers.GUIManager.Instance.StartHitCrosshair();
             }

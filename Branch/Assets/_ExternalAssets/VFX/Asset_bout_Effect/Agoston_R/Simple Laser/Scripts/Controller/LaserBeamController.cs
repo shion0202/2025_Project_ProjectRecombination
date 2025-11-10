@@ -1,5 +1,6 @@
 using Assets.Agoston_R.Simple_Laser.Scripts.Dto;
 using Assets.Agoston_R.Simple_Laser.Scripts.Raycaster;
+using System.Threading;
 using UnityEngine;
 
 namespace Controller
@@ -10,7 +11,10 @@ namespace Controller
     public class LaserBeamController : MonoBehaviour
     {
         [Header("Damage")]
-        [SerializeField] float damagePerSecond = 0.0f;
+        [SerializeField] private float damagePerSecond = 0.0f;
+        [SerializeField] private float unitTime = 0.1f;
+        [SerializeField] private LayerMask targetMask;
+        private float _timer = 0.0f;
 
         private const float Eps = 0.001f;
         private static readonly int LineDistance = Shader.PropertyToID("_lineDistance");
@@ -68,11 +72,20 @@ namespace Controller
                 layersThatStopLaser |= (1 << LayerMask.NameToLayer("MonsterDead"));
             }
 
+            if (targetMask == 0)
+            {
+                targetMask |= (1 << LayerMask.NameToLayer("Player"));
+                targetMask |= (1 << LayerMask.NameToLayer("Enemy"));
+                targetMask |= (1 << LayerMask.NameToLayer("Damagable"));
+            }
+
             if (damagePerSecond <= 0.0f)
             {
                 // 데미지 설정이 없을 경우 기본 값
                 damagePerSecond = 100.0f;
             }
+
+            unitTime = 0.5f;
         }
 
         private void Start()
@@ -80,7 +93,7 @@ namespace Controller
             SetUVScaleBasedOnWidth();
         }
 
-        private void LateUpdate()
+        private void Update()
         {
             if (isLaserActivated)
             {
@@ -111,7 +124,13 @@ namespace Controller
         {
             DrawBeam(hit.HitPoint);
             PlayParticles(hit);
-            TakeDamage(hit, damagePerSecond * Time.deltaTime);
+
+            _timer += Time.deltaTime;
+            if (_timer >= unitTime && ((1 << hit.Target.gameObject.layer) & targetMask) != 0)
+            {
+                _timer = 0.0f;
+                TakeDamage(hit, damagePerSecond * Time.deltaTime / unitTime);
+            }
         }
 
         private void OnRaycastMiss(LaserHit hit)
@@ -227,7 +246,7 @@ namespace Controller
 
             if (damagable != null)
             {
-                damagable.ApplyDamage(damage, layersThatStopLaser, Time.deltaTime, 1.0f);
+                damagable.ApplyDamage(damage, layersThatStopLaser, Time.deltaTime / unitTime, 1.0f);
             }
         }
     }

@@ -56,6 +56,7 @@ public class PartBaseArm : PartBase
             ignoreMask &= ~(1 << LayerMask.NameToLayer("PlayerMesh"));
             ignoreMask &= ~(1 << LayerMask.NameToLayer("Bullet"));
             ignoreMask &= ~(1 << LayerMask.NameToLayer("Minimap"));
+            ignoreMask &= ~(1 << LayerMask.NameToLayer("MonsterDead"));
         }
 
         _currentAmmo = maxAmmo;

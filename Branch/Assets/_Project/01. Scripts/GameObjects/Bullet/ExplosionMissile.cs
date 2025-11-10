@@ -70,9 +70,8 @@ public class ExplosionMissile : MonoBehaviour
             _damagedTargets.Add(otherParent);
 
             enemy.ApplyDamage(_damage * coefficient, targetMask);
-            Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient}");
 
-            if (_owner.CompareTag("Player"))
+            if (_owner && _owner.CompareTag("Player"))
             {
                 Managers.GUIManager.Instance.StartHitCrosshair();
             }
@@ -87,9 +86,8 @@ public class ExplosionMissile : MonoBehaviour
                 _damagedTargets.Add(otherParent);
 
                 enemy.ApplyDamage(_damage * coefficient, targetMask);
-                Debug.Log($"원본 데미지: {_damage * coefficient}, 육질 데미지: {_damage * coefficient}");
 
-                if (_owner.CompareTag("Player"))
+                if (_owner && _owner.CompareTag("Player"))
                 {
                     Managers.GUIManager.Instance.StartHitCrosshair();
                 }
@@ -123,16 +121,16 @@ public class ExplosionMissile : MonoBehaviour
         _damageRoutine = null;
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
-    {
-        // 폭발 반경을 빨간색 반투명 구로 표시
-        Gizmos.color = new Color(1f, 0f, 0f, 0.35f);
-        Gizmos.DrawSphere(transform.position, explosionRadius);
+//#if UNITY_EDITOR
+//    private void OnDrawGizmosSelected()
+//    {
+//        // 폭발 반경을 빨간색 반투명 구로 표시
+//        Gizmos.color = new Color(1f, 0f, 0f, 0.35f);
+//        Gizmos.DrawSphere(transform.position, explosionRadius);
 
-        // 폭발 반경 외곽선(선택사항)
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
-    }
-#endif
+//        // 폭발 반경 외곽선(선택사항)
+//        Gizmos.color = Color.red;
+//        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+//    }
+//#endif
 }

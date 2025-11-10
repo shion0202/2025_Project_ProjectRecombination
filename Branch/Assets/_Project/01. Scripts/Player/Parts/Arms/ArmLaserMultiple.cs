@@ -196,7 +196,9 @@ public class ArmLaserMultiple : PartBaseArm
 
         int bulletCount = (int)(bulletPerShot * _currentChargeTime) + 1;
 
-        for (int i = 0; i < bulletCount; i++)
+        SpawnBullet(shootDirection);
+
+        for (int i = 0; i < bulletCount - 1; i++)
         {
             Vector3 randomizedDirection = GetRandomSpreadDirection(shootDirection, Mathf.Lerp(maxSpreadAngle, minSpreadAngle, _currentChargeTime));
             SpawnBullet(randomizedDirection);
@@ -285,7 +287,7 @@ public class ArmLaserMultiple : PartBaseArm
 
     protected void SpawnBullet(Vector3 direction)
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position + direction * 1.5f, Quaternion.LookRotation(direction.normalized));
+        GameObject bullet = Utils.Instantiate(bulletPrefab, bulletSpawnPoint.position + direction * 1.5f, Quaternion.LookRotation(direction.normalized));
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
         if (bulletComponent != null)
         {

@@ -65,6 +65,7 @@ namespace _Project.Scripts.VisualScripting
         {
             int originalPriority = mainVirtualCamera.Priority;
             GameManager.Instance.PauseObjects();        // Game Manager에 의해 특정 오브젝트들만 Pause
+            GUIManager.Instance.SetIndicator(false);
 
             // 컷씬 카메라의 우선순위를 높이고, 메인 카메라의 우선순위를 낮춘다.
             for (int i = 0; i < cutsceneData.Length; i++)

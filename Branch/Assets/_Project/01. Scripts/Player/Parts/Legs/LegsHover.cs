@@ -93,6 +93,35 @@ public class LegsHover : PartBaseLegs
         CreateBarrier();
     }
 
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        _currentMoveDirection = Vector3.zero;
+        isInit = false;
+        _currentSkillCount = 0;
+
+        if (_currentBarrier != null)
+        {
+            Utils.Destroy(_currentBarrier);
+            _currentBarrier = null;
+        }
+        _owner.Stats.RemoveModifier(this);
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetLegsSkillIcon(false);
+            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.SetLegsSkillCooldown(false);
+        }
+    }
+
     public override Vector3 GetMoveDirection(Vector2 moveInput, Transform characterTransform, Transform cameraTransform)
     {
         // 카메라 기준으로 입력 방향 구하기

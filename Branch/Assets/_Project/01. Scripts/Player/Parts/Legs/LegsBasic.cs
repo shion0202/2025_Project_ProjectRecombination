@@ -65,6 +65,28 @@ public class LegsBasic : PartBaseLegs
         Dash();
     }
 
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        _currentSkillCount = 0;
+        _isCooldown = false;
+        _owner.FinishDash();
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetLegsSkillIcon(false);
+            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.SetLegsSkillCooldown(false);
+        }
+    }
+
     public override Vector3 GetMoveDirection(Vector2 moveInput, Transform characterTransform, Transform cameraTransform)
     {
         if (moveInput == Vector2.zero) return Vector3.zero;

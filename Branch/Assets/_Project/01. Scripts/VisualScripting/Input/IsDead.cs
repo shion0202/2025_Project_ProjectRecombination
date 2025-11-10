@@ -44,7 +44,6 @@ namespace _Project.Scripts.VisualScripting
         // 캐싱된 객체가 파괴될 때 실행할 함수
         public override void Execute()
         {
-            Debug.Log("IsDead called");
             if (IsOn) return;   // 한번도 함수가 호출되지 않았으면 실행
 
             _count--;

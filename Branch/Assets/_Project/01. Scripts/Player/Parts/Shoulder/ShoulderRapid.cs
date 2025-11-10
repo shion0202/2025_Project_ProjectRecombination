@@ -107,6 +107,43 @@ public class ShoulderRapid : PartBaseShoulder
         LaunchTargetMissiles();
     }
 
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        GUIManager.Instance.SetBackSkillIcon(false);
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        for (int i = 0; i < targetingInstances.Count; ++i)
+        {
+            Utils.Destroy(targetingInstances[i]);
+        }
+        targetingInstances.Clear();
+
+        brain.m_DefaultBlend = defaultBlend;
+        _owner.FollowCamera.SetCameraRotatable(true);
+        _owner.SetMovable(true);
+        _owner.PlayerAnimator.SetBool("isPlayShoulderAnim", false);
+        _owner.SetPlayerState(EPlayerState.Skilling, false);
+
+        for (int i = 0; i < cutsceneCams.Count; ++i)
+        {
+            cutsceneCams[i].m_Priority = 10;
+        }
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetBackSkillIcon(false);
+            GUIManager.Instance.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.SetBackSkillCooldown(false);
+        }
+    }
+
     private void LaunchTargetMissiles()
     {
         // 스킬 시전 하는 동안 카메라, 플레이어 이동 불가

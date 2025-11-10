@@ -244,7 +244,6 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         inventory.Init();
         SetOvrrideAnimator(EAnimationType.Base);
 
-        lowHp.gameObject.SetActive(false);
         Spawn();
     }
 
@@ -718,6 +717,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     #region Public Methods
     public void Spawn()
     {
+        lowHp.gameObject.SetActive(false);
+
         // Spawn은 게임 시작 또는 리스폰 시에만 호출
         _currentPlayerState &= ~(EPlayerState.Dead);
         _currentPlayerState |= EPlayerState.Spawning;
@@ -751,13 +752,18 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         // 스킬 등이 사용 중일 경우 모두 초기화
         // 버프, 디버프도 마찬가지
         inventory.EquippedItems[EPartType.ArmL][0].UseCancleAbility();
-        animator.SetBool("isLeftAttack", false);
-        _isLeftAttackReady = false;
-        Stats.RemoveModifier(this);
-
         inventory.EquippedItems[EPartType.ArmR][0].UseCancleAbility();
+        animator.SetBool("isLeftAttack", false);
         animator.SetBool("isRightAttack", false);
+        _isLeftAttackReady = false;
+        _isRightAttackReady = false;
+        Stats.RemoveModifier(this);
         SetOvrrideAnimator(_currentAnimType);
+
+        for (int i = 0; i < Enum.GetValues(typeof(EPartType)).Length; ++i)
+        {
+            inventory.EquippedItems[(EPartType)(1 << i)][0].FinishActionForced();
+        }
 
         lowHp.gameObject.SetActive(false);
     }
@@ -899,10 +905,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
     public void TakeDamage(float takeDamage, float defenceIgnoreRate, float unitOfTime)
     {
-        if ((_currentPlayerState & EPlayerState.Spawning) != 0 || (_currentPlayerState & EPlayerState.Invincibility) != 0) return;
+        if ((_currentPlayerState & EPlayerState.Spawning) != 0 ||
+            (_currentPlayerState & EPlayerState.Invincibility) != 0 ||
+            (_currentPlayerState & EPlayerState.Dead) != 0 ||
+            (_currentPlayerState & EPlayerState.Cutscene) != 0) return;
         if (stats.CurrentHealth <= 0) return;
 
-        var damage = Utils.GetDamage(takeDamage, defenceIgnoreRate, unitOfTime,stats.TotalStats);
+        var damage = Utils.GetDamage(takeDamage, defenceIgnoreRate, unitOfTime, stats.TotalStats);
         if (damage > 0)
         {
             seSource.Stop();
@@ -1193,6 +1202,9 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         {
             Vector3 hoverDelta = hoverLegs.CalculateHoverDeltaY();
             _totalDirection += hoverDelta;
+
+            _currentPlayerState &= ~EPlayerState.Falling;
+            animator.SetBool("isFalling", false);
 
             if (_isOnPlatform)
             {

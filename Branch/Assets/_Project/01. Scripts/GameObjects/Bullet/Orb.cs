@@ -1,3 +1,4 @@
+using Monster.AI.FSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -104,16 +105,51 @@ public class Orb : Bullet
         return log;
     }
 
-#if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    protected override void TakeDamage(Transform target, float coefficient = 1.0f)
     {
-        // 폭발 반경을 빨간색 반투명 구로 표시
-        Gizmos.color = new Color(1f, 0f, 0f, 0.35f);
-        Gizmos.DrawSphere(transform.position, explosionRadius);
+        IDamagable enemy = target.GetComponent<IDamagable>();
+        if (enemy != null)
+        {
+            Transform otherParent = target.transform;
+            if (_damagedTargets.Contains(otherParent)) return;
+            _damagedTargets.Add(otherParent);
 
-        // 폭발 반경 외곽선(선택사항)
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+            enemy.ApplyDamage(Damage * coefficient, targetMask);
+
+            if (From.CompareTag("Player"))
+            {
+                Managers.GUIManager.Instance.StartHitCrosshair();
+            }
+        }
+        else
+        {
+            enemy = target.transform.GetComponentInParent<IDamagable>();
+            if (enemy != null)
+            {
+                Transform otherParent = target.transform.GetComponentInParent<FSM>().transform;
+                if (_damagedTargets.Contains(otherParent)) return;
+                _damagedTargets.Add(otherParent);
+
+                enemy.ApplyDamage(Damage * coefficient, targetMask);
+
+                if (From.CompareTag("Player"))
+                {
+                    Managers.GUIManager.Instance.StartHitCrosshair();
+                }
+            }
+        }
     }
-#endif
+
+//#if UNITY_EDITOR
+//    private void OnDrawGizmosSelected()
+//    {
+//        // 폭발 반경을 빨간색 반투명 구로 표시
+//        Gizmos.color = new Color(1f, 0f, 0f, 0.35f);
+//        Gizmos.DrawSphere(transform.position, explosionRadius);
+
+//        // 폭발 반경 외곽선(선택사항)
+//        Gizmos.color = Color.red;
+//        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+//    }
+//#endif
 }

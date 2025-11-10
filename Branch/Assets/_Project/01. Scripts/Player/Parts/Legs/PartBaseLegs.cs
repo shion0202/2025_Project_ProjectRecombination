@@ -32,13 +32,13 @@ public class PartBaseLegs : PartBase, ILegsMovement
     // 장비 교체 등 특수한 상황에서 대시를 강제로 종료해야 할 때 사용
     public override void FinishActionForced()
     {
-        //if (_skillCoroutine != null)
-        //{
-        //    StopCoroutine(_skillCoroutine);
-        //    _skillCoroutine = null;
-        //}
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
 
-        //_currentSkillCount = 0;
+        _currentSkillCount = 0;
         //GUIManager.Instance.ResetSkillCooldown();
     }
 

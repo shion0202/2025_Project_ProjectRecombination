@@ -103,6 +103,43 @@ public class ShoulderHeavy : PartBaseShoulder
         ShootOrb();
     }
 
+    public override void FinishActionForced()
+    {
+        base.FinishActionForced();
+
+        brain.m_DefaultBlend = defaultBlend;
+        _owner.FollowCamera.SetCameraRotatable(true);
+        _owner.SetMovable(true);
+        _owner.PlayerAnimator.SetBool("isPlayBackHeavyAnim", false);
+        _owner.SetPlayerState(EPlayerState.Skilling, false);
+        SkinnedMeshRenderer smr = backPart.GetComponent<SkinnedMeshRenderer>();
+        smr.SetBlendShapeWeight(0, 0.0f);
+
+        for (int i = 0; i < cutsceneCams.Count; ++i)
+        {
+            cutsceneCams[i].m_Priority = 10;
+        }
+
+        if (_skillCoroutine != null)
+        {
+            StopCoroutine(_skillCoroutine);
+            _skillCoroutine = null;
+        }
+
+        if (_morphBlendRoutine != null)
+        {
+            StopCoroutine(_morphBlendRoutine);
+            _morphBlendRoutine = null;
+        }
+
+        if (Managers.GUIManager.IsAliveInstance())
+        {
+            GUIManager.Instance.SetBackSkillIcon(false);
+            GUIManager.Instance.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.SetBackSkillCooldown(false);
+        }
+    }
+
     private void ShootOrb()
     {
         if (_skillCoroutine != null) return;
@@ -147,7 +184,8 @@ public class ShoulderHeavy : PartBaseShoulder
 
         Vector3 spawnPoint = transform.position + _owner.transform.forward + Vector3.up * 2.0f;
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
-        Vector3 camShootDirection = (targetPoint - spawnPoint);
+        //Vector3 camShootDirection = (targetPoint - spawnPoint);
+        Vector3 camShootDirection = _owner.transform.forward;
         camShootDirection.y = 0.0f;
         camShootDirection.Normalize();
 

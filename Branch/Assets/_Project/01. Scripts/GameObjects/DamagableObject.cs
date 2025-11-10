@@ -90,7 +90,7 @@ public class DamagableObject : MonoBehaviour, IDamagable
     {
         // 오브젝트가 사망했음을 외부에 알림
         OnObjectDied?.Invoke();
-        Debug.Log(gameObject.name + " is Dead.");
+        //Debug.Log(gameObject.name + " is Dead.");
     }
 
     public override string ToString()
