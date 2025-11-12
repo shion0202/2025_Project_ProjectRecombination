@@ -1687,7 +1687,7 @@ MonoBehaviour:
         value:
           statType: 3
           stringValue: 
-          value: 275
+          value: 30
           minValue: -3.4028235e+38
           maxValue: 3.4028235e+38
       - key: 10
