@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 862ee2bf8fce03847ae46a1453d11f61
+timeCreated: 1474371934
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 26903
+  packageName: Planets
+  packageVersion: 1.54
+  assetPath: Assets/FORGE3D/HelpMenu/Editor/F3DHelpMenu.cs
+  uploadId: 638821

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7897558922763663624
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shield_Green
+  m_Shader: {fileID: -6465566751694194690, guid: 2042cc78722596b498292332b772eb66,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - MainTex_:
+        m_Texture: {fileID: 2800000, guid: 40ac06a85bf13c94a84cf01fe62ce493, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_3e7e8515ac094eb7a8e8ddeb9af4576c:
+        m_Texture: {fileID: 2800000, guid: 40ac06a85bf13c94a84cf01fe62ce493, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - ColorBreathing_: 0.66
+    - FresnelPower_: 4
+    - SphereHardness_: 0.21
+    - SphereMask_: 0
+    - SphereRadius_: 0.32
+    - Vector1_5b7f725f9c624db9bcbfaa4d7a5ad6af: 10
+    - Vector1_623017abf9cd44e6b0ec5df12afc60be: 0.48
+    - Vector1_774715637d544e0c9f3f50368badd1f8: 1
+    - Vector1_8d5200ae7fdb41d2ab7d29dcdfa4df50: 6
+    - VertexBreathing_: 0.56
+    - VertexFrequency_: 4
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors:
+    - BackColor_: {r: 0.058250275, g: 0.18095653, b: 0.7264151, a: 1}
+    - Color_3ebb7b9585f5437bb735fd8c57eb02b6: {r: 0.06145063, g: 0.23897468, b: 0.495019,
+        a: 1}
+    - Color_6e7a62ebab2e450081e0f60ce3e576e9: {r: 0.80698234, g: 3.1606808, b: 6.4222345,
+        a: 1}
+    - Color_72ba699fb399443a93d030fece79cc27: {r: 16.062746, g: 0, b: 766.9961, a: 1}
+    - FresnelColor_: {r: 29.814945, g: 47.388054, b: 271.17407, a: 1}
+    - FrontColor_: {r: 1.1587243, g: 3.5534213, b: 14.290933, a: 1}
+    - SphereCenter_: {r: 0, g: 0, b: 0, a: 0}
+    - Vector3_eea253efaca94a80a0ae58b284238f33: {r: 0.05, g: 0.05, b: 0.05, a: 0}
+    - VertexAmount_: {r: 0.2, g: 0.2, b: 0.2, a: 0}
+    - VertexBreathing_: {r: -0.66, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

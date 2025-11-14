@@ -1,0 +1,268 @@
+fileFormatVersion: 2
+guid: ae1c98f719fc17745b9d61e68354f016
+timeCreated: 1429182212
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: engines
+    100002: gun barrel
+    100004: gun body
+    100006: gun turret
+    100008: jet petal
+    100010: jet petal002
+    100012: jet petal003
+    100014: jet petal004
+    100016: jet petal005
+    100018: jet petal006
+    100020: jet petal007
+    100022: jet petal008
+    100024: jet petal009
+    100026: jet petal010
+    100028: jet petal011
+    100030: jet petal012
+    100032: jet petal013
+    100034: jet petal014
+    100036: jet petal015
+    100038: jet petal016
+    100040: jet petal017
+    100042: jet petal018
+    100044: jet petal019
+    100046: jet petal020
+    100048: jet petal021
+    100050: jet petal022
+    100052: jet petal023
+    100054: jet petal024
+    100056: jet petal025
+    100058: jet petal026
+    100060: jet petal027
+    100062: jet petal028
+    100064: jet petal029
+    100066: jet petal030
+    100068: jet petal031
+    100070: jet petal032
+    100072: Object015
+    100074: plane body
+    100076: Shape001
+    100078: //RootNode
+    400000: engines
+    400002: gun barrel
+    400004: gun body
+    400006: gun turret
+    400008: jet petal
+    400010: jet petal002
+    400012: jet petal003
+    400014: jet petal004
+    400016: jet petal005
+    400018: jet petal006
+    400020: jet petal007
+    400022: jet petal008
+    400024: jet petal009
+    400026: jet petal010
+    400028: jet petal011
+    400030: jet petal012
+    400032: jet petal013
+    400034: jet petal014
+    400036: jet petal015
+    400038: jet petal016
+    400040: jet petal017
+    400042: jet petal018
+    400044: jet petal019
+    400046: jet petal020
+    400048: jet petal021
+    400050: jet petal022
+    400052: jet petal023
+    400054: jet petal024
+    400056: jet petal025
+    400058: jet petal026
+    400060: jet petal027
+    400062: jet petal028
+    400064: jet petal029
+    400066: jet petal030
+    400068: jet petal031
+    400070: jet petal032
+    400072: Object015
+    400074: plane body
+    400076: Shape001
+    400078: //RootNode
+    2300000: engines
+    2300002: gun barrel
+    2300004: gun body
+    2300006: gun turret
+    2300008: jet petal
+    2300010: jet petal002
+    2300012: jet petal003
+    2300014: jet petal004
+    2300016: jet petal005
+    2300018: jet petal006
+    2300020: jet petal007
+    2300022: jet petal008
+    2300024: jet petal009
+    2300026: jet petal010
+    2300028: jet petal011
+    2300030: jet petal012
+    2300032: jet petal013
+    2300034: jet petal014
+    2300036: jet petal015
+    2300038: jet petal016
+    2300040: jet petal017
+    2300042: jet petal018
+    2300044: jet petal019
+    2300046: jet petal020
+    2300048: jet petal021
+    2300050: jet petal022
+    2300052: jet petal023
+    2300054: jet petal024
+    2300056: jet petal025
+    2300058: jet petal026
+    2300060: jet petal027
+    2300062: jet petal028
+    2300064: jet petal029
+    2300066: jet petal030
+    2300068: jet petal031
+    2300070: jet petal032
+    2300072: Object015
+    2300074: plane body
+    2300076: Shape001
+    3300000: engines
+    3300002: gun barrel
+    3300004: gun body
+    3300006: gun turret
+    3300008: jet petal
+    3300010: jet petal002
+    3300012: jet petal003
+    3300014: jet petal004
+    3300016: jet petal005
+    3300018: jet petal006
+    3300020: jet petal007
+    3300022: jet petal008
+    3300024: jet petal009
+    3300026: jet petal010
+    3300028: jet petal011
+    3300030: jet petal012
+    3300032: jet petal013
+    3300034: jet petal014
+    3300036: jet petal015
+    3300038: jet petal016
+    3300040: jet petal017
+    3300042: jet petal018
+    3300044: jet petal019
+    3300046: jet petal020
+    3300048: jet petal021
+    3300050: jet petal022
+    3300052: jet petal023
+    3300054: jet petal024
+    3300056: jet petal025
+    3300058: jet petal026
+    3300060: jet petal027
+    3300062: jet petal028
+    3300064: jet petal029
+    3300066: jet petal030
+    3300068: jet petal031
+    3300070: jet petal032
+    3300072: Object015
+    3300074: plane body
+    3300076: Shape001
+    4300000: plane body
+    4300002: gun barrel
+    4300004: gun turret
+    4300006: gun body
+    4300008: Object015
+    4300010: Shape001
+    4300012: engines
+    4300014: jet petal002
+    4300016: jet petal003
+    4300018: jet petal004
+    4300020: jet petal005
+    4300022: jet petal006
+    4300024: jet petal007
+    4300026: jet petal008
+    4300028: jet petal
+    4300030: jet petal009
+    4300032: jet petal010
+    4300034: jet petal011
+    4300036: jet petal012
+    4300038: jet petal013
+    4300040: jet petal014
+    4300042: jet petal015
+    4300044: jet petal016
+    4300046: jet petal017
+    4300048: jet petal018
+    4300050: jet petal019
+    4300052: jet petal020
+    4300054: jet petal021
+    4300056: jet petal022
+    4300058: jet petal023
+    4300060: jet petal024
+    4300062: jet petal025
+    4300064: jet petal026
+    4300066: jet petal027
+    4300068: jet petal028
+    4300070: jet petal029
+    4300072: jet petal030
+    4300074: jet petal031
+    4300076: jet petal032
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.08
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 75
+    secondaryUVAreaDistortion: 75
+    secondaryUVHardAngle: 180
+    secondaryUVPackMargin: 1
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 180
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
