@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaed95e6c505ad34fafe42072c79f764, type: 3}
+  m_Name: SoulOrb
+  m_EditorClassIdentifier: 
+  skillID: 4014
+  skillName: SoulOrb
+  skillDescription: "\"\uC544\uBAAC 2 \uD398\uC774\uC988 \uC2A4\uD0AC: \uC601\uD63C
+    \uBCF4\uC8FC:: \uCE90\uC2A4\uD305 \uC2DC\uAC04\uB3D9\uC548 \uB0A0\uAC1C\uCABD
+    \uAE30\uB465\uC5D0\uC11C \uCC28\uC9D5 \uD6C4"
+  damage: 100
+  range: 50
+  cooldown: 10
+  castTime: 1.5
+  animSpeed: 1
+  bulletPrefab: {fileID: 364168584227083269, guid: 47a3e8009f5c7844aa19ccb71ff7f656,
+    type: 3}
+  bulletSpawnOffset:
+  - {x: 0.8, y: 1.8, z: -0.5}
+  - {x: -0.8, y: 1.8, z: -0.5}

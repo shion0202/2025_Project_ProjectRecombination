@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b1a35df7f316a249ae89f7f85dd28ec, type: 3}
+  m_Name: Lockdown
+  m_EditorClassIdentifier: 
+  skillID: 4016
+  skillName: LockDown
+  skillDescription: "\"\uC544\uBAAC 2 \uD398\uC774\uC988 \uC2A4\uD0AC: \uB77D\uB2E4\uC6B4::
+    \uBA38\uB9AC \uC704\uB85C \uBCC4\uB3C4\uC758 \uCCB4\uB825 \uAC12\uC744 \uAC00\uC9C4
+    \uAD6C\uCCB4\uB97C \uC0DD\uC131"
+  damage: 400
+  range: 100
+  cooldown: 25
+  castTime: 7
+  animSpeed: 1
+  defaultPosition: {x: 0, y: 0, z: 0}
+  warpPosition: {x: 0, y: 10, z: 40}
+  chargeEffectPrefab: {fileID: 2386159082878823987, guid: 2362f9aec9184e1408fb5a9ce224113d,
+    type: 3}
+  chargeEffectRotation: {x: 0, y: 0, z: 90}
+  explosionEffectPrefab: {fileID: 5282322848156710984, guid: d056eae4ce4c1b54ca791b98ee7d69a7,
+    type: 3}
+  effectSpawnOffset: {x: 0, y: 4, z: 0}
+  monsterPrefabs:
+  - {fileID: 4800409579581458399, guid: a3b7a957f3359479da8fe610b17d7633, type: 3}
+  - {fileID: 110370339717111256, guid: 17f96a004373c4230a855a06eacf4c6a, type: 3}
+  spawnTargetPositionX: {x: -45, y: 45}
+  spawnTargetPositionZ: {x: 10, y: 45}
+  spawnTargetPositionY: 0
+  monsterSpawnInterval: 1
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 262656
+  safeZonePrefab: {fileID: 1563908458005812582, guid: 61815ab4d5db305468ef511926db1862,
+    type: 3}

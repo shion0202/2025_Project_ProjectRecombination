@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0b33ab5e8269c54ea4224d236ff4f52, type: 3}
+  m_Name: WingSwipe
+  m_EditorClassIdentifier: 
+  skillID: 4012
+  skillName: WingSwipe
+  skillDescription: "\"\uC544\uBAAC 2 \uD398\uC774\uC988 \uC2A4\uD0AC: \uB0A0\uAC1C
+    \uD718\uB450\uB974\uAE30: 5\uBBF8\uD130 \uC774\uB0B4\uC5D0 \uC704\uCE58\uD55C
+    \uCE90\uB9AD\uD130\uC5D0\uAC8C \uD55C\uCABD \uB0A0\uAC1C\uB97C \uD718\uB450\uB984.
+    \uC88C"
+  damage: 75
+  range: 5
+  cooldown: 3
+  castTime: 1.2
+  animSpeed: 1
+  meleeCollisionPrefab: {fileID: 4070606023755049407, guid: 9738e5f867811414da87d99f8ce56023,
+    type: 3}
+  collisionScale: {x: 4, y: 2.2, z: 4}
+  collisionOffset: {x: 0, y: 1.1, z: 1}
+  wingAttackclips:
+  - {fileID: 1827226128182048838, guid: b6a1c0e7ccb3a334d80b99ad43cd9788, type: 3}
+  - {fileID: 1827226128182048838, guid: 008671a3573377942b9939ada5144771, type: 3}
+  - {fileID: 1827226128182048838, guid: 9a495e2479821824b878416c2489e2f1, type: 3}
+  - {fileID: 1827226128182048838, guid: c633c774ed56a62418e7500456dc9d4b, type: 3}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fea0e527c754aeca3757fdc6c57c96f, type: 3}
+  m_Name: SoulSphere
+  m_EditorClassIdentifier: 
+  skillID: 4010
+  skillName: SoulSphere
+  skillDescription: "\uC544\uBAAC 1\uD398\uC774\uC988 \uC2A4\uD0AC: \uC601\uD63C\uAD6C\uCCB4"
+  damage: 60
+  range: 25
+  cooldown: 12
+  castTime: 1.4
+  animSpeed: 1
+  soulSpherePrefab: {fileID: 5321323443577561300, guid: 665ca049fcfec274bb4df2ef0748326f,
+    type: 3}
+  numberOfSpheres: 1

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73650f1d5d846e7950624bd6e2c7076, type: 3}
+  m_Name: TwoHandsStrike
+  m_EditorClassIdentifier: 
+  skillID: 4006
+  skillName: Two-handswhip
+  skillDescription: "\uB784\uD504 \uAE30\uBCF8 \uACF5\uACA9"
+  damage: 90
+  range: 5
+  cooldown: 1.1
+  castTime: 0.85
+  animSpeed: 1

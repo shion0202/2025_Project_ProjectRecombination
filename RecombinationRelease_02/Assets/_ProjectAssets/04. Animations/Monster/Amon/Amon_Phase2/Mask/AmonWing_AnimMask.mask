@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AmonWing_AnimMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: ACC_L
+    m_Weight: 0
+  - m_Path: ACC_R
+    m_Weight: 0
+  - m_Path: Amon
+    m_Weight: 0
+  - m_Path: Bip001
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+      L Foot
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 L Thigh/Bip001 L Calf/Bip001
+      L Foot/Bip001 L Toe0
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+      R Foot
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 R Thigh/Bip001 R Calf/Bip001
+      R Foot/Bip001 R Toe0
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/Bip001 Neck/Bip001 Head
+    m_Weight: 0
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_1_1_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_1_1_L/Wing_1_2_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_2_1_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_2_1_L/Wing_2_2_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_3_1_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_3_1_L/Wing_3_2_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_4_1_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_4_1_L/Wing_4_2_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_5_1_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_5_1_L/Wing_5_2_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_6_1_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_L_1/Wing_L_2/Wing_6_1_L/Wing_6_2_L
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_1_1_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_1_1_R/Wing_1_2_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_2_1_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_2_1_R/Wing_2_2_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_3_1_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_3_1_R/Wing_3_2_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_4_1_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_4_1_R/Wing_4_2_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_5_1_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_5_1_R/Wing_5_2_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_6_1_R
+    m_Weight: 1
+  - m_Path: Bip001/Bip001 Pelvis/Bip001 Spine/Bip001 Spine1/WingCenter_1/WingCenter_2/Wing_R_1/Wing_R_2/Wing_6_1_R/Wing_6_2_R
+    m_Weight: 1
+  - m_Path: Wing_L
+    m_Weight: 0
+  - m_Path: Wing_R
+    m_Weight: 0

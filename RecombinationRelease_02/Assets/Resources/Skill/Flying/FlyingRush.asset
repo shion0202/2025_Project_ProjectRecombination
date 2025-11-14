@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc0ee4c8c044ee6a2c49713ee9b3097, type: 3}
+  m_Name: FlyingRush
+  m_EditorClassIdentifier: 
+  skillID: 4023
+  skillName: V_Rush
+  skillDescription: "\uC0B4\uBAA8\uC0AC \uC9C8\uC8FC \uACF5\uACA9"
+  damage: 50
+  range: 10
+  cooldown: 5
+  castTime: 1
+  animSpeed: 1
+  rushSpeed: 30
+  meleeCollisionPrefab: {fileID: 4070606023755049407, guid: 1ed1de81781f74493bf77f856c6ac67c,
+    type: 3}
+  collisionScale: {x: 3, y: 3, z: 3}
+  collisionOffset: {x: 0, y: 2, z: 0}
+  maxRushDistance: 10

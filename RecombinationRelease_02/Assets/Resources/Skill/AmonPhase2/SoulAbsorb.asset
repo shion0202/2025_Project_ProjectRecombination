@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a43b83968c3e14083bcc2e29818ccf, type: 3}
+  m_Name: SoulAbsorb
+  m_EditorClassIdentifier: 
+  skillID: 4015
+  skillName: SoulAbsorption
+  skillDescription: "\uC544\uBAAC 2 \uD398\uC774\uC988 \uC2A4\uD0AC: \uC601\uD63C
+    \uD761\uC218:: \uCE90\uC2A4\uD305 \uC2DC\uAC04\uB3D9\uC548 \uBCC4\uB3C4\uC758
+    \uCCB4\uB825 \uAC12\uC744 \uAC00\uC9C4 \uBCF4\uD638\uB9C9\uC744 \uD65C\uC131\uD654\uD558\uC5EC
+    \uCE90\uB9AD\uD130\uB97C \uD5A5\uD574 \uBE60\uB974\uAC8C \uC811\uADFC\uD558\uC5EC
+    \uCCB4\uB825 \uD761\uC218."
+  damage: 200
+  range: 5
+  cooldown: 20
+  castTime: 0.5
+  animSpeed: 1
+  barrierPrefab: {fileID: 3292751394904765131, guid: 98b0d9632f236354b886205f3e1350bb,
+    type: 3}
+  raiseClip: {fileID: 1827226128182048838, guid: 995956e9ab54a2044a0eb7ed617a0766,
+    type: 3}
+  barrierOffset: {x: 0, y: 2.9, z: -0.5}
+  originalCooldown: 20

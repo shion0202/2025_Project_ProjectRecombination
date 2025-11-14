@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e43e2ea5c0442f748867a8854283f923, type: 3}
+  m_Name: FollowCameraData_RollerZoom
+  m_EditorClassIdentifier: 
+  FOV: 65
+  screenX: 0.3
+  screenY: 0.625
+  cameraDistance: 1.75
+  trackedOffset: {x: 0, y: 0, z: 0}
+  lookaheadTime: 0.01
+  lookaheadSmoothing: 3
+  ignoreLookaheadY: 1
+  dampingX: 0
+  dampingY: 0
+  dampingZ: 0
+  targetMovementOnly: 0
+  deadZoneWidth: 0
+  deadZoneHeight: 0
+  deadZoneDepth: 0
+  softZoneWidth: 0
+  softZoneHeight: 0
+  softZoneOffsetX: 0
+  softZoneOffsetY: 0
+  sensitivityX: 1.5
+  sensitivityY: 0.5
+  maxAimRangeX: 180
+  minAimRangeX: -180
+  maxAimRangeY: 70
+  minAimRangeY: -70
+  accelTimeX: 0.1
+  decelTimeX: 0.1
+  accelTimeY: 0.1
+  decelTimeY: 0.1
+  convertSpeed: 10
