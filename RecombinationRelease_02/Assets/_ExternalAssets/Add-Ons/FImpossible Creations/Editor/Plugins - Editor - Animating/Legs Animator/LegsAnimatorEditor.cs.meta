@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: faef2b1a86bcca846a9d51eba379393d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ModulesDirectory: {fileID: 102900000, guid: 31c3993e0695a5149ac5de051e1895e8,
+      type: 3}
+  - MotionPresetsDirectory: {fileID: 102900000, guid: d4ad1ffdea45c444dbcf23b831a57c21,
+      type: 3}
+  - ImpulsesDirectory: {fileID: 102900000, guid: 2dabc31881e9120499f671e29955d41c,
+      type: 3}
+  - DemosPackage: {fileID: 102900000, guid: 905ddb52e3f15314d937bf23713161a0, type: 3}
+  - UserManualFile: {fileID: 102900000, guid: 5a95b18dcb99c914c933e12843092f47, type: 3}
+  - AssemblyDefinitions: {fileID: 102900000, guid: 567d0977835eabd48805d30b4001e4fe,
+      type: 3}
+  - AssemblyDefinitionsAll: {fileID: 102900000, guid: 1b8d36599035b4548acb3ac78e2106d2,
+      type: 3}
+  - SceneHelper_FocusOnBone: {instanceID: 0}
+  - HumanoidTPose: {fileID: 7400000, guid: e605d77184e9c5145bf97d6474c229dc, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

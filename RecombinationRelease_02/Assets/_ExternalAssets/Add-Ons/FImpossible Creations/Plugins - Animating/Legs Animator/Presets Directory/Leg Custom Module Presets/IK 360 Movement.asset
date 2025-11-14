@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879c0a0b11bcd7042b0d1842a4ad0a95, type: 3}
+  m_Name: IK 360 Movement
+  m_EditorClassIdentifier: 
+  Animation360Angles:
+    AnglesOn0: {x: 0, y: 0, z: 0}
+    AnglesOn45: {x: -10, y: 14, z: -5}
+    AnglesOn90: {x: -7, y: 40, z: -3}
+    AnglesOn135: {x: -12, y: -25, z: -4}
+    AnglesOn180: {x: -26, y: 0, z: 0}
+    HipsOffsetOn0: {x: 0, y: 0, z: 0}
+    HipsOffsetOn45: {x: -0.05, y: 0, z: -0.05}
+    HipsOffsetOn90: {x: -0.1, y: 0, z: 0.05}
+    HipsOffsetOn135: {x: -0.1, y: 0, z: 0.1}
+    HipsOffsetOn180: {x: 0, y: 0.05, z: 0.2}
+    IKsOffsetOn0: {x: 0, y: 0, z: 0}
+    IKsOffsetOn45: {x: 0.05, y: 0, z: 0.03}
+    IKsOffsetOn90: {x: 0, y: 0, z: 0.06}
+    IKsOffsetOn135: {x: 0, y: 0, z: -0.1}
+    IKsOffsetOn180: {x: 0, y: 0, z: 0}
+  InfoDisplay: 1

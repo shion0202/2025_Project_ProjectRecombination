@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d180cb244931ee347a2a3cb0bffea79b, type: 3}
+  m_Name: IK Algorithm Switch - Axis Lock IK
+  m_EditorClassIdentifier: 
+  lockX: 1
+  lockY: 0
+  lockZ: 0

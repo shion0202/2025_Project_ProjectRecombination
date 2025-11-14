@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c572eea6db690a945a5a8669b00c1c01
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 193251
+  packageName: Arcade Vehicle Physics
+  packageVersion: 1.4
+  assetPath: Assets/Ash Assets/Arcade Vehicle Physics/Editor/AVC_Editor.cs
+  uploadId: 720603
