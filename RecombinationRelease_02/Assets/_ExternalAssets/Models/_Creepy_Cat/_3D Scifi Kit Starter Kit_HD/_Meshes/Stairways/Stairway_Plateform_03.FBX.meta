@@ -1,0 +1,138 @@
+fileFormatVersion: 2
+guid: 1247c789d2b61417bbe3a33df79594ef
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Stairway_Angle_Right_01
+    100002: Stairway_Plateform_00
+    100004: Stairway_Plateform_01
+    100006: Stairway_Plateform_013
+    100008: Stairway_Plateform_017
+    100010: Stairway_Plateform_02
+    100012: Stairway_Plateform_03
+    100014: //RootNode
+    100016: Stairway_Plateform_03 1
+    100018: Stairway_Plateform_04
+    100020: Stairway_Plateform_04 1
+    100022: Stairway_Plateform_05
+    100024: Stairway_Plateform_06
+    100026: Stairway_Plateform_07
+    100028: Stairway_Plateform_08
+    400000: Stairway_Angle_Right_01
+    400002: Stairway_Plateform_00
+    400004: Stairway_Plateform_01
+    400006: Stairway_Plateform_013
+    400008: Stairway_Plateform_017
+    400010: Stairway_Plateform_02
+    400012: Stairway_Plateform_03
+    400014: //RootNode
+    400016: Stairway_Plateform_03 1
+    400018: Stairway_Plateform_04
+    400020: Stairway_Plateform_04 1
+    400022: Stairway_Plateform_05
+    400024: Stairway_Plateform_06
+    400026: Stairway_Plateform_07
+    400028: Stairway_Plateform_08
+    2300000: Stairway_Angle_Right_01
+    2300002: Stairway_Plateform_00
+    2300004: Stairway_Plateform_01
+    2300006: Stairway_Plateform_013
+    2300008: Stairway_Plateform_017
+    2300010: Stairway_Plateform_02
+    2300012: Stairway_Plateform_03
+    2300014: Stairway_Plateform_03 1
+    2300016: Stairway_Plateform_04
+    2300018: Stairway_Plateform_04 1
+    2300020: Stairway_Plateform_05
+    2300022: Stairway_Plateform_06
+    2300024: Stairway_Plateform_07
+    2300026: Stairway_Plateform_08
+    2300028: //RootNode
+    3300000: Stairway_Angle_Right_01
+    3300002: Stairway_Plateform_00
+    3300004: Stairway_Plateform_01
+    3300006: Stairway_Plateform_013
+    3300008: Stairway_Plateform_017
+    3300010: Stairway_Plateform_02
+    3300012: Stairway_Plateform_03
+    3300014: Stairway_Plateform_03 1
+    3300016: Stairway_Plateform_04
+    3300018: Stairway_Plateform_04 1
+    3300020: Stairway_Plateform_05
+    3300022: Stairway_Plateform_06
+    3300024: Stairway_Plateform_07
+    3300026: Stairway_Plateform_08
+    3300028: //RootNode
+    4300000: Stairway_Plateform_02
+    4300002: Stairway_Angle_Right_01
+    4300004: Stairway_Plateform_01
+    4300006: Stairway_Plateform_03
+    4300008: Stairway_Plateform_04
+    4300010: Stairway_Plateform_07
+    4300012: Stairway_Plateform_05
+    4300014: Stairway_Plateform_03
+    4300016: Stairway_Plateform_013
+    4300018: Stairway_Plateform_08
+    4300020: Stairway_Plateform_06
+    4300022: Stairway_Plateform_04
+    4300024: Stairway_Plateform_017
+    4300026: Stairway_Plateform_00
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 2
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 1
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
