@@ -8,7 +8,8 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DissolveMatirial 2
-  m_Shader: {fileID: -6465566751694194690, guid: 38bbc67b175e07a418dc62ce086e1a3e, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 38bbc67b175e07a418dc62ce086e1a3e,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,11 +25,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _SampleTexture2D_030ebe49537d4b1e94e927aed6262b61_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: c1a4babcf6b037a45abea717462ad17a, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_1004676aabfa41539daab24615d4497a_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: 355d1b1138fd80b4fa3fb0d0d77daeec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _base_taxture:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:

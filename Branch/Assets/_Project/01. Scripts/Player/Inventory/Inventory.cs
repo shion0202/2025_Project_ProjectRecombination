@@ -208,8 +208,16 @@ public class Inventory : MonoBehaviour
         if (!_items[equipItem.PartType][equipItem.AttackType].Contains(equipItem)) return;
         if (_equippedItems[equipItem.PartType].Count > 0 && _equippedItems[equipItem.PartType][0].Equals(equipItem)) return;
 
+        // 이전에 장착 중이던 파츠 해제
+        bool isFirst = true;
         foreach (var part in _equippedItems[equipItem.PartType])
         {
+            if (isFirst)
+            {
+                part.PreserveCurrentCooldown(equipItem.PartType);
+                isFirst = false;
+            }
+
             part.FinishActionForced();
             owner.Stats.RemoveModifier(part);
             part.gameObject.SetActive(false);
@@ -239,6 +247,7 @@ public class Inventory : MonoBehaviour
         }
 
         owner.SetPartStat(equipItem);
+        _equippedItems[equipItem.PartType][0].SetCurrentCooldown(equipItem.PartType);
 
         PartBaseLegs legs = sameTypeParts.OfType<PartBaseLegs>().FirstOrDefault();
         if (legs != null)

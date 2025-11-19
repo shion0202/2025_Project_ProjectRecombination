@@ -1,11 +1,11 @@
+using _Project._01._Scripts.Monster;
+using Cinemachine;
+using Managers;
+using Monster.AI;
+using Monster.AI.FSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Monster.AI;
-using Managers;
-using _Project._01._Scripts.Monster;
-using Cinemachine;
-using Monster.AI.FSM;
 
 public class LegsEnhanced : PartBaseLegs
 {
@@ -22,7 +22,6 @@ public class LegsEnhanced : PartBaseLegs
     private Vector3 _currentVelocity = Vector3.zero;            // 현재 속도 벡터
     private float _skateTime = 0f;                              // 시간 누적 변수
     private bool _isCooldown = false;
-    private float _currentCooldownTime = 0.0f;
     private bool _isAttack = false;
     protected CinemachineImpulseSource source;
     protected AudioSource _audioSource;
@@ -48,14 +47,13 @@ public class LegsEnhanced : PartBaseLegs
         {
             JumpAttackFinish();
 
-            _currentCooldownTime = IsAttack ? (skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value) : (skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value) * 0.5f;
+            _currentCooldown = IsAttack ? (skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value) : (skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value) * 0.5f;
             _isAttack = false;
             _isCooldown = false;
         }
         else
         {
             _currentSkillCount = 0;
-            _currentCooldownTime = 0.0f;
             _currentVelocity = Vector3.zero;
             _skateTime = 0.0f;
             _isCooldown = false;
@@ -68,10 +66,6 @@ public class LegsEnhanced : PartBaseLegs
                 StopCoroutine(_skillCoroutine);
                 _skillCoroutine = null;
             }
-
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
         }
 
         GUIManager.Instance.SetLegsSkillTimer(Color.white);
@@ -86,7 +80,6 @@ public class LegsEnhanced : PartBaseLegs
         if (!_isCooldown)
         {
             _currentSkillCount = 0;
-            _currentCooldownTime = 0.0f;
             _currentVelocity = Vector3.zero;
             _skateTime = 0.0f;
             _isCooldown = false;
@@ -114,10 +107,10 @@ public class LegsEnhanced : PartBaseLegs
 
     private void Update()
     {
-        _currentCooldownTime -= Time.deltaTime;
+        _currentCooldown -= Time.deltaTime;
 
-        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldownTime);
-        if (_currentCooldownTime <= 0.0f)
+        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+        if (_currentCooldown <= 0.0f)
         {
             GUIManager.Instance.SetLegsSkillIcon(false);
             GUIManager.Instance.SetLegsSkillCooldown(false);
@@ -126,6 +119,7 @@ public class LegsEnhanced : PartBaseLegs
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         JumpAttack();
     }
 
@@ -134,7 +128,6 @@ public class LegsEnhanced : PartBaseLegs
         base.FinishActionForced();
 
         _currentSkillCount = 0;
-        _currentCooldownTime = 0.0f;
         _currentVelocity = Vector3.zero;
         _skateTime = 0.0f;
         _isCooldown = false;
@@ -162,13 +155,29 @@ public class LegsEnhanced : PartBaseLegs
         _audioSource.Play();
     }
 
+    public override void SetCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
+
+        _currentCooldown = skillCooldown * _owner.CooldownDictionary[currentPartType];
+
+        if (_currentCooldown > 0.0f)
+        {
+            GUIManager.Instance.SetLegsSkillIcon(true);
+            GUIManager.Instance.SetLegsSkillCooldown(true);
+            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+        }
+    }
+
     protected void JumpAttack()
     {
-        if (_currentCooldownTime > 0.0f || _isCooldown) return;
+        if (_currentCooldown > 0.0f || _isCooldown) return;
 
         // 점프 연출 이후 실행
         Utils.Destroy(
             Utils.Instantiate(jumpEffectPrefab, _owner.transform.position + Vector3.up * 10.0f, Quaternion.Euler(new Vector3(90.0f, 0.0f, 0.0f))), 1.0f);
+
+        _owner.Inven.EquippedItems[EPartType.Shoulder][0].PreserveCurrentCooldown(EPartType.Shoulder);
 
         GameObject go = Utils.Instantiate(RapidPlayerPrefab, _owner.transform.position, _owner.transform.rotation);
         RapidPlayer rapidPlayer = go.GetComponent<RapidPlayer>();
@@ -235,6 +244,7 @@ public class LegsEnhanced : PartBaseLegs
             }
         }
 
+        _owner.Inven.EquippedItems[EPartType.Shoulder][0].SetCurrentCooldown(EPartType.Shoulder);
         _damagedTargets.Clear();
     }
 

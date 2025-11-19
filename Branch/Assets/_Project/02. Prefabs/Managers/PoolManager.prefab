@@ -171,5 +171,5 @@ MonoBehaviour:
     maxSize: 2
   - prefab: {fileID: 6286681193180418720, guid: cd1e3f1f327c3244baf5f32081a7ec38,
       type: 3}
-    defaultSize: 1
-    maxSize: 2
+    defaultSize: 10
+    maxSize: 30

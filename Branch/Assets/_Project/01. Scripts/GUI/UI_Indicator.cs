@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UI_Indicator : MonoBehaviour
@@ -9,6 +10,8 @@ public class UI_Indicator : MonoBehaviour
     [SerializeField] private Camera mainCamera;           // 주 카메라
     [SerializeField] private Canvas canvas;               // 인디케이터용 Canvas
     [SerializeField] private Transform defaultTarget;
+    [SerializeField] private TextMeshProUGUI distanceText;
+    private PlayerController player;
     private Transform target;            // 3D 타겟 오브젝트 (월드 기준)
     private bool _isOn;
 
@@ -30,11 +33,16 @@ public class UI_Indicator : MonoBehaviour
     private void Start()
     {
         target = defaultTarget;
+        player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if (!target || !indicatorUI || !mainCamera) return;
+        if (!target || !mainCamera)
+        {
+            indicatorUI.gameObject.SetActive(false);
+            return;
+        }
 
         if (_isOn)
         {
@@ -112,6 +120,13 @@ public class UI_Indicator : MonoBehaviour
                 Mathf.Clamp(edge.x, minX, maxX),
                 Mathf.Clamp(edge.y, minY, maxY)
             );
+        }
+
+        if (player != null && target != null && distanceText != null)
+        {
+            float distanceSqr = (player.transform.position - target.position).sqrMagnitude;
+            float approxDistance = Mathf.Sqrt(distanceSqr); // 최적화를 위해 특정 조건에서만 실제 거리 계산을 하거나, 필요할 때만 호출하도록 처리 가능
+            distanceText.text = $"{approxDistance:F0}m";
         }
 
         // 스크린 → UI 좌표 변환

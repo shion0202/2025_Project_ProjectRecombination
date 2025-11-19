@@ -11,7 +11,6 @@ public class ShoulderRapid : PartBaseShoulder
     [SerializeField] protected int maxTargetCount = 12;
     [SerializeField] private float particleStopDelay = 0.9f;  // Inspector에서 조절 가능
     [SerializeField] protected float skillDamage = 100.0f;
-    [SerializeField] protected float skillCooldown = 15.0f;
     private Coroutine _skillCoroutine = null;
     private List<GameObject> targetingInstances = new List<GameObject>();
 
@@ -36,8 +35,6 @@ public class ShoulderRapid : PartBaseShoulder
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetBackSkillIcon(false);
-
         if (_skillCoroutine != null)
         {
             StopCoroutine(_skillCoroutine);
@@ -61,10 +58,10 @@ public class ShoulderRapid : PartBaseShoulder
             cutsceneCams[i].m_Priority = 10;
         }
 
-        GUIManager.Instance.SetBackSkillIcon(false);
-        GUIManager.Instance.SetBackSkillCooldown(0.0f);
-        GUIManager.Instance.SetBackSkillCooldown(false);
-        StartCoroutine(SetBackSkillIcon());
+        if (_currentCooldown <= 0.0f)
+        {
+            StartCoroutine(SetBackSkillIcon());
+        }
     }
 
     protected void OnDisable()
@@ -104,6 +101,7 @@ public class ShoulderRapid : PartBaseShoulder
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         LaunchTargetMissiles();
     }
 
@@ -142,6 +140,33 @@ public class ShoulderRapid : PartBaseShoulder
             GUIManager.Instance.SetBackSkillCooldown(0.0f);
             GUIManager.Instance.SetBackSkillCooldown(false);
         }
+    }
+
+    public override IEnumerator CoStartCooldown()
+    {
+        yield return null;
+        yield return null;
+
+        GUIManager.Instance.SetBackSkillIcon(true);
+        GUIManager.Instance.SetBackSkillCooldown(true);
+        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
+            {
+                _currentCooldown = 0.0f;
+                break;
+            }
+        }
+
+        GUIManager.Instance.SetBackSkillIcon(false);
+        GUIManager.Instance.SetBackSkillCooldown(false);
+        _cooldownRoutine = null;
     }
 
     private void LaunchTargetMissiles()
@@ -337,17 +362,18 @@ public class ShoulderRapid : PartBaseShoulder
             cutsceneCams[i].m_Priority = 10;
         }
 
-        float time = skillCooldown;
+        _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
         GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(time);
+        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
-            time -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(time);
-            if (time <= 0.0f)
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
             {
+                _currentCooldown = 0.0f;
                 break;
             }
         }

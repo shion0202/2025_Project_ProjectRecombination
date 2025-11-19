@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField] private GameObject followCameraPrefab;
     [SerializeField] private Volume volume;
     [SerializeField] private GameObject lowHp;
+    [SerializeField] private ParticleFollower navi;
     private FollowCameraController _followCamera;
     private MotionBlur _motionBlur;
 
@@ -88,12 +89,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     private EAnimationType _currentAnimType = EAnimationType.Base;
     private EAnimationType _shootAnimType = EAnimationType.ShootingBase;
 
-    [Header("Parts Set")]
+    [Header("Parts")]
     [SerializeField] private List<SkinnedMeshRenderer> bodyRenderers = new();
     [SerializeField] private List<Material> basicMaterials = new();
     [SerializeField] private List<Material> laserMaterials = new();
     [SerializeField] private List<Material> rapidMaterials = new();
     [SerializeField] private List<Material> heavyMaterials = new();
+    private Dictionary<EPartType, float> cooldownDict = new();
 
     [Header("Sounds")]
     [SerializeField] private List<AudioClip> hitClips = new();
@@ -124,6 +126,11 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         get => characterController;
         set => characterController = value;
+    }
+
+    public ParticleFollower Navi
+    {
+        get => navi;
     }
 
     public EPlayerState CurrentPlayerState
@@ -157,6 +164,12 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         get => inventory;
     }
+
+    public Dictionary<EPartType, float> CooldownDictionary
+    {
+        get => cooldownDict;
+        set => cooldownDict = value;
+    }
     #endregion
 
     #region Unity Methods
@@ -189,11 +202,18 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         inventory = GetComponent<Inventory>();
         rigAimController = GetComponent<RigAimController>();
 
+        foreach (EPartType partType in Enum.GetValues(typeof(EPartType)))
+        {
+            cooldownDict.Add(partType, 0.0f);
+        }
+
         GroundCheck gc = GetComponentInChildren<GroundCheck>();
         if (gc != null)
         {
             groundCheck = gc.transform;
         }
+
+        navi.gameObject.SetActive(false);
 
         // 비트 마스크 방식으로 레이케스트를 관리할 레이어를 설정
         // 마스크 값이 비어있다면 기본 값(모든 레이어 - 일부 레이어)로 설정

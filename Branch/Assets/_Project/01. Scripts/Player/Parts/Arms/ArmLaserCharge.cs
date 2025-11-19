@@ -10,6 +10,7 @@ public class ArmLaserCharge : PartBaseArm
     [SerializeField] private GameObject laserPrefab;  // LineRenderer 포함된 프리팹
     [SerializeField] protected GameObject chargeEffectPrefab;
     [SerializeField] protected float maxChargeTime = 2.0f;
+    [SerializeField] protected float chargeEfficient = 1.0f;
     [SerializeField] protected Vector3 chargeOffset = Vector3.zero;
     [SerializeField] protected List<AudioClip> chargeClips = new();
     protected float _currentChargeTime = 0.0f;
@@ -126,12 +127,13 @@ public class ArmLaserCharge : PartBaseArm
             chargeEffect = null;
         }
 
+        if (!_isDelay)
+        {
+            Shoot();
+        }
+
         _currentShootTime = 0.0f;
         isMaxCharge = false;
-
-        if (_isDelay) return;
-
-        Shoot();
     }
 
     public override void FinishActionForced()
@@ -226,7 +228,8 @@ public class ArmLaserCharge : PartBaseArm
         {
             foreach (RaycastHit hitObject in hits)
             {
-                TakeDamage(hitObject.transform, 1.0f + _currentChargeTime);
+                // 차지 시간에 따라 최대 N배 데미지
+                TakeDamage(hitObject.transform, 1.0f + _currentChargeTime * chargeEfficient);
                 Utils.Destroy(Utils.Instantiate(bulletPrefab, hitObject.point, Quaternion.identity), 0.1f);
             }
         }

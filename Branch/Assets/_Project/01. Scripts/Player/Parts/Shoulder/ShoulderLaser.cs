@@ -16,7 +16,6 @@ public class ShoulderLaser : PartBaseShoulder
     [SerializeField] protected float beamDamage = 300.0f;
     [SerializeField] protected Vector3 beamOffset = Vector3.zero;
     [SerializeField] protected float beamDuration = 2.0f;
-    [SerializeField] protected float beamCooldown = 5.0f;
     [SerializeField] protected float beamMaxDistance = 100.0f;
     [SerializeField] protected float beamRadius = 1.0f;
     [SerializeField] protected LayerMask obstacleMask;
@@ -58,10 +57,6 @@ public class ShoulderLaser : PartBaseShoulder
         }
 
         _damagedTargets.Clear();
-
-        GUIManager.Instance.SetBackSkillIcon(false);
-        GUIManager.Instance.SetBackSkillCooldown(0.0f);
-        GUIManager.Instance.SetBackSkillCooldown(false);
     }
 
     protected void OnDisable()
@@ -110,6 +105,7 @@ public class ShoulderLaser : PartBaseShoulder
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         ShootLaser();
     }
 
@@ -295,17 +291,18 @@ public class ShoulderLaser : PartBaseShoulder
         _owner.PlayerAnimator.SetBool("isPlayBackShootAnim", false);
         _owner.PlayerAnimator.SetBool("isPlayBackLaserAnim", false);
 
-        float time = beamCooldown;
+        _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
         GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(time);
+        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
-            time -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(time);
-            if (time <= 0.0f)
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
             {
+                _currentCooldown = 0.0f;
                 break;
             }
         }

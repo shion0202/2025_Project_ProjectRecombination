@@ -996,6 +996,7 @@ MonoBehaviour:
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
     type: 3}
   maxChargeTime: 2
+  chargeEfficient: 1
   chargeOffset: {x: 0, y: 0, z: 0}
   chargeClips: []
 --- !u!114 &4733233971650792553
@@ -1090,6 +1091,7 @@ MonoBehaviour:
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
     type: 3}
   maxChargeTime: 2
+  chargeEfficient: 1
   chargeOffset: {x: 0, y: 0, z: 0}
   chargeClips: []
 --- !u!114 &6600234738805247064
@@ -1184,6 +1186,7 @@ MonoBehaviour:
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
     type: 3}
   maxChargeTime: 2
+  chargeEfficient: 1
   chargeOffset: {x: 0, y: 0, z: 0}
   chargeClips: []
 --- !u!1 &624097717114179101
@@ -1571,6 +1574,7 @@ MonoBehaviour:
     type: 3}
   volume: {fileID: 0}
   lowHp: {fileID: 0}
+  navi: {fileID: 0}
   movementBlockMask: 8968
   dashBlockMask: 11012
   skillBlockMask: 11012
@@ -13796,6 +13800,7 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  skillCooldown: 0
 --- !u!1 &2552530128444037841
 GameObject:
   m_ObjectHideFlags: 0
@@ -16564,6 +16569,7 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  skillCooldown: 15
 --- !u!1 &4464290158731810965
 GameObject:
   m_ObjectHideFlags: 0
@@ -17854,13 +17860,13 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  skillCooldown: 15
   missilePrefab: {fileID: 1234507268503195618, guid: 5c13b7f0b5cd7e04990c03edc858d81a,
     type: 3}
   targetingPrefab: {fileID: 139102, guid: 4194ceaacbae66d4c82403180d035ff7, type: 3}
   maxTargetCount: 12
   particleStopDelay: 0.9
   skillDamage: 150
-  skillCooldown: 15
   maxYawAngle: 80
   maxPitchAngle: 80
   launchOffset: {x: 0, y: 1.7, z: 0}
@@ -18416,6 +18422,7 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  skillCooldown: 15
   beamLineRendererPrefab: {fileID: 113598, guid: 9bc40fcd7e707f149b47aa3fbb1773df,
     type: 3}
   beamStartPrefab: {fileID: 108584, guid: 9b0245240330cec41893d8611880df8d, type: 3}
@@ -18425,7 +18432,6 @@ MonoBehaviour:
   beamDamage: 300
   beamOffset: {x: 0, y: 1.3, z: 0.3}
   beamDuration: 5
-  beamCooldown: 15
   beamMaxDistance: 100
   beamRadius: 0.8
   obstacleMask:
@@ -22458,7 +22464,8 @@ MonoBehaviour:
     type: 3}
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
     type: 3}
-  maxChargeTime: 1
+  maxChargeTime: 1.5
+  chargeEfficient: 2
   chargeOffset: {x: 0, y: 0, z: 0}
   chargeClips:
   - {fileID: 8300000, guid: 94312cf4e9f4e6341a567c5ae36c65ee, type: 3}
@@ -25130,12 +25137,12 @@ MonoBehaviour:
   ignoreMask:
     serializedVersion: 2
     m_Bits: 0
+  skillCooldown: 12
   shootPrefab: {fileID: 169642, guid: fff13bebbd256b54db6f12ff5455bb45, type: 3}
   orbPrefab: {fileID: 364168584227083269, guid: 23f7c226d30f55e48841c26e8087eb37,
     type: 3}
   backPart: {fileID: 3770361588193418437}
   damage: 300
-  cooldown: 12
   cutsceneCams:
   - {fileID: 7256824862633441005}
 --- !u!114 &883675992394569450

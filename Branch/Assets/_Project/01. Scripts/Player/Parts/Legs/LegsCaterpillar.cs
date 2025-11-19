@@ -89,6 +89,7 @@ public class LegsCaterpillar : PartBaseLegs
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         Impact(true);
     }
 
@@ -382,17 +383,18 @@ public class LegsCaterpillar : PartBaseLegs
             _owner.FollowCamera.SetCameraRotatable(true);
 
             // 스킬 쿨타임
-            float endTime = skillCooldown;
+            _currentCooldown = skillCooldown;
             GUIManager.Instance.SetLegsSkillCooldown(true);
-            GUIManager.Instance.SetLegsSkillCooldown(endTime);
+            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
             while (true)
             {
                 yield return new WaitForSeconds(0.1f);
 
-                    endTime -= 0.1f;
-                GUIManager.Instance.SetLegsSkillCooldown(endTime);
-                if (endTime <= 0.0f)
+                _currentCooldown -= 0.1f;
+                GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+                if (_currentCooldown <= 0.0f)
                 {
+                    _currentCooldown = 0.0f;
                     break;
                 }
             }

@@ -25,6 +25,8 @@ public abstract class PartBase : MonoBehaviour
     protected bool _isAnimating = true;
     protected bool _isZooming = true;
     protected List<Transform> _damagedTargets = new();
+    protected float _currentCooldown = 0.0f;
+    protected Coroutine _cooldownRoutine = null;
 
     public EPartType PartType => partType;
     public EAttackType AttackType => attackType;
@@ -102,6 +104,7 @@ public abstract class PartBase : MonoBehaviour
             if (_damagedTargets.Contains(otherParent)) return;
             _damagedTargets.Add(otherParent);
             monster.ApplyDamage((_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue), targetMask);
+            Debug.Log($"Hit! ({_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient} / {_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue})");
 
             if (_owner.CompareTag("Player"))
             {
@@ -117,6 +120,7 @@ public abstract class PartBase : MonoBehaviour
                 if (_damagedTargets.Contains(otherParent)) return;
                 _damagedTargets.Add(otherParent);
                 monster.ApplyDamage((_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue), targetMask);
+                Debug.Log($"Hit! ({_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient} / {_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue})");
 
                 if (_owner.CompareTag("Player"))
                 {
@@ -124,5 +128,16 @@ public abstract class PartBase : MonoBehaviour
                 }
             }
         }
+    }
+
+    // 파츠 교체 등 이전 쿨타임 정보가 필요할 경우 이를 저장하고 불러오는 함수
+    public virtual void PreserveCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
+    }
+
+    public virtual void SetCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
     }
 }

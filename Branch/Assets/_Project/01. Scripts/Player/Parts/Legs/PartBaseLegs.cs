@@ -46,4 +46,53 @@ public class PartBaseLegs : PartBase, ILegsMovement
     {
         return Vector3.zero;
     }
+
+    public override void PreserveCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
+        if (_cooldownRoutine != null)
+        {
+            StopCoroutine(_cooldownRoutine);
+            _cooldownRoutine = null;
+        }
+
+        // 쿨타임이 얼마나 지났는지 백분율(%)로 저장 (1 -> 0)
+        _owner.CooldownDictionary[currentPartType] = _currentCooldown / skillCooldown;
+    }
+
+    public override void SetCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
+
+        _currentCooldown = skillCooldown * _owner.CooldownDictionary[currentPartType];
+
+        if (_currentCooldown > 0.0f)
+        {
+            _cooldownRoutine = StartCoroutine(CoStartCooldown());
+        }
+    }
+
+    public virtual IEnumerator CoStartCooldown()
+    {
+        GUIManager.Instance.SetLegsSkillIcon(true);
+        GUIManager.Instance.SetLegsSkillCooldown(true);
+        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
+            {
+                _currentCooldown = 0.0f;
+                break;
+            }
+        }
+
+        GUIManager.Instance.SetLegsSkillIcon(false);
+        GUIManager.Instance.SetLegsSkillCooldown(false);
+        _cooldownRoutine = null;
+    }
 }

@@ -1,3 +1,4 @@
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -18,5 +19,28 @@ public class ShoulderBasic : PartBaseShoulder
             //Managers.GUIManager.Instance.ShoulderIcon.SetActive(false);
             Managers.GUIManager.Instance.SetBackSkillIcon(false);
         }
+    }
+
+    public override IEnumerator CoStartCooldown()
+    {
+        GUIManager.Instance.SetBackSkillIcon(true);
+        GUIManager.Instance.SetBackSkillCooldown(true);
+        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
+            {
+                _currentCooldown = 0.0f;
+                break;
+            }
+        }
+
+        GUIManager.Instance.SetBackSkillCooldown(false);
+        _cooldownRoutine = null;
     }
 }

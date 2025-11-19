@@ -59,6 +59,7 @@ namespace Managers
         [Header("Indicator UI")]
         [SerializeField] private Image indicatorImage;
         [SerializeField] private UI_Indicator indicator;
+        [SerializeField] private UI_Indicator partIndicator;
         private Coroutine _indicatorFadeRoutine = null;
 
         [Header("Buff UI")]
@@ -600,17 +601,43 @@ namespace Managers
 
                 //indicatorImage.color = Color.white;
                 indicator.IsOn = true;
+                partIndicator.IsOn = true;
+
+                var player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
+                if (player)
+                {
+                    player.Navi.gameObject.SetActive(true);
+                    player.Navi.MoveToTarget();
+                }
             }
             else
             {
                 //_indicatorFadeRoutine = StartCoroutine(CoFadeIndicator(0.5f));
                 indicator.IsOn = false;
+                partIndicator.IsOn = false;
+
+                var player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
+                if (player)
+                {
+                    player.Navi.StopEffect();
+                }
             }
         }
 
         public void SetIndicatorTarget(Transform target)
         {
             indicator.Target = target;
+
+            var player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
+            if (player)
+            {
+                player.Navi.SetTarget(target);
+            }
+        }
+
+        public void SetPartIndicatorTarget(Transform target)
+        {
+            partIndicator.Target = target;
         }
 
         public void SetConstraintMessage(string message)

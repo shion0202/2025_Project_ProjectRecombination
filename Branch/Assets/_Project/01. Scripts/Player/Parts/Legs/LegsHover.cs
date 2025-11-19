@@ -55,10 +55,6 @@ public class LegsHover : PartBaseLegs
             StopCoroutine(_skillCoroutine);
             _skillCoroutine = null;
         }
-
-        GUIManager.Instance.SetLegsSkillIcon(false);
-        GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-        GUIManager.Instance.SetLegsSkillCooldown(false);
     }
 
     protected void OnDisable()
@@ -90,6 +86,7 @@ public class LegsHover : PartBaseLegs
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         CreateBarrier();
     }
 
@@ -214,17 +211,18 @@ public class LegsHover : PartBaseLegs
         }
         _owner.Stats.RemoveModifier(this);
 
-        float time = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
+        _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
         GUIManager.Instance.SetLegsSkillCooldown(true);
-        GUIManager.Instance.SetLegsSkillCooldown(time);
+        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
-            time -= 0.1f;
-            GUIManager.Instance.SetLegsSkillCooldown(time);
-            if (time <= 0.0f)
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
             {
+                _currentCooldown = 0.0f;
                 break;
             }
         }

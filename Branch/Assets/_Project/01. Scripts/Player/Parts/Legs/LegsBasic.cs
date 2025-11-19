@@ -33,10 +33,6 @@ public class LegsBasic : PartBaseLegs
             StopCoroutine(_skillCoroutine);
             _skillCoroutine = null;
         }
-
-        GUIManager.Instance.SetLegsSkillIcon(false);
-        GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-        GUIManager.Instance.SetLegsSkillCooldown(false);
     }
 
     protected void OnDisable()
@@ -61,6 +57,7 @@ public class LegsBasic : PartBaseLegs
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         if (_currentSkillCount >= maxSkillCount) return;
         Dash();
     }
@@ -146,17 +143,18 @@ public class LegsBasic : PartBaseLegs
         _owner.FinishDash();
         GUIManager.Instance.SetLegsSkillIcon(true);
 
-        float time = (skillCooldown * (_currentSkillCount)) - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
+        _currentCooldown = (skillCooldown * (_currentSkillCount)) - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
         GUIManager.Instance.SetLegsSkillCooldown(true);
-        GUIManager.Instance.SetLegsSkillCooldown(time);
+        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
-            time -= 0.1f;
-            GUIManager.Instance.SetLegsSkillCooldown(time);
-            if (time <= 0.0f)
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
             {
+                _currentCooldown = 0.0f;
                 break;
             }
         }

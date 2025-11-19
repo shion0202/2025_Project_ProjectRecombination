@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f77d5ff8f9f9f4e80d11470fc13043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beamLineRendererPrefab: {fileID: 113598, guid: 9bc40fcd7e707f149b47aa3fbb1773df, type: 3}
+  beamLineRendererPrefab: {fileID: 113598, guid: 9bc40fcd7e707f149b47aa3fbb1773df,
+    type: 3}
   beamStartPrefab: {fileID: 108584, guid: 9b0245240330cec41893d8611880df8d, type: 3}
   beamEndPrefab: {fileID: 131904, guid: 16d8536db6f4c8e469e7c0929758624d, type: 3}
   beamCollides: 1

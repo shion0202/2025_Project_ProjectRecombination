@@ -15,7 +15,6 @@ public class ShoulderHeavy : PartBaseShoulder
     protected Coroutine _morphBlendRoutine = null;
 
     [SerializeField] protected float damage = 200.0f;
-    [SerializeField] protected float cooldown = 15.0f;
 
     [SerializeField] protected List<CinemachineVirtualCamera> cutsceneCams = new();
     protected CinemachineBrain brain;
@@ -57,10 +56,6 @@ public class ShoulderHeavy : PartBaseShoulder
             StopCoroutine(_morphBlendRoutine);
             _morphBlendRoutine = null;
         }
-
-        GUIManager.Instance.SetBackSkillIcon(false);
-        GUIManager.Instance.SetBackSkillCooldown(0.0f);
-        GUIManager.Instance.SetBackSkillCooldown(false);
     }
 
     protected void OnDisable()
@@ -100,6 +95,7 @@ public class ShoulderHeavy : PartBaseShoulder
 
     public override void UseAbility()
     {
+        if (_cooldownRoutine != null) return;
         ShootOrb();
     }
 
@@ -143,6 +139,7 @@ public class ShoulderHeavy : PartBaseShoulder
     private void ShootOrb()
     {
         if (_skillCoroutine != null) return;
+
         _skillCoroutine = StartCoroutine(CoShootOrb());
     }
 
@@ -241,17 +238,18 @@ public class ShoulderHeavy : PartBaseShoulder
         brain.m_DefaultBlend = defaultBlend;
         cutsceneCams[0].m_Priority = 10;
 
-        float time = cooldown;
+        _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
         GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(time);
+        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
-            time -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(time);
-            if (time <= 0.0f)
+            _currentCooldown -= 0.1f;
+            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            if (_currentCooldown <= 0.0f)
             {
+                _currentCooldown = 0.0f;
                 break;
             }
         }
