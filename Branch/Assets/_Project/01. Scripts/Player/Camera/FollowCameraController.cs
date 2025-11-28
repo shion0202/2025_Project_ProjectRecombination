@@ -45,6 +45,11 @@ public class FollowCameraController : MonoBehaviour
         set => vcam = value;
     }
 
+    public CinemachinePOV CameraAim
+    {
+        get => _cameraAim;
+    }
+
     public ECameraState CurrentCameraState
     {
         get { return currentCameraState; }

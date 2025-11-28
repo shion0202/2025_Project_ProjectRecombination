@@ -184,7 +184,7 @@ public class LegsEnhanced : PartBaseLegs
         if (rapidPlayer != null)
         {
             _isCooldown = true;
-            rapidPlayer.Init(_owner, this);
+            rapidPlayer.Init(_owner, this, _owner.FollowCamera.CameraAim.m_HorizontalAxis.Value);
         }
     }
 

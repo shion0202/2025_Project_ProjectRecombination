@@ -167,7 +167,7 @@ public class PartBaseArm : PartBase
     {
         Camera cam = Camera.main;
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * (Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position));
+        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * ((Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position)) + 1.0f);
         Vector3 targetPoint = Vector3.zero;
 
         if (Physics.Raycast(startPoint, ray.direction, out hit, shootingRange, ignoreMask))
@@ -186,7 +186,7 @@ public class PartBaseArm : PartBase
     {
         Camera cam = Camera.main;
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * (Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position));
+        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * ((Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position)) + 1.0f);
         Vector3 targetPoint = Vector3.zero;
 
         hits = Physics.RaycastAll(startPoint, ray.direction, shootingRange, ignoreMask);

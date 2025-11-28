@@ -53,15 +53,22 @@ public class PartBaseShoulder : PartBase
             _cooldownRoutine = null;
         }
 
-        // 쿨타임이 얼마나 지났는지 백분율(%)로 저장 (1 -> 0)
-        _owner.CooldownDictionary[currentPartType] = _currentCooldown / skillCooldown;
+        // 쿨타임이 얼마나 남았는지 저장
+        if (_currentCooldown > 0)
+        {
+            _owner.CooldownDictionary[currentPartType] = _currentCooldown;
+        }
+        else
+        {
+            _owner.CooldownDictionary[currentPartType] = 0.0f;
+        }
     }
 
     public override void SetCurrentCooldown(EPartType currentPartType)
     {
         if (!_owner) return;
 
-        _currentCooldown = skillCooldown * _owner.CooldownDictionary[currentPartType];
+        _currentCooldown = _owner.CooldownDictionary[currentPartType];
 
         if (_currentCooldown > 0.0f)
         {

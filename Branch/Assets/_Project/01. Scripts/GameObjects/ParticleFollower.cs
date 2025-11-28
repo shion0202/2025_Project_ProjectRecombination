@@ -1,4 +1,3 @@
-using LaserAssetPackage.Tests.LaserAssetPackage.Tests.Runtime.BasicActorTest;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -20,19 +19,16 @@ public class ParticleFollower : MonoBehaviour
         //    _deactiveRoutine = null;
         //}
 
-        // NavMeshAgent 잠깐 비활성화
-        agent.enabled = false;
-
         // playerPosition을 NavMesh 위 위치로 보정
         NavMeshHit hit;
         Vector3 startPos = Managers.MonsterManager.Instance.Player.transform.position;
         if (NavMesh.SamplePosition(startPos, out hit, 1f, NavMesh.AllAreas))
             startPos = hit.position;
 
-        // 직접 위치 이동
-        transform.position = startPos + Managers.MonsterManager.Instance.Player.transform.forward * 1.0f;
 
-        // NavMeshAgent 다시 활성화
+        // 직접 위치 이동
+        agent.enabled = false;
+        transform.position = startPos + Managers.MonsterManager.Instance.Player.transform.forward * 1.0f;
         agent.enabled = true;
 
         // 타겟 위치도 NavMesh 위로 보정
@@ -40,10 +36,13 @@ public class ParticleFollower : MonoBehaviour
         if (NavMesh.SamplePosition(targetPos, out hit, 1f, NavMesh.AllAreas))
             targetPos = hit.position;
 
-        agent.isStopped = false;
-
-        transform.rotation = Quaternion.LookRotation(Managers.MonsterManager.Instance.Player.transform.forward);
         agent.SetDestination(targetPos);
+        Vector3 moveDirection = (agent.destination - transform.position).normalized;
+        if (moveDirection.sqrMagnitude > 0.001f) // 아주 가까운 경우 예외 처리
+        {
+            transform.rotation = Quaternion.LookRotation(moveDirection);
+        }
+
         foreach (var particle in ps)
         {
             particle.Play();
@@ -61,13 +60,14 @@ public class ParticleFollower : MonoBehaviour
     public void StopEffect()
     {
         if (!gameObject.activeSelf) return;
+        if (ps[0].isStopped) return;
 
         foreach (var particle in ps)
         {
             particle.Stop();
         }
 
-        agent.isStopped = true;
+        agent.ResetPath();
 
         //if (_deactiveRoutine != null)
         //{
@@ -89,7 +89,7 @@ public class ParticleFollower : MonoBehaviour
 
         agent.SetDestination(targetPos);
     }
-    
+
     private IEnumerator CoDeactive()
     {
         yield return new WaitForSeconds(1.0f);

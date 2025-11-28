@@ -740,8 +740,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 70
     OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 100
+    NearClipPlane: 1
+    FarClipPlane: 70
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -1299,8 +1299,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 70
     OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 100
+    NearClipPlane: 1
+    FarClipPlane: 70
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -1511,13 +1511,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.7
-  m_Radius: 0.15
+  m_Height: 1.72
+  m_Radius: 0.16
   m_SlopeLimit: 45
   m_StepOffset: 0.5
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 0.89, z: 0}
+  m_Center: {x: 0, y: 0.87, z: -0.03}
 --- !u!114 &8248014748569777297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1575,6 +1575,7 @@ MonoBehaviour:
   volume: {fileID: 0}
   lowHp: {fileID: 0}
   navi: {fileID: 0}
+  worldmap: {fileID: 0}
   movementBlockMask: 8968
   dashBlockMask: 11012
   skillBlockMask: 11012
@@ -13519,8 +13520,8 @@ MonoBehaviour:
   pelletCount: 12
   denseSpreadAngle: 5
   denseRange: 10
-  spreadAngle: 60
-  maxRange: 20
+  spreadAngle: 10
+  maxRange: 50
   shootClips:
   - {fileID: 8300000, guid: 041b9fea16a3cf14ca6d17f9fab12763, type: 3}
   - {fileID: 8300000, guid: 06e9dc1c1dbb61c49851e3a8deb0bc7d, type: 3}
@@ -15179,8 +15180,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 70
     OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 100
+    NearClipPlane: 1
+    FarClipPlane: 70
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -18053,8 +18054,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 70
     OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 100
+    NearClipPlane: 1
+    FarClipPlane: 70
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -23610,6 +23611,8 @@ MonoBehaviour:
   caterpillarMaterial: {fileID: 2100000, guid: 1dca80f331c7cc244b0e6e8833945693, type: 2}
   bulletPrefab: {fileID: 914363595772914150, guid: 54c0c4d3bf9e54547a040ca32ebbe207,
     type: 3}
+  hitEffectPrefab: {fileID: 4264509212131509058, guid: 39645742d4f431b4283bd20284ae70f4,
+    type: 3}
   turnMoveSpeed: 60
   turnRotateSpeed: 20
   backwardThreshold: -0.6
@@ -25355,7 +25358,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.01, y: 0.01, z: 0}
+  m_DefaultVelocity: {x: -0.01, y: 0.01, z: 0}
 --- !u!114 &7425572409170030477
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -150,7 +150,10 @@ public class ArmLaserCharge : PartBaseArm
         {
             StopCoroutine(fadeCoroutine);
             fadeCoroutine = null;
+        }
 
+        if (currentLaserObject)
+        {
             Utils.Destroy(currentLaserObject.gameObject);
             currentLaser = null;
             currentLaserObject = null;
@@ -329,7 +332,7 @@ public class ArmLaserCharge : PartBaseArm
     {
         Camera cam = Camera.main;
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * (Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position));
+        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * ((Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position)) + 1.0f);
         Vector3 targetPoint = Vector3.zero;
 
         hits = Physics.RaycastAll(startPoint, ray.direction, shootingRange, ignoreMask);

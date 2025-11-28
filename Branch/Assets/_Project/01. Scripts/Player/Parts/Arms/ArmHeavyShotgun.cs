@@ -91,39 +91,45 @@ public class ArmHeavyShotgun : PartBaseArm
 
     protected override void Shoot()
     {
-        Vector3 startPoint = _owner.FollowCamera.transform.position + _owner.FollowCamera.transform.forward * (Vector3.Distance(_owner.transform.position, _owner.FollowCamera.transform.position));
+        // 실제 발사 방향
         Vector3 origin = bulletSpawnPoint.position;
-        Vector3 forward = _owner.FollowCamera.transform.forward;
+        Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
+        Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
 
         if (muzzleFlashPrefab)
         {
             muzzleFlashEffect = Utils.Instantiate(muzzleFlashPrefab, origin, Quaternion.LookRotation(-_owner.transform.forward));
-            Utils.Destroy(muzzleFlashEffect, 0.5f); // Lifetime of muzzle effect.
+            Utils.Destroy(muzzleFlashEffect, 0.5f);
         }
 
         for (int i = 0; i < pelletCount; i++)
         {
-            // 1. '좁은 탄착군' (bulletPosition 기준) ray
-            Vector3 narrowDir = GetRandomConeDirection(forward, denseSpreadAngle);
+            // 1단계 발사 방향 (좁은 스프레드)
+            Vector3 narrowDir = GetRandomConeDirection(camShootDirection, denseSpreadAngle * Random.Range(0.6f, 1.0f));
 
-            if (Physics.Raycast(startPoint, narrowDir, out RaycastHit hit, denseRange, ignoreMask))
+            // 편차 벡터 계산: narrowDir에서 중앙 forward 제외 (normalized)
+            Vector3 deviation = (narrowDir * 1.41f - camShootDirection).normalized;
+
+            if (Physics.Raycast(origin, narrowDir, out RaycastHit denseHit, denseRange, ignoreMask))
             {
                 // 밀집 히트 처리
-                ProcessPelletHit(hit, 0.5f);
+                ProcessPelletHit(denseHit);
+                DebugDrawPelletRays(origin, narrowDir, Vector3.zero, Vector3.zero);
                 continue;
             }
             else
             {
                 Vector3 denseEndPos = origin + narrowDir * denseRange;
 
-                // 2. '넓은 탄착군' (denseEndPos 기준) ray: narrowDir을 중심축 삼아 고르게 퍼짐!
-                Vector3 spreadDir = GetRandomConeDirection(narrowDir, spreadAngle);
+                // 2단계: 편차 벡터를 축으로 2단계 확산 각도 내에서 회전시켜 더 넓게 퍼짐
+                Vector3 spreadDir = RotateAroundAxis(narrowDir, deviation, (spreadAngle - denseSpreadAngle) * Random.Range(0.6f, 1.0f));
 
                 if (Physics.Raycast(denseEndPos, spreadDir, out RaycastHit spreadHit, maxRange - denseRange, ignoreMask))
                 {
-                    // 확산 히트 처리 etc.
-                    ProcessPelletHit(spreadHit);
+                    ProcessPelletHit(spreadHit, 1.5f);
                 }
+
+                DebugDrawPelletRays(origin, narrowDir, denseEndPos, spreadDir);
             }
         }
 
@@ -147,8 +153,22 @@ public class ArmHeavyShotgun : PartBaseArm
             _isOverheat = true;
             GUIManager.Instance.SetAmmoColor(partType, true);
         }
+    }
 
-        _damagedTargets.Clear();
+    // forward 벡터를 axis 축으로 angle 도만큼 회전하는 함수
+    private Vector3 RotateAroundAxis(Vector3 forward, Vector3 axis, float angle)
+    {
+        // angle은 도 단위 (0~90)
+        // angle을 0~1 범위로 정규화 (여기서 90도는 최대 회전)
+        float t = Mathf.Clamp01(angle / 90f);
+
+        // axis 방향 벡터 생성 (forward 벡터 끝에서 axis 방향으로 회전하므로 axis는 deviation normalized)
+        Vector3 targetDir = (forward + axis).normalized;
+
+        // forward에서 targetDir로 t 만큼 slerp (부드러운 방향 변화)
+        Vector3 resultDir = Vector3.Slerp(forward, targetDir, t);
+
+        return resultDir.normalized;
     }
 
     private Vector3 GetRandomConeDirection(Vector3 axis, float angle)
@@ -173,6 +193,8 @@ public class ArmHeavyShotgun : PartBaseArm
         TakeDamage(hit.transform, coefficient);
         Utils.Destroy(Utils.Instantiate(hitEffectPrefab, hit.point, Quaternion.identity), 0.5f);
         Utils.Destroy(Utils.Instantiate(bulletPrefab, hit.point, Quaternion.identity), 0.1f);
+
+        _damagedTargets.Clear();
     }
 
     private IEnumerator CoPlayReloadClip()
@@ -182,5 +204,14 @@ public class ArmHeavyShotgun : PartBaseArm
         _audioSource.Stop();
         _audioSource.clip = shootClips[1];
         _audioSource.Play();
+    }
+
+    private void DebugDrawPelletRays(Vector3 startPoint, Vector3 narrowDir, Vector3 denseEndPos, Vector3 spreadDir)
+    {
+        // 1단계 narrow ray (빨간색)
+        Debug.DrawRay(startPoint, narrowDir * denseRange, Color.red, 0.5f);
+
+        // 2단계 spread ray (노란색)
+        Debug.DrawRay(denseEndPos, spreadDir * (maxRange - denseRange), Color.yellow, 0.5f);
     }
 }

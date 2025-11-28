@@ -126,6 +126,48 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &-1439696652470374106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
+  m_Name: OutlineTransparentRenderer
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    passTag: OutlineTransparentRenderer
+    Event: 300
+    filterSettings:
+      RenderQueueType: 1
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 33554432
+      PassNames: []
+    overrideMaterial: {fileID: 2100000, guid: eed8b86f5e281cc419c29482d6b8f894, type: 2}
+    overrideMaterialPassIndex: 0
+    overrideShader: {fileID: 0}
+    overrideShaderPassIndex: 0
+    overrideMode: 1
+    overrideDepthState: 0
+    depthCompareFunction: 4
+    enableWrite: 1
+    stencilSettings:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
+    cameraSettings:
+      overrideCamera: 0
+      restoreCamera: 1
+      offset: {x: 0, y: 0, z: 0, w: 0}
+      cameraFieldOfView: 60
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +194,9 @@ MonoBehaviour:
   - {fileID: 1801289326048895534}
   - {fileID: 2263948989350165309}
   - {fileID: 6150364840990455862}
-  m_RendererFeatureMap: e6010d85337d7dcbfa6991f0e1dcdb5fe3e886b192dcc31ab8fe7c01661930ea0b6b451c084e0bebd535bbb4f41c9f362ee2d8301977ff183d3bd2639c296b1f36b849a23c7c5a55
+  - {fileID: 1696145900672956163}
+  - {fileID: -1439696652470374106}
+  m_RendererFeatureMap: e6010d85337d7dcbfa6991f0e1dcdb5fe3e886b192dcc31ab8fe7c01661930ea0b6b451c084e0bebd535bbb4f41c9f362ee2d8301977ff183d3bd2639c296b1f36b849a23c7c5a5503b7d8c8b5eb891726312fbd852b05ec
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -184,7 +228,7 @@ MonoBehaviour:
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 16252791
+    m_Bits: 49807223
   m_TransparentLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -201,6 +245,49 @@ MonoBehaviour:
   m_CopyDepthMode: 1
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &1696145900672956163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
+  m_Name: AlphaBlendRenderer
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    passTag: AlphaBlendRenderer
+    Event: 450
+    filterSettings:
+      RenderQueueType: 1
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 33554432
+      PassNames: []
+    overrideMaterial: {fileID: 2100000, guid: 0d200a05b227326429921c472deafa75, type: 2}
+    overrideMaterialPassIndex: 0
+    overrideShader: {fileID: -6465566751694194690, guid: a2e55b55a90d80a4b953d3ea23b3eb72,
+      type: 3}
+    overrideShaderPassIndex: 0
+    overrideMode: 1
+    overrideDepthState: 0
+    depthCompareFunction: 4
+    enableWrite: 1
+    stencilSettings:
+      overrideStencilState: 0
+      stencilReference: 0
+      stencilCompareFunction: 8
+      passOperation: 0
+      failOperation: 0
+      zFailOperation: 0
+    cameraSettings:
+      overrideCamera: 0
+      restoreCamera: 1
+      offset: {x: 0, y: 0, z: 0, w: 0}
+      cameraFieldOfView: 60
 --- !u!114 &1801289326048895534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +392,7 @@ MonoBehaviour:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 17344
+        m_Bits: 33571776
       PassNames: []
     overrideMaterial: {fileID: 2100000, guid: 90d3bb1da0b19e6478a6121c1601ee34, type: 2}
     overrideMaterialPassIndex: 0

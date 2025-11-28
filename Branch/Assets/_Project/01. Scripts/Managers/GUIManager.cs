@@ -588,7 +588,7 @@ namespace Managers
             objectText.text = text;
         }
 
-        public void SetIndicator(bool isActivate)
+        public void SetIndicator(bool isActivate, bool isNaviOn = true)
         {
             // 인디케이터 켜는 소리 필요
             if (isActivate)
@@ -603,11 +603,14 @@ namespace Managers
                 indicator.IsOn = true;
                 partIndicator.IsOn = true;
 
-                var player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
-                if (player)
+                if (isNaviOn)
                 {
-                    player.Navi.gameObject.SetActive(true);
-                    player.Navi.MoveToTarget();
+                    var player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
+                    if (player)
+                    {
+                        player.Navi.gameObject.SetActive(true);
+                        player.Navi.MoveToTarget();
+                    }
                 }
             }
             else

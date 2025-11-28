@@ -162,19 +162,6 @@ public class Inventory : MonoBehaviour
     #region Public Methods
     public void Init()
     {
-        if (DebugManager.Instance.GetAllParts)
-        {
-            foreach (PartBase part in _parts.Values)
-            {
-                GetItem(part);
-            }
-
-            for (int i = 0; i < 3; ++i)
-            {
-                Managers.GUIManager.Instance.UnlockParts(i);
-            }
-        }
-
         foreach (PartBase part in baseParts)
         {
             GetItem(part);

@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Team Recombination
-  productName: Machina_Phantom
+  productName: Phantom_Makina
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -141,7 +141,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.0
+  bundleVersion: 0.2
   preloadedAssets:
   - {fileID: 11400000, guid: adaec780defdf7d4281ef732b7e52552, type: 2}
   - {fileID: -944628639613478452, guid: 7cccd61a7d56afb44af2ceefb868e21c, type: 3}

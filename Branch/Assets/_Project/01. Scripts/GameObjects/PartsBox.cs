@@ -11,7 +11,7 @@ public class PartsBox : MonoBehaviour
         if (other.transform.CompareTag("Player"))
         {
             Managers.GUIManager.Instance.SetPartIndicatorTarget(target);
-            Managers.GUIManager.Instance.SetIndicator(true);
+            Managers.GUIManager.Instance.SetIndicator(true, false);
         }
     }
 

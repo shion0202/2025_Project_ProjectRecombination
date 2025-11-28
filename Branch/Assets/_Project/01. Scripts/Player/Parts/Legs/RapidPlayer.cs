@@ -18,6 +18,7 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
     private PlayerController _owner;
     private LegsEnhanced _originalPart;
 
+    protected CinemachinePOV pov;
     protected CinemachineBrain brain;
     protected CinemachineBlendDefinition defaultBlend;
 
@@ -35,6 +36,15 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
         _playerActions = new PlayerActions();
         _playerActions.JumpAttackActionMap.SetCallbacks(this);
 
+        if (pov == null)
+        {
+            var vcam = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
+            if (vcam != null)
+            {
+                pov = vcam.GetCinemachineComponent<CinemachinePOV>();
+            }
+        }
+
         brain = Camera.main.GetComponent<CinemachineBrain>();
         defaultBlend = brain.m_DefaultBlend;
         brain.m_DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.EaseInOut, 0.3f);
@@ -43,7 +53,6 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
     private void OnEnable()
     {
         _playerActions.JumpAttackActionMap.Enable();
-
         _currentTime = time;
     }
 
@@ -81,10 +90,20 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
         Move();
     }
 
-    public void Init(PlayerController owner, LegsEnhanced origin)
+    public void Init(PlayerController owner, LegsEnhanced origin, float horizontalValue)
     {
         _owner = owner;
         _originalPart = origin;
+
+        if (pov == null)
+        {
+            var vcam = gameObject.GetComponentInChildren<CinemachineVirtualCamera>();
+            if (vcam != null)
+            {
+                pov = vcam.GetCinemachineComponent<CinemachinePOV>();
+                pov.m_HorizontalAxis.Value = horizontalValue;
+            }
+        }
     }
 
     private void Move()
@@ -119,6 +138,7 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
         _owner.Controller.enabled = true;
         _originalPart.IsAttack = true;
         brain.m_DefaultBlend = defaultBlend;
+        _owner.FollowCamera.CameraAim.m_HorizontalAxis.Value = pov.m_HorizontalAxis.Value;
 
         _owner.gameObject.SetActive(true);
         Utils.Destroy(gameObject);

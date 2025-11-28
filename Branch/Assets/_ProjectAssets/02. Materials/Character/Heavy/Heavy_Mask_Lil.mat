@@ -318,7 +318,7 @@ Material:
     - _AlphaBoostFA: 10
     - _AlphaMaskMode: 1
     - _AlphaMaskScale: 1
-    - _AlphaMaskValue: 0.11
+    - _AlphaMaskValue: 1
     - _AlphaToMask: 0
     - _Anisotropy2MatCap: 0
     - _Anisotropy2MatCap2nd: 0

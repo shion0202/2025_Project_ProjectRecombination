@@ -13,6 +13,7 @@ public class LegsCaterpillar : PartBaseLegs
     [SerializeField] protected GameObject impactEffectPrefab;
     [SerializeField] protected Material caterpillarMaterial;
     [SerializeField] protected GameObject bulletPrefab;
+    [SerializeField] protected GameObject hitEffectPrefab;
     [SerializeField] private float turnMoveSpeed = 120.0f;
     [SerializeField] private float turnRotateSpeed = 10.0f;
     [SerializeField] protected float backwardThreshold = -0.7f;
@@ -290,7 +291,7 @@ public class LegsCaterpillar : PartBaseLegs
                 float maxDistance = skillRange;
                 float radius = 10.0f;
                 Vector3 targetDirection = _owner.transform.forward;
-                Collider[] hitResults = new Collider[10];
+                Collider[] hitResults = new Collider[1000];
 
                 Utils.Destroy(
                     Utils.Instantiate(
@@ -321,6 +322,8 @@ public class LegsCaterpillar : PartBaseLegs
                         _damagedTargets.Add(otherParent);
                         enemy.ApplyDamage(skillDamage, targetMask);
 
+                        Utils.Destroy(Utils.Instantiate(hitEffectPrefab, otherParent.transform.position + Vector3.up * 1.0f, Quaternion.identity), 1.0f);
+
                         if (_owner.CompareTag("Player"))
                         {
                             Managers.GUIManager.Instance.StartHitCrosshair();
@@ -338,6 +341,8 @@ public class LegsCaterpillar : PartBaseLegs
                                 if (_damagedTargets.Contains(otherParent)) continue;
                                 _damagedTargets.Add(otherParent);
                                 enemy.ApplyDamage(skillDamage, targetMask);
+
+                                Utils.Destroy(Utils.Instantiate(hitEffectPrefab, otherParent.transform.position + Vector3.up * 1.0f, Quaternion.identity), 1.0f);
 
                                 if (_owner.CompareTag("Player"))
                                 {

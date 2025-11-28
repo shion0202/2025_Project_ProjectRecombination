@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField] private Volume volume;
     [SerializeField] private GameObject lowHp;
     [SerializeField] private ParticleFollower navi;
+    [SerializeField] private GameObject worldmap;
     private FollowCameraController _followCamera;
     private MotionBlur _motionBlur;
 
@@ -323,7 +324,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _hitRoutine = null;
         }
 
-        if (!_isLowHp)
+        if (lowHp && !_isLowHp)
         {
             lowHp.SetActive(false);
         }
@@ -585,6 +586,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             if (!Managers.GUIManager.Instance.WorldMap.activeSelf)
             {
                 _followCamera.OnUIOpen();
+                worldmap.SetActive(true);
 
                 Managers.GUIManager.Instance.WorldMap.SetActive(true);
                 Managers.GUIManager.Instance.HUD.SetActive(false);
@@ -593,6 +595,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             else
             {
                 Managers.GUIManager.Instance.WorldMap.SetActive(false);
+                worldmap.SetActive(false);
 
                 if (!Managers.GUIManager.Instance.PauseUI.activeSelf)
                 {
@@ -928,6 +931,9 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
             if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic && isLeft) return;
             SetOvrrideAnimator(_currentAnimType);
+
+            rigAimController.SmoothChangeWeight("ArmLAim", false);
+            rigAimController.SmoothChangeWeight("ArmRAim", false);
         }
     }
 
@@ -1087,7 +1093,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             rigAimController.SmoothChangeBaseWeight(true);
         }
 
-        SwitchStateToIdle();
+        //SwitchStateToIdle();
 
         return true;
     }
