@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 7a99abe2652e5fb4ea34d981e8d5452a
+timeCreated: 1475370730
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: darkness
+    100002: floor_large
+    100004: floor_medium
+    100006: floor_small
+    100008: L_door
+    100010: R_door
+    100012: //RootNode
+    100014: Strut_a
+    100016: wall_A1
+    100018: wall_A11
+    100020: Wall_A2
+    100022: Wall_A3
+    100024: Wall_A4
+    100026: Wall_A5
+    100028: Wall_A55
+    100030: Wall_A6
+    100032: wallpart_triang
+    400000: darkness
+    400002: floor_large
+    400004: floor_medium
+    400006: floor_small
+    400008: L_door
+    400010: R_door
+    400012: //RootNode
+    400014: Strut_a
+    400016: wall_A1
+    400018: wall_A11
+    400020: Wall_A2
+    400022: Wall_A3
+    400024: Wall_A4
+    400026: Wall_A5
+    400028: Wall_A55
+    400030: Wall_A6
+    400032: wallpart_triang
+    2300000: darkness
+    2300002: floor_large
+    2300004: floor_medium
+    2300006: floor_small
+    2300008: L_door
+    2300010: R_door
+    2300012: Strut_a
+    2300014: wall_A1
+    2300016: wall_A11
+    2300018: Wall_A2
+    2300020: Wall_A3
+    2300022: Wall_A4
+    2300024: Wall_A5
+    2300026: Wall_A55
+    2300028: Wall_A6
+    2300030: wallpart_triang
+    3300000: darkness
+    3300002: floor_large
+    3300004: floor_medium
+    3300006: floor_small
+    3300008: L_door
+    3300010: R_door
+    3300012: Strut_a
+    3300014: wall_A1
+    3300016: wall_A11
+    3300018: Wall_A2
+    3300020: Wall_A3
+    3300022: Wall_A4
+    3300024: Wall_A5
+    3300026: Wall_A55
+    3300028: Wall_A6
+    3300030: wallpart_triang
+    4300000: darkness
+    4300002: floor_large
+    4300004: floor_medium
+    4300006: floor_small
+    4300008: L_door
+    4300010: R_door
+    4300012: Strut_a
+    4300014: wall_A1
+    4300016: wall_A11
+    4300018: Wall_A2
+    4300020: Wall_A3
+    4300022: Wall_A4
+    4300024: Wall_A5
+    4300026: Wall_A55
+    4300028: Wall_A6
+    4300030: wallpart_triang
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 109
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
