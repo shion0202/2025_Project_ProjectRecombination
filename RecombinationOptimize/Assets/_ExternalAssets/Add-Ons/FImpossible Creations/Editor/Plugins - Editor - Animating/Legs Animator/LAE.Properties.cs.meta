@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: db6e9f8d594b1b4438a8d6f940d65c00
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 154245
+  packageName: Legs Animator
+  packageVersion: 1.0
+  assetPath: Assets/FImpossible Creations/Editor/Plugins - Editor - Animating/Legs
+    Animator/LAE.Properties.cs
+  uploadId: 603299
