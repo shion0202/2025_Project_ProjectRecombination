@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 167e025aff43044419d87a827fc3b097, type: 3}
+  m_Name: HeavyLegsBoneData
+  m_EditorClassIdentifier: 
+  boneNames:
+  - HeavyLeg2
+  - Body2
+  - Body3
+  - MidwheelL1_2
+  - SideL1_2
+  - SideL2_2
+  - SideL3_2
+  - BWheelUp2
+  - BLegL1_2
+  - BLegL1_4
+  - BLegL1_3
+  - BarrelL2
+  - MidwheelR1_2
+  - SideR1_2
+  - SideR2_2
+  - SideR3_2
+  - BWheelUpR2
+  - BLegR1_2
+  - BLegR1_4
+  - BLegR1_3
+  - BarrelR2

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffad7a38e9e73474fb0dabf1025ed558, type: 3}
+  m_Name: ChargingLaser
+  m_EditorClassIdentifier: 
+  skillID: 4019
+  skillName: ChargingLaser
+  skillDescription: "\uB9DD\uB098\uB2C8 \uB4F1 \uBD80\uC704 \uCD94\uC801 \uB808\uC774\uC800"
+  damage: 50
+  range: 60
+  cooldown: 9
+  castTime: 2.2
+  animSpeed: 1
+  laserPrefab: {fileID: 100000, guid: dbb29de15054545239c5e47d1a526eb4, type: 3}
+  laserOffset: {x: 0, y: 7.7, z: 5}
+  attackDuration: 4
+  rotateSpeed: 2
+  chargingLaserAudioClip: {fileID: 8300000, guid: b14b51b9211c04e95bda0b206c5a509a,
+    type: 3}

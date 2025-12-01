@@ -1,0 +1,34 @@
+{
+    "name": "UIActions",
+    "maps": [
+        {
+            "name": "UIActionMap",
+            "id": "bac484b5-69c9-46b4-8151-f05803c9418e",
+            "actions": [
+                {
+                    "name": "NextDialogue",
+                    "type": "Button",
+                    "id": "bd8e7100-8927-4c18-99f2-897d68b2d05c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "62abbb45-8588-4698-96c8-a206cb661ee4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

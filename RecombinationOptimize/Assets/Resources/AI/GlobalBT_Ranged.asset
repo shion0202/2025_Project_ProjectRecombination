@@ -1,0 +1,569 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8318653980062956096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c9d2bd2b76824e16b88e84682282825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: UseSkill Parallel
+  guid: a1b7e918-4427-4406-af50-7899a616b7c8
+  position: {x: 436, y: 723.5}
+  input: {fileID: -7694519054628685811}
+  outputs: []
+  children:
+  - {fileID: -213376956405467711}
+  - {fileID: 4031874631692929751}
+--- !u!114 &-8303093160293175895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93d617aec60274a58a0f9046f18134c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is In Detection
+  guid: 61851f2a-541f-4638-8600-080a4f0b39ac
+  position: {x: 787, y: 219}
+  input: {fileID: -2089725495818364074}
+  outputs: []
+--- !u!114 &-8090762498360380564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885571f88eff42b985bc89d540829073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is ObstacleBlocking
+  guid: ba4a77f7-8c7f-496c-ae85-83a8d555d7bd
+  position: {x: 959, y: 667}
+  input: {fileID: -8002046786588908349}
+  outputs: []
+--- !u!114 &-8002046786588908349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Skill A Condition
+  guid: 8cf774a7-082a-4bb7-b691-173964177315
+  position: {x: 787, y: 568}
+  input: {fileID: -213376956405467711}
+  outputs: []
+  children:
+  - {fileID: 1158137598684322297}
+  - {fileID: -571442912595166345}
+  - {fileID: -8090762498360380564}
+--- !u!114 &-7972168290244058969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aff184046c8428a94ad0c8945bf58de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: StartMessage
+  guid: 2a8f98ab-cc9a-4ba7-b0bf-4cec9837e168
+  position: {x: 170, y: -119}
+  input: {fileID: 3795547468829089543}
+  outputs: []
+  priority: 0
+  speaker: Monster
+  message: "BT \uC21C\uD68C\uB97C \uC2DC\uC791\uD569\uB2C8\uB2E4."
+--- !u!114 &-7694519054628685811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Battle
+  guid: 59a5c5ba-3938-4c80-9a2a-4a5dcda93f38
+  position: {x: 286, y: 700}
+  input: {fileID: 3795547468829089543}
+  outputs: []
+  children:
+  - {fileID: -6492461697236824350}
+  - {fileID: -8318653980062956096}
+  - {fileID: 973973541574554766}
+--- !u!114 &-6492461697236824350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: CTC
+  guid: 03862735-eb0a-4123-85d6-f6ca4e911ace
+  position: {x: 436, y: 246}
+  input: {fileID: -7694519054628685811}
+  outputs: []
+  children:
+  - {fileID: 5149726945982545104}
+  - {fileID: -2089725495818364074}
+--- !u!114 &-6052899094770472606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Skill B Condition
+  guid: c3901e46-dfa3-4811-991e-1315ffc783d0
+  position: {x: 790, y: 806.9999}
+  input: {fileID: 4031874631692929751}
+  outputs: []
+  children:
+  - {fileID: 2761677286257417045}
+  - {fileID: 3017741543212304988}
+  - {fileID: 2494553789212122202}
+--- !u!114 &-6049510859617113023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89db8a462c46045cea20e176cb31c4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Use Skill B
+  guid: 9865df42-1faf-4e03-8e81-f09d956b8d14
+  position: {x: 790, y: 950}
+  input: {fileID: 4031874631692929751}
+  outputs: []
+  priority: 5
+  skillId: 4001
+--- !u!114 &-4662484622183757789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Death
+  guid: 269d8dcd-ea16-4b84-a0f1-424c91b48e80
+  position: {x: 289, y: 16}
+  input: {fileID: 3795547468829089543}
+  outputs: []
+  children:
+  - {fileID: 775305355143685732}
+  - {fileID: -2550947244755095003}
+--- !u!114 &-2550947244755095003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf7c54ce7a8de4e9e90aad5078f1a0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Action Death
+  guid: f24de454-c253-4af1-af63-d7a69bc092c2
+  position: {x: 436, y: 88}
+  input: {fileID: -4662484622183757789}
+  outputs: []
+  priority: 999
+--- !u!114 &-2089725495818364074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a1557f55b324ec68df07a4533485c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Check the Combat
+  guid: f381f905-778d-4bac-9c01-6ee7e3db2106
+  position: {x: 594, y: 307}
+  input: {fileID: -6492461697236824350}
+  outputs: []
+  children:
+  - {fileID: 1484239777875789110}
+  - {fileID: 6511417830426688992}
+  - {fileID: -8303093160293175895}
+--- !u!114 &-571442912595166345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78809f67c1648caa6116a99c36a653f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is In Skill Cooldown
+  guid: a9c94ecf-b576-4d5a-bbde-500ce34a920f
+  position: {x: 959, y: 566}
+  input: {fileID: -8002046786588908349}
+  outputs: []
+  skillId: 4002
+--- !u!114 &-213376956405467711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: UseSkill A
+  guid: 3ceb1538-2b74-4d1a-93bc-3aa26898b9af
+  position: {x: 635, y: 610}
+  input: {fileID: -8318653980062956096}
+  outputs: []
+  children:
+  - {fileID: -8002046786588908349}
+  - {fileID: 4449008411380328354}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8023448fada204636a60781f2a5d6009, type: 3}
+  m_Name: GlobalBT_Ranged
+  m_EditorClassIdentifier: 
+  rootNode: {fileID: 3795547468829089543}
+--- !u!114 &775305355143685732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616c9982a36a84367a90b9cdb7bd90c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Is Death
+  guid: 82a83b26-832b-4466-b51b-78ae40f42807
+  position: {x: 436, y: -23}
+  input: {fileID: -4662484622183757789}
+  outputs: []
+--- !u!114 &973973541574554766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Chase
+  guid: cb30a117-41c7-4dd4-a65e-c0b6526fe48f
+  position: {x: 436, y: 1064.5}
+  input: {fileID: -7694519054628685811}
+  outputs: []
+  children:
+  - {fileID: 3256888038535417448}
+  - {fileID: 7969912489850957220}
+--- !u!114 &1158137598684322297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e5d110583c456eb9962a6bf156cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is In Skill Range
+  guid: d246209e-4d35-4937-a942-ff72a9979123
+  position: {x: 959, y: 465}
+  input: {fileID: -8002046786588908349}
+  outputs: []
+  skillId: 4002
+--- !u!114 &1484239777875789110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ca8083eaf5c4198b8afc1229459aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Is Combat Nearby
+  guid: 4b8d7004-0bbc-4782-b1fd-e75d59bb3892
+  position: {x: 787, y: 448}
+  input: {fileID: -2089725495818364074}
+  outputs: []
+--- !u!114 &2494553789212122202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885571f88eff42b985bc89d540829073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: NewNode
+  guid: 2211d352-b192-4617-80a4-f7306a482e3e
+  position: {x: 959, y: 979.04004}
+  input: {fileID: -6052899094770472606}
+  outputs: []
+--- !u!114 &2761677286257417045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e5d110583c456eb9962a6bf156cdcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is In Skill Range
+  guid: 79b13d5e-f41f-45fa-93d6-fe1cd98d392c
+  position: {x: 959, y: 775}
+  input: {fileID: -6052899094770472606}
+  outputs: []
+  skillId: 4001
+--- !u!114 &3017741543212304988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78809f67c1648caa6116a99c36a653f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is In Skill Cooldown
+  guid: 761acfa7-e813-4a27-b4da-5fe2ccf7c766
+  position: {x: 959, y: 876.00006}
+  input: {fileID: -6052899094770472606}
+  outputs: []
+  skillId: 4001
+--- !u!114 &3256888038535417448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15565b428cb04ee8949d723e2dbbe747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Is In MinDetection
+  guid: b26117d3-7155-4a97-8d39-e8762520f3a5
+  position: {x: 635, y: 1026.5}
+  input: {fileID: 973973541574554766}
+  outputs: []
+--- !u!114 &3795547468829089543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a1557f55b324ec68df07a4533485c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: Root
+  guid: 2a4105af-a7fb-436c-9bf2-2736a3985cc0
+  position: {x: 170, y: 319}
+  input: {fileID: 0}
+  outputs: []
+  children:
+  - {fileID: -4662484622183757789}
+  - {fileID: -7694519054628685811}
+--- !u!114 &4031874631692929751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9feb5e4ab7074492693efbd2e4ef07b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: UseSkill B
+  guid: b2895ed5-3e71-4a7f-9fe9-aee4621fcc0a
+  position: {x: 636, y: 852}
+  input: {fileID: -8318653980062956096}
+  outputs: []
+  children:
+  - {fileID: -6052899094770472606}
+  - {fileID: -6049510859617113023}
+--- !u!114 &4449008411380328354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89db8a462c46045cea20e176cb31c4d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Use Skill A
+  guid: 4573af94-6480-4799-b795-0354885b5f66
+  position: {x: 787, y: 711}
+  input: {fileID: -213376956405467711}
+  outputs: []
+  priority: 10
+  skillId: 4002
+--- !u!114 &5149726945982545104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4430d90dc2e421c8d3ae9336e8136b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Is Target Alive
+  guid: afb3d2fe-84af-41d3-962a-9d87695fa205
+  position: {x: 590, y: 193}
+  input: {fileID: -6492461697236824350}
+  outputs: []
+--- !u!114 &6511417830426688992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b12971c6d6d94e3ea591865b5db1b75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  name: IsHit
+  guid: 34c3cbdd-d83f-4e6a-a518-d94d6f748f17
+  position: {x: 787, y: 331}
+  input: {fileID: -2089725495818364074}
+  outputs: []
+--- !u!114 &7969912489850957220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71eca084121443d19df72a733d53acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  name: Action Chase
+  guid: bce30251-8520-4819-a568-98fec17e91e4
+  position: {x: 635.00006, y: 1166}
+  input: {fileID: 973973541574554766}
+  outputs: []
+  priority: -10

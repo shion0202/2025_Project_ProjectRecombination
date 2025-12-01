@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f62cad6dee8cc844da44cf1254d4513d, type: 3}
+  m_Name: Dash
+  m_EditorClassIdentifier: 
+  skillID: 4011
+  skillName: Dash
+  skillDescription: "\uC544\uBAAC 2 \uD398\uC774\uC988 \uC2A4\uD0AC: \uC9C8\uC8FC
+    :: 1 \uD398\uC774\uC988 \uC2A4\uD0AC: \uB3CC\uC9C4\uACFC \uB3D9\uC77C"
+  damage: 50
+  range: 30
+  cooldown: 7
+  castTime: 1.2
+  animSpeed: 1
+  meleeCollisionPrefab: {fileID: 4070606023755049407, guid: 9738e5f867811414da87d99f8ce56023,
+    type: 3}
+  collisionScale: {x: 1.3, y: 2.2, z: 1.5}
+  collisionOffset: {x: 0, y: 1.1, z: 0}
+  clip: {fileID: 1827226128182048838, guid: 995956e9ab54a2044a0eb7ed617a0766, type: 3}
+  dashSpeed: 30
+  forwardDistanceOffset: 4
+  arrivalDistance: 1

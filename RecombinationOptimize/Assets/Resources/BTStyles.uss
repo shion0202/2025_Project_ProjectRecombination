@@ -1,0 +1,117 @@
+﻿:root {
+    --main-bg: #1f1f1f;
+    --panel-bg: #2a2a2a;
+    --node-fg: #f3f3f3;
+    --border: #3c3c3c;
+    --divider: #4b4b4b;
+    --font-size: 13px;
+    --radius-md: 8px;
+    --radius-lg: 14px;
+    --spacing: 12px;
+}
+
+/* ===== 툴바 ===== */
+.top-bar {
+    background-color: var(--panel-bg);
+    border-bottom-width: 1px;
+    border-bottom-color: var(--divider);
+    padding-left: var(--spacing);
+    padding-right: var(--spacing);
+    padding-top: 6px;
+    padding-bottom: 6px;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* ===== 노드 공통 ===== */
+.node {
+    color: var(--node-fg);
+    border-width: 2px;
+    border-radius: var(--radius-lg);
+    /*padding-top: 12px;*/
+    /*padding-bottom: 12px;*/
+    /*padding-left: 16px;*/
+    /*padding-right: 16px;*/
+    font-size: var(--font-size);
+    border-color: var(--border);
+}
+
+.node.sequence {
+    background-color: #f67280;
+    color: #fff;
+}
+.node.selector {
+    background-color: #0487BD;
+    color: #fff;
+}
+.node.condition {
+    background-color: #2ecc71;
+    color: #fff;
+}
+.node.action {
+    background-color: #EBD125;
+    color: #333;
+}
+.node.decorator {
+    background-color: #7901F0;
+    color: #fff;
+}
+
+/* ===== 그래프 뷰 ===== */
+.graph-view {
+    background-color: var(--main-bg);
+    padding: var(--spacing);
+}
+
+/* ===== 사이드 설정 패널 ===== */
+.settings-popup {
+    background-color: var(--panel-bg);
+    color: var(--node-fg);
+    font-size: var(--font-size);
+    border-width: 1px;
+    border-color: var(--divider);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing);
+    width: 320px;
+    height: 400px;
+    flex-direction: column;
+}
+
+/* ===== 버튼 ===== */
+.unity-button {
+    background-color: var(--main-bg);
+    color: var(--node-fg);
+    border-width: 1px;
+    border-color: var(--divider);
+    border-radius: var(--radius-md);
+    padding: 5px 12px;
+    font-size: var(--font-size);
+    margin-right: 6px;
+}
+
+/* ===== 입력 필드 ===== */
+.unity-text-field,
+.unity-object-field {
+    background-color: var(--main-bg);
+    border-color: var(--divider);
+    border-width: 1px;
+    border-radius: var(--radius-md);
+    padding: 4px 8px;
+    font-size: var(--font-size);
+    color: var(--node-fg);
+    margin-bottom: 10px;
+}
+
+/* ===== 라벨 ===== */
+.unity-label {
+    font-size: var(--font-size);
+    color: var(--node-fg);
+    margin-bottom: 4px;
+}
+.unity-toggle {
+    align-items: center;
+    flex-direction: row;
+    padding: 0 6px;
+    margin-right: 6px;
+    font-size: var(--font-size);
+}

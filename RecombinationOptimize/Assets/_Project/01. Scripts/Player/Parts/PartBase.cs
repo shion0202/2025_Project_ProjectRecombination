@@ -1,0 +1,143 @@
+using _Project._01._Scripts.Monster;
+using Monster;
+using Monster.AI;
+using Monster.AI.FSM;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public abstract class PartBase : MonoBehaviour
+{
+    [Header("파츠 기본 설정")]
+    [SerializeField] protected int partId = 2000;
+    [SerializeField] protected EPartType partType;
+    [SerializeField] protected EAttackType attackType;
+    [SerializeField] protected EPartMeshType meshType;
+    [SerializeField] protected Vector3 staticOffset = Vector3.zero;
+    [SerializeField] protected Vector3 staticRotation = Vector3.zero;
+    [SerializeField] protected LayerMask targetMask;
+
+    protected PlayerController _owner;
+    protected StatDictionary _stats = new();
+    protected List<StatModifier> _partModifiers = new();
+
+    protected bool _isAnimating = true;
+    protected bool _isZooming = true;
+    protected List<Transform> _damagedTargets = new();
+    protected float _currentCooldown = 0.0f;
+    protected Coroutine _cooldownRoutine = null;
+
+    public EPartType PartType => partType;
+    public EAttackType AttackType => attackType;
+    public EPartMeshType MeshType => meshType;
+    public StatDictionary Stats => _stats;
+    public List<StatModifier> PartModifiers => _partModifiers;
+    public bool IsAnimating => _isAnimating;
+    public bool IsZooming => _isZooming;
+    public Vector3 StaticOffset => staticOffset;
+    public Vector3 StaticRotation => staticRotation;
+
+    protected virtual void Awake()
+    {
+        if (targetMask == 0)
+        {
+            targetMask |= (1 << LayerMask.NameToLayer("Enemy"));
+            targetMask |= (1 << LayerMask.NameToLayer("Damagable"));
+        }
+    }
+
+    public abstract void UseAbility();
+    public abstract void UseCancleAbility();
+    public abstract void FinishActionForced();
+
+    public void Init(PlayerController owner)
+    {
+        SetOwner(owner);
+        SetPartStat();
+    }
+
+    public virtual void SetOwner(PlayerController owner)
+    {
+        _owner = owner;
+    }
+
+    public void SetPartStat()
+    {
+        GoogleSheetLoader baseParam = Resources.Load<GoogleSheetLoader>("Params/ParamDatas");
+        if (baseParam != null)
+        {
+            var row = baseParam.GetRow("CharacterParts", partId);
+            if (row != null)
+            {
+                InitializeFromRow(row);
+            }
+            else
+            {
+                Debug.LogWarning($"Part Stat Index({partId}) 데이터가 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("파츠 파라미터 데이터가 없습니다.");
+        }
+    }
+
+    public void InitializeFromRow(RowData row)
+    {
+        _stats = row.Stats.Clone();
+    }
+
+    public void TakeDamage(Transform target, float coefficient = 1.0f)
+    {
+        float hitZoneValue = 1.0f;
+        PartialBlow partialBlow = target.GetComponent<PartialBlow>();
+        if (partialBlow)
+        {
+            hitZoneValue = partialBlow.fValue;
+        }
+
+        IDamagable monster = target.GetComponent<IDamagable>();
+        if (monster != null)
+        {
+            Transform otherParent = target.transform;
+            if (_damagedTargets.Contains(otherParent)) return;
+            _damagedTargets.Add(otherParent);
+            monster.ApplyDamage((_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue), targetMask);
+            Debug.Log($"Hit! ({_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient} / {_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue})");
+
+            if (_owner.CompareTag("Player"))
+            {
+                Managers.GUIManager.Instance.StartHitCrosshair();
+            }
+        }
+        else
+        {
+            monster = target.transform.GetComponentInParent<IDamagable>();
+            if (monster != null)
+            {
+                Transform otherParent = target.transform.GetComponentInParent<FSM>().transform;
+                if (_damagedTargets.Contains(otherParent)) return;
+                _damagedTargets.Add(otherParent);
+                monster.ApplyDamage((_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue), targetMask);
+                Debug.Log($"Hit! ({_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient} / {_owner.Stats.CombinedPartStats[partType][EStatType.Damage].value * coefficient * hitZoneValue})");
+
+                if (_owner.CompareTag("Player"))
+                {
+                    Managers.GUIManager.Instance.StartHitCrosshair();
+                }
+            }
+        }
+    }
+
+    // 파츠 교체 등 이전 쿨타임 정보가 필요할 경우 이를 저장하고 불러오는 함수
+    public virtual void PreserveCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
+    }
+
+    public virtual void SetCurrentCooldown(EPartType currentPartType)
+    {
+        if (!_owner) return;
+    }
+}

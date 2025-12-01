@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9801980a72c7f674480c715701b421ca, type: 3}
+  m_Name: WhipStrike
+  m_EditorClassIdentifier: 
+  skillID: 4017
+  skillName: WhipStrike
+  skillDescription: "\uB9DD\uB098\uB2C8 \uC0AC\uBCF5\uAC80 \uD718\uB450\uB974\uAE30"
+  damage: 60
+  range: 18
+  cooldown: 5
+  castTime: 1.5
+  animSpeed: 1
+  attackRangePrefab: {fileID: 5441038580396050504, guid: df2b216a6006cb94fb4736dd6bcbacf3,
+    type: 3}
+  attackRangeOffset: {x: 0, y: 0, z: 15}
+  meleeCollisionPrefab: {fileID: 4070606023755049407, guid: 9738e5f867811414da87d99f8ce56023,
+    type: 3}
+  collisionScale: {x: 10, y: 0.1, z: 20}
+  collisionOffset: {x: 0, y: 1, z: 15}
+  attackClip: {fileID: 5686553645976202475, guid: 53b443f341aeaa2449d9fb7add3c7cc9,
+    type: 3}
+  rotateSpeed: 2
+  whipStrikeAudioClip: {fileID: 8300000, guid: 67cf67c29cd404d0582c5a9fc7e22d53, type: 3}

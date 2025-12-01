@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b974931ae740a484db125e7d845d59, type: 3}
+  m_Name: StateData
+  m_EditorClassIdentifier: 
+  states:
+  - stateName: None
+    bitIndex: 0
+  - stateName: Idle
+    bitIndex: 1
+  - stateName: Chase
+    bitIndex: 2
+  - stateName: Attack
+    bitIndex: 3
+  - stateName: Hit
+    bitIndex: 4
+  - stateName: Death
+    bitIndex: 5
+  - stateName: Patrol
+    bitIndex: 6
+  - stateName: Wander
+    bitIndex: 7
+  - stateName: Spawn
+    bitIndex: 8
+  - stateName: Pase2
+    bitIndex: 9
+  - stateName: Pase1
+    bitIndex: 10
+  - stateName: UsingSkill1
+    bitIndex: 11
+  - stateName: UsingSkill2
+    bitIndex: 12
+  - stateName: UsingSkill3
+    bitIndex: 13
+  - stateName: UsingSkill4
+    bitIndex: 14
+  - stateName: UsingSkill5
+    bitIndex: 15
+  - stateName: UsingSkill6
+    bitIndex: 16
+  - stateName: Moving
+    bitIndex: 17
+  - stateName: UsingSkill7
+    bitIndex: 18

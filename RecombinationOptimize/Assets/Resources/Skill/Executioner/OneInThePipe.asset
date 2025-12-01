@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6423d7ff63ebe43ae4de08c7571fe1, type: 3}
+  m_Name: OneInThePipe
+  m_EditorClassIdentifier: 
+  skillID: 4018
+  skillName: OneInThePipe
+  skillDescription: "\uB9DD\uB098\uB2C8 \uC6D0\uAC70\uB9AC \uACF5\uACA9"
+  damage: 100
+  range: 60
+  cooldown: 6
+  castTime: 1.75
+  animSpeed: 1
+  bulletPrefab: {fileID: 196044, guid: fbd797a2936860d429c9bba90eeed6c7, type: 3}
+  shootOffset: {x: -1.1, y: 3.2, z: 11.7}
+  shootClip: {fileID: 7766876665380483674, guid: 9732f8057adfa8040a6cf12145755157,
+    type: 3}
+  rotateSpeed: 2
+  loadAudioClip: {fileID: 8300000, guid: 49d17e42b3acc4c948ff8722cadc48e3, type: 3}
+  shootAudioClip: {fileID: 8300000, guid: 4ab7f5a1a0dca439090bb45b70d32e32, type: 3}

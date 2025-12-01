@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a3f62aa42a2c744e8814fd13d636167, type: 3}
+  m_Name: PowerPivotSettings
+  m_EditorClassIdentifier: 
+  LogLevel: 1
+  ShowWindow: 1
+  PlaneScalingKey: 304
+  ActivationKey: 117
+  DeactivationKey: 27
+  SnapKey: 118
+  ContextualActivation: 1
+  ContextualActivationOnMove: 1
+  UndoKey: 122
+  RedoKey: 121
+  MoveKey: 119
+  RotateKey: 101
+  ScaleKey: 114
+  SnapToPivot: 1
+  IgnoreBackFacingVertices: 1
+  PreferSelectedDistance: 15
+  PreferZDistance: 15
+  IgnoreZDistance: 1.5
+  OverrideFraming: 1
+  FrameSelectedKey: 102
+  UpdateCursorWithObject: 1
+  ShowParentingButtons: 0
+  AutoRefreshModelsWithModifiedPivots: 0
+  WindowPosition: {x: 748, y: 315}
+  GizmoOpacity: 1
+  GizmoColorA: {r: 1, g: 0, b: 0, a: 1}
+  GizmoColorB: {r: 1, g: 1, b: 1, a: 1}
+  GizmoCursorColor: {r: 0, g: 0, b: 1, a: 1}

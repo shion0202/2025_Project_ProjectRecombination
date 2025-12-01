@@ -1,0 +1,225 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ExecutionerMask
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: body
+    m_Weight: 0
+  - m_Path: body00
+    m_Weight: 0
+  - m_Path: body00/body01
+    m_Weight: 1
+  - m_Path: body00/body01/body02
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/barrel02
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/barrel02/barrel00
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/barrel02/barrel00/barrel01
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/barrel02/barrel00/barrel01/barrel_qwer
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05/chainsword04
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05/chainsword04/chainsword03
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05/chainsword04/chainsword03/chainsword02
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05/chainsword04/chainsword03/chainsword02/chainsword01
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05/chainsword04/chainsword03/chainsword02/chainsword01/chainsword00
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/chainsword09/chainsword08/chainsword07/chainsword05/chainsword04/chainsword03/chainsword02/chainsword01/chainsword00/chainsword_qwer
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/neck03
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/neck03/neck00
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/neck03/neck00/neck01
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/neck03/neck00/neck01/neck02
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/neck03/neck00/neck01/neck02/head
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/body04/neck03/neck00/neck01/neck02/head/head_qwer
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_a05
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_a05/chain_a04
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_a05/chain_a04/chain_a03
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_a05/chain_a04/chain_a03/chain_a02
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_a05/chain_a04/chain_a03/chain_a02/chain_a01
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_b03
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_b03/chain_b02
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/chain_b03/chain_b02/chain_b01
+    m_Weight: 1
+  - m_Path: body00/body01/body02/body03/body05/body06/body07/lazer03/lazer00/lazer01/lazer_qwer
+    m_Weight: 1
+  - m_Path: body00/body01/missile_a02
+    m_Weight: 1
+  - m_Path: body00/body01/missile_a02/missile_a00
+    m_Weight: 1
+  - m_Path: body00/body01/missile_a02/missile_a00/missile_qwer
+    m_Weight: 1
+  - m_Path: body00/body01/missile_b02
+    m_Weight: 1
+  - m_Path: body00/body01/missile_b02/missile_b01
+    m_Weight: 1
+  - m_Path: body00/body01/missile_b02/missile_b01/missile_qwer
+    m_Weight: 1
+  - m_Path: body00/leg_a00
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01/leg_a02
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01/leg_a02/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01/leg_a03
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01/leg_a03/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01/leg_a04
+    m_Weight: 0
+  - m_Path: body00/leg_a00/leg_a01/leg_a04/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_b00
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01/leg_b02
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01/leg_b02/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01/leg_b03
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01/leg_b03/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01/leg_b04
+    m_Weight: 0
+  - m_Path: body00/leg_b00/leg_b01/leg_b04/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_c01
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00/leg_c02
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00/leg_c02/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00/leg_c03
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00/leg_c03/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00/leg_c04
+    m_Weight: 0
+  - m_Path: body00/leg_c01/leg_c00/leg_c04/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_d01
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00/leg_d02
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00/leg_d02/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00/leg_d03
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00/leg_d03/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00/leg_d04
+    m_Weight: 0
+  - m_Path: body00/leg_d01/leg_d00/leg_d04/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_e01
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00/leg_e02
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00/leg_e02/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00/leg_e03
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00/leg_e03/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00/leg_e04
+    m_Weight: 0
+  - m_Path: body00/leg_e01/leg_e00/leg_e04/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_f00
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01/leg_f02
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01/leg_f02/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01/leg_f03
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01/leg_f03/leg_qwer
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01/leg_f04
+    m_Weight: 0
+  - m_Path: body00/leg_f00/leg_f01/leg_f04/leg_qwer
+    m_Weight: 0
+  - m_Path: IK Chain001
+    m_Weight: 0
+  - m_Path: IK Chain002
+    m_Weight: 0
+  - m_Path: IK Chain003
+    m_Weight: 0
+  - m_Path: IK Chain004
+    m_Weight: 0
+  - m_Path: IK Chain005
+    m_Weight: 0
+  - m_Path: IK Chain_a
+    m_Weight: 0
+  - m_Path: IK Chain_b
+    m_Weight: 0
+  - m_Path: IK Chain_c
+    m_Weight: 0
+  - m_Path: IK Chain_d
+    m_Weight: 0
+  - m_Path: IK Chain_e
+    m_Weight: 0
+  - m_Path: IK Chain_f
+    m_Weight: 0
