@@ -1,4 +1,4 @@
-# Machina Phantom (Team 재조합)
+# Phantom:Makina (Team 재조합)
 
 ### 프로젝트 소개
 
