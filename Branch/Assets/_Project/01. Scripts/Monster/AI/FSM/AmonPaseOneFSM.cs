@@ -198,7 +198,7 @@ namespace Monster.AI.FSM
         {
             base.ApplyDamage(inDamage, targetMask, unitOfTime, defenceIgnoreRate);
         
-            GUIManager.Instance.UpdateBossHpBar("아몬", blackboard.CurrentHealth, blackboard.MaxHealth);
+            GUIManager.Instance.GameUIController.UpdateBossHpBar("아몬", blackboard.CurrentHealth, blackboard.MaxHealth);
         }
     }
 }

@@ -371,7 +371,7 @@ public class Bullet : MonoBehaviour
 
             if (_from.CompareTag("Player"))
             {
-                Managers.GUIManager.Instance.StartHitCrosshair();
+                GUIManager.Instance.GameUIController.StartHitCrosshair();
             }
         }
         else
@@ -391,7 +391,7 @@ public class Bullet : MonoBehaviour
 
                 if (_from.CompareTag("Player"))
                 {
-                    Managers.GUIManager.Instance.StartHitCrosshair();
+                    GUIManager.Instance.GameUIController.StartHitCrosshair();
                 }
             }
         }

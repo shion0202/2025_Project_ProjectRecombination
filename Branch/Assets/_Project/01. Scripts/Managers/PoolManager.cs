@@ -45,11 +45,22 @@ namespace Managers
         // 풀링 데이터 하이어라키 관리를 위한 딕셔너리
         // 하이어라키에서 풀링된 데이터를 보기 쉽게 하기 위한 용도로, 실제 빌드 시 삭제 가능
         private Dictionary<string, Transform> _poolParents;
+        
+        public bool IsInitialized { get; private set; } = false;
 
         /// <summary>
         /// PoolManager 초기화
         /// </summary>
-        private void Awake()
+
+        private void Update()
+        {
+            if (!GameManager.Instance.IsLoad || GameManager.Instance.CurrentState != GameManager.GameState.Playing || IsInitialized) return;
+            
+            Init();
+            IsInitialized = true;
+        }
+
+        private void Init()
         {
             _pools = new Dictionary<string, ObjectPool<GameObject>>();
             _poolParents = new Dictionary<string, Transform>();

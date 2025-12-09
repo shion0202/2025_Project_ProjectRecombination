@@ -1,3 +1,4 @@
+using Managers;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -181,7 +182,7 @@ public class UI_Prologue : MonoBehaviour, UIActions.IUIActionMapActions
         }
         image.color = new Color(color.r, color.g, color.b, toAlpha);
 
-        SceneManager.LoadScene(nextSceneName);
+        GameManager.Instance.StartGame();
     }
 
     private IEnumerator SetNextDialogWithFade(bool isFirst = false)

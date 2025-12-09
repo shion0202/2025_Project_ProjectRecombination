@@ -21,11 +21,11 @@ public class UI_RadialButtonPanel : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Managers.GUIManager.Instance.SelectedPartIndex = partIndex;
+        Managers.GUIManager.Instance.GameUIController.SelectedPartIndex = partIndex;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Managers.GUIManager.Instance.SelectedPartIndex = -1;
+        Managers.GUIManager.Instance.GameUIController.SelectedPartIndex = -1;
     }
 }

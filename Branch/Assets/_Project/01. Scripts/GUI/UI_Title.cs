@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Managers;
 
 public class UI_Title : MonoBehaviour
 {
     public void OnClickStart()
     {
-        SceneManager.LoadScene("PrologueScene");
+        GameManager.Instance.EnterPrologue();
     }
 
     public void OnClickExit()

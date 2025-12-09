@@ -1,75 +1,132 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Managers
 {
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField] private PlayerController player;
-        private Coroutine _rebirthRoutine = null;
-
-        private void Start()
+        public enum GameState
         {
-            var hp = player.Stats.CurrentHealth;
-
-            if (hp <= 0f)
-                Debug.LogError("Player HP Stats Init Failed");
+            Loading,
+            Title,
+            Prologue,
+            Epilogue,
+            Playing,
+            Paused,
+            GameOver
         }
+
+        public PlayerController Player { get; set; }
+        public GameObject MainCamera { get; set; }
+        public GameObject FollowCamera { get; set; }
+        private Coroutine _rebirthRoutine;
+
+        public bool IsLoad { get; private set; }
+        public GameState CurrentState { get; private set; } = GameState.Title;
 
         private void Update()
         {
-            if (_rebirthRoutine != null) return;
-
-            var hp = player.Stats.CurrentHealth;
-            if (hp <= 0f)
+            switch (CurrentState)
             {
-                // 게임 오버 처리
-                Debug.Log("Player is Death");
-                GUIManager.Instance.OnGameOverPanel();
-                //StartCoroutine(SceneClear());
-                _rebirthRoutine = StartCoroutine(RebirthGame());
+                case GameState.Playing:
+                    PlayingProcess();
+                    break;
+                case GameState.GameOver:
+                    GameOverProcess();
+                    break;
             }
         }
 
-        private IEnumerator SceneClear()
+        // 모든 매니저들이 로드되었음을 수신
+        public void SceneLoaded()
         {
-            yield return new WaitForSeconds(5);
-            // GameScene 다시 로드
-            SceneManager.LoadScene("GameScene");
+            IsLoad = true;
         }
 
+        private void PlayingProcess()
+        {
+            if (_rebirthRoutine != null) return;
+
+            float hp = Player.Stats.CurrentHealth;
+            if (hp <= 0f) CurrentState = GameState.GameOver;
+        }
+
+        private void GameOverProcess()
+        {
+            // 게임 오버 처리
+            Debug.Log("Player is Death");
+            GUIManager.Instance.GameUIController.OnGameOverPanel();
+            
+            // 부활 코루틴 시작
+            _rebirthRoutine = StartCoroutine(RebirthGame());
+        }
+
+        // 플레이어 부활 코루틴 (5초 대기 후 부활)
         private IEnumerator RebirthGame()
         {
             yield return new WaitForSeconds(5.0f);
 
-            GUIManager.Instance.CloseGameOverPanel();
-            player.Stats.CurrentHealth = player.Stats.MaxHealth;
-            player.Spawn();
+            GUIManager.Instance.GameUIController.CloseGameOverPanel();
+            Player.Stats.CurrentHealth = Player.Stats.MaxHealth;
+            Player.Spawn();
 
             _rebirthRoutine = null;
         }
+
+        #region Pause Objects
 
         // 플레이어, 카메라, 몬스터 등 일부 오브젝트들을 정지시켜야할 때 사용
         public void PauseObjects()
         {
             // 플레이어 캐릭터와 카메라 Pause
-            player.FollowCamera.SetCameraRotatable(false);
-            player.SetMovable(false);
-            player.SetPlayerState(EPlayerState.Cutscene, true);
+            Player.FollowCamera.SetCameraRotatable(false);
+            Player.SetMovable(false);
+            Player.SetPlayerState(EPlayerState.Cutscene, true);
 
             // 현재 존재하는 모든 몬스터 Pause
             MonsterManager.Instance.PauseMonsters();
+            
+            // 게임 상태를 Paused로 변경
+            CurrentState = GameState.Paused;
         }
 
         public void UnpauseObjects()
         {
-            player.FollowCamera.SetCameraRotatable(true);
-            player.SetMovable(true);
-            player.SetPlayerState(EPlayerState.Cutscene, false);
+            Player.FollowCamera.SetCameraRotatable(true);
+            Player.SetMovable(true);
+            Player.SetPlayerState(EPlayerState.Cutscene, false);
 
             MonsterManager.Instance.UnpauseMonsters();
+            
+            CurrentState = GameState.Playing;
+        }
+
+        #endregion
+
+        public void EnterPrologue()
+        {
+            // 프롤로그 실행
+            CurrentState = GameState.Prologue;
+            
+            // 프롤로그 재생하는 동안 플레이어 씬과 게임 씬 로드
+            SceneController.Instance.LoadSceneAdditive("Scene_Game");
+            SceneController.Instance.LoadSceneAdditive("Scene_Player");
+        }
+        
+        public void StartGame()
+        {
+            // 게임 시작
+            CurrentState = GameState.Playing;
+            
+            // 플레이어 오브젝트 참조 설정
+            Player = FindObjectOfType<PlayerController>();
+        }
+
+        public void ExitGame()
+        {
+            // 게임 종료
+            // 모든 씬 언로드
+            SceneController.Instance.UnloadScene("Scene_Game");
         }
     }
 }
