@@ -66,10 +66,10 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
         }
         _owner.gameObject.SetActive(false);
 
-        GUIManager.Instance.SetLegsSkillTimer(new Color(0.45f, 0.59f, 0.59f));
-        GUIManager.Instance.SetLegsSkillIcon(true);
-        GUIManager.Instance.SetLegsSkillCooldown(true);
-        GUIManager.Instance.RapidInfo.SetActive(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillTimer(new Color(0.45f, 0.59f, 0.59f));
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
+        GUIManager.Instance.GameUIController.RapidInfo.SetActive(true);
     }
 
     private void OnDisable()
@@ -80,8 +80,8 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
     private void Update()
     {
         _currentTime -= Time.deltaTime;
-        GUIManager.Instance.SetLegsSkillCooldown(_currentTime);
-        GUIManager.Instance.SetRapidCooldownText(_currentTime);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentTime);
+        GUIManager.Instance.GameUIController.SetRapidCooldownText(_currentTime);
         if (_currentTime <= 0.0f)
         {
             Apply();

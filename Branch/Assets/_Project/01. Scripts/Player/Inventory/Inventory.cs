@@ -10,8 +10,8 @@ public class Inventory : MonoBehaviour
     #region Variables
     [Header("Inventory")]
     [SerializeField] private PlayerController owner;
-    [SerializeField] private List<PartBase> baseParts = new List<PartBase>();
-    private Dictionary<EPartType, Dictionary<EAttackType, List<PartBase>>> _items = new Dictionary<EPartType, Dictionary<EAttackType, List<PartBase>>>();
+    [SerializeField] private List<PartBase> baseParts = new ();
+    private Dictionary<EPartType, Dictionary<EAttackType, List<PartBase>>> _items = new ();
     private Dictionary<EPartType, List<PartBase>> _equippedItems = new();
     private int partIndex = 0;
 
@@ -29,6 +29,9 @@ public class Inventory : MonoBehaviour
     private Dictionary<EPartType, Dictionary<string, Transform>> _heavyBoneMap = new();
     private Dictionary<EPartType, List<string>> _subBoneList = new();
     private Dictionary<EPartType, Dictionary<string, Transform>> _subBoneMap = new();
+    
+    // isInit
+    private bool _isInit;
     #endregion
 
     #region Properties
@@ -48,9 +51,12 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
-    #region Unity Methods
-    private void Awake()
+    #region Public Methods
+    public void Init()
     {
+        if (_isInit) return;
+        
+        // 기존 Awake 코드 이동
         foreach (EPartType partType in Enum.GetValues(typeof(EPartType)))
         {
             _equippedItems.Add(partType, new List<PartBase>());
@@ -136,37 +142,14 @@ public class Inventory : MonoBehaviour
                 target.gameObject.SetActive(false);
             }
         }
-    }
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Alpha1))
-    //    {
-    //        if (partIndex == 0) return;
-
-    //        partIndex = 0;
-    //        EquipItem(_items[EPartType.Shoulder][partIndex]);
-    //        EquipItem(_items[EPartType.ArmL][partIndex]);
-    //        EquipItem(_items[EPartType.ArmR][partIndex]);
-    //        EquipItem(_items[EPartType.Legs][partIndex]);
-    //        EquipItem(_items[EPartType.Back][partIndex]);
-    //        EquipItem(_items[EPartType.Mask][partIndex]);
-
-    //        // 임시로 파츠 전체 교체 시 특정 파츠 카메라로 변경
-    //        // To-do: R&D가 필요하나, 캐릭터 콜라이더 크기에 따라 카메라 위치를 조정하는 등의 조치 필요
-    //        owner.FollowCamera.CurrentCameraState = ECameraState.Normal;
-    //    }
-    //}
-    #endregion
-
-    #region Public Methods
-    public void Init()
-    {
+        
         foreach (PartBase part in baseParts)
         {
             GetItem(part);
             EquipItem(part);
         }
+        
+        _isInit = true;
     }
 
     public void GetItem(PartBase newItem)

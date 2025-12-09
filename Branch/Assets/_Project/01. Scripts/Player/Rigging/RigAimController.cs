@@ -15,27 +15,18 @@ public class RigAimController : MonoBehaviour
     private float _currentWeight = 0.0f;
     private bool _isAim = false;
 
+    private bool _isInit;
+
     public bool IsAim
     {
         get => _isAim;
         set => _isAim = value;
     }
 
-    private void Awake()
-    {
-        _ownerTransform = transform;
-
-        MultiAimConstraint[] constraintArray = gameObject.GetComponentsInChildren<MultiAimConstraint>();
-        foreach (MultiAimConstraint constraint in constraintArray)
-        {
-            constraint.weight = 0.0f;
-            _constraints.Add(constraint.gameObject.name, constraint);
-            _changeRoutines.Add(constraint.gameObject.name, null);
-        }
-    }
-
     private void LateUpdate()
     {
+        if (!_isInit) return;
+        
         if (_ownerTransform == null || targetObject == null) return;
         if (!_isAim) return;
 
@@ -170,5 +161,24 @@ public class RigAimController : MonoBehaviour
         string log = $"[{gameObject.name} ({GetType().Name})] Owner: {ownerName}, Target: {targetName}, IsAim: {_isAim}, " +
             $"Weight Change Speed: {weightChangeSpeed:F2}, Max Yaw Angle: {maxYawAngle:F2}, Constraints: {{ {constraintsInfo} }}";
         return log;
+    }
+
+    public void Init(GameObject getComponentInChildren)
+    {
+        if (_isInit) return;
+        
+        _ownerTransform = transform;
+
+        MultiAimConstraint[] constraintArray = gameObject.GetComponentsInChildren<MultiAimConstraint>();
+        foreach (MultiAimConstraint constraint in constraintArray)
+        {
+            constraint.weight = 0.0f;
+            _constraints.Add(constraint.gameObject.name, constraint);
+            _changeRoutines.Add(constraint.gameObject.name, null);
+        }
+        
+        targetObject = getComponentInChildren.transform;
+        
+        _isInit = true;
     }
 }

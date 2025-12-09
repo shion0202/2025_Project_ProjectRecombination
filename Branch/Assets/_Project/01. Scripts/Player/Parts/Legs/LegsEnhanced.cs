@@ -68,8 +68,8 @@ public class LegsEnhanced : PartBaseLegs
             }
         }
 
-        GUIManager.Instance.SetLegsSkillTimer(Color.white);
-        GUIManager.Instance.RapidInfo.SetActive(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillTimer(Color.white);
+        GUIManager.Instance.GameUIController.RapidInfo.SetActive(false);
 
         _audioSource.volume = 0.0f;
         _audioSource.Play();
@@ -95,9 +95,9 @@ public class LegsEnhanced : PartBaseLegs
 
             if (Managers.GUIManager.IsAliveInstance())
             {
-                GUIManager.Instance.SetLegsSkillIcon(false);
-                GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-                GUIManager.Instance.SetLegsSkillCooldown(false);
+                GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+                GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+                GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
             }
         }
 
@@ -109,11 +109,11 @@ public class LegsEnhanced : PartBaseLegs
     {
         _currentCooldown -= Time.deltaTime;
 
-        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
         if (_currentCooldown <= 0.0f)
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
     }
 
@@ -143,13 +143,13 @@ public class LegsEnhanced : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
 
-        GUIManager.Instance.SetLegsSkillTimer(Color.white);
-        GUIManager.Instance.RapidInfo.SetActive(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillTimer(Color.white);
+        GUIManager.Instance.GameUIController.RapidInfo.SetActive(false);
 
         _audioSource.volume = 0.0f;
         _audioSource.Play();
@@ -163,9 +163,9 @@ public class LegsEnhanced : PartBaseLegs
 
         if (_currentCooldown > 0.0f)
         {
-            GUIManager.Instance.SetLegsSkillIcon(true);
-            GUIManager.Instance.SetLegsSkillCooldown(true);
-            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
         }
     }
 
@@ -191,8 +191,8 @@ public class LegsEnhanced : PartBaseLegs
     protected void JumpAttackFinish()
     {
         // 쿨타임, 재등장/공격 이펙트, 데미지 판정 등
-        GUIManager.Instance.SetLegsSkillIcon(true);
-        GUIManager.Instance.SetLegsSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
 
         if (_isAttack)
         {
@@ -222,7 +222,7 @@ public class LegsEnhanced : PartBaseLegs
 
                     if (_owner.CompareTag("Player"))
                     {
-                        Managers.GUIManager.Instance.StartHitCrosshair();
+                        Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                     }
                 }
                 else
@@ -237,7 +237,7 @@ public class LegsEnhanced : PartBaseLegs
 
                         if (_owner.CompareTag("Player"))
                         {
-                            Managers.GUIManager.Instance.StartHitCrosshair();
+                            Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                         }
                     }
                 }

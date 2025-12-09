@@ -78,9 +78,9 @@ public class LegsHover : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
     }
 
@@ -113,9 +113,9 @@ public class LegsHover : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
     }
 
@@ -191,7 +191,7 @@ public class LegsHover : PartBaseLegs
 
     IEnumerator CoCreateBarrier()
     {
-        GUIManager.Instance.SetLegsSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
         // 스킬 사용 시 보호막 생성
         _currentBarrier = Utils.Instantiate(barrierPrefab, barrierSpawnPoint.position - new Vector3(0.0f, 0.2f, 0.0f), Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f)), transform);
         Debug.Log("호버링 보호막 생성 및 버프");
@@ -212,14 +212,14 @@ public class LegsHover : PartBaseLegs
         _owner.Stats.RemoveModifier(this);
 
         _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
-        GUIManager.Instance.SetLegsSkillCooldown(true);
-        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -228,8 +228,8 @@ public class LegsHover : PartBaseLegs
         }
 
         Debug.Log("호버링 쿨타임 초기화");
-        GUIManager.Instance.SetLegsSkillIcon(false);
-        GUIManager.Instance.SetLegsSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         _skillCoroutine = null;
     }
 }

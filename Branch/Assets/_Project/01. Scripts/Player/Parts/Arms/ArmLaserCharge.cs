@@ -37,8 +37,8 @@ public class ArmLaserCharge : PartBaseArm
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetAmmoColor(partType, Color.blue);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.blue);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
 
         _damagedTargets.Clear();
     }
@@ -47,11 +47,11 @@ public class ArmLaserCharge : PartBaseArm
     {
         if (partType == EPartType.ArmL)
         {
-            GUIManager.Instance.SetAmmoLeftSlider(_currentShootTime, maxChargeTime);
+            GUIManager.Instance.GameUIController.SetAmmoLeftSlider(_currentShootTime, maxChargeTime);
         }
         else
         {
-            GUIManager.Instance.SetAmmoRightSlider(_currentShootTime, maxChargeTime);
+            GUIManager.Instance.GameUIController.SetAmmoRightSlider(_currentShootTime, maxChargeTime);
         }
 
         if (!_isShooting)
@@ -269,7 +269,7 @@ public class ArmLaserCharge : PartBaseArm
 
     protected IEnumerator CoDestroyLaser()
     {
-        GUIManager.Instance.SetAmmoColor(partType, true);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, true);
         _isDelay = true;
 
         yield return new WaitForSeconds(_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value);
@@ -292,7 +292,7 @@ public class ArmLaserCharge : PartBaseArm
             _morphBlendRoutine = StartCoroutine(CoMorphBlend(0, true));
         }
 
-        GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
         Utils.Destroy(currentLaserObject.gameObject);
         currentLaser = null;
         currentLaserObject = null;

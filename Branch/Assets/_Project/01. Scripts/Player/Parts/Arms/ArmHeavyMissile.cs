@@ -16,8 +16,8 @@ public class ArmHeavyMissile : PartBaseArm
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetAmmoColor(partType, Color.red);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.red);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
         _currentShootTime = (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value);
     }
 
@@ -25,11 +25,11 @@ public class ArmHeavyMissile : PartBaseArm
     {
         if (partType == EPartType.ArmL)
         {
-            GUIManager.Instance.SetAmmoLeftSlider(_currentShootTime, (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value));
+            GUIManager.Instance.GameUIController.SetAmmoLeftSlider(_currentShootTime, (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value));
         }
         else
         {
-            GUIManager.Instance.SetAmmoRightSlider(_currentShootTime, (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value));
+            GUIManager.Instance.GameUIController.SetAmmoRightSlider(_currentShootTime, (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value));
         }
 
         _currentShootTime += Time.deltaTime;
@@ -98,7 +98,7 @@ public class ArmHeavyMissile : PartBaseArm
         {
             CancleShootState(partType == EPartType.ArmL ? true : false);
             _isOverheat = true;
-            GUIManager.Instance.SetAmmoColor(partType, true);
+            GUIManager.Instance.GameUIController.SetAmmoColor(partType, true);
         }
     }
 

@@ -67,11 +67,11 @@ public class PartBaseArm : PartBase
     {
         if (partType == EPartType.ArmL)
         {
-            GUIManager.Instance.SetAmmoLeftSlider(_currentAmmo, maxAmmo);
+            GUIManager.Instance.GameUIController.SetAmmoLeftSlider(_currentAmmo, maxAmmo);
         }
         else
         {
-            GUIManager.Instance.SetAmmoRightSlider(_currentAmmo, maxAmmo);
+            GUIManager.Instance.GameUIController.SetAmmoRightSlider(_currentAmmo, maxAmmo);
         }
 
         _currentShootTime -= Time.deltaTime;
@@ -88,7 +88,7 @@ public class PartBaseArm : PartBase
             if (_currentAmmo >= maxAmmo)
             {
                 _isOverheat = false;
-                GUIManager.Instance.SetAmmoColor(partType, false);
+                GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
             }
 
             return;
@@ -158,7 +158,7 @@ public class PartBaseArm : PartBase
         {
             CancleShootState(partType == EPartType.ArmL ? true : false);
             _isOverheat = true;
-            GUIManager.Instance.SetAmmoColor(partType, true);
+            GUIManager.Instance.GameUIController.SetAmmoColor(partType, true);
         }
     }
 

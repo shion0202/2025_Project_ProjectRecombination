@@ -66,7 +66,7 @@ public class ShoulderRapid : PartBaseShoulder
 
     protected void OnDisable()
     {
-        GUIManager.Instance.SetBackSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
 
         if (_skillCoroutine != null)
         {
@@ -93,9 +93,9 @@ public class ShoulderRapid : PartBaseShoulder
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetBackSkillIcon(false);
-            GUIManager.Instance.SetBackSkillCooldown(0.0f);
-            GUIManager.Instance.SetBackSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         }
     }
 
@@ -109,7 +109,7 @@ public class ShoulderRapid : PartBaseShoulder
     {
         base.FinishActionForced();
 
-        GUIManager.Instance.SetBackSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
 
         if (_skillCoroutine != null)
         {
@@ -136,9 +136,9 @@ public class ShoulderRapid : PartBaseShoulder
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetBackSkillIcon(false);
-            GUIManager.Instance.SetBackSkillCooldown(0.0f);
-            GUIManager.Instance.SetBackSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         }
     }
 
@@ -147,16 +147,16 @@ public class ShoulderRapid : PartBaseShoulder
         yield return null;
         yield return null;
 
-        GUIManager.Instance.SetBackSkillIcon(true);
-        GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
 
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -164,8 +164,8 @@ public class ShoulderRapid : PartBaseShoulder
             }
         }
 
-        GUIManager.Instance.SetBackSkillIcon(false);
-        GUIManager.Instance.SetBackSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         _cooldownRoutine = null;
     }
 
@@ -187,7 +187,7 @@ public class ShoulderRapid : PartBaseShoulder
 
         brain.m_DefaultBlend = new CinemachineBlendDefinition(CinemachineBlendDefinition.Style.EaseInOut, 0.3f);
         cutsceneCams[0].m_Priority = 100;
-        GUIManager.Instance.SetBackSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(true);
 
         _skillCoroutine = StartCoroutine(CoLaunchTargetMissiles());
     }
@@ -300,9 +300,9 @@ public class ShoulderRapid : PartBaseShoulder
                 cutsceneCams[i].m_Priority = 10;
             }
 
-            GUIManager.Instance.SetBackSkillIcon(false);
-            GUIManager.Instance.SetBackSkillCooldown(0.0f);
-            GUIManager.Instance.SetBackSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
 
             _skillCoroutine = null;
             yield break;
@@ -363,14 +363,14 @@ public class ShoulderRapid : PartBaseShoulder
         }
 
         _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
-        GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -378,9 +378,9 @@ public class ShoulderRapid : PartBaseShoulder
             }
         }
 
-        GUIManager.Instance.SetBackSkillIcon(false);
-        GUIManager.Instance.SetBackSkillCooldown(0.0f);
-        GUIManager.Instance.SetBackSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(0.0f);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         Debug.Log("쿨타임 종료");
         _skillCoroutine = null;
     }
@@ -398,6 +398,6 @@ public class ShoulderRapid : PartBaseShoulder
     private IEnumerator SetBackSkillIcon()
     {
         yield return null;
-        GUIManager.Instance.SetBackSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
     }
 }

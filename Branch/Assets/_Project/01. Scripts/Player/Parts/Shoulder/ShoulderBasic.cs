@@ -8,31 +8,31 @@ public class ShoulderBasic : PartBaseShoulder
 {
     private void OnEnable()
     {
-        //Managers.GUIManager.Instance.ShoulderIcon.SetActive(true);
-        Managers.GUIManager.Instance.SetBackSkillIcon(true);
+        //Managers.GUIManager.Instance.GameUIController.ShoulderIcon.SetActive(true);
+        Managers.GUIManager.Instance.GameUIController.SetBackSkillIcon(true);
     }
 
     private void OnDisable()
     {
         if (Managers.GUIManager.IsAliveInstance())
         {
-            //Managers.GUIManager.Instance.ShoulderIcon.SetActive(false);
-            Managers.GUIManager.Instance.SetBackSkillIcon(false);
+            //Managers.GUIManager.Instance.GameUIController.ShoulderIcon.SetActive(false);
+            Managers.GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
         }
     }
 
     public override IEnumerator CoStartCooldown()
     {
-        GUIManager.Instance.SetBackSkillIcon(true);
-        GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
 
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -40,7 +40,7 @@ public class ShoulderBasic : PartBaseShoulder
             }
         }
 
-        GUIManager.Instance.SetBackSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         _cooldownRoutine = null;
     }
 }
