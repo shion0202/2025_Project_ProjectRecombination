@@ -119,4 +119,34 @@ void GetSubLight_float(float3 ReferencePosWS, float3 ReferenceNormalWS, out floa
     OutColor = selectedColor;
 #endif
 }
+
+void GetPointLightsForSDF_float(float3 PositionWS, float3 NormalWS,
+                          out float3 OutColor, out float3 SDFDirection)
+{
+#if defined(SHADERGRAPH_PREVIEW)
+    OutColor     = float3(0, 0, 0);
+    SDFDirection = float3(0, 0, 1);
+#else
+    OutColor = float3(0, 0, 0);
+
+    // 1) 메인 라이트
+    Light mainLight = GetMainLight();
+
+    float mainNdotL = saturate(dot(NormalWS, mainLight.direction));
+    OutColor += mainLight.color * mainNdotL;
+
+    // 2) 추가 라이트는 색/밝기만 더해준다 (SDFDirection에는 전혀 반영 X)
+    int lightCount = GetAdditionalLightsCount();
+    for (int i = 0; i < lightCount; ++i)
+    {
+        Light light = GetAdditionalLight(i, PositionWS);
+        float nDotL = saturate(dot(NormalWS, light.direction));
+
+        OutColor += light.color * light.distanceAttenuation * nDotL;
+    }
+
+    // 3) SDF용 방향은 항상 "메인 라이트 방향" 고정
+    SDFDirection = normalize(mainLight.direction);
+#endif
+}
 #endif

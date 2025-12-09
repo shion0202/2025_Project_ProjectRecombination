@@ -130,18 +130,36 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
     {
         PlayerInput inputComp = _owner.GetComponent<PlayerInput>();
         if (inputComp != null)
-        {
-            inputComp.enabled = true;
-        }
+            inputComp.enabled = false;   // 일단 확실히 OFF
+
         _owner.Controller.enabled = false;
         _owner.transform.position = transform.position;
         _owner.Controller.enabled = true;
         _originalPart.IsAttack = true;
         brain.m_DefaultBlend = defaultBlend;
-        _owner.FollowCamera.CameraAim.m_HorizontalAxis.Value = pov.m_HorizontalAxis.Value;
+
+        // 1) 스킬 카메라의 "실제 월드 forward" 구하기
+        // pov가 붙어 있는 vcam의 Transform 사용
+        Transform skillVcamTransform = pov.VirtualCamera.transform;
+        Vector3 worldForward = skillVcamTransform.forward;
+        float yaw = GetYawFromForward(worldForward);
+
+        // 2) 플레이어 POV에 같은 Yaw를 세팅
+        var playerPov = _owner.FollowCamera.CameraAim;
+        playerPov.m_HorizontalAxis.Value = Mathf.Clamp(
+            yaw,
+            playerPov.m_HorizontalAxis.m_MinValue,
+            playerPov.m_HorizontalAxis.m_MaxValue
+        );
 
         _owner.gameObject.SetActive(true);
         Utils.Destroy(gameObject);
+
+        // 3) 다음 프레임에 인풋 다시 켜기 (축이 확정된 후)
+        if (inputComp != null)
+        {
+            StartCoroutine(ReEnableInputNextFrame(inputComp));
+        }
     }
 
     public void OnApply(InputAction.CallbackContext context)
@@ -182,6 +200,27 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
 
     public void OnLook(InputAction.CallbackContext context)
     {
-        
+
+    }
+
+    float GetYawFromForward(Vector3 forward)
+    {
+        // XZ 평면에서의 각도
+        float yaw = Mathf.Atan2(forward.x, forward.z) * Mathf.Rad2Deg;
+        // -180 ~ 180 정규화
+        return Mathf.DeltaAngle(0f, yaw);
+    }
+
+    private IEnumerator ReEnableInputNextFrame(PlayerInput inputComp)
+    {
+        // 한 프레임 쉬고
+        yield return null;
+
+        if (inputComp != null)
+        {
+            inputComp.enabled = true;
+        }
+
+        Utils.Destroy(gameObject);
     }
 }

@@ -159,7 +159,7 @@ public class LegsEnhanced : PartBaseLegs
     {
         if (!_owner) return;
 
-        _currentCooldown = skillCooldown * _owner.CooldownDictionary[currentPartType];
+        _currentCooldown = _owner.CooldownDictionary[currentPartType];
 
         if (_currentCooldown > 0.0f)
         {
@@ -167,6 +167,8 @@ public class LegsEnhanced : PartBaseLegs
             GUIManager.Instance.SetLegsSkillCooldown(true);
             GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
         }
+
+        if (!_owner) return;
     }
 
     protected void JumpAttack()
