@@ -101,6 +101,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""3472f349-3725-4efe-9337-ed51bb430612"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""LeftAttack"",
                     ""type"": ""Button"",
                     ""id"": ""233ae484-8c17-415b-83ae-96159fe85900"",
@@ -146,36 +155,36 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""Indicator"",
                     ""type"": ""Button"",
-                    ""id"": ""c72704f6-7149-4736-9bde-ecf6e0f64281"",
+                    ""id"": ""7846b28c-71bf-4d07-8bf2-3177cb0814b9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Zoom"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
-                    ""id"": ""636b85ff-1f9c-4589-8e15-3779e0575ccf"",
+                    ""id"": ""fca1fe55-4c28-4826-96d8-89bc34507af0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MouseScroll"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""898759bc-9d17-41ff-97d4-4dd07589f75e"",
-                    ""expectedControlType"": ""Axis"",
+                    ""name"": ""Help"",
+                    ""type"": ""Button"",
+                    ""id"": ""18cc9652-ba8f-4b98-9793-4dcf15b03962"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ResetCamera"",
+                    ""name"": ""Map"",
                     ""type"": ""Button"",
-                    ""id"": ""5e81a24e-5b16-46a6-ae5e-67c4d7d28a35"",
+                    ""id"": ""df30c0c8-58bc-47ac-98c5-55aa5c838e88"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -185,15 +194,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""name"": ""RadialMenu"",
                     ""type"": ""Button"",
                     ""id"": ""f6874795-d083-4591-a22a-342732ee20f1"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Indicator"",
-                    ""type"": ""Button"",
-                    ""id"": ""7846b28c-71bf-4d07-8bf2-3177cb0814b9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -236,36 +236,36 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Help"",
+                    ""name"": ""MouseScroll"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""898759bc-9d17-41ff-97d4-4dd07589f75e"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
                     ""type"": ""Button"",
-                    ""id"": ""18cc9652-ba8f-4b98-9793-4dcf15b03962"",
+                    ""id"": ""c72704f6-7149-4736-9bde-ecf6e0f64281"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""Zoom"",
                     ""type"": ""Button"",
-                    ""id"": ""fca1fe55-4c28-4826-96d8-89bc34507af0"",
+                    ""id"": ""636b85ff-1f9c-4589-8e15-3779e0575ccf"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""Value"",
-                    ""id"": ""3472f349-3725-4efe-9337-ed51bb430612"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Map"",
+                    ""name"": ""ResetCamera"",
                     ""type"": ""Button"",
-                    ""id"": ""df30c0c8-58bc-47ac-98c5-55aa5c838e88"",
+                    ""id"": ""5e81a24e-5b16-46a6-ae5e-67c4d7d28a35"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -352,11 +352,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b0167f22-56af-4ac3-b36b-f63ebf9d9be5"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3bf891d2-13a1-4ac8-95c6-1ae1b66f5ede"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC_Keyboard"",
+                    ""action"": ""ShoulderSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78b5d4fb-197b-49af-b81b-27c2dc398651"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""ShoulderSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -385,6 +407,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c663365a-e72b-4091-9b54-df16bc43b0aa"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""13696436-f5d4-458d-905e-8b3b7ee98cc2"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -396,11 +429,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""f3b68142-5664-4226-ae90-2694ce6f9b48"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""199dd1fa-0a51-42de-8d7a-789724b05b3c"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC_Keyboard"",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84f760d5-a185-485f-9689-c912da1b3846"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -451,11 +506,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""66ab8cd8-8c7e-4bfa-ad24-66aa66210c2d"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RadialMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4608d7d0-f429-4bc6-bb23-80c40d8e5483"",
                     ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC_Keyboard"",
+                    ""action"": ""Indicator"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8a5a498-0ad0-4e92-b61a-37834bef69dd"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Indicator"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -473,11 +550,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e2c921dc-e4bf-4e4a-9815-bde17cc1e45f"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LaserSet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""43ead0d8-55de-45de-a27f-d63a580bca3c"",
                     ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC_Keyboard"",
+                    ""action"": ""RapidSet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdd6098e-8500-49c6-863c-12b6f8a0f77c"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""RapidSet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -495,6 +594,17 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""bf1b60a5-7d88-4d38-8be7-4c35ba8e3d45"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavySet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c9240539-0092-4401-bfc4-6f2454aabec7"",
                     ""path"": ""<Keyboard>/f1"",
                     ""interactions"": """",
@@ -506,11 +616,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""32a3c0b5-822c-4def-ab59-713821a631f1"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""38287c02-c7da-44a3-bc07-5d3b223692ab"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC_Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49548e4f-9936-413f-a8f7-05f6aeea72d9"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -531,8 +663,19 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""id"": ""4b63312c-5c8e-43ab-b18b-5fb4d473aee7"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=20,y=20)"",
                     ""groups"": "";PC_Keyboard;Mobile"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d20e4d6-a473-4b13-8df1-b31bc5d62431"",
+                    ""path"": ""<Touchscreen>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mobile"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -550,11 +693,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2cd3bf11-d9c2-41a4-9862-48ccc70f032d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""7c1f1bc1-83c4-4954-b5b9-4003ba4404f2"",
                     ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";PC_Keyboard"",
+                    ""action"": ""BaseSet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f055162b-b803-4188-a546-1ccd85005e52"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""BaseSet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -727,25 +892,25 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         // PlayerActionMap
         m_PlayerActionMap = asset.FindActionMap("PlayerActionMap", throwIfNotFound: true);
         m_PlayerActionMap_Move = m_PlayerActionMap.FindAction("Move", throwIfNotFound: true);
+        m_PlayerActionMap_Look = m_PlayerActionMap.FindAction("Look", throwIfNotFound: true);
         m_PlayerActionMap_LeftAttack = m_PlayerActionMap.FindAction("LeftAttack", throwIfNotFound: true);
         m_PlayerActionMap_RightAttack = m_PlayerActionMap.FindAction("RightAttack", throwIfNotFound: true);
         m_PlayerActionMap_Dash = m_PlayerActionMap.FindAction("Dash", throwIfNotFound: true);
         m_PlayerActionMap_ShoulderSkill = m_PlayerActionMap.FindAction("ShoulderSkill", throwIfNotFound: true);
         m_PlayerActionMap_Interaction = m_PlayerActionMap.FindAction("Interaction", throwIfNotFound: true);
-        m_PlayerActionMap_Jump = m_PlayerActionMap.FindAction("Jump", throwIfNotFound: true);
-        m_PlayerActionMap_Zoom = m_PlayerActionMap.FindAction("Zoom", throwIfNotFound: true);
-        m_PlayerActionMap_MouseScroll = m_PlayerActionMap.FindAction("MouseScroll", throwIfNotFound: true);
-        m_PlayerActionMap_ResetCamera = m_PlayerActionMap.FindAction("ResetCamera", throwIfNotFound: true);
-        m_PlayerActionMap_RadialMenu = m_PlayerActionMap.FindAction("RadialMenu", throwIfNotFound: true);
         m_PlayerActionMap_Indicator = m_PlayerActionMap.FindAction("Indicator", throwIfNotFound: true);
+        m_PlayerActionMap_Pause = m_PlayerActionMap.FindAction("Pause", throwIfNotFound: true);
+        m_PlayerActionMap_Help = m_PlayerActionMap.FindAction("Help", throwIfNotFound: true);
+        m_PlayerActionMap_Map = m_PlayerActionMap.FindAction("Map", throwIfNotFound: true);
+        m_PlayerActionMap_RadialMenu = m_PlayerActionMap.FindAction("RadialMenu", throwIfNotFound: true);
         m_PlayerActionMap_BaseSet = m_PlayerActionMap.FindAction("BaseSet", throwIfNotFound: true);
         m_PlayerActionMap_LaserSet = m_PlayerActionMap.FindAction("LaserSet", throwIfNotFound: true);
         m_PlayerActionMap_RapidSet = m_PlayerActionMap.FindAction("RapidSet", throwIfNotFound: true);
         m_PlayerActionMap_HeavySet = m_PlayerActionMap.FindAction("HeavySet", throwIfNotFound: true);
-        m_PlayerActionMap_Help = m_PlayerActionMap.FindAction("Help", throwIfNotFound: true);
-        m_PlayerActionMap_Pause = m_PlayerActionMap.FindAction("Pause", throwIfNotFound: true);
-        m_PlayerActionMap_Look = m_PlayerActionMap.FindAction("Look", throwIfNotFound: true);
-        m_PlayerActionMap_Map = m_PlayerActionMap.FindAction("Map", throwIfNotFound: true);
+        m_PlayerActionMap_MouseScroll = m_PlayerActionMap.FindAction("MouseScroll", throwIfNotFound: true);
+        m_PlayerActionMap_Jump = m_PlayerActionMap.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActionMap_Zoom = m_PlayerActionMap.FindAction("Zoom", throwIfNotFound: true);
+        m_PlayerActionMap_ResetCamera = m_PlayerActionMap.FindAction("ResetCamera", throwIfNotFound: true);
         // JumpAttackActionMap
         m_JumpAttackActionMap = asset.FindActionMap("JumpAttackActionMap", throwIfNotFound: true);
         m_JumpAttackActionMap_Move = m_JumpAttackActionMap.FindAction("Move", throwIfNotFound: true);
@@ -834,25 +999,25 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActionMap;
     private List<IPlayerActionMapActions> m_PlayerActionMapActionsCallbackInterfaces = new List<IPlayerActionMapActions>();
     private readonly InputAction m_PlayerActionMap_Move;
+    private readonly InputAction m_PlayerActionMap_Look;
     private readonly InputAction m_PlayerActionMap_LeftAttack;
     private readonly InputAction m_PlayerActionMap_RightAttack;
     private readonly InputAction m_PlayerActionMap_Dash;
     private readonly InputAction m_PlayerActionMap_ShoulderSkill;
     private readonly InputAction m_PlayerActionMap_Interaction;
-    private readonly InputAction m_PlayerActionMap_Jump;
-    private readonly InputAction m_PlayerActionMap_Zoom;
-    private readonly InputAction m_PlayerActionMap_MouseScroll;
-    private readonly InputAction m_PlayerActionMap_ResetCamera;
-    private readonly InputAction m_PlayerActionMap_RadialMenu;
     private readonly InputAction m_PlayerActionMap_Indicator;
+    private readonly InputAction m_PlayerActionMap_Pause;
+    private readonly InputAction m_PlayerActionMap_Help;
+    private readonly InputAction m_PlayerActionMap_Map;
+    private readonly InputAction m_PlayerActionMap_RadialMenu;
     private readonly InputAction m_PlayerActionMap_BaseSet;
     private readonly InputAction m_PlayerActionMap_LaserSet;
     private readonly InputAction m_PlayerActionMap_RapidSet;
     private readonly InputAction m_PlayerActionMap_HeavySet;
-    private readonly InputAction m_PlayerActionMap_Help;
-    private readonly InputAction m_PlayerActionMap_Pause;
-    private readonly InputAction m_PlayerActionMap_Look;
-    private readonly InputAction m_PlayerActionMap_Map;
+    private readonly InputAction m_PlayerActionMap_MouseScroll;
+    private readonly InputAction m_PlayerActionMap_Jump;
+    private readonly InputAction m_PlayerActionMap_Zoom;
+    private readonly InputAction m_PlayerActionMap_ResetCamera;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerActionMap".
     /// </summary>
@@ -868,6 +1033,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActionMap/Move".
         /// </summary>
         public InputAction @Move => m_Wrapper.m_PlayerActionMap_Move;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActionMap/Look".
+        /// </summary>
+        public InputAction @Look => m_Wrapper.m_PlayerActionMap_Look;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActionMap/LeftAttack".
         /// </summary>
@@ -889,29 +1058,25 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Interaction => m_Wrapper.m_PlayerActionMap_Interaction;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Jump".
+        /// Provides access to the underlying input action "PlayerActionMap/Indicator".
         /// </summary>
-        public InputAction @Jump => m_Wrapper.m_PlayerActionMap_Jump;
+        public InputAction @Indicator => m_Wrapper.m_PlayerActionMap_Indicator;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Zoom".
+        /// Provides access to the underlying input action "PlayerActionMap/Pause".
         /// </summary>
-        public InputAction @Zoom => m_Wrapper.m_PlayerActionMap_Zoom;
+        public InputAction @Pause => m_Wrapper.m_PlayerActionMap_Pause;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/MouseScroll".
+        /// Provides access to the underlying input action "PlayerActionMap/Help".
         /// </summary>
-        public InputAction @MouseScroll => m_Wrapper.m_PlayerActionMap_MouseScroll;
+        public InputAction @Help => m_Wrapper.m_PlayerActionMap_Help;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/ResetCamera".
+        /// Provides access to the underlying input action "PlayerActionMap/Map".
         /// </summary>
-        public InputAction @ResetCamera => m_Wrapper.m_PlayerActionMap_ResetCamera;
+        public InputAction @Map => m_Wrapper.m_PlayerActionMap_Map;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActionMap/RadialMenu".
         /// </summary>
         public InputAction @RadialMenu => m_Wrapper.m_PlayerActionMap_RadialMenu;
-        /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Indicator".
-        /// </summary>
-        public InputAction @Indicator => m_Wrapper.m_PlayerActionMap_Indicator;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActionMap/BaseSet".
         /// </summary>
@@ -929,21 +1094,21 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @HeavySet => m_Wrapper.m_PlayerActionMap_HeavySet;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Help".
+        /// Provides access to the underlying input action "PlayerActionMap/MouseScroll".
         /// </summary>
-        public InputAction @Help => m_Wrapper.m_PlayerActionMap_Help;
+        public InputAction @MouseScroll => m_Wrapper.m_PlayerActionMap_MouseScroll;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Pause".
+        /// Provides access to the underlying input action "PlayerActionMap/Jump".
         /// </summary>
-        public InputAction @Pause => m_Wrapper.m_PlayerActionMap_Pause;
+        public InputAction @Jump => m_Wrapper.m_PlayerActionMap_Jump;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Look".
+        /// Provides access to the underlying input action "PlayerActionMap/Zoom".
         /// </summary>
-        public InputAction @Look => m_Wrapper.m_PlayerActionMap_Look;
+        public InputAction @Zoom => m_Wrapper.m_PlayerActionMap_Zoom;
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActionMap/Map".
+        /// Provides access to the underlying input action "PlayerActionMap/ResetCamera".
         /// </summary>
-        public InputAction @Map => m_Wrapper.m_PlayerActionMap_Map;
+        public InputAction @ResetCamera => m_Wrapper.m_PlayerActionMap_ResetCamera;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -973,6 +1138,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
             @LeftAttack.started += instance.OnLeftAttack;
             @LeftAttack.performed += instance.OnLeftAttack;
             @LeftAttack.canceled += instance.OnLeftAttack;
@@ -988,24 +1156,21 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
-            @Zoom.started += instance.OnZoom;
-            @Zoom.performed += instance.OnZoom;
-            @Zoom.canceled += instance.OnZoom;
-            @MouseScroll.started += instance.OnMouseScroll;
-            @MouseScroll.performed += instance.OnMouseScroll;
-            @MouseScroll.canceled += instance.OnMouseScroll;
-            @ResetCamera.started += instance.OnResetCamera;
-            @ResetCamera.performed += instance.OnResetCamera;
-            @ResetCamera.canceled += instance.OnResetCamera;
-            @RadialMenu.started += instance.OnRadialMenu;
-            @RadialMenu.performed += instance.OnRadialMenu;
-            @RadialMenu.canceled += instance.OnRadialMenu;
             @Indicator.started += instance.OnIndicator;
             @Indicator.performed += instance.OnIndicator;
             @Indicator.canceled += instance.OnIndicator;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @Help.started += instance.OnHelp;
+            @Help.performed += instance.OnHelp;
+            @Help.canceled += instance.OnHelp;
+            @Map.started += instance.OnMap;
+            @Map.performed += instance.OnMap;
+            @Map.canceled += instance.OnMap;
+            @RadialMenu.started += instance.OnRadialMenu;
+            @RadialMenu.performed += instance.OnRadialMenu;
+            @RadialMenu.canceled += instance.OnRadialMenu;
             @BaseSet.started += instance.OnBaseSet;
             @BaseSet.performed += instance.OnBaseSet;
             @BaseSet.canceled += instance.OnBaseSet;
@@ -1018,18 +1183,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @HeavySet.started += instance.OnHeavySet;
             @HeavySet.performed += instance.OnHeavySet;
             @HeavySet.canceled += instance.OnHeavySet;
-            @Help.started += instance.OnHelp;
-            @Help.performed += instance.OnHelp;
-            @Help.canceled += instance.OnHelp;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
-            @Map.started += instance.OnMap;
-            @Map.performed += instance.OnMap;
-            @Map.canceled += instance.OnMap;
+            @MouseScroll.started += instance.OnMouseScroll;
+            @MouseScroll.performed += instance.OnMouseScroll;
+            @MouseScroll.canceled += instance.OnMouseScroll;
+            @Jump.started += instance.OnJump;
+            @Jump.performed += instance.OnJump;
+            @Jump.canceled += instance.OnJump;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
+            @ResetCamera.started += instance.OnResetCamera;
+            @ResetCamera.performed += instance.OnResetCamera;
+            @ResetCamera.canceled += instance.OnResetCamera;
         }
 
         /// <summary>
@@ -1044,6 +1209,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @LeftAttack.started -= instance.OnLeftAttack;
             @LeftAttack.performed -= instance.OnLeftAttack;
             @LeftAttack.canceled -= instance.OnLeftAttack;
@@ -1059,24 +1227,21 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
-            @Zoom.started -= instance.OnZoom;
-            @Zoom.performed -= instance.OnZoom;
-            @Zoom.canceled -= instance.OnZoom;
-            @MouseScroll.started -= instance.OnMouseScroll;
-            @MouseScroll.performed -= instance.OnMouseScroll;
-            @MouseScroll.canceled -= instance.OnMouseScroll;
-            @ResetCamera.started -= instance.OnResetCamera;
-            @ResetCamera.performed -= instance.OnResetCamera;
-            @ResetCamera.canceled -= instance.OnResetCamera;
-            @RadialMenu.started -= instance.OnRadialMenu;
-            @RadialMenu.performed -= instance.OnRadialMenu;
-            @RadialMenu.canceled -= instance.OnRadialMenu;
             @Indicator.started -= instance.OnIndicator;
             @Indicator.performed -= instance.OnIndicator;
             @Indicator.canceled -= instance.OnIndicator;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @Help.started -= instance.OnHelp;
+            @Help.performed -= instance.OnHelp;
+            @Help.canceled -= instance.OnHelp;
+            @Map.started -= instance.OnMap;
+            @Map.performed -= instance.OnMap;
+            @Map.canceled -= instance.OnMap;
+            @RadialMenu.started -= instance.OnRadialMenu;
+            @RadialMenu.performed -= instance.OnRadialMenu;
+            @RadialMenu.canceled -= instance.OnRadialMenu;
             @BaseSet.started -= instance.OnBaseSet;
             @BaseSet.performed -= instance.OnBaseSet;
             @BaseSet.canceled -= instance.OnBaseSet;
@@ -1089,18 +1254,18 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @HeavySet.started -= instance.OnHeavySet;
             @HeavySet.performed -= instance.OnHeavySet;
             @HeavySet.canceled -= instance.OnHeavySet;
-            @Help.started -= instance.OnHelp;
-            @Help.performed -= instance.OnHelp;
-            @Help.canceled -= instance.OnHelp;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
-            @Map.started -= instance.OnMap;
-            @Map.performed -= instance.OnMap;
-            @Map.canceled -= instance.OnMap;
+            @MouseScroll.started -= instance.OnMouseScroll;
+            @MouseScroll.performed -= instance.OnMouseScroll;
+            @MouseScroll.canceled -= instance.OnMouseScroll;
+            @Jump.started -= instance.OnJump;
+            @Jump.performed -= instance.OnJump;
+            @Jump.canceled -= instance.OnJump;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
+            @ResetCamera.started -= instance.OnResetCamera;
+            @ResetCamera.performed -= instance.OnResetCamera;
+            @ResetCamera.canceled -= instance.OnResetCamera;
         }
 
         /// <summary>
@@ -1304,6 +1469,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMove(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLook(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "LeftAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1339,33 +1511,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteraction(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Indicator" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnJump(InputAction.CallbackContext context);
+        void OnIndicator(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnZoom(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "MouseScroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Help" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMouseScroll(InputAction.CallbackContext context);
+        void OnHelp(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "ResetCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Map" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnResetCamera(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "RadialMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1373,13 +1545,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRadialMenu(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Indicator" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnIndicator(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "BaseSet" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1409,33 +1574,33 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHeavySet(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Help" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "MouseScroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnHelp(InputAction.CallbackContext context);
+        void OnMouseScroll(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPause(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnLook(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Map" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ResetCamera" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnMap(InputAction.CallbackContext context);
+        void OnResetCamera(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "JumpAttackActionMap" which allows adding and removing callbacks.
