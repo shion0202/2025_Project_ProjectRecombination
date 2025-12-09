@@ -27,7 +27,7 @@ namespace _Project.Scripts.VisualScripting
         {
             if (!isLoop && IsOn) return;
 
-            if (audioSource != null)
+            if (audioSource is not null && audioSource.isActiveAndEnabled)
             {
                 audioSource.Play();
             }

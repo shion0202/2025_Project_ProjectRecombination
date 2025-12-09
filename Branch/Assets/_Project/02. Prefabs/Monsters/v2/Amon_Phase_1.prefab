@@ -259,11 +259,13 @@ MonoBehaviour:
   id: 1009
   navMeshAgent: {fileID: 7270007255789879844}
   agent: {fileID: 7373134389740238114}
+  characterController: {fileID: 0}
   animatorParameterSetter: {fileID: 3646957178891513591}
   target: {fileID: 0}
   deathEffect: {fileID: 0}
   hitEffects: []
   ragdollController: {fileID: 0}
+  dissolve: []
   patrolInfo:
     isPatrol: 0
     minPatrolTime: 0
@@ -499,10 +501,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40e6aafb70cfab144a099217ef22cebe,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2360151105958416999}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40e6aafb70cfab144a099217ef22cebe,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6957063330312613394}
   m_SourcePrefab: {fileID: 100100000, guid: 40e6aafb70cfab144a099217ef22cebe, type: 3}
 --- !u!1 &2643886890815275500 stripped
@@ -511,19 +509,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2914269654452436157}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2360151105958416999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2643886890815275500}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 651392d2279d648a68f9a51386b7f4cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackboard: {fileID: 7649363827161289517}
 --- !u!95 &6957063330312613394
 Animator:
   serializedVersion: 5
@@ -751,10 +736,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40e6aafb70cfab144a099217ef22cebe,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8916715715268749720}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 40e6aafb70cfab144a099217ef22cebe,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 5054183416473516304}
   m_SourcePrefab: {fileID: 100100000, guid: 40e6aafb70cfab144a099217ef22cebe, type: 3}
 --- !u!1 &3754812550417488915 stripped
@@ -763,19 +744,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4096780114872574274}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8916715715268749720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3754812550417488915}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 651392d2279d648a68f9a51386b7f4cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blackboard: {fileID: 7649363827161289517}
 --- !u!95 &5054183416473516304
 Animator:
   serializedVersion: 5

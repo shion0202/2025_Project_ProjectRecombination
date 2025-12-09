@@ -22,7 +22,7 @@ namespace Managers
         private Coroutine _rebirthRoutine;
 
         public bool IsLoad { get; private set; }
-        public GameState CurrentState { get; private set; } = GameState.Title;
+        public GameState CurrentState { get; private set; } = GameState.Loading;
 
         private void Update()
         {
@@ -41,6 +41,7 @@ namespace Managers
         public void SceneLoaded()
         {
             IsLoad = true;
+            SoundManager.Instance.Init();
         }
 
         private void PlayingProcess()
@@ -103,6 +104,12 @@ namespace Managers
 
         #endregion
 
+        public void EnterTitle()
+        {
+            SceneController.Instance.LoadSceneAdditive("Scene_UI");
+            CurrentState = GameState.Title;
+        }
+        
         public void EnterPrologue()
         {
             // 프롤로그 실행

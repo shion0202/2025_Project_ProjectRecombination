@@ -10,18 +10,6 @@ using UnityEngine.SceneManagement;
 public class SceneController : Singleton<SceneController>
 {
     private Dictionary<string, AsyncOperationHandle<SceneInstance>> _loadedScenes = new();
-
-    private bool _isLoaded;
-
-    private void Update()
-    {
-        if (!GameManager.Instance.IsLoad || _isLoaded) return;
-
-        _isLoaded = true;
-        LoadSceneAdditive("Scene_UI");
-        // LoadSceneAdditive("Scene_Game");
-        // LoadSceneAdditive("Scene_Player");
-    }
     
     // 씬을 추가로 로드하는 함수
     public async void LoadSceneAdditive(string key)
@@ -34,7 +22,7 @@ public class SceneController : Singleton<SceneController>
             Debug.Log($"[SceneController] {key} 로드 시작 (Additive)...");
 
             // Addressables로 씬 로드
-            var handle = Addressables.LoadSceneAsync(key, LoadSceneMode.Additive);
+            AsyncOperationHandle<SceneInstance> handle = Addressables.LoadSceneAsync(key, LoadSceneMode.Additive);
         
             await handle.Task;
 
@@ -60,7 +48,7 @@ public class SceneController : Singleton<SceneController>
         }
         catch (Exception e)
         {
-            throw; // TODO 예외 처리
+            Debug.Log($"{key} 로드 중 예외 발생: {e.Message}");
         }
     }
 
@@ -69,20 +57,17 @@ public class SceneController : Singleton<SceneController>
     {
         try
         {
-            if (_loadedScenes.ContainsKey(key))
-            {
-                AsyncOperationHandle<SceneInstance> handle = _loadedScenes[key];
-            
-                // Addressables로 씬 언로드
-                await Addressables.UnloadSceneAsync(handle).Task;
+            if (!_loadedScenes.TryGetValue(key, out AsyncOperationHandle<SceneInstance> handle)) return;
 
-                _loadedScenes.Remove(key);
-                Debug.Log($"[SceneController] {key} 언로드 완료.");
-            }
+            // Addressables로 씬 언로드
+            await Addressables.UnloadSceneAsync(handle).Task;
+
+            _loadedScenes.Remove(key);
+            Debug.Log($"[SceneController] {key} 언로드 완료.");
         }
         catch (Exception e)
         {
-            throw; // TODO 예외 처리
+            Debug.Log($"{key} 언로드 중 예외 발생: {e.Message}");
         }
     }
 }

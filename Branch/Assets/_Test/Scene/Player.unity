@@ -211,27 +211,23 @@ MonoBehaviour:
     isActive: 1
   - prefab: {fileID: 9069380339737678772, guid: fb7fa354ef8974f47b5bb574cae3b1d7,
       type: 3}
-    prefabType: 4
-    isActive: 1
-  - prefab: {fileID: 2400993249388847640, guid: 33a1f9d3bb5c84f36b42e53a60abdc82,
-      type: 3}
     prefabType: 3
     isActive: 1
   - prefab: {fileID: 8765793853822610566, guid: 26350bacb3f42465ab261e9fa814f599,
       type: 3}
-    prefabType: 5
+    prefabType: 4
     isActive: 1
   - prefab: {fileID: 3621219311917525375, guid: 97b108b74f0124062a787a2d6ef30a15,
       type: 3}
-    prefabType: 6
+    prefabType: 5
     isActive: 1
   - prefab: {fileID: 6901384372144632134, guid: 12cdb945c9ace40aea49e59aab6f1557,
       type: 3}
-    prefabType: 7
+    prefabType: 6
     isActive: 0
   - prefab: {fileID: 3579945791948366795, guid: 14534da9fa6854aecb57c58aab8d08dc,
       type: 3}
-    prefabType: 8
+    prefabType: 7
     isActive: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

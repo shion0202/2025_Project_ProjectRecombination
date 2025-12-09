@@ -2,7 +2,6 @@ using Managers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public enum EManagerType
 {
@@ -15,6 +14,8 @@ public enum EManagerType
     MonsterManager,
     PoolManager,
     SceneManager,
+    SoundManager,
+    EventManager,
 }
 
 [Serializable]
@@ -46,16 +47,21 @@ public class InitPersistent : MonoBehaviour
                 
                 createdManagers.Add(managerInfo.managerType, managerInstance);
             }
-
-            // 모든 매니저가 로드되었음을 GameManager에 알림
+            
+            Debug.Log($"persistent LoadPersistent()"); // 모든 매니저가 로드되었음을 GameManager에 알림
             GameManager.Instance.MainCamera = createdManagers[EManagerType.MainCamera];
             GameManager.Instance.SceneLoaded();
             
-            Debug.Log($"persistent LoadPersistent()");
+            Destroy(gameObject);
         }
         catch (Exception e)
         {
             Debug.Log(e);
         }
+    }
+    
+    private void OnDestroy()
+    {
+        GameManager.Instance.EnterTitle();
     }
 }

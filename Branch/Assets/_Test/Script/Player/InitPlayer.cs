@@ -1,9 +1,7 @@
 using Cinemachine;
 using Managers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EPlayerPrefabType
@@ -11,7 +9,6 @@ public enum EPlayerPrefabType
     Player,
     Minimap,
     Volume,
-    Listener,
     Navi,
     FollowCamera,
     MinimapCamera,
@@ -72,15 +69,17 @@ public class InitPlayer : MonoBehaviour
         }
         
         // 3. FollowAudioListener 초기화
-        if (createdObj.TryGetValue(EPlayerPrefabType.Listener, out GameObject listener))
-        {
-            listener.GetComponent<FollowAudioListener>()?.Init(player);
-        }
+        // if (createdObj.TryGetValue(EPlayerPrefabType.Listener, out GameObject listener))
+        // {
+        //     listener.GetComponent<FollowAudioListener>()?.Init(player);
+        // }
 
         if (createdObj.TryGetValue(EPlayerPrefabType.Minimap, out GameObject minimap))
         {
             minimap.GetComponent<FollowAudioListener>()?.Init(player);
         }
+        
+        SoundManager.Instance.AudioListener.GetComponent<FollowAudioListener>()?.Init(player);
         
         // 4. Minimap Camera 초기화
         if (createdObj.TryGetValue(EPlayerPrefabType.MinimapCamera, out GameObject minimapCamera))

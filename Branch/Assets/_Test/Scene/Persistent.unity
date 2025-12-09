@@ -210,6 +210,12 @@ MonoBehaviour:
   - managerType: 5
     managerPrefab: {fileID: 1142317525218384322, guid: 234012d9e29344dea9ae2ae391090a9d,
       type: 3}
+  - managerType: 10
+    managerPrefab: {fileID: 863833892386728678, guid: c2861675f4a7e42d49c8080e6e2c73a7,
+      type: 3}
+  - managerType: 9
+    managerPrefab: {fileID: 7100317660788745124, guid: d55b4eca5714a4f3fac3acf6a323790c,
+      type: 3}
 --- !u!4 &1320477662
 Transform:
   m_ObjectHideFlags: 0
