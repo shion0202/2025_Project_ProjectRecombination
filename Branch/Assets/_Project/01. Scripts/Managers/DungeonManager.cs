@@ -108,17 +108,27 @@ namespace Managers
         {
             try
             {
-                // TODO: 스테이지 업데이트 로직 수정 필요 (임시 구현)
-                // 뒤로 이동 하는 경우 스테이지 언로드가 제대로 되지 않는 문제 발생 (현재 스테이지가 언로드 되는 문제)
-                
                 if (newStageIndex == CurrentPlayerStageIndex) return;
                 
                 // 새로운 스테이지 인덱스에 따라 필요한 스테이지 로드/언로드
-                if (!LoadedStages.ContainsKey(newStageIndex + 1))
-                    await LoadStage(stageDatas[newStageIndex + 1]);
-                
-                if (LoadedStages.ContainsKey(CurrentPlayerStageIndex - 1))
-                    await UnloadStage(stageDatas[CurrentPlayerStageIndex - 1]);
+                {
+                    // newStageIndex 값이 현재 플레이어 스테이지 인덱스보다 작아지는 경우 (뒤로 이동)
+                    if (newStageIndex < CurrentPlayerStageIndex)
+                    {
+                        if (LoadedStages.ContainsKey(CurrentPlayerStageIndex + 1))
+                            await UnloadStage(stageDatas[CurrentPlayerStageIndex + 1]);
+                        
+                        await LoadStage(stageDatas[newStageIndex - 1 < 0 ? 0 : newStageIndex - 1]);
+                    }
+                    // newStageIndex 값이 현재 플레이어 스테이지 인덱스보다 커지는 경우 (앞으로 이동)
+                    else if (newStageIndex > CurrentPlayerStageIndex)
+                    {
+                        if (LoadedStages.ContainsKey(CurrentPlayerStageIndex - 1))
+                            await UnloadStage(stageDatas[CurrentPlayerStageIndex - 1]);
+
+                        await LoadStage(stageDatas[newStageIndex + 1]);
+                    }
+                }
                 
                 CurrentPlayerStageIndex = newStageIndex;
                 
