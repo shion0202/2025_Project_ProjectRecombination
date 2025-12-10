@@ -224,7 +224,7 @@ MonoBehaviour:
   - prefab: {fileID: 6901384372144632134, guid: 12cdb945c9ace40aea49e59aab6f1557,
       type: 3}
     prefabType: 6
-    isActive: 0
+    isActive: 1
   - prefab: {fileID: 3579945791948366795, guid: 14534da9fa6854aecb57c58aab8d08dc,
       type: 3}
     prefabType: 7

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -104,20 +105,35 @@ namespace Managers
 
         #endregion
 
-        public void EnterTitle()
+        public async void EnterTitle()
         {
-            SceneController.Instance.LoadSceneAdditive("Scene_UI");
-            CurrentState = GameState.Title;
+            try
+            {
+                await SceneController.Instance.LoadSceneAdditive("Scene_UI");
+                CurrentState = GameState.Title;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[GameManager] 타이틀 씬 로드 중 예외 발생: {e}");
+            }
         }
         
-        public void EnterPrologue()
+        public async void EnterPrologue()
         {
-            // 프롤로그 실행
-            CurrentState = GameState.Prologue;
+            try
+            {
+                // 프롤로그 실행
+                CurrentState = GameState.Prologue;
             
-            // 프롤로그 재생하는 동안 플레이어 씬과 게임 씬 로드
-            SceneController.Instance.LoadSceneAdditive("Scene_Game");
-            SceneController.Instance.LoadSceneAdditive("Scene_Player");
+                // 프롤로그 재생하는 동안 플레이어 씬과 게임 씬 로드
+                // await SceneController.Instance.LoadSceneAdditive("Scene_Game");
+                await DungeonManager.Instance.LoadAllStage();   // 테스트용 모든 스테이지 로드
+                await SceneController.Instance.LoadSceneAdditive("Scene_Player");
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[GameManager] 게임 실행 준비 중 예외 발생: {e}");
+            }
         }
         
         public void StartGame()

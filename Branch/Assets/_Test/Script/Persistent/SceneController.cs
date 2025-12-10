@@ -1,6 +1,7 @@
 using Managers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -12,7 +13,7 @@ public class SceneController : Singleton<SceneController>
     private Dictionary<string, AsyncOperationHandle<SceneInstance>> _loadedScenes = new();
     
     // 씬을 추가로 로드하는 함수
-    public async void LoadSceneAdditive(string key)
+    public async Task LoadSceneAdditive(string key)
     {
         try
         {

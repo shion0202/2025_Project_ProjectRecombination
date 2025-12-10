@@ -25,5 +25,5 @@ EditorBuildSettings:
       type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: adaec780defdf7d4281ef732b7e52552,
       type: 2}
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 43127e8a7a301154097b836257f651c1,
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 7cccd61a7d56afb44af2ceefb868e21c,
       type: 3}
