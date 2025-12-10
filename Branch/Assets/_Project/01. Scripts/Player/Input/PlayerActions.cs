@@ -128,6 +128,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""BothAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""77cb0b6e-f0a0-423a-ba50-fd26f41eed3e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""580a207e-97da-4205-9050-cd5f12fca0b1"",
@@ -356,7 +365,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -378,7 +387,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""ShoulderSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -400,7 +409,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";PC_Keyboard"",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""LeftAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -422,7 +431,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";PC_Keyboard"",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""RightAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -444,7 +453,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";PC_Keyboard"",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -455,7 +464,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -510,7 +519,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""RadialMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -532,7 +541,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Indicator"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -554,7 +563,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""LaserSet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -576,7 +585,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""RapidSet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -598,7 +607,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""HeavySet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -620,7 +629,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Help"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -642,7 +651,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -697,7 +706,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -719,8 +728,19 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
                     ""action"": ""BaseSet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb878270-3749-4b5e-a605-3e39350dad2a"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mobile;PC_Keyboard"",
+                    ""action"": ""BothAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -895,6 +915,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_PlayerActionMap_Look = m_PlayerActionMap.FindAction("Look", throwIfNotFound: true);
         m_PlayerActionMap_LeftAttack = m_PlayerActionMap.FindAction("LeftAttack", throwIfNotFound: true);
         m_PlayerActionMap_RightAttack = m_PlayerActionMap.FindAction("RightAttack", throwIfNotFound: true);
+        m_PlayerActionMap_BothAttack = m_PlayerActionMap.FindAction("BothAttack", throwIfNotFound: true);
         m_PlayerActionMap_Dash = m_PlayerActionMap.FindAction("Dash", throwIfNotFound: true);
         m_PlayerActionMap_ShoulderSkill = m_PlayerActionMap.FindAction("ShoulderSkill", throwIfNotFound: true);
         m_PlayerActionMap_Interaction = m_PlayerActionMap.FindAction("Interaction", throwIfNotFound: true);
@@ -1002,6 +1023,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActionMap_Look;
     private readonly InputAction m_PlayerActionMap_LeftAttack;
     private readonly InputAction m_PlayerActionMap_RightAttack;
+    private readonly InputAction m_PlayerActionMap_BothAttack;
     private readonly InputAction m_PlayerActionMap_Dash;
     private readonly InputAction m_PlayerActionMap_ShoulderSkill;
     private readonly InputAction m_PlayerActionMap_Interaction;
@@ -1045,6 +1067,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActionMap/RightAttack".
         /// </summary>
         public InputAction @RightAttack => m_Wrapper.m_PlayerActionMap_RightAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActionMap/BothAttack".
+        /// </summary>
+        public InputAction @BothAttack => m_Wrapper.m_PlayerActionMap_BothAttack;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActionMap/Dash".
         /// </summary>
@@ -1147,6 +1173,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @RightAttack.started += instance.OnRightAttack;
             @RightAttack.performed += instance.OnRightAttack;
             @RightAttack.canceled += instance.OnRightAttack;
+            @BothAttack.started += instance.OnBothAttack;
+            @BothAttack.performed += instance.OnBothAttack;
+            @BothAttack.canceled += instance.OnBothAttack;
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
@@ -1218,6 +1247,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @RightAttack.started -= instance.OnRightAttack;
             @RightAttack.performed -= instance.OnRightAttack;
             @RightAttack.canceled -= instance.OnRightAttack;
+            @BothAttack.started -= instance.OnBothAttack;
+            @BothAttack.performed -= instance.OnBothAttack;
+            @BothAttack.canceled -= instance.OnBothAttack;
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
@@ -1489,6 +1521,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnRightAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BothAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBothAttack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

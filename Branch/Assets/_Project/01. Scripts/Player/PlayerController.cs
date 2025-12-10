@@ -420,6 +420,34 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         }
     }
 
+    void PlayerActions.IPlayerActionMapActions.OnBothAttack(InputAction.CallbackContext context)
+    {
+        if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
+        
+        if (context.started)
+        {
+            PartBaseArm left = inventory.EquippedItems[EPartType.ArmL][0].GetComponent<PartBaseArm>();
+            if (!left.IsOverheat && left.IsAnimating)
+            {
+                _currentPlayerState |= EPlayerState.LeftShooting;
+                Shoot(true);
+            }
+
+            PartBaseArm right = inventory.EquippedItems[EPartType.ArmR][0].GetComponent<PartBaseArm>();
+            if (!right.IsOverheat && right.IsAnimating)
+            {
+                _currentPlayerState |= EPlayerState.RightShooting;
+                Shoot(false);
+            }
+        }
+
+        if (context.canceled)
+        {
+            CancleAttack(true);
+            CancleAttack(false);
+        }
+    }
+
     void PlayerActions.IPlayerActionMapActions.OnInteraction(InputAction.CallbackContext context)
     {
         if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;

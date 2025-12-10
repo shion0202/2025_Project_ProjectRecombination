@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "BothAttack",
+                    "type": "Button",
+                    "id": "77cb0b6e-f0a0-423a-ba50-fd26f41eed3e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "580a207e-97da-4205-9050-cd5f12fca0b1",
@@ -270,7 +279,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -292,7 +301,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "ShoulderSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -314,7 +323,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC_Keyboard",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "LeftAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -336,7 +345,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC_Keyboard",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "RightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -358,7 +367,7 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC_Keyboard",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -369,7 +378,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -424,7 +433,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "RadialMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -446,7 +455,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Indicator",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -468,7 +477,7 @@
                     "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "LaserSet",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -490,7 +499,7 @@
                     "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "RapidSet",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -512,7 +521,7 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "HeavySet",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -534,7 +543,7 @@
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Help",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -556,7 +565,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -611,7 +620,7 @@
                     "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "Map",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -633,8 +642,19 @@
                     "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "BaseSet",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb878270-3749-4b5e-a605-3e39350dad2a",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile;PC_Keyboard",
+                    "action": "BothAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

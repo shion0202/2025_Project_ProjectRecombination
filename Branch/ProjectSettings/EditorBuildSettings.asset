@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: 5f399f80c608b284da77dfcf771ccf0d
   - enabled: 1
     path: Assets/_Project/04. Scenes/GameScene.unity
-    guid: af9ba4a8ca08c2f40b573d590bc900d0
+    guid: 1074481086a39bd489e814172fadd25d
   - enabled: 1
     path: Assets/_Project/04. Scenes/EpilogueScene.unity
     guid: 6e10b19937a119c46b207e0f9ff142f0
