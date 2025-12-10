@@ -168,8 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOn: 0
   target: {fileID: 0}
-  objectDescription: "\uC2B9\uAC15\uAE30 \uCF58\uC194 \uC870\uC791\uD558\uC5EC \uC9C0\uD558\uB85C
-    \uB0B4\uB824\uAC00\uAE30"
+  objectDescription: "\uC2B9\uAC15\uAE30 \uCF58\uC194 \uC870\uC791\uD558\uAE30"
 --- !u!1 &11307429
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 935638243}
   - {fileID: 1780788554}
   - {fileID: 1850215333}
   - {fileID: 1779117434}
@@ -1937,6 +1937,74 @@ MonoBehaviour:
   destroyTrigger: {fileID: 0}
   disableTrigger: {fileID: 1504471939}
   deadTrigger: {fileID: 0}
+--- !u!1 &935638240
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 935638243}
+  - component: {fileID: 935638241}
+  - component: {fileID: 935638242}
+  m_Layer: 2
+  m_Name: Trigger_5th_Message_in_Big_Elevator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &935638241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935638240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524a7da724744708b7755ffc8fdb0ce3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
+  selectedTag: Player
+--- !u!65 &935638242
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935638240}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &935638243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935638240}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 52.485077, y: -1.974, z: -19.633171}
+  m_LocalScale: {x: 6, y: 4, z: 18}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 119463263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &936670769
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,7 +4222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOn: 0
   inputData:
-    process: {fileID: 0}
+    process: {fileID: 935638241}
     isNot: 0
   outputData:
   - process: {fileID: 1850215334}
@@ -4556,7 +4624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOn: 0
   target: {fileID: 0}
-  objectDescription: "\uB2E4\uC74C \uAD6C\uC5ED\uC73C\uB85C \uC774\uB3D9\uD558\uAE30"
+  objectDescription: 
 --- !u!1 &1868306022
 GameObject:
   m_ObjectHideFlags: 0
