@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -52,16 +53,16 @@ namespace Managers
         /// PoolManager 초기화
         /// </summary>
 
-        private void Update()
+        // private void Update()
+        // {
+        //     if (!GameManager.Instance.IsLoad || GameManager.Instance.CurrentState != GameManager.GameState.Playing || IsInitialized) return;
+        //     
+        //     Init();
+        // }
+        public Task Init()
         {
-            if (!GameManager.Instance.IsLoad || GameManager.Instance.CurrentState != GameManager.GameState.Playing || IsInitialized) return;
+            if (IsInitialized) return Task.CompletedTask;
             
-            Init();
-            IsInitialized = true;
-        }
-
-        private void Init()
-        {
             _pools = new Dictionary<string, ObjectPool<GameObject>>();
             _poolParents = new Dictionary<string, Transform>();
 
@@ -114,6 +115,9 @@ namespace Managers
 
                 _pools.Add(key, pool);
             }
+            
+            IsInitialized = true;
+            return Task.CompletedTask;
         }
 
         private void AddPoolableComponent(GameObject obj)

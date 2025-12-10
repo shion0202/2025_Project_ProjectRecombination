@@ -27,11 +27,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f10f638b10204cdda1eda8247f5752e
-    m_Address: Scene_Game
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ab3dc90457c8b44ad8f11c08c392efef
     m_Address: Scene_Player
     m_ReadOnly: 0

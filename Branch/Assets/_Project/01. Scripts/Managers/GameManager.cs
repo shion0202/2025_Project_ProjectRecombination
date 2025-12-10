@@ -122,13 +122,20 @@ namespace Managers
         {
             try
             {
+                Debug.Log("[GameManager] 게임 실행 준비 중...");
                 // 프롤로그 실행
                 CurrentState = GameState.Prologue;
             
                 // 프롤로그 재생하는 동안 플레이어 씬과 게임 씬 로드
                 // await SceneController.Instance.LoadSceneAdditive("Scene_Game");
-                await DungeonManager.Instance.LoadAllStage();   // 테스트용 모든 스테이지 로드
+                // await DungeonManager.Instance.LoadAllStage();   // 테스트용 모든 스테이지 로드
+                await DungeonManager.Instance.Init();
+                await PoolManager.Instance.Init();
                 await SceneController.Instance.LoadSceneAdditive("Scene_Player");
+                
+                DungeonManager.Instance.SetPlayerStartPosition();
+                
+                Debug.Log("[GameManager] 게임 실행 준비 완료!");
             }
             catch (Exception e)
             {

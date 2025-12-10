@@ -54,7 +54,7 @@ public class SceneController : Singleton<SceneController>
     }
 
     // 씬을 언로드하는 함수
-    public async void UnloadScene(string key)
+    public async Task UnloadScene(string key)
     {
         try
         {
@@ -69,6 +69,22 @@ public class SceneController : Singleton<SceneController>
         catch (Exception e)
         {
             Debug.Log($"{key} 언로드 중 예외 발생: {e.Message}");
+        }
+    }
+    
+    // 씬을 액티브 시키는 함수
+    public void SetActiveScene(string key)
+    {
+        try
+        {
+            if (!_loadedScenes.TryGetValue(key, out AsyncOperationHandle<SceneInstance> handle)) return;
+
+            SceneManager.SetActiveScene(handle.Result.Scene);
+            Debug.Log($"[SceneController] {key} 액티브 씬 전환 완료.");
+        }
+        catch (Exception e)
+        {
+            Debug.Log($"{key} 액티브 씬 전환 중 예외 발생: {e.Message}");
         }
     }
 }
