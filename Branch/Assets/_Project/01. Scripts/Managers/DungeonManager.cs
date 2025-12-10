@@ -21,10 +21,10 @@ namespace Managers
         [SerializeField] private StageData[] stageDatas;
         
         // 현재 플레이어가 있는 스테이지 인덱스
-        public int CurrentPlayerStageIndex { get; set; } = 0;
+        private int CurrentPlayerStageIndex { get; set; } = 0;
         
         // 로딩된 스테이지 딕셔너리
-        public Dictionary<int, string> LoadedStages { get; private set; } = new ();
+        private Dictionary<int, string> LoadedStages { get; set; } = new();
 
         #region Initialization
 
@@ -39,12 +39,14 @@ namespace Managers
                 // 스테이지 데이터 로드 (플레이어의 현재 위치 + 주변 스테이지 로딩
                 foreach (StageData stageData in stageDatas)
                 {
-                    if (stageData.stageIndex != CurrentPlayerStageIndex - 1 &&
-                        stageData.stageIndex != CurrentPlayerStageIndex + 1 &&
+                    if (stageData.stageIndex != CurrentPlayerStageIndex + 1 &&
                         stageData.stageIndex != CurrentPlayerStageIndex) continue;
 
                     await LoadStage(stageData);
                 }
+                
+                // 미니맵 로드
+                LoadMiniMap();
             }
             catch (Exception e)
             {
@@ -142,7 +144,7 @@ namespace Managers
                 Debug.LogWarning($"[DungeonManager] 모든 스테이지 로드 중 예외 발생: {e}");
             }
         }
-        
+
         private void LoadMiniMap()
         {
             if (miniMapPrefab != null)
