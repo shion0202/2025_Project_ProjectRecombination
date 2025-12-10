@@ -293,6 +293,11 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         _followCamera.UpdateFollowCamera();
         RotateCharacter();
 
+        if (_currentMovement is LegsCaterpillar legsCaterpillar)
+        {
+            legsCaterpillar.LateUpdateCaterpillarRotation(transform);
+        }
+
         characterController.Move(_totalDirection * Time.deltaTime);
         _totalDirection = Vector3.zero;
     }

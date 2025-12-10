@@ -2161,8 +2161,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6925254885942206541}
-  - {fileID: 60447625430795917}
+  - {fileID: 4485202681575293092}
   m_Father: {fileID: 2078838933849667625}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1140535075734445082
@@ -13364,15 +13363,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2438424170018937285}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.045720596, y: 0.0000000020116566, z: 0}
+  m_LocalRotation: {x: 9.043675e-14, y: -0.00000012520024, z: -0.00000012643943, w: 1}
+  m_LocalPosition: {x: -0.045720607, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 618548493953974788}
   - {fileID: 538267106909584146}
   - {fileID: 2119226323268229332}
-  m_Father: {fileID: 7629403391189679563}
+  m_Father: {fileID: 4485202681575293092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2480424917450773565
 GameObject:
@@ -19317,6 +19316,38 @@ MonoBehaviour:
   maxYawAngle: 20
   maxPitchAngle: 10
   targetRadius: 3
+--- !u!1 &6160521896271892126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4485202681575293092}
+  m_Layer: 0
+  m_Name: HeavyLegPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4485202681575293092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6160521896271892126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6925254885942206541}
+  m_Father: {fileID: 7629403391189679563}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6165807771643856812
 GameObject:
   m_ObjectHideFlags: 0
@@ -26028,35 +26059,4 @@ Transform:
   - {fileID: 886767600528143157}
   - {fileID: 4286291422589490130}
   m_Father: {fileID: 5925158486645442099}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &9204555028849164601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 60447625430795917}
-  m_Layer: 0
-  m_Name: Heavy_Legs_Pivot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &60447625430795917
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9204555028849164601}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7629403391189679563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

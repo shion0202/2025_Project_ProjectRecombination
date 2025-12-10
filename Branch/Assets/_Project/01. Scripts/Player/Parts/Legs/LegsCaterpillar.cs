@@ -15,16 +15,21 @@ public class LegsCaterpillar : PartBaseLegs
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected GameObject hitEffectPrefab;
     [SerializeField] private float turnMoveSpeed = 120.0f;
-    [SerializeField] private float turnRotateSpeed = 10.0f;
     [SerializeField] protected float backwardThreshold = -0.7f;
     [SerializeField] protected Vector2 animSpeed = Vector2.zero;
     [SerializeField] protected Vector2 shootOffset = Vector2.zero;
     private Vector3 _currentMoveDirection = Vector3.forward;
     private bool _isBackward = false;
-    private Quaternion _originalRotation;
     protected CinemachineImpulseSource source;
     private bool _isCooldown = false;
     protected AudioSource _audioSource;
+
+    [Header("캐터필러 피벗 설정")]
+    [SerializeField] private Transform caterpillarPivot;
+    [SerializeField] private float pivotTurnSpeed = 8.0f;    // 하체 회전 속도
+    [SerializeField] private float maxPivotYaw = 180.0f;      // 상체 기준 최대 회전 각도
+
+    public Vector3 CurrentMoveDirectionWorld { get; private set; }
 
     protected override void Awake()
     {
@@ -154,24 +159,22 @@ public class LegsCaterpillar : PartBaseLegs
         camForward.Normalize();
         camRight.Normalize();
         Vector3 targetDirection = (camForward * moveInput.y + camRight * moveInput.x).normalized;
-        Debug.DrawRay(_owner.transform.position + Vector3.up, targetDirection * 5.0f, Color.red);
-        Debug.DrawRay(_owner.transform.position + Vector3.up, transform.TransformDirection(-transform.forward) * 5.0f, Color.green);
 
         _audioSource.volume = 1.0f;
 
         // 현재 하체(캐릭터) 정면 방향과 목표 방향 각도(dot) 계산
         // 후진 모드 전환: dot가 threshold(예: -0.7) 이하이면 true로, threshold 이상이면 false로 딱 한 번만 전환
-        float dot = Vector3.Dot(transform.TransformDirection(-transform.forward), targetDirection);
-        if (!_isBackward && dot < backwardThreshold)
-        {
-            _isBackward = true; // 후진 모드 진입
-            _currentMoveDirection = -_currentMoveDirection; // 딱 한 번만 뒤집어줌
-        }
-        else if (_isBackward && dot > -backwardThreshold)
-        {
-            _isBackward = false; // 전진 모드 복귀
-            _currentMoveDirection = -_currentMoveDirection; // 다시 전진
-        }
+        //float dot = Vector3.Dot(transform.TransformDirection(-transform.forward), targetDirection);
+        //if (!_isBackward && dot < backwardThreshold)
+        //{
+        //    _isBackward = true; // 후진 모드 진입
+        //    _currentMoveDirection = -_currentMoveDirection; // 딱 한 번만 뒤집어줌
+        //}
+        //else if (_isBackward && dot > -backwardThreshold)
+        //{
+        //    _isBackward = false; // 전진 모드 복귀
+        //    _currentMoveDirection = -_currentMoveDirection; // 다시 전진
+        //}
 
         // 현재 하체 방향에서 목표 방향까지 서서히 lerp (캐터필러 느낌)
         // 후방이라면 _currentMoveDirection이 반대로 뒤집혀야함
@@ -181,7 +184,7 @@ public class LegsCaterpillar : PartBaseLegs
             turnMoveSpeed * Mathf.Deg2Rad * Time.deltaTime,
             0f);
 
-        HandleCylinderDirection(_currentMoveDirection);
+        CurrentMoveDirectionWorld = _currentMoveDirection;
 
         if (caterpillarMaterial != null)
         {
@@ -189,6 +192,25 @@ public class LegsCaterpillar : PartBaseLegs
         }
 
         return _currentMoveDirection * (_owner.Stats.TotalStats[EStatType.WalkSpeed].value + _owner.Stats.TotalStats[EStatType.AddMoveSpeed].value); // 좌우가 서서히 꺾이는 이동방향
+    }
+
+    public void LateUpdateCaterpillarRotation(Transform characterTransform)
+    {
+        // 입력이 없을 때는 천천히 정면으로 복귀
+        if (CurrentMoveDirectionWorld.sqrMagnitude < 0.0001f)
+        {
+            if (caterpillarPivot != null)
+            {
+                caterpillarPivot.localRotation = Quaternion.Slerp(
+                    caterpillarPivot.localRotation,
+                    Quaternion.identity,
+                    pivotTurnSpeed * Time.deltaTime
+                );
+            }
+            return;
+        }
+
+        RotateCaterpillarPivot(CurrentMoveDirectionWorld, characterTransform);
     }
 
     protected void Impact(bool isOn)
@@ -216,33 +238,29 @@ public class LegsCaterpillar : PartBaseLegs
         }
     }
 
-    public void HandleCylinderDirection(Vector3 moveDirection)
+    private void RotateCaterpillarPivot(Vector3 moveDirectionWorld, Transform characterTransform)
     {
-        if (moveDirection.sqrMagnitude < 0.01f) return;
+        if (caterpillarPivot == null) return;
+        if (moveDirectionWorld.sqrMagnitude < 0.0001f) return;
 
-        Quaternion targetRot;
+        // 이동 방향을 캐릭터 로컬 기준으로 변환
+        // characterTransform.forward가 "상체 정면"이라고 가정
+        //Vector3 dirForPivot = _isBackward ? -moveDirectionWorld : moveDirectionWorld;
 
-        // 후진 상태일 때는 moveDirection이 뒤집혀야 함
-        if (_isBackward)
-        {
-            // 후진: 정면이 오브젝트의 forward(후면)이 moveDirection을 바라보게
-            targetRot = Quaternion.LookRotation(-moveDirection, Vector3.up);
-        }
-        else
-        {
-            // 전진: 정면이 오브젝트의 -forward(정면)이 moveDirection을 바라보게
-            targetRot = Quaternion.LookRotation(moveDirection, Vector3.up);
-        }
+        Vector3 localDir = characterTransform.InverseTransformDirection(moveDirectionWorld);
+        localDir.y = 0f;
+        if (localDir.sqrMagnitude < 0.0001f) return;
 
-        // x축 -90도 회전을 곱해서 보정용 회전 생성
-        Quaternion fix = Quaternion.Euler(-90f, 0f, 0f);
-        targetRot *= fix;
+        localDir.Normalize();
 
-        // 현재 회전과 보간해서 부드럽게 회전 처리
-        gameObject.transform.rotation = Quaternion.Slerp(
-            gameObject.transform.rotation,
-            targetRot,
-            Time.deltaTime * turnRotateSpeed);
+        // 2) 로컬 X/Z에서 yaw(좌우 각도) 추출
+        float targetYaw = Mathf.Atan2(localDir.x, localDir.z) * Mathf.Rad2Deg;
+
+        // 3) 상체 기준 최대 회전각 제한 (예: -90 ~ 90)
+        targetYaw = Mathf.Clamp(targetYaw, -maxPivotYaw, maxPivotYaw);
+
+        // 4) localRotation을 목표 yaw로 보간
+        caterpillarPivot.localRotation = Quaternion.Euler(targetYaw, 0f, 0f);
     }
 
     protected void LookCameraDirection()

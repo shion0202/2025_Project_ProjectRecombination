@@ -308,6 +308,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8853506001578164610, guid: c71ebc6f56de66943989b5adebd14ff2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c71ebc6f56de66943989b5adebd14ff2,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -383,6 +388,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f4950693960136b4bbcdb9e85f1ffc21, type: 2}
+    - target: {fileID: 8655578390236746780, guid: c71ebc6f56de66943989b5adebd14ff2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8930396849073222642, guid: c71ebc6f56de66943989b5adebd14ff2,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
