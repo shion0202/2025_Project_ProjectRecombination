@@ -430,6 +430,8 @@ namespace Monster.AI.FSM
         
         private void FireBullet(int bulletType = 0)
         {
+            if (blackboard.Target == null || _useSkill == null) return;
+
             Vector3 startPos = blackboard.AttackInfo.firePoint.position;
             Vector3 targetPos = blackboard.Target.transform.position + Vector3.up * 1.5f;
             Vector3 direction = (targetPos - startPos).normalized;
@@ -439,6 +441,8 @@ namespace Monster.AI.FSM
         
         public void AnimationEvent_Fire()
         {
+            if (blackboard.Target == null || _useSkill == null) return;
+
             if (_useSkill.skillData.skillID is 4003 or 4002)
                 FireBullet(1);
             else
