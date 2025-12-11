@@ -23,19 +23,19 @@ public class ArmRapidCastProjectile : PartBaseArm
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetAmmoColor(partType, Color.green);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.green);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
     }
 
     protected override void Update()
     {
         if (partType == EPartType.ArmL)
         {
-            GUIManager.Instance.SetAmmoLeftSlider(_currentAmmo, maxAmmo);
+            GUIManager.Instance.GameUIController.SetAmmoLeftSlider(_currentAmmo, maxAmmo);
         }
         else
         {
-            GUIManager.Instance.SetAmmoRightSlider(_currentAmmo, maxAmmo);
+            GUIManager.Instance.GameUIController.SetAmmoRightSlider(_currentAmmo, maxAmmo);
         }
 
         _currentShootTime -= Time.deltaTime;
@@ -53,7 +53,7 @@ public class ArmRapidCastProjectile : PartBaseArm
             if (_currentAmmo >= maxAmmo)
             {
                 _isOverheat = false;
-                GUIManager.Instance.SetAmmoColor(partType, false);
+                GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
             }
 
             return;
@@ -155,7 +155,7 @@ public class ArmRapidCastProjectile : PartBaseArm
         {
             CancleShootState(partType == EPartType.ArmL ? true : false);
             _isOverheat = true;
-            GUIManager.Instance.SetAmmoColor(partType, true);
+            GUIManager.Instance.GameUIController.SetAmmoColor(partType, true);
         }
     }
 }

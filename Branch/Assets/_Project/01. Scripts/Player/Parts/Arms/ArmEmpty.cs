@@ -13,16 +13,16 @@ public class ArmEmpty : PartBaseArm
 
     private void OnEnable()
     {
-        Managers.GUIManager.Instance.RightArmRadial.SetActive(false);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, Color.black);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, true);
+        Managers.GUIManager.Instance.GameUIController.RightArmRadial.SetActive(false);
+        Managers.GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.black);
+        Managers.GUIManager.Instance.GameUIController.SetAmmoColor(partType, true);
     }
 
     private void OnDisable()
     {
         if (Managers.GUIManager.IsAliveInstance())
         {
-            Managers.GUIManager.Instance.RightArmRadial.SetActive(true);
+            Managers.GUIManager.Instance.GameUIController.RightArmRadial.SetActive(true);
         }
     }
 

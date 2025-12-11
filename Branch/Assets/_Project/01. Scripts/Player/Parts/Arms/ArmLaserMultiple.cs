@@ -37,19 +37,19 @@ public class ArmLaserMultiple : PartBaseArm
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetAmmoColor(partType, Color.blue);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.blue);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
     }
 
     protected override void Update()
     {
         if (partType == EPartType.ArmL)
         {
-            GUIManager.Instance.SetAmmoLeftSlider(_currentShootTime, maxChargeTime);
+            GUIManager.Instance.GameUIController.SetAmmoLeftSlider(_currentShootTime, maxChargeTime);
         }
         else
         {
-            GUIManager.Instance.SetAmmoRightSlider(_currentShootTime, maxChargeTime);
+            GUIManager.Instance.GameUIController.SetAmmoRightSlider(_currentShootTime, maxChargeTime);
         }
 
         if (!_isShooting)

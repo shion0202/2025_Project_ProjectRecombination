@@ -9,8 +9,12 @@ public class FollowAudioListener : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private bool isYRotation = false;
 
+    private bool _isInit;
+
     private void Update()
     {
+        if (!_isInit) return;
+        
         transform.position = positionTarget.position + offset;
 
         if (isYRotation)
@@ -24,5 +28,24 @@ public class FollowAudioListener : MonoBehaviour
         {
             transform.rotation = rotationTarget.rotation;
         }
+    }
+
+    public void Init(GameObject player)
+    {
+        if (_isInit) return;
+        
+        positionTarget = player.GetComponent<Transform>();
+        rotationTarget = player.GetComponent<Transform>();
+        
+        _isInit = true;
+    }
+
+    public void Unload()
+    {
+        if (!_isInit) return;
+        _isInit = false;
+        
+        positionTarget = null;
+        rotationTarget = null;
     }
 }

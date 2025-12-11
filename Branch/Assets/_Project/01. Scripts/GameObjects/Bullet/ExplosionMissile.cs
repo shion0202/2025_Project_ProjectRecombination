@@ -1,4 +1,5 @@
 using _Project._01._Scripts.Monster;
+using Managers;
 using Monster.AI.FSM;
 using System.Collections;
 using System.Collections.Generic;
@@ -81,7 +82,7 @@ public class ExplosionMissile : MonoBehaviour
 
             if (_owner && _owner.CompareTag("Player"))
             {
-                Managers.GUIManager.Instance.StartHitCrosshair();
+                GUIManager.Instance.GameUIController.StartHitCrosshair();
             }
         }
         else
@@ -100,7 +101,7 @@ public class ExplosionMissile : MonoBehaviour
 
                 if (_owner && _owner.CompareTag("Player"))
                 {
-                    Managers.GUIManager.Instance.StartHitCrosshair();
+                    GUIManager.Instance.GameUIController.StartHitCrosshair();
                 }
             }
         }

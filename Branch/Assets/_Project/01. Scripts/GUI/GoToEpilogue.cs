@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GoToEpilogue : MonoBehaviour
 {
@@ -10,7 +8,8 @@ public class GoToEpilogue : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // 에필로그 씬으로 전환
-            SceneManager.LoadScene("EpilogueScene");
+            // SceneManager.LoadScene("EpilogueScene");
+            GameManager.Instance.EnterEpilogue();
         }
     }
 }

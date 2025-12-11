@@ -14,16 +14,16 @@ public class ArmBasic : PartBaseArm
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetAmmoColor(partType, Color.white);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.white);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
 
         if (partType == EPartType.ArmL)
         {
-            GUIManager.Instance.SetAmmoLeftSlider(0, 0);
+            GUIManager.Instance.GameUIController.SetAmmoLeftSlider(0, 0);
         }
         else
         {
-            GUIManager.Instance.SetAmmoRightSlider(0, 0);
+            GUIManager.Instance.GameUIController.SetAmmoRightSlider(0, 0);
         }
     }
 

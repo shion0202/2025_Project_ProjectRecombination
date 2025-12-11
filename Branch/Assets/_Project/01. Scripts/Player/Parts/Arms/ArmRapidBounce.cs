@@ -11,8 +11,8 @@ public class ArmRapidBounce : PartBaseArm
 
     protected void OnEnable()
     {
-        GUIManager.Instance.SetAmmoColor(partType, Color.green);
-        Managers.GUIManager.Instance.SetAmmoColor(partType, false);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.green);
+        GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
     }
 
     protected override void Shoot()
@@ -37,7 +37,7 @@ public class ArmRapidBounce : PartBaseArm
         {
             CancleShootState(partType == EPartType.ArmL ? true : false);
             _isOverheat = true;
-            GUIManager.Instance.SetAmmoColor(partType, true);
+            GUIManager.Instance.GameUIController.SetAmmoColor(partType, true);
         }
     }
 

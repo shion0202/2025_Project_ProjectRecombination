@@ -41,16 +41,16 @@ namespace _Project.Scripts.VisualScripting
         [SerializeField] private float cutsceneBlendTime = 1f; // 컷씬 블렌드 시간
         private Coroutine _cinemachineBlendRoutine = null;
 
-        private void Start()
+        private bool _isInit;
+
+        private void Update()
         {
-            // Find 메서드로 다른 스크립트에서 인스턴스 되는 FollowCamera를 찾아서 사용하는 구조인데 안정성이 떨어진다.
-            // 인스팩터에서 하이라키에 등록된 FollowCamera를 등록하는 것으로 해결
-
-            if (mainVirtualCamera is not null) return;
-            mainVirtualCamera = GameObject.Find("FollowCamera").GetComponent<CinemachineVirtualCamera>();
-
-            if (mainVirtualCamera is not null) return;
-            Debug.LogError("No Cinemachine Virtual Camera found in the scene.");
+            // Update 문에서 게임 매니저가 FollowCamera를 할당할 때까지 대기 (안전한 방법일까?)
+            if (_isInit) return;
+            if (!GameManager.Instance.IsLoad) return;
+            if (GameManager.Instance.FollowCamera is null) return;
+            mainVirtualCamera = GameManager.Instance.FollowCamera.GetComponent<CinemachineVirtualCamera>();
+            _isInit = true;
         }
     
         public override void Execute()
@@ -65,11 +65,11 @@ namespace _Project.Scripts.VisualScripting
         {
             int originalPriority = mainVirtualCamera.Priority;
             GameManager.Instance.PauseObjects();        // Game Manager에 의해 특정 오브젝트들만 Pause
-            GUIManager.Instance.SetIndicator(false);
-            GUIManager.Instance.HUD.SetActive(false);
-
+            GUIManager.Instance.GameUIController.SetIndicator(false);
+            GUIManager.Instance.GameUIController.HUD.SetActive(false);
             // 컷씬 카메라의 우선순위를 높이고, 메인 카메라의 우선순위를 낮춘다.
-            for (int i = 0; i < cutsceneData.Length; i++)
+            
+for (int i = 0; i < cutsceneData.Length; i++)
             {
                 CinemachineCutsceneData cutscene = cutsceneData[i];
                 if (cutscene.cutsceneVirtualCamera is null)
@@ -77,18 +77,18 @@ namespace _Project.Scripts.VisualScripting
                     Debug.LogError($"Cutscene camera at index {i} is not assigned.");
                     continue;
                 }
-                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.FadeOut(cutsceneBlendTime);
+                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.GameUIController.FadeOut(cutsceneBlendTime);
                 cutscene.cutsceneVirtualCamera.Priority = originalPriority + 1 + i;
-                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.FadeIn(cutsceneBlendTime);
+                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.GameUIController.FadeIn(cutsceneBlendTime);
 
                 yield return new WaitForSeconds(cutscene.cutsceneDuration);
             }
 
             foreach (CinemachineCutsceneData cutscene in cutsceneData)
             {
-                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.FadeOut(cutsceneBlendTime);
+                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.GameUIController.FadeOut(cutsceneBlendTime);
                 cutscene.cutsceneVirtualCamera.Priority = originalPriority - 1;
-                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.FadeIn(cutsceneBlendTime);
+                if (cutsceneMode == CutsceneMode.FadeInNOut) GUIManager.Instance.GameUIController.FadeIn(cutsceneBlendTime);
             }
             StartCoroutine(CoCheckBlendCamera());
         }

@@ -1,3 +1,4 @@
+using Managers;
 using Monster.AI.FSM;
 using System.Collections;
 using System.Collections.Generic;
@@ -118,7 +119,7 @@ public class Orb : Bullet
 
             if (From.CompareTag("Player"))
             {
-                Managers.GUIManager.Instance.StartHitCrosshair();
+                GUIManager.Instance.GameUIController.StartHitCrosshair();
             }
         }
         else
@@ -134,7 +135,7 @@ public class Orb : Bullet
 
                 if (From.CompareTag("Player"))
                 {
-                    Managers.GUIManager.Instance.StartHitCrosshair();
+                    GUIManager.Instance.GameUIController.StartHitCrosshair();
                 }
             }
         }

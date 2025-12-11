@@ -12,7 +12,7 @@ namespace _Project.Scripts.VisualScripting
         {
             if (IsOn) return;
 
-            Managers.GUIManager.Instance.ActivateMessage(noticeMessage);
+            Managers.GUIManager.Instance.GameUIController.ActivateMessage(noticeMessage);
 
             IsOn = true;
         }

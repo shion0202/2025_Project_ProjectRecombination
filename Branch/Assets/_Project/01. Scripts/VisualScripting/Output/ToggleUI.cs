@@ -10,7 +10,7 @@ namespace _Project.Scripts.VisualScripting
 
         public override void Execute()
         {
-            Managers.GUIManager.Instance.HUD.SetActive(isActivate);
+            Managers.GUIManager.Instance.GameUIController.HUD.SetActive(isActivate);
         }
     }
 }

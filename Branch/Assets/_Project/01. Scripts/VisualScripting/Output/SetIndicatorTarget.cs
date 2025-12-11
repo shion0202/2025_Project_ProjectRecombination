@@ -12,7 +12,8 @@ namespace _Project.Scripts.VisualScripting
         {
             if (IsOn) return;
 
-            Managers.GUIManager.Instance.SetIndicatorTarget(target);
+            Managers.GUIManager.Instance.GameUIController.SetIndicatorTarget(target);
+            Managers.GUIManager.Instance.GameUIController.SetIndicator(true);
 
             IsOn = true;
         }

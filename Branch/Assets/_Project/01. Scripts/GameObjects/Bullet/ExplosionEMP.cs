@@ -1,4 +1,5 @@
 using _Project._01._Scripts.Monster;
+using Managers;
 using Monster.AI.FSM;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ public class ExplosionEMP : ExplosionMissile
             enemy.ApplyDamage(_damage * coefficient, targetMask);
             ApplyDeceleration(target);
 
-            Managers.GUIManager.Instance.StartHitCrosshair();
+            GUIManager.Instance.GameUIController.StartHitCrosshair();
         }
         else
         {
@@ -63,7 +64,7 @@ public class ExplosionEMP : ExplosionMissile
                 enemy.ApplyDamage(_damage * coefficient, targetMask);
                 ApplyDeceleration(target);
 
-                Managers.GUIManager.Instance.StartHitCrosshair();
+                GUIManager.Instance.GameUIController.StartHitCrosshair();
             }
         }
     }

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UI_Credits : MonoBehaviour
 {
@@ -16,7 +14,8 @@ public class UI_Credits : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
-            SceneManager.LoadScene("TitleScene");
+            // SceneManager.LoadScene("TitleScene");
+            GameManager.Instance.EnterTitle();
         }
 
         _creditPosition = new Vector3(0.0f, Time.deltaTime * creditSpeed, 0.0f);

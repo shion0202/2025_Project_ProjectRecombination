@@ -11,10 +11,10 @@ namespace _Project.Scripts.VisualScripting
 
         public override void Execute()
         {
-            Managers.GUIManager.Instance.InteractionUI.SetActive(isActivate);
+            Managers.GUIManager.Instance.GameUIController.InteractionUI.SetActive(isActivate);
             if (isActivate)
             {
-                Managers.GUIManager.Instance.InteractionText.text = interactionName;
+                Managers.GUIManager.Instance.GameUIController.InteractionText.text = interactionName;
             }
         }
     }

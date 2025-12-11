@@ -11,17 +11,23 @@ public class GetItem : ProcessBase
     [SerializeField] private List<string> partNames;
     private List<PartBase> _partList = new();
     private Inventory _inven;
-    private void Start()
-    {
-        // 임시로 Manager로부터 Player 정보 획득
-        PlayerController player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
-        if (player == null) return;
 
+    private bool _isInit;
+
+    private void Update()
+    {
+        if (_isInit) return;
+        if (!Managers.MonsterManager.Instance.Player) return;
+        
+        PlayerController player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
+        if (!player) return;
+        
         _inven = player.Inven;
-        foreach (string name in partNames)
+        foreach (string s in partNames)
         {
-            _partList.Add(_inven.Parts[name]);
+            _partList.Add(_inven.Parts[s]);
         }
+        _isInit = true;
     }
 
     public override void Execute()
@@ -41,8 +47,8 @@ public class GetItem : ProcessBase
 
         if (unlockIndex > -1)
         {
-            Managers.GUIManager.Instance.UnlockParts(unlockIndex);
-            Managers.GUIManager.Instance.ActivateRadialMessage(false);
+            Managers.GUIManager.Instance.GameUIController.UnlockParts(unlockIndex);
+            Managers.GUIManager.Instance.GameUIController.ActivateRadialMessage(false);
         }
     }
 }

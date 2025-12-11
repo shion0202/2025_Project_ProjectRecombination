@@ -12,8 +12,8 @@ namespace _Project.Scripts.VisualScripting
         {
             if (IsOn) return;
 
-            Managers.GUIManager.Instance.SetBossName(bossName);
-            Managers.GUIManager.Instance.ToggleBossHp(true);
+            Managers.GUIManager.Instance.GameUIController.SetBossName(bossName);
+            Managers.GUIManager.Instance.GameUIController.ToggleBossHp(true);
 
             IsOn = true;
         }

@@ -108,7 +108,7 @@ public abstract class PartBase : MonoBehaviour
 
             if (_owner.CompareTag("Player"))
             {
-                Managers.GUIManager.Instance.StartHitCrosshair();
+                Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
             }
         }
         else
@@ -124,7 +124,7 @@ public abstract class PartBase : MonoBehaviour
 
                 if (_owner.CompareTag("Player"))
                 {
-                    Managers.GUIManager.Instance.StartHitCrosshair();
+                    Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                 }
             }
         }

@@ -9,12 +9,8 @@ namespace Managers
 {
     public class MonsterManager: Singleton<MonsterManager>
     {
-        [SerializeField] private List<GameObject> monsters;     // 몬스터가 인스턴스 되면 추가되는 리스트
-        [SerializeField] private GameObject player;
-        
-        public GameObject Player => player;
-        
-        // public List<GameObject> Monsters => monsters;
+        [SerializeField] private List<GameObject> monsters;
+        public GameObject Player { get; set; }
         
         public void AddMonster(GameObject monster)
         {
@@ -59,6 +55,12 @@ namespace Managers
         {
             // To-do: Monster AI를 다시 실행시키는 로직
             // 함수 2개 쓰는 게 불편하다면 bool 등으로 함수 하나로 통일하고 Game Manager 쪽만 수정해주시면 됩니다
+        }
+
+        private void Update()
+        {
+            // if (Player is not null) return;
+            // Player = GameManager.Instance.Player.gameObject;
         }
     }
 }

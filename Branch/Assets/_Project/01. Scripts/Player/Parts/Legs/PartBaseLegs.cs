@@ -39,7 +39,7 @@ public class PartBaseLegs : PartBase, ILegsMovement
         }
 
         _currentSkillCount = 0;
-        //GUIManager.Instance.ResetSkillCooldown();
+        //GUIManager.Instance.GameUIController.ResetSkillCooldown();
     }
 
     public virtual Vector3 GetMoveDirection(Vector2 moveInput, Transform characterTransform, Transform cameraTransform)
@@ -56,22 +56,15 @@ public class PartBaseLegs : PartBase, ILegsMovement
             _cooldownRoutine = null;
         }
 
-        // 쿨타임이 얼마나 남았는지 저장
-        if (_currentCooldown > 0)
-        {
-            _owner.CooldownDictionary[currentPartType] = _currentCooldown;
-        }
-        else
-        {
-            _owner.CooldownDictionary[currentPartType] = 0.0f;
-        }
+        // 쿨타임이 얼마나 지났는지 백분율(%)로 저장 (1 -> 0)
+        _owner.CooldownDictionary[currentPartType] = _currentCooldown / skillCooldown;
     }
 
     public override void SetCurrentCooldown(EPartType currentPartType)
     {
         if (!_owner) return;
 
-        _currentCooldown = _owner.CooldownDictionary[currentPartType];
+        _currentCooldown = skillCooldown * _owner.CooldownDictionary[currentPartType];
 
         if (_currentCooldown > 0.0f)
         {
@@ -81,16 +74,16 @@ public class PartBaseLegs : PartBase, ILegsMovement
 
     public virtual IEnumerator CoStartCooldown()
     {
-        GUIManager.Instance.SetLegsSkillIcon(true);
-        GUIManager.Instance.SetLegsSkillCooldown(true);
-        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
 
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -98,8 +91,8 @@ public class PartBaseLegs : PartBase, ILegsMovement
             }
         }
 
-        GUIManager.Instance.SetLegsSkillIcon(false);
-        GUIManager.Instance.SetLegsSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         _cooldownRoutine = null;
     }
 }

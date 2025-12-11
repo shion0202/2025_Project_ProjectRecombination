@@ -320,6 +320,6 @@ public class ExcutionerFSM : FSM
     {
         base.ApplyDamage(inDamage, targetMask, unitOfTime, defenceIgnoreRate);
         
-        GUIManager.Instance.UpdateBossHpBar("엑시큐셔너 254", blackboard.CurrentHealth, blackboard.MaxHealth);
+        GUIManager.Instance.GameUIController.UpdateBossHpBar("엑시큐셔너 254", blackboard.CurrentHealth, blackboard.MaxHealth);
     }
 }

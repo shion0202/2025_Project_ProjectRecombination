@@ -13,7 +13,6 @@ public class LegsCaterpillar : PartBaseLegs
     [SerializeField] protected GameObject impactEffectPrefab;
     [SerializeField] protected Material caterpillarMaterial;
     [SerializeField] protected GameObject bulletPrefab;
-    [SerializeField] protected GameObject hitEffectPrefab;
     [SerializeField] private float turnMoveSpeed = 120.0f;
     [SerializeField] protected float backwardThreshold = -0.7f;
     [SerializeField] protected Vector2 animSpeed = Vector2.zero;
@@ -69,7 +68,7 @@ public class LegsCaterpillar : PartBaseLegs
         _owner.SetMovable(true);
         _owner.PlayerAnimator.SetBool("isPlayLegsAnim", false);
         _owner.SetPlayerState(EPlayerState.Nuking, false);
-        GUIManager.Instance.SetLegsSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
         _owner.FollowCamera.SetCameraRotatable(true);
         _isCooldown = false;
 
@@ -84,9 +83,9 @@ public class LegsCaterpillar : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
 
         _owner.Stats.RemoveModifier(this);
@@ -111,7 +110,7 @@ public class LegsCaterpillar : PartBaseLegs
         _owner.SetMovable(true);
         _owner.PlayerAnimator.SetBool("isPlayLegsAnim", false);
         _owner.SetPlayerState(EPlayerState.Nuking, false);
-        GUIManager.Instance.SetLegsSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
         _owner.FollowCamera.SetCameraRotatable(true);
         _isCooldown = false;
 
@@ -123,9 +122,9 @@ public class LegsCaterpillar : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
 
         if (subWheelObject)
@@ -287,7 +286,7 @@ public class LegsCaterpillar : PartBaseLegs
 
             _owner.PlayerAnimator.SetBool("isPlayLegsAnim", true);
             _owner.SetPlayerState(EPlayerState.Nuking, true);
-            GUIManager.Instance.SetLegsSkillIcon(true);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
             _owner.SetMovable(false);
             _owner.FollowCamera.SetCameraRotatable(false);
             yield return new WaitForSeconds(2.0f);
@@ -309,7 +308,7 @@ public class LegsCaterpillar : PartBaseLegs
                 float maxDistance = skillRange;
                 float radius = 10.0f;
                 Vector3 targetDirection = _owner.transform.forward;
-                Collider[] hitResults = new Collider[1000];
+                Collider[] hitResults = new Collider[10];
 
                 Utils.Destroy(
                     Utils.Instantiate(
@@ -340,11 +339,9 @@ public class LegsCaterpillar : PartBaseLegs
                         _damagedTargets.Add(otherParent);
                         enemy.ApplyDamage(skillDamage, targetMask);
 
-                        Utils.Destroy(Utils.Instantiate(hitEffectPrefab, otherParent.transform.position + Vector3.up * 1.0f, Quaternion.identity), 1.0f);
-
                         if (_owner.CompareTag("Player"))
                         {
-                            Managers.GUIManager.Instance.StartHitCrosshair();
+                            Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                         }
                     }
                     else
@@ -360,11 +357,9 @@ public class LegsCaterpillar : PartBaseLegs
                                 _damagedTargets.Add(otherParent);
                                 enemy.ApplyDamage(skillDamage, targetMask);
 
-                                Utils.Destroy(Utils.Instantiate(hitEffectPrefab, otherParent.transform.position + Vector3.up * 1.0f, Quaternion.identity), 1.0f);
-
                                 if (_owner.CompareTag("Player"))
                                 {
-                                    Managers.GUIManager.Instance.StartHitCrosshair();
+                                    Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                                 }
                             }
                         }
@@ -407,14 +402,14 @@ public class LegsCaterpillar : PartBaseLegs
 
             // 스킬 쿨타임
             _currentCooldown = skillCooldown;
-            GUIManager.Instance.SetLegsSkillCooldown(true);
-            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
             while (true)
             {
                 yield return new WaitForSeconds(0.1f);
 
                 _currentCooldown -= 0.1f;
-                GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+                GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
                 if (_currentCooldown <= 0.0f)
                 {
                     _currentCooldown = 0.0f;
@@ -422,8 +417,8 @@ public class LegsCaterpillar : PartBaseLegs
                 }
             }
 
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
             _isCooldown = false;
             Debug.Log("쿨타임 종료");
         }

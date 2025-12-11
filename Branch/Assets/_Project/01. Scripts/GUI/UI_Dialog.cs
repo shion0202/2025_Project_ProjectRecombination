@@ -1,10 +1,8 @@
+using Managers;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [System.Serializable]
@@ -169,7 +167,7 @@ public class UI_Dialog : MonoBehaviour, UIActions.IUIActionMapActions
         }
         image.color = new Color(color.r, color.g, color.b, toAlpha);
 
-        SceneManager.LoadScene(nextSceneName);
+        GameManager.Instance.EnterCredit();
     }
 
     private IEnumerator SetNextDialogWithFade(bool isFirst = false)

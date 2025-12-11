@@ -83,9 +83,9 @@ public class ShoulderLaser : PartBaseShoulder
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetBackSkillIcon(false);
-            GUIManager.Instance.SetBackSkillCooldown(0.0f);
-            GUIManager.Instance.SetBackSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         }
     }
 
@@ -135,9 +135,9 @@ public class ShoulderLaser : PartBaseShoulder
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetBackSkillIcon(false);
-            GUIManager.Instance.SetBackSkillCooldown(0.0f);
-            GUIManager.Instance.SetBackSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         }
     }
 
@@ -205,7 +205,7 @@ public class ShoulderLaser : PartBaseShoulder
 
                 if (_owner.CompareTag("Player"))
                 {
-                    Managers.GUIManager.Instance.StartHitCrosshair();
+                    Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                 }
             }
             else
@@ -220,7 +220,7 @@ public class ShoulderLaser : PartBaseShoulder
 
                     if (_owner.CompareTag("Player"))
                     {
-                        Managers.GUIManager.Instance.StartHitCrosshair();
+                        Managers.GUIManager.Instance.GameUIController.StartHitCrosshair();
                     }
                 }
             }
@@ -260,7 +260,7 @@ public class ShoulderLaser : PartBaseShoulder
 
     private IEnumerator CoStopAndCooldown()
     {
-        GUIManager.Instance.SetBackSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(true);
 
         _owner.PlayerAnimator.SetBool("isPlayBackLaserAnim", true);
         yield return new WaitForSeconds(0.5f);
@@ -292,14 +292,14 @@ public class ShoulderLaser : PartBaseShoulder
         _owner.PlayerAnimator.SetBool("isPlayBackLaserAnim", false);
 
         _currentCooldown = skillCooldown - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
-        GUIManager.Instance.SetBackSkillCooldown(true);
-        GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetBackSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetBackSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -307,8 +307,8 @@ public class ShoulderLaser : PartBaseShoulder
             }
         }
 
-        GUIManager.Instance.SetBackSkillIcon(false);
-        GUIManager.Instance.SetBackSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetBackSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetBackSkillCooldown(false);
         Debug.Log("쿨타임 종료");
         _skillCoroutine = null;
     }

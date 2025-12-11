@@ -49,9 +49,9 @@ public class LegsBasic : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
     }
 
@@ -78,9 +78,9 @@ public class LegsBasic : PartBaseLegs
 
         if (Managers.GUIManager.IsAliveInstance())
         {
-            GUIManager.Instance.SetLegsSkillIcon(false);
-            GUIManager.Instance.SetLegsSkillCooldown(0.0f);
-            GUIManager.Instance.SetLegsSkillCooldown(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(0.0f);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
     }
 
@@ -134,24 +134,24 @@ public class LegsBasic : PartBaseLegs
         ++_currentSkillCount;
         if (_currentSkillCount >= maxSkillCount)
         {
-            GUIManager.Instance.SetLegsSkillIcon(true);
+            GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
         }
 
         yield return new WaitForSeconds(skillTime);
 
         _isCooldown = true;
         _owner.FinishDash();
-        GUIManager.Instance.SetLegsSkillIcon(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(true);
 
         _currentCooldown = (skillCooldown * (_currentSkillCount)) - _owner.Stats.TotalStats[EStatType.CooldownReduction].value;
-        GUIManager.Instance.SetLegsSkillCooldown(true);
-        GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(true);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
         while (true)
         {
             yield return new WaitForSeconds(0.1f);
 
             _currentCooldown -= 0.1f;
-            GUIManager.Instance.SetLegsSkillCooldown(_currentCooldown);
+            GUIManager.Instance.GameUIController.SetLegsSkillCooldown(_currentCooldown);
             if (_currentCooldown <= 0.0f)
             {
                 _currentCooldown = 0.0f;
@@ -159,8 +159,8 @@ public class LegsBasic : PartBaseLegs
             }
         }
 
-        GUIManager.Instance.SetLegsSkillIcon(false);
-        GUIManager.Instance.SetLegsSkillCooldown(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillIcon(false);
+        GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         _currentSkillCount = 0;
         _isCooldown = false;
         _skillCoroutine = null;
