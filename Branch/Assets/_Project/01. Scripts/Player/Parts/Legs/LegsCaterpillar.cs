@@ -25,7 +25,7 @@ public class LegsCaterpillar : PartBaseLegs
 
     [Header("캐터필러 피벗 설정")]
     [SerializeField] private Transform caterpillarPivot;
-    [SerializeField] private float pivotTurnSpeed = 8.0f;    // 하체 회전 속도
+    [SerializeField] private float pivotTurnSpeed = 8.0f;     // 하체 회전 속도
     [SerializeField] private float maxPivotYaw = 180.0f;      // 상체 기준 최대 회전 각도
 
     public Vector3 CurrentMoveDirectionWorld { get; private set; }
