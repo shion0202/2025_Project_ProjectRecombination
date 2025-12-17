@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 using DG.Tweening;
+using Managers;
 
 namespace _Project.Scripts.VisualScripting
 {
@@ -20,24 +21,25 @@ namespace _Project.Scripts.VisualScripting
         public void OneStepShake()
         {
            // if (!IsOn) return;
-        
-            if (objectToShake is null) return;
-            FollowCameraController followCamera = objectToShake.GetComponent<FollowCameraController>();
-            impulseSource = GetComponent<CinemachineImpulseSource>();
-        
-            if (followCamera != null && impulseSource != null)
-            {
-                followCamera.ApplyShake(impulseSource, shakeMagnitude * 50.0f);
-                return;
-            }
 
-            if (!repeat)
-                objectToShake.transform.DOShakePosition(shakeDuration, shakeMagnitude).OnComplete(() =>
-                {
-                    IsOn = false;
-                });
-            else
-                objectToShake.transform.DOShakePosition(shakeDuration, shakeMagnitude).SetLoops(-1);
+           objectToShake ??= GameManager.Instance.FollowCamera.gameObject;
+           
+           FollowCameraController followCamera = objectToShake.GetComponent<FollowCameraController>();
+           impulseSource = GetComponent<CinemachineImpulseSource>();
+        
+           if (followCamera != null && impulseSource != null)
+           {
+               followCamera.ApplyShake(impulseSource, shakeMagnitude * 50.0f);
+               return;
+           }
+
+           if (!repeat)
+               objectToShake.transform.DOShakePosition(shakeDuration, shakeMagnitude).OnComplete(() =>
+               {
+                   IsOn = false;
+               });
+           else
+               objectToShake.transform.DOShakePosition(shakeDuration, shakeMagnitude).SetLoops(-1);
         }
     }
 }

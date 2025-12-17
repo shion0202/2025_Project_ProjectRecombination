@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 namespace _Project.Scripts.VisualScripting
 {
     public abstract class ProcessBase : MonoBehaviour
     {
+        // [Tooltip("에디터에서 우클릭으로 고유 ID를 생성하세요.")]
+        // public string uniqueID;
+        
         [SerializeField] private bool isOn;
         private Coroutine _runningCoroutine;
 
@@ -35,5 +39,12 @@ namespace _Project.Scripts.VisualScripting
             if (_runningCoroutine != null)
                 StopCoroutine(_runningCoroutine);
         }
+        
+        // // 에디터 편의 기능: 컨텍스트 메뉴로 ID 자동 생성
+        // [ContextMenu("Generate Unique ID")]
+        // private void GenerateID()
+        // {
+        //     uniqueID = Guid.NewGuid().ToString();
+        // }
     }
 }
