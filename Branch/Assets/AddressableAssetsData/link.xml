@@ -18,7 +18,6 @@
     <type fullname="_Project.Scripts.VisualScripting.Logic" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.MoveObject" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.OnEvent" preserve="all" />
-    <type fullname="_Project.Scripts.VisualScripting.PlaySound" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.PlaySoundSimple" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.Register" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.ReplaceLayer" preserve="all" />
@@ -26,7 +25,6 @@
     <type fullname="_Project.Scripts.VisualScripting.SetNoticeMessage" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.SetObjectText" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.ShakeObject" preserve="all" />
-    <type fullname="_Project.Scripts.VisualScripting.StartAmonFirstPhase" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.StopSound" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.Timer" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.ToggleInteractionHUD" preserve="all" />
@@ -34,12 +32,6 @@
     <type fullname="_Project.Scripts.VisualScripting.TriggerEnter" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.TriggerExit" preserve="all" />
     <type fullname="_Project.Scripts.VisualScripting.Unregister" preserve="all" />
-    <type fullname="_Test.Skills.AmonDash" preserve="all" />
-    <type fullname="_Test.Skills.AmonLockdown" preserve="all" />
-    <type fullname="_Test.Skills.AmonSoulAbsorb" preserve="all" />
-    <type fullname="_Test.Skills.AmonSoulOrb" preserve="all" />
-    <type fullname="_Test.Skills.AmonSoulSphere" preserve="all" />
-    <type fullname="_Test.Skills.AmonWingSwipe" preserve="all" />
     <type fullname="_Test.Skills.ExeChargingLaser" preserve="all" />
     <type fullname="_Test.Skills.ExeLaunchFullStrike" preserve="all" />
     <type fullname="_Test.Skills.ExeLegStrike" preserve="all" />
@@ -51,14 +43,7 @@
     <type fullname="_Test.Skills.Ralph.TwoHandsStrike" preserve="all" />
     <type fullname="_Test.Skills.Ranger.ChargingShot" preserve="all" />
     <type fullname="_Test.Skills.Ranger.OneShot" preserve="all" />
-    <type fullname="_Test.Skills.RapidFire" preserve="all" />
-    <type fullname="_Test.Skills.Rush" preserve="all" />
-    <type fullname="_Test.Skills.Teleport" preserve="all" />
-    <type fullname="AmonBarrier" preserve="all" />
-    <type fullname="AmonEnergyBall" preserve="all" />
     <type fullname="AmonMeleeCollision" preserve="all" />
-    <type fullname="AmonPaseTwoFSM" preserve="all" />
-    <type fullname="AnimCheck" preserve="all" />
     <type fullname="ArmBasic" preserve="all" />
     <type fullname="ArmEmpty" preserve="all" />
     <type fullname="ArmHeavyMissile" preserve="all" />
@@ -75,7 +60,6 @@
     <type fullname="BulletSpawnPointRight" preserve="all" />
     <type fullname="CameraTarget" preserve="all" />
     <type fullname="CharacterStat" preserve="all" />
-    <type fullname="DamagableObject" preserve="all" />
     <type fullname="ExcutionerFSM" preserve="all" />
     <type fullname="ExeMissile" preserve="all" />
     <type fullname="ExplosionEMP" preserve="all" />
@@ -88,14 +72,12 @@
     <type fullname="FollowMinimap" preserve="all" />
     <type fullname="FootstepListener" preserve="all" />
     <type fullname="FORGE3D.F3DBeam" preserve="all" />
-    <type fullname="FORGE3D.F3DDespawn" preserve="all" />
     <type fullname="FORGE3D.F3DPulsewaveReverse" preserve="all" />
     <type fullname="FPSCheck" preserve="all" />
     <type fullname="GasBarrel" preserve="all" />
     <type fullname="GetItem" preserve="all" />
     <type fullname="GlobalGameObject" preserve="all" />
     <type fullname="GoogleSheetLoader" preserve="all" />
-    <type fullname="GoToEpilogue" preserve="all" />
     <type fullname="GravityBullet" preserve="all" />
     <type fullname="GroundCheck" preserve="all" />
     <type fullname="HealCharacter" preserve="all" />
@@ -124,7 +106,6 @@
     <type fullname="Missile" preserve="all" />
     <type fullname="MobileDragCamera" preserve="all" />
     <type fullname="Monster.AI.Blackboard.Blackboard" preserve="all" />
-    <type fullname="Monster.AI.FSM.AmonPaseOneFSM" preserve="all" />
     <type fullname="Monster.AI.FSM.FlyFSM" preserve="all" />
     <type fullname="Monster.AI.FSM.MonsterFSM" preserve="all" />
     <type fullname="MonsterDissolve" preserve="all" />
@@ -133,7 +114,6 @@
     <type fullname="PartBaseBack" preserve="all" />
     <type fullname="PartBaseMask" preserve="all" />
     <type fullname="ParticleFollower" preserve="all" />
-    <type fullname="PlayAnimation" preserve="all" />
     <type fullname="PlayerController" preserve="all" />
     <type fullname="ProjectileBlade" preserve="all" />
     <type fullname="RagdollController" preserve="all" />
@@ -141,7 +121,6 @@
     <type fullname="RigAimController" preserve="all" />
     <type fullname="RigTarget" preserve="all" />
     <type fullname="RotateByCamera" preserve="all" />
-    <type fullname="SafeZoneObject" preserve="all" />
     <type fullname="ScaleFactorApplyToMaterial" preserve="all" />
     <type fullname="SceneController" preserve="all" />
     <type fullname="SciFiArsenal.SciFiLightFade" preserve="all" />
@@ -152,10 +131,8 @@
     <type fullname="ShoulderHeavy" preserve="all" />
     <type fullname="ShoulderLaser" preserve="all" />
     <type fullname="ShoulderRapid" preserve="all" />
-    <type fullname="SoulSphereObject" preserve="all" />
     <type fullname="StageUpdateTrigger" preserve="all" />
     <type fullname="TargetPoint" preserve="all" />
-    <type fullname="TargetRenderer" preserve="all" />
     <type fullname="TitleLogoDT" preserve="all" />
     <type fullname="Turn_Move" preserve="all" />
     <type fullname="UI.InitUI" preserve="all" />
@@ -167,9 +144,6 @@
     <type fullname="UI_RadialButtonPanel" preserve="all" />
     <type fullname="UI_RadialButtonSecond" preserve="all" />
     <type fullname="UI_Title" preserve="all" />
-    <type fullname="_Project.Scripts.VisualScripting.MoveData" preserve="nothing" serialized="true" />
-    <type fullname="_Project.Scripts.VisualScripting.ProcessData" preserve="nothing" serialized="true" />
-    <type fullname="BreakableData" preserve="nothing" serialized="true" />
     <type fullname="FIMSpace.FProceduralAnimation.LegsAnimator/HipsReference" preserve="nothing" serialized="true" />
     <type fullname="FIMSpace.FProceduralAnimation.LegsAnimator/Leg" preserve="nothing" serialized="true" />
     <type fullname="FIMSpace.FProceduralAnimation.LegsAnimator/LegStepAnimatingParameters" preserve="nothing" serialized="true" />
@@ -184,7 +158,9 @@
     <type fullname="Monster.MonsterPatrol" preserve="nothing" serialized="true" />
     <type fullname="Monster.MonsterState" preserve="nothing" serialized="true" />
     <type fullname="Monster.MonsterWander" preserve="nothing" serialized="true" />
-    <type fullname="StatPair" preserve="nothing" serialized="true" />
+    <type fullname="_Project.Scripts.VisualScripting.MoveData" preserve="nothing" serialized="true" />
+    <type fullname="_Project.Scripts.VisualScripting.ProcessData" preserve="nothing" serialized="true" />
+    <type fullname="BreakableData" preserve="nothing" serialized="true" />
     <type fullname="_Project.Scripts.VisualScripting.CinemachineCutsceneData" preserve="nothing" serialized="true" />
     <type fullname="DialogData" preserve="nothing" serialized="true" />
     <type fullname="DialogVideoData" preserve="nothing" serialized="true" />
@@ -401,8 +377,8 @@
     <type fullname="UnityEngine.Texture2D" preserve="all" />
     <type fullname="UnityEngine.TrailRenderer" preserve="all" />
     <type fullname="UnityEngine.Transform" preserve="all" />
-    <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.ArgumentCache" preserve="nothing" serialized="true" />
+    <type fullname="UnityEngine.Events.PersistentCallGroup" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.PersistentListenerMode" preserve="nothing" serialized="true" />
     <type fullname="UnityEngine.Events.UnityEvent" preserve="nothing" serialized="true" />
   </assembly>

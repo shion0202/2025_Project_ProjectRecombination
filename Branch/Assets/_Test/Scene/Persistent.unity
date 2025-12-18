@@ -185,6 +185,9 @@ MonoBehaviour:
   - managerType: 9
     managerPrefab: {fileID: 7100317660788745124, guid: d55b4eca5714a4f3fac3acf6a323790c,
       type: 3}
+  - managerType: 11
+    managerPrefab: {fileID: 2922577610311866960, guid: c0058a79d834746229a4278cd49d9dcf,
+      type: 3}
 --- !u!4 &1320477662
 Transform:
   m_ObjectHideFlags: 0

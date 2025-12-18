@@ -10,13 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: GameScene
+  m_Name: Packed Assets
   m_EditorClassIdentifier: 
   m_GroupName: Packed Assets
   m_Data:
     m_SerializedData: []
   m_GUID: 1ac5fddde4cb14002b550dba9dd330cc
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 050393c24749d4b8fb6069e9cbe52926
+    m_Address: 3rd_Elevator_Room
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 86d1204d3002143ccbcd3e42cd199966
+    m_Address: 4th_Big_Elevator
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9a4023f476fa44fd9a5670c3f5b11d38
+    m_Address: 1st_Security_Room
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b9f61cbd7b284cc4a6d51cd4042c921
+    m_Address: 2nd_Control_Room
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9cdff7cc633a948c6b9bb98e34015460, type: 2}
   m_SchemaSet:

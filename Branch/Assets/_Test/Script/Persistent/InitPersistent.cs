@@ -16,6 +16,7 @@ public enum EManagerType
     SceneManager,
     SoundManager,
     EventManager,
+    MapManager,
 }
 
 [Serializable]
