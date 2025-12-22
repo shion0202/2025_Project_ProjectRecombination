@@ -45,6 +45,8 @@ namespace _Project._01._Scripts.Monster.Animator
 
         private void Update()
         {
+            if (rigConstraints == null || rigConstraints.Length == 0) return;
+            
             // 현재 Weight를 목표 Weight로 매끄럽게 변경 (Lerp)
             float currentWeight = rigConstraints[0].weight; // 첫 번째 값으로 현재 값 확인
             float newWeight = Mathf.Lerp(currentWeight, targetWeight, Time.deltaTime * blendSpeed);

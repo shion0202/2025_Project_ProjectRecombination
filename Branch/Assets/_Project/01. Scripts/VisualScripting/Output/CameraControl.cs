@@ -43,6 +43,11 @@ namespace _Project.Scripts.VisualScripting
 
         private bool _isInit;
 
+        private void Awake()
+        {
+            cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        }
+
         private void Update()
         {
             // Update 문에서 게임 매니저가 FollowCamera를 할당할 때까지 대기 (안전한 방법일까?)

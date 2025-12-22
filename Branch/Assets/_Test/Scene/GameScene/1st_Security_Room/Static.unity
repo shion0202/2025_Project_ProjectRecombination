@@ -34863,6 +34863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageIndex: 0
+  respawnPosition: {fileID: 1767009858}
 --- !u!65 &1334463919
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47810,12 +47811,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1767009859}
   m_Layer: 0
-  m_Name: TestPos
+  m_Name: Respon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1767009859
 Transform:
   m_ObjectHideFlags: 0

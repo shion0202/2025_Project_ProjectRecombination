@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializePlayerPrefabs:
-  - prefab: {fileID: 853507374332792821, guid: f9ed1a34b1a938e4495f06ddcc18c94d, type: 3}
+  - prefab: {fileID: 853507374332792821, guid: 24139d8e238befc448a21e61e21e8a6f, type: 3}
     prefabType: 0
     isActive: 1
   - prefab: {fileID: 8101825418735920585, guid: ede3b087a932a49cd9137c545cc1b96b,

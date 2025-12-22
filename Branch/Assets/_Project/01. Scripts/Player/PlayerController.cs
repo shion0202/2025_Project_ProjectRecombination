@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _hitRoutine = null;
         }
 
-        if (!_isLowHp)
+        if (_isLowHp && lowHp != null)
         {
             lowHp.SetActive(false);
         }
@@ -1579,8 +1579,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         VolumeProfile profile = volume.profile;     // 공유 프로필을 쓸 경우 sharedProfile을 사용                      
         profile.TryGet<MotionBlur>(out _motionBlur);   // MotionBlur 오버라이드 얻기
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         
         _followCamera = FindFirstObjectByType<FollowCameraController>();
         if (_followCamera == null)

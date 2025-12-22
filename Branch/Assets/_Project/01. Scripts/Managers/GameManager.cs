@@ -19,6 +19,8 @@ namespace Managers
             Credit
         }
 
+        [SerializeField] private bool isHardMode;
+        public bool IsHardMode { get => isHardMode; set => isHardMode = value; }
         public PlayerController Player { get; set; }
         public GameObject MainCamera { get; set; }
         public GameObject FollowCamera { get; set; }
@@ -58,9 +60,13 @@ namespace Managers
         private void GameOverProcess()
         {
             // 게임 오버 처리
-            Debug.Log("Player is Death");
-            GUIManager.Instance.GameUIController.OnGameOverPanel();
+            Debug.Log("[GameManager] 게임 오버 처리 중...");
+
+            if (_rebirthRoutine != null) return;    // 이미 부활 코루틴이 실행 중이면 무시
+            // CurrentState = GameState.GameOver;
             
+            GUIManager.Instance.GameUIController.OnGameOverPanel();
+
             // 부활 코루틴 시작
             _rebirthRoutine = StartCoroutine(RebirthGame());
         }
@@ -69,12 +75,27 @@ namespace Managers
         private IEnumerator RebirthGame()
         {
             yield return new WaitForSeconds(5.0f);
-
             GUIManager.Instance.GameUIController.CloseGameOverPanel();
+
+            if (IsHardMode)
+            {
+                Debug.Log("[GameManager] 하드 모드 부활 처리 중...");
+                // 1. 몬스터 풀 리셋
+                MonsterManager.Instance.ReleaseAllMonsters();
+                // PoolManager.Instance.ClearPools();
+                // PoolManager.Instance.Init();
+                // 2. 플레이어가 위치한 현재 스테이지 리셋
+                DungeonManager.Instance.ResetCurrentStage();
+            }
+            
             Player.Stats.CurrentHealth = Player.Stats.MaxHealth;
             Player.Spawn();
 
             _rebirthRoutine = null;
+            
+            CurrentState = GameState.Playing;
+            
+            Debug.Log("[GameManager] 플레이어 부활 완료!");
         }
 
         #region Pause Objects
@@ -135,8 +156,6 @@ namespace Managers
                 CurrentState = GameState.Prologue;
             
                 // 프롤로그 재생하는 동안 플레이어 씬과 게임 씬 로드
-                // await SceneController.Instance.LoadSceneAdditive("Scene_Game");
-                // await DungeonManager.Instance.LoadAllStage();   // 테스트용 모든 스테이지 로드
                 await DungeonManager.Instance.Init();
                 await PoolManager.Instance.Init();
                 await LoadPlayerScene();

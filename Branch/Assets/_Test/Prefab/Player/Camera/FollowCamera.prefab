@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 5941306011934582950}
   - component: {fileID: 4121268085018721999}
   - component: {fileID: 2931792196858412046}
+  - component: {fileID: 2046278185230971327}
   m_Layer: 0
   m_Name: FollowCamera
   m_TagString: Untagged
@@ -572,7 +573,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8765793853822610566}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
   m_Name: 
@@ -581,3 +582,20 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: 2502121402016220982, guid: 7cccd61a7d56afb44af2ceefb868e21c, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &2046278185230971327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8765793853822610566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2053b681c757e214c8eb38be7e6b988f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vcam: {fileID: 621066846622348936}
+  rotationSpeed: 260
+  maxDeltaInches: 1
+  deadZoneInches: 0.01
+  useRightHalfOnly: 1

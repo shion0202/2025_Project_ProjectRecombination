@@ -1544,8 +1544,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: PC_Keyboard
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Mobile
   m_DefaultActionMap: PlayerActionMap
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -1575,7 +1575,6 @@ MonoBehaviour:
   volume: {fileID: 0}
   lowHp: {fileID: 0}
   navi: {fileID: 0}
-  worldmap: {fileID: 0}
   movementBlockMask: 8968
   dashBlockMask: 11012
   skillBlockMask: 11012
@@ -23860,13 +23859,13 @@ MonoBehaviour:
   caterpillarMaterial: {fileID: 2100000, guid: 1dca80f331c7cc244b0e6e8833945693, type: 2}
   bulletPrefab: {fileID: 914363595772914150, guid: 54c0c4d3bf9e54547a040ca32ebbe207,
     type: 3}
-  hitEffectPrefab: {fileID: 4264509212131509058, guid: 39645742d4f431b4283bd20284ae70f4,
-    type: 3}
   turnMoveSpeed: 60
-  turnRotateSpeed: 20
   backwardThreshold: -0.6
   animSpeed: {x: 0, y: -1}
   shootOffset: {x: 2, y: 0.7}
+  caterpillarPivot: {fileID: 0}
+  pivotTurnSpeed: 8
+  maxPivotYaw: 180
 --- !u!114 &8261462207663945465
 MonoBehaviour:
   m_ObjectHideFlags: 0

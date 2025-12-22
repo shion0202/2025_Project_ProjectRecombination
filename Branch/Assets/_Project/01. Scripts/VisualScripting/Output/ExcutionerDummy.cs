@@ -22,7 +22,7 @@ namespace _Project.Scripts.VisualScripting
         {
            // if (!IsOn) return;
 
-           objectToShake ??= GameManager.Instance.FollowCamera.gameObject;
+           objectToShake = GameManager.Instance.FollowCamera.gameObject;
            
            FollowCameraController followCamera = objectToShake.GetComponent<FollowCameraController>();
            impulseSource = GetComponent<CinemachineImpulseSource>();

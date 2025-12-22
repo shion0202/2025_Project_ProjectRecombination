@@ -156,7 +156,7 @@ MonoBehaviour:
     managerPrefab: {fileID: 3886129718511960932, guid: 1a45fbdf9f1e4409e9a39446c2b5f90c,
       type: 3}
   - managerType: 3
-    managerPrefab: {fileID: 3761987598488225709, guid: 5e79e7363f9924635a6fbf1356d14900,
+    managerPrefab: {fileID: 3212429620522674296, guid: b4255f0abda72154c9d26cd689abf5d9,
       type: 3}
   - managerType: 8
     managerPrefab: {fileID: 354075799538619577, guid: c5e83e5c6ef6e479ab62c272bb525fc1,
@@ -184,6 +184,9 @@ MonoBehaviour:
       type: 3}
   - managerType: 9
     managerPrefab: {fileID: 7100317660788745124, guid: d55b4eca5714a4f3fac3acf6a323790c,
+      type: 3}
+  - managerType: 11
+    managerPrefab: {fileID: 2922577610311866960, guid: c0058a79d834746229a4278cd49d9dcf,
       type: 3}
 --- !u!4 &1320477662
 Transform:

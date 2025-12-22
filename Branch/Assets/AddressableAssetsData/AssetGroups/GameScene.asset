@@ -15,146 +15,31 @@ MonoBehaviour:
   m_GroupName: GameScene
   m_Data:
     m_SerializedData: []
-  m_GUID: 5768b6f9ec2a64bccbbfbdc61cfe385b
+  m_GUID: 1ac5fddde4cb14002b550dba9dd330cc
   m_SerializeEntries:
-  - m_GUID: 04f86f69c7f27474e82dc72fe7f7d6fc
-    m_Address: 2nd_Control_Room/Static
+  - m_GUID: 050393c24749d4b8fb6069e9cbe52926
+    m_Address: 3rd_Elevator_Room
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0c910f3bdc8e6431dbea43a7f2b700ee
-    m_Address: 6th_Soul_Care/Dynamic
+  - m_GUID: 86d1204d3002143ccbcd3e42cd199966
+    m_Address: 4th_Big_Elevator
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 15e806a6fb2f645a5a0f58ec95d79792
-    m_Address: 3rd_Elevator_Room/Hybrid
+  - m_GUID: 9a4023f476fa44fd9a5670c3f5b11d38
+    m_Address: 1st_Security_Room
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1755ca58f250e480cb01d3252ff4a14e
-    m_Address: 7th_Warpgate/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 193e7b8630b9b4df09bb3e15bcc265f0
-    m_Address: 7th_Warpgate/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 19fcc509df3a34c4fb34d7bf655cb3d5
-    m_Address: 7th_Warpgate/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2bd67d3b99f4c4abeb35ed4456f0effd
-    m_Address: 8th_Another_Space/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 34c762e8caa2e4db9ade3554cba703bd
-    m_Address: 4th_Big_Elevator/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3cee43b00e71f4f77ae9da263d074386
-    m_Address: 9th_Warpgate_Return_When_Amon_2Phase_Defeated/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3fcde97b9fdb74627a5314d8e2268e2b
-    m_Address: 9th_Warpgate_Return_When_Amon_2Phase_Defeated/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 40c6e7a6ec5cb4ef9abb29921ad61d45
-    m_Address: 3rd_Elevator_Room/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4c0bf04470fd54a0c8c020f16b511546
-    m_Address: 1st_Security_Room/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5303d8b7696714774b91288aaec8805f
-    m_Address: 4th_Big_Elevator/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5b2cb29e5a9184df2a31ea51ae2c102a
-    m_Address: 5th_Morgue/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 79e3cda4ba96b4b98ba508266e94795e
-    m_Address: 6th_Soul_Care/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8483e5d4426b34cd78ee77b7b868c476
-    m_Address: 5th_Morgue/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 864b8dd6203544ce2b4be80377af8bc3
-    m_Address: 5th_Morgue/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: afe8c6a7b17d64b4ab488a23b7e4438c
-    m_Address: 2nd_Control_Room/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c62871e8c83af4f408d1ef20f6db4b7e
-    m_Address: 2nd_Control_Room/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc547a157776a4e93bbdcf284edb81fb
-    m_Address: 6th_Soul_Care/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d3b33890e504d42f5ae251e144216d73
-    m_Address: 9th_Warpgate_Return_When_Amon_2Phase_Defeated/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: de2f47c14ee124470bdbf0295c90fa19
-    m_Address: 8th_Another_Space/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e0a801a9bae254a5093de40eeb4982a6
-    m_Address: 8th_Another_Space/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e32ca7671c04a4fd7ad7dacecd235c10
-    m_Address: 1st_Security_Room/Static
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e45b622f1f55a4fb2938aa8fd6cdeb18
-    m_Address: 1st_Security_Room/Dynamic
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ecbeeb7b145fb42fdaa5b052cde4fe1b
-    m_Address: 4th_Big_Elevator/Hybrid
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9dddbc31ade54a49afde3768296aee5
-    m_Address: 3rd_Elevator_Room/Static
+  - m_GUID: 9b9f61cbd7b284cc4a6d51cd4042c921
+    m_Address: 2nd_Control_Room
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
-  m_Settings: {fileID: 11400000, guid: de8b6286f9b6142349a28f2c16b529a3, type: 2}
+  m_Settings: {fileID: 11400000, guid: 9cdff7cc633a948c6b9bb98e34015460, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: f1e31cd67e6834a308b3d6fdc632cfa0, type: 2}
-    - {fileID: 11400000, guid: 32daefa05a59d43a0abac1cda93cc6f0, type: 2}
+    - {fileID: 11400000, guid: 343197f9de5bd463d86ea73963b28ed8, type: 2}
+    - {fileID: 11400000, guid: 7428011a172d74a2f94ab9a9e55d1188, type: 2}

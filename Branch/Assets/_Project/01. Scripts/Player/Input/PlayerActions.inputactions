@@ -324,7 +324,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC_Keyboard;Mobile",
+                    "groups": ";PC_Keyboard",
                     "action": "LeftAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -335,7 +335,7 @@
                     "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "LeftAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -346,7 +346,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC_Keyboard;Mobile",
+                    "groups": ";PC_Keyboard",
                     "action": "RightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -357,7 +357,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";PC_Keyboard;Mobile",
                     "action": "RightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -368,7 +368,7 @@
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";PC_Keyboard;Mobile",
+                    "groups": ";Mobile",
                     "action": "Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -595,17 +595,6 @@
                 },
                 {
                     "name": "",
-                    "id": "7d20e4d6-a473-4b13-8df1-b31bc5d62431",
-                    "path": "<Touchscreen>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3e2e521c-5056-4ff8-9c03-e207313e9075",
                     "path": "<Keyboard>/m",
                     "interactions": "",
@@ -675,6 +664,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "fa7ed4b0-7faf-4c1c-b006-93592329a54e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Apply",
                     "type": "Button",
                     "id": "d5938ded-7ad8-46b2-b2bf-d3bb5f52b50c",
@@ -691,15 +689,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "fa7ed4b0-7faf-4c1c-b006-93592329a54e",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -788,6 +777,56 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UIActionMap",
+            "id": "8120f1cc-95d6-4a36-a9eb-9cca973afa8a",
+            "actions": [
+                {
+                    "name": "NextDialogue",
+                    "type": "Button",
+                    "id": "c29e8383-4696-4605-b0b9-a5f9e831778e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d97e39e1-c7fa-4a31-b27b-6000bd511ebd",
+                    "path": "<Pointer>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "463a40fb-d78e-4872-a30a-34a8f996a111",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e4faa6a1-0b72-4370-a73d-8070b44bd272",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextDialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

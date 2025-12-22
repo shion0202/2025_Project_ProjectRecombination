@@ -62,6 +62,7 @@ public class CameraWalk : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             isCursorVisible = !isCursorVisible;
+            
             Cursor.visible = isCursorVisible;
             Cursor.lockState = isCursorVisible ? CursorLockMode.None : CursorLockMode.Locked;
         }

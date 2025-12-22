@@ -241,8 +241,8 @@ namespace Managers
                 HelpUI.SetActive(true);
                 HUD.SetActive(false);
 
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                //Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.visible = false;
 
                 Time.timeScale = 0.0f;
 

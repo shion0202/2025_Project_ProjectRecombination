@@ -32,9 +32,7 @@ public class SceneController : Singleton<SceneController>
                 // 성공 시 핸들 저장
                 _loadedScenes.Add(key, handle);
                 SceneInstance sceneInstance = handle.Result;
-
-                // ★ 중요: 맵(Map) 씬을 로드했다면, 거기를 Active Scene으로 만들어야
-                // 몬스터 생성 시 그 씬 안에 들어갑니다. (UI 씬 제외)
+                
                 if (!key.Contains("UI")) 
                 {
                     SceneManager.SetActiveScene(sceneInstance.Scene);

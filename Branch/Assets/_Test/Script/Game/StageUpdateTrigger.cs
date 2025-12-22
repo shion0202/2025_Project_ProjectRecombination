@@ -6,6 +6,7 @@ using UnityEngine;
 public class StageUpdateTrigger : MonoBehaviour
 {
     [SerializeField] private int stageIndex;
+    [SerializeField] private GameObject respawnPosition;
     
     private int _previousStageIndex;
 
@@ -21,13 +22,16 @@ public class StageUpdateTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
+        // 플레이어가 뒤로 이동
         if (_previousStageIndex > stageIndex)
         {
             DungeonManager.Instance.UpdatePlayerStageIndex(stageIndex);
         }
+        // 플레이어가 앞으로 이동
         else if (_previousStageIndex == stageIndex)
         {
             DungeonManager.Instance.UpdatePlayerStageIndex(stageIndex + 1);
+            DungeonManager.Instance.RestartPosition = respawnPosition.transform.position;
         }
     }
 }

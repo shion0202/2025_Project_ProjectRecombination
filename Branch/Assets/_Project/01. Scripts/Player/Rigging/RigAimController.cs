@@ -172,7 +172,14 @@ public class RigAimController : MonoBehaviour
         MultiAimConstraint[] constraintArray = gameObject.GetComponentsInChildren<MultiAimConstraint>();
         foreach (MultiAimConstraint constraint in constraintArray)
         {
+            var data = constraint.data;
+            var sources = constraint.data.sourceObjects;
+            sources.Clear();
+            sources.Add(new WeightedTransform(getComponentInChildren.transform, 1.0f));
+            data.sourceObjects = sources;
+            constraint.data = data;
             constraint.weight = 0.0f;
+
             _constraints.Add(constraint.gameObject.name, constraint);
             _changeRoutines.Add(constraint.gameObject.name, null);
         }

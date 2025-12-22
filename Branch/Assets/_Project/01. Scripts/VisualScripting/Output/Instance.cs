@@ -36,7 +36,7 @@ namespace _Project.Scripts.VisualScripting
 
             for (int i = 0; i < count; i++)
             {
-                Debug.Log("유니티야아프지마");
+                // Debug.Log("유니티야아프지마");
                 
                 // 부모 오브젝트의 위치를 기준으로 무작위 위치 계산
                 float randomX = Random.Range(-spawnArea.x / 2, spawnArea.x / 2);
@@ -47,7 +47,18 @@ namespace _Project.Scripts.VisualScripting
 
                 // GameObject obj = Instantiate(instancePrefab, transform);
                 GameObject obj = PoolManager.Instance.GetObject(instancePrefab);
-                // obj.transform.position = randomPosition;
+                
+                if (obj is null)
+                {
+                    Debug.LogError("Failed to get object from PoolManager.");
+                    continue;
+                }
+                
+                // 풀에서 가져온 오브젝트가 몬스터일 경우 매니저에 등록
+                if (obj.CompareTag("Enemy"))
+                {
+                    MonsterManager.Instance.AddMonster(obj);
+                }
                 
                 // 네비매시 에이전트가 있을 경우 Warp 사용
                 NavMeshAgent agent = obj.GetComponentInChildren<NavMeshAgent>();

@@ -115,7 +115,7 @@ namespace Managers
 
         private void AddPoolableComponent(GameObject obj)
         {
-            if (obj.GetComponent<PoolableObject>() == null)
+            if (!obj.GetComponent<PoolableObject>())
             {
                 obj.AddComponent<PoolableObject>();
             }
@@ -304,7 +304,7 @@ namespace Managers
                 yield break;
             }
 
-            var poolable = go.GetComponent<PoolableObject>();
+            PoolableObject poolable = go.GetComponent<PoolableObject>();
             if (poolable && poolable.IsInPool)
             {
                 Debug.LogWarning($"Attempted to release object '{go.name}' that is already in pool (delayed).");

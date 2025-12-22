@@ -22,7 +22,7 @@ public struct DialogData
     [TextArea(3, 5)] public string dialog;  // 텍스트 스크립트
 }
 
-public class UI_Dialog : MonoBehaviour, UIActions.IUIActionMapActions
+public class UI_Dialog : MonoBehaviour, PlayerActions.IUIActionMapActions
 {
     [Header("배경 이미지 및 스크립트 설정")]
     [SerializeField] private Speaker speaker;
@@ -40,7 +40,7 @@ public class UI_Dialog : MonoBehaviour, UIActions.IUIActionMapActions
     private Coroutine _nextRoutine = null;
     private Coroutine _fadeRoutine = null;
 
-    private UIActions _uiActions;
+    private PlayerActions _uiActions;
     private bool _isUpdateDialogue = false;
 
     private void Awake()
@@ -94,7 +94,7 @@ public class UI_Dialog : MonoBehaviour, UIActions.IUIActionMapActions
             _uiActions.UIActionMap.Disable();
             _uiActions.Dispose();
         }
-        _uiActions = new UIActions();
+        _uiActions = new PlayerActions();
         _uiActions.UIActionMap.SetCallbacks(this);
         _uiActions.UIActionMap.Enable();
 
@@ -199,7 +199,7 @@ public class UI_Dialog : MonoBehaviour, UIActions.IUIActionMapActions
         StartCoroutine("CoTypeText");
     }
 
-    void UIActions.IUIActionMapActions.OnNextDialogue(InputAction.CallbackContext context)
+    void PlayerActions.IUIActionMapActions.OnNextDialogue(InputAction.CallbackContext context)
     {
         if (context.started)
         {

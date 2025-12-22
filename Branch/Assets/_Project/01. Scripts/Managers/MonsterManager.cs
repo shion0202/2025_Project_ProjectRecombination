@@ -1,8 +1,6 @@
-using Monster;
-using Monster.AI;
 using Monster.AI.Blackboard;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
 using UnityEngine;
 
 namespace Managers
@@ -26,6 +24,16 @@ namespace Managers
             {
                 monsters.Remove(monster);
             }
+        }
+        
+        public void ReleaseAllMonsters()
+        {
+            foreach (GameObject monster in monsters.Where(monster => monster is not null))
+            {
+                PoolManager.Instance.ReleaseObject(monster);
+            }
+
+            monsters.Clear();
         }
 
         public GameObject[] GetBattleMonsters()
@@ -55,12 +63,6 @@ namespace Managers
         {
             // To-do: Monster AI를 다시 실행시키는 로직
             // 함수 2개 쓰는 게 불편하다면 bool 등으로 함수 하나로 통일하고 Game Manager 쪽만 수정해주시면 됩니다
-        }
-
-        private void Update()
-        {
-            // if (Player is not null) return;
-            // Player = GameManager.Instance.Player.gameObject;
         }
     }
 }
