@@ -169,11 +169,11 @@ MonoBehaviour:
       type: 3}
     isActive: 0
   - uiType: 3
-    uiPrefab: {fileID: 147244201293411302, guid: 7e335dff23a80429fae2b28c9624d350,
+    uiPrefab: {fileID: 147244201293411302, guid: 91fcceaf7af3ead4f8e33ab6127f4f2f,
       type: 3}
     isActive: 0
   - uiType: 4
-    uiPrefab: {fileID: 6966486708735406087, guid: b910743d6c48a461da21fcf59330fd4b,
+    uiPrefab: {fileID: 7061428158078531917, guid: a14a2e926e101274ba434f4b37571db9,
       type: 3}
     isActive: 0
   - uiType: 6
