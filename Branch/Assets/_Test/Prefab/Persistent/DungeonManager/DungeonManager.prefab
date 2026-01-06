@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniMapPrefab: {fileID: 3173371444265284236, guid: 777a791e5249546de8e3f25938231be6,
     type: 3}
-  startPosition: {x: -239.02, y: 32.314, z: -109.96}
+  startPosition: {fileID: 0}
   stageDatas:
   - stageIndex: 0
     stageName: 1st_Security_Room
@@ -56,6 +56,16 @@ MonoBehaviour:
     stageName: 3rd_Elevator_Room
   - stageIndex: 3
     stageName: 4th_Big_Elevator
+  - stageIndex: 4
+    stageName: 5th_Morgue
+  - stageIndex: 5
+    stageName: 6th_Soul_Care
+  - stageIndex: 6
+    stageName: 7th_Warpgate
+  - stageIndex: 7
+    stageName: 8th_Another_Space
+  - stageIndex: 8
+    stageName: 9th_Warpgate_Return_When_Amon_2Phase_Defeated
   currentPlayerStageIndex: 0
   amonFirstPhase: {fileID: 0}
   amonSecondPhasePrefab: {fileID: 0}
