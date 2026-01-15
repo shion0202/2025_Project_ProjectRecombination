@@ -77,7 +77,7 @@ Material:
     - _Mask_Size: 0.6
     - _PulseSpeed: 4
     - _Pulse_Speed: 5
-    - _enabled: 1
+    - _enabled: 0
     m_Colors:
     - _Color: {r: 0.6037736, g: 0.03138373, b: 0.019935932, a: 0}
   m_BuildTextureStacks: []
