@@ -22,7 +22,7 @@ namespace _Test.Skills
             {
                 // 직접 생성 ( 이때 풀 메니저를 사용 )
                 // 스킬 데이터가 가진 범위 정보를 사용하여 범위 내 랜덤 위치 계산
-                var randomPos = range != null ? GetRandomPos() : data.transform.position;
+                var randomPos = GetRandomPos();
                 // 몬스터의 현재 위치를 기준으로 랜덤 위치 설정
                 GameObject sphere = PoolManager.Instance.GetObject(soulSpherePrefab, randomPos, Quaternion.identity);
             }

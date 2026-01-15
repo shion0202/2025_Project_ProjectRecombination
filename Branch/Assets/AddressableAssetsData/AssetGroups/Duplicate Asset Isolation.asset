@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Duplicate Asset Isolation
+  m_EditorClassIdentifier: 
+  m_GroupName: Duplicate Asset Isolation
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e1368805a54df48f4865aae650a57928
+  m_SerializeEntries:
+  - m_GUID: 14462cec958bd47f384bc091708d8d91
+    m_Address: Assets/_ExternalAssets/Models/_Creepy_Cat/_3D Scifi Kit Starter Kit_HD/_Textures/_Others/Glass_01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e2b7b873485ab04ca51bf95baded26e
+    m_Address: Assets/_ExternalAssets/Models/Object_set/RustyConsole/source/SM_Bunker_PBR_Showcase_Props_Assets_Roblox_JFG.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3227f4892f8814d539eb553de8250134
+    m_Address: Assets/_ExternalAssets/Models/_Creepy_Cat/_3D Scifi Kit Starter Kit_HD/_Meshes/Walls/Wall_Cube_01_Long.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a9a75d7a5520fb47a86035e1afb86c4
+    m_Address: Assets/_ProjectAssets/01. Models/Maps/Functional_Object/Object_250927/Laser_Trap_A.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ec7f4cebe9394e498ca28333ddfaa38
+    m_Address: Assets/_ExternalAssets/Models/_Creepy_Cat/_3D Scifi Kit Starter Kit_HD/_Meshes/Walls/Wall_Simple_05_Long.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49f057e7636481942b8f89e0b64407ad
+    m_Address: Assets/_ProjectAssets/07. Art/UI/UI_HUD.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50d5441fe077a466f8313250ca58e409
+    m_Address: Assets/_ExternalAssets/Models/_Creepy_Cat/_3D Scifi Kit Starter Kit_HD/_Meshes/Roofs/Roof_Squared_02_6x6.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 51bfaa729d6c0264480d3ea83e1d9a04
+    m_Address: Assets/_ProjectAssets/01. Models/Maps/Functional_Object/WallBreak/BreakWallOrigin.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d640b36265eadc4a87d38682a77f08e
+    m_Address: Assets/_ExternalAssets/Models/Object_set/WarehouseKit/Meshes/Props/Shelves/Shelves.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68e7f816b8ee16941bd1eb675944709e
+    m_Address: Assets/_ExternalAssets/Models/sci_fi_industrial_container_03_fbx/Mash/Sci-fi
+      Large container.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b7301f128f154064bc8c6010480e896
+    m_Address: Assets/_ExternalAssets/Models/_Creepy_Cat/_3D Scifi Kit Starter Kit_HD/_Meshes/Floors/Floor_Third_01_Strip_2x6.FBX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c311c0e7c1e1e44c8e35ac4450f3ee2
+    m_Address: Assets/_ProjectAssets/01. Models/Maps/Functional_Object/Lab_Cell/Lab_cap.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: baa4a5985b9634b4ab1b5814e4dd1abb
+    m_Address: Assets/_ExternalAssets/Models/Object/paip/pipe.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e0fc8b26e76bc4e48877ba74beefd9a2
+    m_Address: Assets/_Project/02. Prefabs/Monsters/fbx/Monster_Parts/ralph/ralph_uparm.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f55bd4e14436baf40a41fc4106d8ca01
+    m_Address: Assets/_ProjectAssets/01. Models/Maps/Functional_Object/WallBreak/BreakWall01.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f755928453821f749b5863820e179d5d
+    m_Address: Assets/_ProjectAssets/01. Models/Maps/Functional_Object/WallBreak/Wall_Thin_Break.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9cdff7cc633a948c6b9bb98e34015460, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e9b61ba123dfb445eb142369b4d53071, type: 2}
+    - {fileID: 11400000, guid: 3f5ff68a683ea4c939cc805fc8c32de0, type: 2}

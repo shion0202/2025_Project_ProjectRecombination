@@ -1,11 +1,8 @@
 using Managers;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -21,7 +18,8 @@ public struct VideoSpeaker
 [System.Serializable]
 public struct DialogVideoData
 {
-    public VideoClip video;
+    // public VideoClip video;
+    public string videoName;
     [TextArea(3, 5)] public string dialog;  // 텍스트 스크립트
 }
 
@@ -37,15 +35,15 @@ public class UI_Prologue : MonoBehaviour, PlayerActions.IUIActionMapActions
     [SerializeField] private float fadeDuration = 1.0f;
     private bool _isFirst = true;
     private int _currentDialogIndex = -1;
-    private bool _isTypingEffect = false;
-    private bool _isFadeOut = false;
-    private bool _isFadeIn = false;
-    private bool _isEnd = false;
-    private Coroutine _nextRoutine = null;
-    private Coroutine _fadeRoutine = null;
+    private bool _isTypingEffect;
+    private bool _isFadeOut;
+    private bool _isFadeIn;
+    private bool _isEnd;
+    private Coroutine _nextRoutine;
+    private Coroutine _fadeRoutine;
 
     private PlayerActions _uiActions;
-    private bool _isUpdateDialogue = false;
+    private bool _isUpdateDialogue;
 
     private void Awake()
     {
@@ -121,8 +119,8 @@ public class UI_Prologue : MonoBehaviour, PlayerActions.IUIActionMapActions
     private void SetNextDialog()
     {
         // 다음 씬 영상이 없을 경우
-        if (!_isFirst && (_currentDialogIndex + 1 < dialogs.Length
-            && !dialogs[_currentDialogIndex + 1].video))
+        if (!_isFirst && !(_currentDialogIndex + 1 < dialogs.Length
+                           && !dialogs[_currentDialogIndex + 1].videoName.Equals("")))
         {
             // 페이드 아웃 없이 바로 진행
             speaker.textDialog.text = "";
@@ -203,7 +201,9 @@ public class UI_Prologue : MonoBehaviour, PlayerActions.IUIActionMapActions
 
         ++_currentDialogIndex;
         videoPlayer.Stop();
-        videoPlayer.clip = dialogs[_currentDialogIndex].video;
+        videoPlayer.source = VideoSource.Url;
+        // videoPlayer.clip = dialogs[_currentDialogIndex].video;
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, dialogs[_currentDialogIndex].videoName);
         _isFadeIn = true;
 
         yield return new WaitForSeconds(0.2f);
@@ -252,7 +252,9 @@ public class UI_Prologue : MonoBehaviour, PlayerActions.IUIActionMapActions
 
                 ++_currentDialogIndex;
                 videoPlayer.Stop();
-                videoPlayer.clip = dialogs[_currentDialogIndex].video;
+                videoPlayer.source = VideoSource.Url;
+                // videoPlayer.clip = dialogs[_currentDialogIndex].video;
+                videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, dialogs[_currentDialogIndex].videoName);
                 videoPlayer.Play();
                 StartCoroutine("CoTypeText");
 

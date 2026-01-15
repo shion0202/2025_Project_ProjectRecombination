@@ -155,9 +155,6 @@ MonoBehaviour:
   - managerType: 0
     managerPrefab: {fileID: 3886129718511960932, guid: 1a45fbdf9f1e4409e9a39446c2b5f90c,
       type: 3}
-  - managerType: 3
-    managerPrefab: {fileID: 3212429620522674296, guid: b4255f0abda72154c9d26cd689abf5d9,
-      type: 3}
   - managerType: 8
     managerPrefab: {fileID: 354075799538619577, guid: c5e83e5c6ef6e479ab62c272bb525fc1,
       type: 3}

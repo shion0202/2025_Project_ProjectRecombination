@@ -15,7 +15,7 @@ public class BallLegs : PartBase
 
     private PlayerController owner;
 
-    private void Awake()
+    private new void Awake()
     {
         defaultMyPos = new Vector3(0.02f, 0.06f, -0.03f);
     }

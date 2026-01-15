@@ -22,7 +22,7 @@ namespace Managers
         [SerializeField] private bool isHardMode;
         public bool IsHardMode { get => isHardMode; set => isHardMode = value; }
         public PlayerController Player { get; set; }
-        public GameObject MainCamera { get; set; }
+        // public GameObject MainCamera { get; set; }
         public GameObject FollowCamera { get; set; }
         public GameObject MinimapObject { get; set; }
         private Coroutine _rebirthRoutine;

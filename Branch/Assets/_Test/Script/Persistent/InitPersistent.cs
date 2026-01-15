@@ -8,7 +8,6 @@ public enum EManagerType
     GameManager,
     GUIManager,
     DataManager,
-    MainCamera,
     DungeonManager,
     DungeonStateManager,
     MonsterManager,
@@ -50,7 +49,7 @@ public class InitPersistent : MonoBehaviour
             }
             
             Debug.Log($"persistent LoadPersistent()"); // 모든 매니저가 로드되었음을 GameManager에 알림
-            GameManager.Instance.MainCamera = createdManagers[EManagerType.MainCamera];
+            // GameManager.Instance.MainCamera = createdManagers[EManagerType.MainCamera];
             GameManager.Instance.SceneLoaded();
             
             Destroy(gameObject);

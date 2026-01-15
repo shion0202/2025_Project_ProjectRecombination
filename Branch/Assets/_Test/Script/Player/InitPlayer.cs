@@ -1,3 +1,4 @@
+using _Test.Script.Bootstrap;
 using Cinemachine;
 using Managers;
 using System;
@@ -104,7 +105,7 @@ public class InitPlayer : MonoBehaviour
         {
             // 게임 메니저가 관리하는 MainCamera를 이용하여 Rig Aim Controller 초기화
             RigAimController rigAimController = GameManager.Instance.Player.GetComponent<RigAimController>();
-            rigAimController.Init(GameManager.Instance.MainCamera.GetComponentInChildren<RigTarget>().gameObject);
+            rigAimController.Init(MainCamera.Instance.GetComponentInChildren<RigTarget>().gameObject);
         }
     }
 }
