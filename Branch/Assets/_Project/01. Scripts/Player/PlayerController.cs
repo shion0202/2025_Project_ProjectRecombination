@@ -489,6 +489,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (Managers.GUIManager.Instance.GameUIController.RadialUI.activeSelf) return;
         if (Managers.GUIManager.Instance.GameUIController.WorldMap.activeSelf) return;
+        if (Managers.GUIManager.Instance.GameUIController.Tutorial.activeSelf) return;
+        if (Managers.GUIManager.Instance.GameUIController.Option.activeSelf) return;
 
         if (context.started)
         {
@@ -521,6 +523,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (Managers.GUIManager.Instance.GameUIController.RadialUI.activeSelf) return;
         if (Managers.GUIManager.Instance.GameUIController.HelpUI.activeSelf) return;
+        if (Managers.GUIManager.Instance.GameUIController.Tutorial.activeSelf) return;
+        if (Managers.GUIManager.Instance.GameUIController.Option.activeSelf) return;
 
         if (context.started)
         {
@@ -588,6 +592,18 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                     Time.timeScale = 1.0f;
                 }
 
+                return;
+            }
+
+            if (Managers.GUIManager.Instance.GameUIController.Tutorial.activeSelf)
+            {
+                Managers.GUIManager.Instance.GameUIController.Tutorial.SetActive(false);
+                return;
+            }
+
+            if (Managers.GUIManager.Instance.GameUIController.Option.activeSelf)
+            {
+                Managers.GUIManager.Instance.GameUIController.Option.SetActive(false);
                 return;
             }
 

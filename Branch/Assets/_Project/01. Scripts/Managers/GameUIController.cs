@@ -116,6 +116,10 @@ namespace Managers
         [SerializeField] private GameObject rapidInfo;
         [SerializeField] private TextMeshProUGUI rapidCooldownText;
 
+        [Header("Menu UI")]
+        [SerializeField] private GameObject tutorial;
+        [SerializeField] private GameObject option;
+
         public GameObject HUD
         {
             get => GUI;
@@ -132,6 +136,16 @@ namespace Managers
         {
             get => worldMap;
             set => worldMap = value;
+        }
+
+        public GameObject Tutorial
+        {
+            get => tutorial;
+        }
+
+        public GameObject Option
+        {
+            get => option;
         }
 
         public Image IndicatorUI
@@ -966,6 +980,28 @@ namespace Managers
         public void SetRapidCooldownText(float remainingTime)
         {
             rapidCooldownText.text = $"{remainingTime:F0}";
+        }
+
+        public void OpenTutorial()
+        {
+            var player = MonsterManager.Instance.Player.GetComponent<PlayerController>();
+            if (player)
+            {
+                player.FollowCamera.OnUIOpen();
+            }
+
+            tutorial.SetActive(true);
+        }
+
+        public void OpenOption()
+        {
+            var player = MonsterManager.Instance.Player.GetComponent<PlayerController>();
+            if (player)
+            {
+                player.FollowCamera.OnUIOpen();
+            }
+
+            option.SetActive(true);
         }
 
         #region Fade In/Out

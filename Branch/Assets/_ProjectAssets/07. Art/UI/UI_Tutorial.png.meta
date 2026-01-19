@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0d597151ee8b73640ad4727b160b4437
+guid: 0150f4d393669fe409a7e45b4e5b25a7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 512
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 2
@@ -106,29 +106,58 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 69576be7bbb2589b_0
+      name: UI_Tutorial_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 479
-        width: 128
+        x: 26
+        y: 480
+        width: 77
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1feb23162bcef2245ab193e88984aaaf
+      internalID: -1408466634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Tutorial_2
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 384
+        width: 76
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c1be73a038917b4aaca2756d194a9c1
+      internalID: 1276038619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Tutorial_4
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 287
+        width: 111
         height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -137,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 022b83a510195d24d98ca7c77c916c73
-      internalID: -1075177289
+      spriteID: 1874f4803732a7c47bebdb03d0befdc0
+      internalID: 4994576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 69576be7bbb2589b_1
+      name: UI_Tutorial_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 382
-        width: 128
-        height: 35
+        x: 9
+        y: 191
+        width: 111
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df3799a013e174940b46c84665121cca
-      internalID: 826319822
+      spriteID: 57551dd8a616d4248869bd4ab1b123b5
+      internalID: 1164889072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 69576be7bbb2589b_2
+      name: UI_Tutorial_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 285
-        width: 128
-        height: 35
+        x: 12
+        y: 95
+        width: 104
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4f6047ae457b654cb6b73b8c652bc63
-      internalID: 1562787773
+      spriteID: cd5c66a3188c33d48a5099523ae9e5c9
+      internalID: -1501554354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 69576be7bbb2589b_3
+      name: UI_Tutorial_7
       rect:
         serializedVersion: 2
         x: 0
-        y: 188
+        y: 0
         width: 128
-        height: 37
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,50 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0b7fc8f743131a4c82892728a5f687b
-      internalID: 2135586271
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 69576be7bbb2589b_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 92
-        width: 128
-        height: 37
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 63b0e8bf03b54b44493bde90d8a83f2d
-      internalID: 197316535
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 69576be7bbb2589b_5
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2
-        width: 128
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b94cd2b94101c6c48aec904a8246a5cd
-      internalID: -756555757
+      spriteID: 7c3be5862b534ee419e6256782b3298f
+      internalID: 343305756
       vertices: []
       indices: 
       edges: []
@@ -251,7 +238,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 284673627eaf22d4d90020db78c69fcb
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -259,12 +246,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      69576be7bbb2589b_0: -1075177289
-      69576be7bbb2589b_1: 826319822
-      69576be7bbb2589b_2: 1562787773
-      69576be7bbb2589b_3: 2135586271
-      69576be7bbb2589b_4: 197316535
-      69576be7bbb2589b_5: -756555757
+      UI_Tutorial_0: -1408466634
+      UI_Tutorial_1: -1322440687
+      UI_Tutorial_2: 1276038619
+      UI_Tutorial_3: 1200790066
+      UI_Tutorial_4: 4994576
+      UI_Tutorial_5: 1164889072
+      UI_Tutorial_6: -1501554354
+      UI_Tutorial_7: 343305756
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
