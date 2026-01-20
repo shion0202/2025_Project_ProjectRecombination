@@ -152,9 +152,8 @@ namespace Managers
             try
             {
                 Debug.Log("[GameManager] 게임 실행 준비 중...");
-                // 프롤로그 실행
-                CurrentState = GameState.Prologue;
-            
+                CurrentState = GameState.Loading;
+                
                 // 프롤로그 재생하는 동안 플레이어 씬과 게임 씬 로드
                 await DungeonManager.Instance.Init();
                 await PoolManager.Instance.Init();
@@ -163,6 +162,9 @@ namespace Managers
                 DungeonManager.Instance.SetPlayerStartPosition();
                 
                 Debug.Log("[GameManager] 게임 실행 준비 완료!");
+                
+                // 프롤로그 실행
+                CurrentState = GameState.Prologue;
             }
             catch (Exception e)
             {
