@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f2d69c44041501f4aab1c355410d67b2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 193251
+  packageName: Arcade Vehicle Physics
+  packageVersion: 1.4
+  assetPath: Assets/Ash Assets/Arcade Vehicle Physics/Scripts/ArcadeVehicleController.cs
+  uploadId: 720603

@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.machina.externalassets": {
-      "version": "git+https://github.com/JJH0204/Machina-ExAssets.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "c399ebc7605e4181e4ed20d772a95dd931effefd"
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
