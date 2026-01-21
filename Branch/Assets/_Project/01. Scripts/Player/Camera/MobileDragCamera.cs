@@ -33,7 +33,7 @@ public class MobileDragCamera : MonoBehaviour
 
     [Header("Input Policy")]
     [Tooltip("오른쪽 절반에서만 카메라 드래그 허용.")]
-    [SerializeField] private bool useRightHalfOnly = true;
+    [SerializeField] private bool useRightHalfOnly = false;
 
     [Tooltip("안전영역(노치 등)을 고려하여 조작 영역 계산.")]
     [SerializeField] private bool considerSafeArea = true;
@@ -173,7 +173,7 @@ public class MobileDragCamera : MonoBehaviour
         if (_pov == null) return;
 
         // 해상도/SafeArea 변경 감지 시에만 영역 재계산
-        bool screenChanged = (_lastScreenSize.x != Screen.width) || (_lastScreenSize.y != Screen.height);
+        bool screenChanged = (!Mathf.Approximately(_lastScreenSize.x, Screen.width)) || (!Mathf.Approximately(_lastScreenSize.y, Screen.height));
         bool safeAreaChanged = _lastSafeArea != Screen.safeArea;
 
         if (screenChanged || safeAreaChanged)
