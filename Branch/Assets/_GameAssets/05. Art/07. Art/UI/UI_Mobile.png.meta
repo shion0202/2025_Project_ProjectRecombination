@@ -1,0 +1,878 @@
+fileFormatVersion: 2
+guid: bcb904ed981c7c34c853cf0664dd43be
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: UI_Mobile_18
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 1350
+        width: 81
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7d0f1ff7e613c44f8a47f85b934471b
+      internalID: 654672272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_19
+      rect:
+        serializedVersion: 2
+        x: 1968
+        y: 1359
+        width: 89
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6779f88af4da9cf47899666a3ea577a1
+      internalID: 381768785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_21
+      rect:
+        serializedVersion: 2
+        x: 2131
+        y: 1356
+        width: 83
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05096d9ca0e2a854695695419bf751ae
+      internalID: 1366340941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_37
+      rect:
+        serializedVersion: 2
+        x: 1579
+        y: 1306
+        width: 46
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c959e713d3ab5774fad818e45d64563d
+      internalID: -320718881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_45
+      rect:
+        serializedVersion: 2
+        x: 1846
+        y: 1266
+        width: 91
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c6b4c14841a5584abcb80d0c7b13f1a
+      internalID: 1899667906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_52
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 1195
+        width: 99
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28c37c4beb8f54f459851f60fb251447
+      internalID: -1742762382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_53
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 1199
+        width: 105
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34aecd5f7cafd9a4691562ce75a5f66a
+      internalID: -1039809815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_55
+      rect:
+        serializedVersion: 2
+        x: 1987
+        y: 1266
+        width: 95
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1070fbf9aab3d2f43baabb7ec698faa2
+      internalID: 196044356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_61
+      rect:
+        serializedVersion: 2
+        x: 2131
+        y: 1271
+        width: 93
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b587a2be66688d74a9bd582f2622a737
+      internalID: 169657553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_67
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 1066
+        width: 371
+        height: 369
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79eb648185710d648b827f2a15af3251
+      internalID: 265103858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_78
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 1154
+        width: 154
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b8a771d7772919438d6a9e2a902c9ba
+      internalID: 636953111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_96
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 1135
+        width: 74
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 229d28b65a84a704ca35ff3b9282cd16
+      internalID: -121248230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_99
+      rect:
+        serializedVersion: 2
+        x: 2153
+        y: 1123
+        width: 61
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2f86660ad51dc748b73ae56b7ce6a83
+      internalID: 1272541487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_101
+      rect:
+        serializedVersion: 2
+        x: 2279
+        y: 1139
+        width: 82
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d11be05eaa065d4f817bea19687a21f
+      internalID: -1971249243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_104
+      rect:
+        serializedVersion: 2
+        x: 1962
+        y: 1129
+        width: 75
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56ac072a0b958494687f2e555c33e0d7
+      internalID: 1102634586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_131
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 1019
+        width: 154
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8413649c51a173d4d899b782de954465
+      internalID: 425135721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_146
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 957
+        width: 18
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f120c3269fdc0c14bbdc72dd4ffc5b52
+      internalID: 887307761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_148
+      rect:
+        serializedVersion: 2
+        x: 1959
+        y: 959
+        width: 41
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6a33be203eead240ae92cda592dd01e
+      internalID: -1917664541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_153
+      rect:
+        serializedVersion: 2
+        x: 2254
+        y: 957
+        width: 77
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7010d9d000536c34c9bfa4d3941a8db1
+      internalID: -196500498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_161
+      rect:
+        serializedVersion: 2
+        x: 2117
+        y: 957
+        width: 78
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 568803428a83f5743a3eea66a5a1a06d
+      internalID: -606032636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_172
+      rect:
+        serializedVersion: 2
+        x: 1546
+        y: 890
+        width: 154
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 620cc6b63677d9048b930c8a2e4b2966
+      internalID: 1944402111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_183
+      rect:
+        serializedVersion: 2
+        x: 1933
+        y: 829
+        width: 85
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f966339c500277846b615db2920c5122
+      internalID: 638124065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_190
+      rect:
+        serializedVersion: 2
+        x: 1091
+        y: 702
+        width: 118
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed9ef7d280e9dff4daa299bb6a91b87e
+      internalID: -1024100423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_198
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 449
+        width: 176
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b0bf873577139d4ab3616c8d71bac3f
+      internalID: 372290719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_199
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 449
+        width: 174
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d8aadef3d9c37499cf2933a6507c6b
+      internalID: -1728232467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_Mobile_200
+      rect:
+        serializedVersion: 2
+        x: 1091
+        y: 300
+        width: 118
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fb92703d6925fe44bc57d7d002b35e1
+      internalID: -100899891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      UI_Mobile_0: 1499148054
+      UI_Mobile_1: 2021319499
+      UI_Mobile_10: 1490286385
+      UI_Mobile_100: -1055849306
+      UI_Mobile_101: -1971249243
+      UI_Mobile_102: 33880870
+      UI_Mobile_103: -1165271811
+      UI_Mobile_104: 1102634586
+      UI_Mobile_105: -2079315011
+      UI_Mobile_106: -1773919172
+      UI_Mobile_107: -1953592383
+      UI_Mobile_108: 1835971762
+      UI_Mobile_109: 2133919074
+      UI_Mobile_11: 2023158269
+      UI_Mobile_110: 1806217954
+      UI_Mobile_111: -482663168
+      UI_Mobile_112: -641778002
+      UI_Mobile_113: 392397867
+      UI_Mobile_114: 1073637937
+      UI_Mobile_115: -154920951
+      UI_Mobile_116: 1424656025
+      UI_Mobile_117: 2077577295
+      UI_Mobile_118: -1714657414
+      UI_Mobile_119: 930733236
+      UI_Mobile_12: -207253379
+      UI_Mobile_120: -1487141482
+      UI_Mobile_121: -1734214222
+      UI_Mobile_122: -1878764604
+      UI_Mobile_123: 1117612247
+      UI_Mobile_124: -1305471040
+      UI_Mobile_125: 83725778
+      UI_Mobile_126: -2069106618
+      UI_Mobile_127: 1123575680
+      UI_Mobile_128: -1721179402
+      UI_Mobile_129: 598322307
+      UI_Mobile_13: 1811589801
+      UI_Mobile_130: 569954767
+      UI_Mobile_131: 425135721
+      UI_Mobile_132: -338271901
+      UI_Mobile_133: 550375038
+      UI_Mobile_134: -371053057
+      UI_Mobile_135: -1866827000
+      UI_Mobile_136: 891639006
+      UI_Mobile_137: 909961327
+      UI_Mobile_138: -1866127716
+      UI_Mobile_139: 812561401
+      UI_Mobile_14: -930798211
+      UI_Mobile_140: -1367989635
+      UI_Mobile_141: 545497953
+      UI_Mobile_142: 327965078
+      UI_Mobile_143: 1739392734
+      UI_Mobile_144: 1612854885
+      UI_Mobile_145: 774571982
+      UI_Mobile_146: 887307761
+      UI_Mobile_147: -240892044
+      UI_Mobile_148: -1917664541
+      UI_Mobile_149: 260552877
+      UI_Mobile_15: 511324309
+      UI_Mobile_150: 64036884
+      UI_Mobile_151: 661715244
+      UI_Mobile_152: 576025325
+      UI_Mobile_153: -196500498
+      UI_Mobile_154: -263882791
+      UI_Mobile_155: 148799375
+      UI_Mobile_156: -1859358635
+      UI_Mobile_157: 1454336200
+      UI_Mobile_158: -2132633821
+      UI_Mobile_159: -937319468
+      UI_Mobile_16: -1993035119
+      UI_Mobile_160: -1709117928
+      UI_Mobile_161: -606032636
+      UI_Mobile_162: -1799310767
+      UI_Mobile_163: -950926819
+      UI_Mobile_164: -1844536818
+      UI_Mobile_165: 741467657
+      UI_Mobile_166: -1090157687
+      UI_Mobile_167: 463714052
+      UI_Mobile_168: -40559775
+      UI_Mobile_169: -1424424902
+      UI_Mobile_17: 303626787
+      UI_Mobile_170: -53217444
+      UI_Mobile_171: -1951218379
+      UI_Mobile_172: 1944402111
+      UI_Mobile_173: -406180138
+      UI_Mobile_174: 170233251
+      UI_Mobile_175: 786748189
+      UI_Mobile_176: -7081233
+      UI_Mobile_177: -273822444
+      UI_Mobile_178: -870532868
+      UI_Mobile_179: -1187603501
+      UI_Mobile_18: 654672272
+      UI_Mobile_180: -1813524089
+      UI_Mobile_181: -1667949863
+      UI_Mobile_182: 927306087
+      UI_Mobile_183: 638124065
+      UI_Mobile_184: 1221238314
+      UI_Mobile_185: 1142367399
+      UI_Mobile_186: -104684949
+      UI_Mobile_187: 871383652
+      UI_Mobile_188: -480993436
+      UI_Mobile_189: -1014977024
+      UI_Mobile_19: 381768785
+      UI_Mobile_190: -1024100423
+      UI_Mobile_191: 1281481113
+      UI_Mobile_192: -730511019
+      UI_Mobile_193: -1348881945
+      UI_Mobile_194: 1706448168
+      UI_Mobile_195: -1565441512
+      UI_Mobile_196: -457992683
+      UI_Mobile_197: -339057562
+      UI_Mobile_198: 372290719
+      UI_Mobile_199: -1728232467
+      UI_Mobile_2: -875308356
+      UI_Mobile_20: -239730376
+      UI_Mobile_200: -100899891
+      UI_Mobile_201: 1031651367
+      UI_Mobile_202: -159412995
+      UI_Mobile_203: -1139470867
+      UI_Mobile_204: 1115971172
+      UI_Mobile_21: 1366340941
+      UI_Mobile_22: -1825823375
+      UI_Mobile_23: 1643505362
+      UI_Mobile_24: 1431000876
+      UI_Mobile_25: -1393311957
+      UI_Mobile_26: -1657497144
+      UI_Mobile_27: -1232218347
+      UI_Mobile_28: -961953476
+      UI_Mobile_29: 776203679
+      UI_Mobile_3: 390673902
+      UI_Mobile_30: 1413862346
+      UI_Mobile_31: 46578819
+      UI_Mobile_32: -383532864
+      UI_Mobile_33: -427392817
+      UI_Mobile_34: -2104308027
+      UI_Mobile_35: 1231047403
+      UI_Mobile_36: -888713186
+      UI_Mobile_37: -320718881
+      UI_Mobile_38: -1044124683
+      UI_Mobile_39: 889082296
+      UI_Mobile_4: 1439164134
+      UI_Mobile_40: 817934528
+      UI_Mobile_41: -181337371
+      UI_Mobile_42: 1857003060
+      UI_Mobile_43: -869629454
+      UI_Mobile_44: -955059508
+      UI_Mobile_45: 1899667906
+      UI_Mobile_46: -1828042125
+      UI_Mobile_47: -1553269159
+      UI_Mobile_48: 1491838963
+      UI_Mobile_49: 128395269
+      UI_Mobile_5: -2027079509
+      UI_Mobile_50: -760093461
+      UI_Mobile_51: 675269860
+      UI_Mobile_52: -1742762382
+      UI_Mobile_53: -1039809815
+      UI_Mobile_54: -1211341941
+      UI_Mobile_55: 196044356
+      UI_Mobile_56: -1839400529
+      UI_Mobile_57: -1360057608
+      UI_Mobile_58: -1503492460
+      UI_Mobile_59: 1899888892
+      UI_Mobile_6: -335742635
+      UI_Mobile_60: 531641051
+      UI_Mobile_61: 169657553
+      UI_Mobile_62: 1499061955
+      UI_Mobile_63: -1619580877
+      UI_Mobile_64: -1812111584
+      UI_Mobile_65: -874356239
+      UI_Mobile_66: 2143790059
+      UI_Mobile_67: 265103858
+      UI_Mobile_68: 811700140
+      UI_Mobile_69: -750960796
+      UI_Mobile_7: 910183969
+      UI_Mobile_70: -9878875
+      UI_Mobile_71: -1499440250
+      UI_Mobile_72: -1891258513
+      UI_Mobile_73: 938631974
+      UI_Mobile_74: -1310798932
+      UI_Mobile_75: 1644459733
+      UI_Mobile_76: 1580494519
+      UI_Mobile_77: -987757808
+      UI_Mobile_78: 636953111
+      UI_Mobile_79: 470828431
+      UI_Mobile_8: -1565924051
+      UI_Mobile_80: 1506735463
+      UI_Mobile_81: -1850181508
+      UI_Mobile_82: -1696228158
+      UI_Mobile_83: 839237371
+      UI_Mobile_84: -1885979476
+      UI_Mobile_85: -394941386
+      UI_Mobile_86: 2125321782
+      UI_Mobile_87: 1012686459
+      UI_Mobile_88: 1391778550
+      UI_Mobile_89: 2017793798
+      UI_Mobile_9: 1265243555
+      UI_Mobile_90: -1796718814
+      UI_Mobile_91: -2041921618
+      UI_Mobile_92: 1994419312
+      UI_Mobile_93: 1477645924
+      UI_Mobile_94: 1601860270
+      UI_Mobile_95: -111126471
+      UI_Mobile_96: -121248230
+      UI_Mobile_97: -1762200635
+      UI_Mobile_98: -279804962
+      UI_Mobile_99: 1272541487
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

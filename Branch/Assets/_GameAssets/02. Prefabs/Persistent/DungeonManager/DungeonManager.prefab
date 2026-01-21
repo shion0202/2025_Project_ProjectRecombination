@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7429723126968139185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3603763601909833738}
+  - component: {fileID: 4043723066953735987}
+  m_Layer: 0
+  m_Name: DungeonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3603763601909833738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429723126968139185}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4043723066953735987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7429723126968139185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd85b516ca3a4eef98556cf9e41dc5bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miniMapPrefab: {fileID: 3173371444265284236, guid: 777a791e5249546de8e3f25938231be6,
+    type: 3}
+  startPosition: {fileID: 0}
+  stageDatas:
+  - stageIndex: 0
+    stageName: 1st_Security_Room
+  - stageIndex: 1
+    stageName: 2nd_Control_Room
+  - stageIndex: 2
+    stageName: 3rd_Elevator_Room
+  - stageIndex: 3
+    stageName: 4th_Big_Elevator
+  - stageIndex: 4
+    stageName: 5th_Morgue
+  - stageIndex: 5
+    stageName: 6th_Soul_Care
+  - stageIndex: 6
+    stageName: 7th_Warpgate
+  - stageIndex: 7
+    stageName: 8th_Another_Space
+  - stageIndex: 8
+    stageName: 9th_Warpgate_Return_When_Amon_2Phase_Defeated
+  currentPlayerStageIndex: 0
+  amonFirstPhase: {fileID: 0}
+  amonSecondPhasePrefab: {fileID: 0}
+  playerTeleportPoint: {fileID: 0}
+  playerRespawnPoint: {fileID: 0}

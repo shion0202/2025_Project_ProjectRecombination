@@ -1,0 +1,6 @@
+#ifndef CUSTOM_LIGHTING_INCLUDED
+#define CUSTOM_LIGHTING_INCLUDED
+
+
+
+#endif
