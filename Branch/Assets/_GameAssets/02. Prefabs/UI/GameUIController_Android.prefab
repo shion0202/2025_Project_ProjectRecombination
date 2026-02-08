@@ -757,8 +757,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 297157281873338055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.8, y: 0}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 41, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1399,7 +1399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6645945780381715334
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2393,7 +2393,7 @@ RectTransform:
   m_Father: {fileID: 1751504279203561190}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3623,7 +3623,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 4984105944544464381}
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
@@ -3820,6 +3820,7 @@ GameObject:
   - component: {fileID: 8958358735398232249}
   - component: {fileID: 1820934720964232894}
   - component: {fileID: 6030836356860018003}
+  - component: {fileID: 4773624174426677418}
   m_Layer: 5
   m_Name: Img_Menu_Attack
   m_TagString: Untagged
@@ -3927,7 +3928,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1820934720964232894}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4773624174426677418}
+        m_TargetAssemblyTypeName: UI_TutorialMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4773624174426677418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485256739031936587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d386a98eeea8e734b96b498b9be960dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialKey: Attack
+  controller: {fileID: 6252727508406216258}
 --- !u!1 &1526290982575449685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,10 +5436,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0.8
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4670195771453152047}
+        m_TargetAssemblyTypeName: UI_Option, Assembly-CSharp
+        m_MethodName: SetSEVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2028072585849555212
 GameObject:
   m_ObjectHideFlags: 0
@@ -5726,7 +5765,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1 / 10
+  m_text: 1 / 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b1941770d036c04f8726e4213fd21db, type: 2}
   m_sharedMaterial: {fileID: -4092400106809932780, guid: 9b1941770d036c04f8726e4213fd21db,
@@ -7170,10 +7209,22 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 0.8
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4670195771453152047}
+        m_TargetAssemblyTypeName: UI_Option, Assembly-CSharp
+        m_MethodName: SetBGMVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2862870898515524765
 GameObject:
   m_ObjectHideFlags: 0
@@ -10358,6 +10409,7 @@ GameObject:
   - component: {fileID: 1632821604068988223}
   - component: {fileID: 8860176535163379289}
   - component: {fileID: 1334876979526790208}
+  - component: {fileID: 930144956484633385}
   m_Layer: 5
   m_Name: Img_Menu_Move
   m_TagString: Untagged
@@ -10465,7 +10517,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8860176535163379289}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 930144956484633385}
+        m_TargetAssemblyTypeName: UI_TutorialMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &930144956484633385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3944538873316115129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d386a98eeea8e734b96b498b9be960dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialKey: Move
+  controller: {fileID: 6252727508406216258}
 --- !u!1 &4017646860226673291
 GameObject:
   m_ObjectHideFlags: 0
@@ -11338,8 +11416,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1165056933405804264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.8, y: 0}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 41, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12406,6 +12484,7 @@ GameObject:
   - component: {fileID: 8997279654107349920}
   - component: {fileID: 768958696308869347}
   - component: {fileID: 7828845187472470035}
+  - component: {fileID: 5351907563196872888}
   m_Layer: 5
   m_Name: Img_Menu_Indicator
   m_TagString: Untagged
@@ -12513,7 +12592,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 768958696308869347}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5351907563196872888}
+        m_TargetAssemblyTypeName: UI_TutorialMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5351907563196872888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5052675941917463149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d386a98eeea8e734b96b498b9be960dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialKey: Indicator
+  controller: {fileID: 6252727508406216258}
 --- !u!1 &5129943638685363526
 GameObject:
   m_ObjectHideFlags: 0
@@ -13293,6 +13398,7 @@ GameObject:
   - component: {fileID: 1388090933883197787}
   - component: {fileID: 1013110436060688482}
   - component: {fileID: 2052848966077360353}
+  - component: {fileID: 4411869724519864804}
   m_Layer: 5
   m_Name: Img_Menu_ChangeParts
   m_TagString: Untagged
@@ -13400,7 +13506,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1013110436060688482}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4411869724519864804}
+        m_TargetAssemblyTypeName: UI_TutorialMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4411869724519864804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610364992448285718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d386a98eeea8e734b96b498b9be960dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialKey: ChangeParts
+  controller: {fileID: 6252727508406216258}
 --- !u!1 &5617198158379844122
 GameObject:
   m_ObjectHideFlags: 0
@@ -13691,7 +13823,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100%
+  m_text: 80%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b8c984e6b639e4fa08566623a00c02, type: 2}
   m_sharedMaterial: {fileID: -7136064791811694356, guid: 71b8c984e6b639e4fa08566623a00c02,
@@ -15927,6 +16059,7 @@ GameObject:
   - component: {fileID: 5971196900003860462}
   - component: {fileID: 3279906510301256102}
   - component: {fileID: 6269148618157003714}
+  - component: {fileID: 6252727508406216258}
   m_Layer: 5
   m_Name: UI_Tutorial
   m_TagString: Untagged
@@ -16017,6 +16150,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6252727508406216258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6272315718830238149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbd1cdc03aea164292b22271d8ed1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 1477774030286471040}
+  descriptionText: {fileID: 583559434390678607}
+  exampleImage: {fileID: 2690168689996390141}
+  defaultKey: Move
 --- !u!1 &6283519368365486111
 GameObject:
   m_ObjectHideFlags: 0
@@ -16029,7 +16178,7 @@ GameObject:
   - component: {fileID: 2754633972705101584}
   - component: {fileID: 1615351732236752996}
   m_Layer: 5
-  m_Name: Txt_BGM
+  m_Name: Txt_SE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16082,7 +16231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100%
+  m_text: 80%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b8c984e6b639e4fa08566623a00c02, type: 2}
   m_sharedMaterial: {fileID: -7136064791811694356, guid: 71b8c984e6b639e4fa08566623a00c02,
@@ -18568,6 +18717,7 @@ GameObject:
   - component: {fileID: 7147876359145426721}
   - component: {fileID: 7748593508634028893}
   - component: {fileID: 5030751822136374188}
+  - component: {fileID: 1532989488624867811}
   m_Layer: 5
   m_Name: Img_Menu_PartSkill
   m_TagString: Untagged
@@ -18675,7 +18825,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7748593508634028893}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1532989488624867811}
+        m_TargetAssemblyTypeName: UI_TutorialMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1532989488624867811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7170418877827922512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d386a98eeea8e734b96b498b9be960dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialKey: PartSkill
+  controller: {fileID: 6252727508406216258}
 --- !u!1 &7221698390866734476
 GameObject:
   m_ObjectHideFlags: 0
@@ -19954,7 +20130,7 @@ RectTransform:
   m_Father: {fileID: 5369633236163268696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22042,6 +22218,7 @@ GameObject:
   - component: {fileID: 2269643453155359546}
   - component: {fileID: 2719749244324945917}
   - component: {fileID: 4207578265086796590}
+  - component: {fileID: 3770161569586639663}
   m_Layer: 5
   m_Name: Img_Menu_Interaction
   m_TagString: Untagged
@@ -22149,7 +22326,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2719749244324945917}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3770161569586639663}
+        m_TargetAssemblyTypeName: UI_TutorialMenuButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3770161569586639663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510034334921986374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d386a98eeea8e734b96b498b9be960dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialKey: Interaction
+  controller: {fileID: 6252727508406216258}
 --- !u!1 &8534121626411380358
 GameObject:
   m_ObjectHideFlags: 0
@@ -23504,6 +23707,7 @@ GameObject:
   - component: {fileID: 1948359688996321723}
   - component: {fileID: 8172228836328997625}
   - component: {fileID: 6409689672915381576}
+  - component: {fileID: 4670195771453152047}
   m_Layer: 5
   m_Name: UI_Setting
   m_TagString: Untagged
@@ -23594,6 +23798,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4670195771453152047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016159332763083681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d8b625e07d0d4b45b0a39e9cb2ad4f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 61a5faa6522bc9b4a9fde3fa6711f734, type: 2}
+  bgmVolumeText: {fileID: 2261284476587638067}
+  seVolumeText: {fileID: 1615351732236752996}
 --- !u!1 &9098858217499592364
 GameObject:
   m_ObjectHideFlags: 0
