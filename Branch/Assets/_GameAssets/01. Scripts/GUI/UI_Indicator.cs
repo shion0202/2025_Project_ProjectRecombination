@@ -34,6 +34,7 @@ public class UI_Indicator : MonoBehaviour
     {
         target = defaultTarget;
         player = Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>();
+        mainCamera = Camera.main;
     }
 
     void Update()

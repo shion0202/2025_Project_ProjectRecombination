@@ -194,6 +194,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "QuickTurn",
+                    "type": "Button",
+                    "id": "3c9987a1-f217-41e1-9047-c37df5f351b0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -645,6 +654,39 @@
                     "processors": "",
                     "groups": ";Mobile;PC_Keyboard",
                     "action": "BothAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d0021e3-e712-4898-9e66-8f6f00efb126",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile;PC_Keyboard",
+                    "action": "BothAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41106c4a-005f-4f4d-8648-f0694e9aa7d8",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC_Keyboard",
+                    "action": "QuickTurn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58fd96f4-8fb1-4a0a-a7b3-e1a8415beb6f",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC_Keyboard;Mobile",
+                    "action": "QuickTurn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

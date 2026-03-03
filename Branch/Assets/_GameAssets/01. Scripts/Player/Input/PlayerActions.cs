@@ -280,6 +280,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QuickTurn"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c9987a1-f217-41e1-9047-c37df5f351b0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -733,6 +742,39 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""action"": ""BothAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d0021e3-e712-4898-9e66-8f6f00efb126"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Mobile;PC_Keyboard"",
+                    ""action"": ""BothAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41106c4a-005f-4f4d-8648-f0694e9aa7d8"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC_Keyboard"",
+                    ""action"": ""QuickTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58fd96f4-8fb1-4a0a-a7b3-e1a8415beb6f"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";PC_Keyboard;Mobile"",
+                    ""action"": ""QuickTurn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -972,6 +1014,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_PlayerActionMap_Jump = m_PlayerActionMap.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActionMap_Zoom = m_PlayerActionMap.FindAction("Zoom", throwIfNotFound: true);
         m_PlayerActionMap_ResetCamera = m_PlayerActionMap.FindAction("ResetCamera", throwIfNotFound: true);
+        m_PlayerActionMap_QuickTurn = m_PlayerActionMap.FindAction("QuickTurn", throwIfNotFound: true);
         // JumpAttackActionMap
         m_JumpAttackActionMap = asset.FindActionMap("JumpAttackActionMap", throwIfNotFound: true);
         m_JumpAttackActionMap_Move = m_JumpAttackActionMap.FindAction("Move", throwIfNotFound: true);
@@ -1084,6 +1127,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActionMap_Jump;
     private readonly InputAction m_PlayerActionMap_Zoom;
     private readonly InputAction m_PlayerActionMap_ResetCamera;
+    private readonly InputAction m_PlayerActionMap_QuickTurn;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerActionMap".
     /// </summary>
@@ -1180,6 +1224,10 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @ResetCamera => m_Wrapper.m_PlayerActionMap_ResetCamera;
         /// <summary>
+        /// Provides access to the underlying input action "PlayerActionMap/QuickTurn".
+        /// </summary>
+        public InputAction @QuickTurn => m_Wrapper.m_PlayerActionMap_QuickTurn;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_PlayerActionMap; }
@@ -1268,6 +1316,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @ResetCamera.started += instance.OnResetCamera;
             @ResetCamera.performed += instance.OnResetCamera;
             @ResetCamera.canceled += instance.OnResetCamera;
+            @QuickTurn.started += instance.OnQuickTurn;
+            @QuickTurn.performed += instance.OnQuickTurn;
+            @QuickTurn.canceled += instance.OnQuickTurn;
         }
 
         /// <summary>
@@ -1342,6 +1393,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @ResetCamera.started -= instance.OnResetCamera;
             @ResetCamera.performed -= instance.OnResetCamera;
             @ResetCamera.canceled -= instance.OnResetCamera;
+            @QuickTurn.started -= instance.OnQuickTurn;
+            @QuickTurn.performed -= instance.OnQuickTurn;
+            @QuickTurn.canceled -= instance.OnQuickTurn;
         }
 
         /// <summary>
@@ -1780,6 +1834,13 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnResetCamera(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "QuickTurn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQuickTurn(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "JumpAttackActionMap" which allows adding and removing callbacks.

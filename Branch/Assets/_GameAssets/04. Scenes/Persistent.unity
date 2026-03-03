@@ -155,7 +155,7 @@ MonoBehaviour:
   - managerType: 0
     managerPrefab: {fileID: 3886129718511960932, guid: 1a45fbdf9f1e4409e9a39446c2b5f90c,
       type: 3}
-  - managerType: 8
+  - managerType: 7
     managerPrefab: {fileID: 354075799538619577, guid: c5e83e5c6ef6e479ab62c272bb525fc1,
       type: 3}
   - managerType: 2
@@ -164,25 +164,25 @@ MonoBehaviour:
   - managerType: 1
     managerPrefab: {fileID: 6181618449983523092, guid: 3ae3c7b1c44124f98b57e995c383dd82,
       type: 3}
-  - managerType: 7
+  - managerType: 6
     managerPrefab: {fileID: 1604775639143964874, guid: a5d3c737b67908a428b5c9da70f9be55,
       type: 3}
-  - managerType: 6
+  - managerType: 5
     managerPrefab: {fileID: 9211179836300288814, guid: 23bed93b983f24f46b609973d7ce55ee,
       type: 3}
-  - managerType: 4
+  - managerType: 3
     managerPrefab: {fileID: 7429723126968139185, guid: 3b8274735912145e6938e3fd2ef22be1,
       type: 3}
-  - managerType: 5
+  - managerType: 4
     managerPrefab: {fileID: 1142317525218384322, guid: 234012d9e29344dea9ae2ae391090a9d,
       type: 3}
-  - managerType: 10
+  - managerType: 9
     managerPrefab: {fileID: 863833892386728678, guid: c2861675f4a7e42d49c8080e6e2c73a7,
       type: 3}
-  - managerType: 9
+  - managerType: 8
     managerPrefab: {fileID: 7100317660788745124, guid: d55b4eca5714a4f3fac3acf6a323790c,
       type: 3}
-  - managerType: 11
+  - managerType: 10
     managerPrefab: {fileID: 2922577610311866960, guid: c0058a79d834746229a4278cd49d9dcf,
       type: 3}
 --- !u!4 &1320477662

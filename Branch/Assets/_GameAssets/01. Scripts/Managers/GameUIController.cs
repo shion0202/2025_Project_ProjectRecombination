@@ -436,8 +436,8 @@ namespace Managers
                 _selectedPartIndex = -1;
 
                 Time.timeScale = 1.0f;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                //Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.visible = false;
 
                 Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>().SetMovable(true);
                 Managers.MonsterManager.Instance.Player.GetComponent<PlayerController>().FollowCamera.SetCameraRotatable(true);
@@ -813,8 +813,8 @@ namespace Managers
                 player.FollowCamera.OnUIClose();
             }
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
 
             GUI.SetActive(true);
             pauseUI.SetActive(false);

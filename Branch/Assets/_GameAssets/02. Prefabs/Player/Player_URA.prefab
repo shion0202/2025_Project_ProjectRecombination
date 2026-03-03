@@ -1576,11 +1576,12 @@ MonoBehaviour:
   lowHp: {fileID: 0}
   navi: {fileID: 0}
   movementBlockMask: 8968
-  dashBlockMask: 11012
-  skillBlockMask: 11012
-  shootBlockMask: 11016
-  zoomBlockMask: 8960
+  dashBlockMask: 27396
+  skillBlockMask: 27396
+  shootBlockMask: 27400
+  zoomBlockMask: 25344
   partChangeBlockMask: 15164
+  quickTurnBlockMask: 31544
   jumpVelocity: 30
   rotationSpeed: 20
   boxSize: {x: 0.2, y: 0.1, z: 0.2}

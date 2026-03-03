@@ -75,8 +75,8 @@ public class ArmBasic : PartBaseArm
         _currentAmmo = Mathf.Clamp(_currentAmmo - 1, 0, maxAmmo);
         if (_currentAmmo <= 0)
         {
-            CancleShootState(partType == EPartType.ArmL ? true : false);
             _isOverheat = true;
+            CancleShootState(partType == EPartType.ArmL ? true : false);
         }
     }
 }

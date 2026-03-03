@@ -432,8 +432,6 @@ GameObject:
   - component: {fileID: 3750729134949462029}
   - component: {fileID: 5941306011934582950}
   - component: {fileID: 4121268085018721999}
-  - component: {fileID: 2931792196858412046}
-  - component: {fileID: 2046278185230971327}
   m_Layer: 0
   m_Name: FollowCamera
   m_TagString: Untagged
@@ -512,7 +510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 16064513
+    m_Bits: 150282241
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
@@ -565,48 +563,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCameraState: 0
   _owner: {fileID: 0}
+  quickTurnDuration: 0.1
+  dragSensitivity: 0.2
+  assistRadius: 100
+  assistStrength: 0.2
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 145235968
   recoilRecoverySpeed: 20
---- !u!114 &2931792196858412046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765793853822610566}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerIndex: -1
-  AutoEnableInputs: 1
-  XYAxis: {fileID: 2502121402016220982, guid: 7cccd61a7d56afb44af2ceefb868e21c, type: 3}
-  ZAxis: {fileID: 0}
---- !u!114 &2046278185230971327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8765793853822610566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2053b681c757e214c8eb38be7e6b988f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vcam: {fileID: 621066846622348936}
-  sensitivity: 107.2
-  invertY: 0
-  maxDeltaInches: 1
-  deadZoneInches: 0.01
-  useRightHalfOnly: 0
-  considerSafeArea: 1
-  ignoreUI: 1
-  blockOnMultiTouch: 0
-  releaseOnAreaExit: 0
-  releaseOnUIEnter: 1
-  smoothingTime: 0.05
-  dpiFallback: 200
-  disableInputProvider: 1
-  configurePOVAxesOnAwake: 1
-  editorEnableTouchSimulation: 1

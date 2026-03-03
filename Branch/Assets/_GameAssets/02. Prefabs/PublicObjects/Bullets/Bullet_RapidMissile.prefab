@@ -9635,6 +9635,7 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 0
+  collisionTags: []
   muzzleParticlePrefab: {fileID: 146450, guid: 189837baf0e34034881c61044f6b2aaa, type: 3}
   impactParticle: {fileID: 0}
   explosionEffectPrefab: {fileID: 134280, guid: 0d074214414ef1243a43a628f3ccec15,
@@ -9645,7 +9646,7 @@ MonoBehaviour:
   explodeDistanceThreshold: 2
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 16261120
+    m_Bits: 150478848
 --- !u!4 &1903344226896516440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b3520d2fdd51d98479996609d5982f73,

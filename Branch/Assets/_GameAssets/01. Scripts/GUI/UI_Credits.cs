@@ -11,8 +11,8 @@ public class UI_Credits : MonoBehaviour
     {
         if (gameObject.transform.position.y >= targetPosition)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            //Cursor.lockState = CursorLockMode.None;
+            //Cursor.visible = true;
 
             // SceneManager.LoadScene("TitleScene");
             GameManager.Instance.EnterTitle();

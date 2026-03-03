@@ -1,9 +1,9 @@
 using Cinemachine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 // 기획자 작업 편의를 위해, 씬에서 SO 값을 변경하여 바로 적용할 수 있도록 ExecuteInEditMode 속성 추가
 [ExecuteInEditMode]
@@ -27,6 +27,18 @@ public class FollowCameraController : MonoBehaviour
 
     private Vector2 _lockedValue = Vector2.zero;
     private bool _isLockedByUI = false;
+
+    [Header("Mobile Camera Settings")]
+    [SerializeField] private float quickTurnDuration = 0.1f;
+    private bool _isQuickTurning = false;
+    private Coroutine _quickTurnCoroutine = null;
+    [SerializeField] private float dragSensitivity = 0.15f;
+    private int _dragFingerId = -1;                             // 현재 카메라를 드래그 중인 손가락 ID
+    private Vector2 _lastMousePosition;                         // 이전 프레임의 터치 위치
+    [SerializeField] private float assistRadius = 150.0f;       // 화면 중심으로부터의 픽셀 반경
+    [SerializeField] private float assistStrength = 0.2f;       // 보정 강도 (0~1)
+    [SerializeField] private LayerMask targetLayer;             // 보정을 할 타겟 레이어
+    private Coroutine _aimAssistCoroutine = null;
 
     [Header("Recoil Settings")]
     [SerializeField] private float recoilRecoverySpeed = 20.0f;
@@ -201,6 +213,7 @@ public class FollowCameraController : MonoBehaviour
     // Update에서 매 프레임마다 실행되는 카메라 관련 함수
     public void UpdateFollowCamera()
     {
+        HandleMobileCameraDrag();
         SmoothChangeCamera();
         ZoomCamera();
         HandleRecoil();
@@ -310,6 +323,56 @@ public class FollowCameraController : MonoBehaviour
         return $"[{gameObject.name} ({GetType().Name})] State: {currentCameraState}, Owner: {ownerName}, Target: {targetName}, IsLock: {_isLock}, " +
                $"ScrollY: {_scrollY:F2}, CurrentRecoilX: {_currentRecoilX:F2}, CurrentRecoilY: {_currentRecoilY:F2}, CameraSetting: [{settingInfo}]";
     }
+
+    public void StartQuickTurn()
+    {
+        if (_quickTurnCoroutine != null) return;
+
+        // Quick Turn 중 카메라 회전, 공격, 스킬 사용 불가
+        // 카메라 회전, 공격 중일 경우 취소하고 Quick Turn하며, 스킬 사용 중에는 불가능하도록 구현
+        _quickTurnCoroutine = StartCoroutine(QuickTurnCoroutine());
+    }
+
+    public void ApplyAimAssist()
+    {
+        // 화면 중앙 좌표 계산
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+
+        // 가장 가까운 타겟 탐색
+        Collider[] targets = Physics.OverlapSphere(_cameraTarget.position, 30f, targetLayer);
+        Transform bestTarget = null;
+        float closestScreenDistance = assistRadius;
+
+        foreach (var target in targets)
+        {
+            // 적의 중심부 위치 계산
+            Vector3 targetPos = target.bounds.center;
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(targetPos);
+
+            // 카메라 뒤에 있는 적 제외
+            if (screenPos.z < 0) continue;
+
+            // 화면 중앙과의 거리 계산
+            float dist = Vector2.Distance(screenCenter, new Vector2(screenPos.x, screenPos.y));
+
+            if (dist < closestScreenDistance)
+            {
+                closestScreenDistance = dist;
+                bestTarget = target.transform;
+            }
+        }
+
+        // 타겟이 있다면 카메라 축 값을 부드럽게 보정
+        if (bestTarget != null)
+        {
+            if (_aimAssistCoroutine != null)
+            {
+                StopCoroutine(_aimAssistCoroutine);
+            }
+
+            _aimAssistCoroutine = StartCoroutine(AimAssistCoroutine(bestTarget));
+        }
+    }
     #endregion
 
     #region Private Methods
@@ -363,6 +426,149 @@ public class FollowCameraController : MonoBehaviour
             float recoveryStep = recoilRecoverySpeed * Time.deltaTime;
             _currentRecoilX = Mathf.MoveTowards(_currentRecoilX, 0, recoveryStep);
             _currentRecoilY = Mathf.Max(0, _currentRecoilY - recoveryStep);
+        }
+    }
+
+    private IEnumerator QuickTurnCoroutine()
+    {
+        _isQuickTurning = true;
+
+        // 회전 시작 시 현재의 입력 잠금 상태를 저장하거나 강제로 잠금
+        bool wasLocked = _isLock;
+        _isLock = true;
+
+        float elapsedTime = 0f;
+        float startX = _cameraAim.m_HorizontalAxis.Value;
+        float targetX = startX + 180.0f; // 180도 뒤로 목표 설정
+
+        while (elapsedTime < quickTurnDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / quickTurnDuration;
+
+            // SmoothStep을 사용하여 부드러운 가속/감속 효과 적용
+            float smoothT = Mathf.SmoothStep(0, 1, t);
+            _cameraAim.m_HorizontalAxis.Value = Mathf.Lerp(startX, targetX, smoothT);
+
+            yield return null;
+        }
+
+        // 최종 각도 보정 및 상태 복구
+        _cameraAim.m_HorizontalAxis.Value = targetX;
+        _isLock = wasLocked; // 원래 잠금 상태로 복구
+
+        // Player State도 복구
+        PlayerController player = _owner.GetComponent<PlayerController>();
+        if (player)
+        {
+            player.SetPlayerState(EPlayerState.QuickTurning, false);
+        }
+
+        _isQuickTurning = false;
+        _quickTurnCoroutine = null;
+    }
+
+    private bool IsPointerOverUI(int fingerId = -1)
+    {
+        if (EventSystem.current == null) return false;
+
+        // 포인터 위치 결정
+        Vector2 pointerPosition;
+        if (fingerId == -1)
+            pointerPosition = Input.mousePosition;
+        else if (Input.touchCount > fingerId)
+            pointerPosition = Input.GetTouch(fingerId).position;
+        else
+            return false;
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = pointerPosition;
+
+        // 모든 UI 요소를 대상으로 레이캐스트 실행
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        return results.Count > 0;
+    }
+
+    private void HandleMobileCameraDrag()
+    {
+        // 특정 상황에서 카메라 회전이 불가능하도록 제어
+        if (_isQuickTurning || _isLockedByUI || _isLock || _quickTurnCoroutine != null) return;
+
+        // EventSystem 안전 장치 (씬에 EventSystem이 없거나 초기화 안 된 경우 방지)
+        if (UnityEngine.EventSystems.EventSystem.current == null) return;
+
+        // 모바일 터치 처리 (멀티 터치 대응)
+        if (Input.touchCount > 0)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                // 터치 시작 시: UI 버튼 위가 아닌 경우에만 드래그 시작
+                if (touch.phase == TouchPhase.Began)
+                {
+                    if (IsPointerOverUI(touch.fingerId)) continue;
+
+                    _dragFingerId = touch.fingerId;
+                    _lastMousePosition = touch.position;
+                }
+                // 드래그 중: 시작할 때 잡은 손가락만 추적 (UI 영역 무시)
+                else if (touch.fingerId == _dragFingerId)
+                {
+                    if (touch.phase == TouchPhase.Moved)
+                    {
+                        float deltaX = touch.position.x - _lastMousePosition.x;
+                        float deltaY = touch.position.y - _lastMousePosition.y;
+
+                        // 시네머신 축 값에 직접 더함 (떨림 방지)
+                        _cameraAim.m_HorizontalAxis.Value += deltaX * dragSensitivity;
+                        _cameraAim.m_VerticalAxis.Value -= deltaY * dragSensitivity;
+
+                        _lastMousePosition = touch.position;
+                    }
+                    else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                    {
+                        _dragFingerId = -1;
+                    }
+                }
+            }
+        }
+    }
+
+    private IEnumerator AimAssistCoroutine(Transform target)
+    {
+        float elapsed = 0.0f;
+        float duration = 0.1f; // 보정 시간
+
+        float startX = _cameraAim.m_HorizontalAxis.Value;
+        float startY = _cameraAim.m_VerticalAxis.Value;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            float smoothT = Mathf.SmoothStep(0, 1, t);
+
+            // 현재 적을 바라보기 위한 목표 회전값 계산
+            Vector3 dirToTarget = (target.position - Camera.main.transform.position).normalized;
+            Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
+
+            // 현재 카메라의 POV 축 값을 타겟 방향으로 살짝 보정
+            // POV의 각도는 오일러 각도를 따르므로 직접 값을 부드럽게 섞음 (POV Vertical 축 범위 대응)
+            float targetX = targetRot.eulerAngles.y;
+            float targetY = targetRot.eulerAngles.x;
+            if (targetY > 180)
+            {
+                targetY -= 360.0f;
+            }
+
+            float deltaX = Mathf.DeltaAngle(_cameraAim.m_HorizontalAxis.Value, targetX);
+            float deltaY = Mathf.DeltaAngle(_cameraAim.m_VerticalAxis.Value, targetY);
+
+            _cameraAim.m_HorizontalAxis.Value += deltaX * assistStrength * smoothT;
+            _cameraAim.m_VerticalAxis.Value += deltaY * assistStrength * smoothT;
+
+            yield return null;
         }
     }
     #endregion

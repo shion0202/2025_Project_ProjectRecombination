@@ -14524,7 +14524,7 @@ MonoBehaviour:
   explodeDistanceThreshold: 2
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 13967361
+    m_Bits: 148185089
 --- !u!1 &185690
 GameObject:
   m_ObjectHideFlags: 0

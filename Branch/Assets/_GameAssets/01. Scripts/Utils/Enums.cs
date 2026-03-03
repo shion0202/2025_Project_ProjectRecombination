@@ -85,6 +85,7 @@ public enum EPlayerState
     Skilling = 1 << 11,
     Nuking = 1 << 12,
     Cutscene = 1 << 13,
+    QuickTurning = 1 << 14,
 
     RotateState = Moving | LeftShooting | RightShooting | Zooming | Skilling | Nuking,
     ActionState = Idle | Moving | Dashing | LeftShooting | RightShooting | Zooming,

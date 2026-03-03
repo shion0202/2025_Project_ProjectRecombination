@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField] private EPlayerState shootBlockMask = EPlayerState.Dashing;
     [SerializeField] private EPlayerState zoomBlockMask = EPlayerState.Dashing;
     [SerializeField] private EPlayerState partChangeBlockMask;
+    [SerializeField] private EPlayerState quickTurnBlockMask;
     private EPlayerState _currentPlayerState = EPlayerState.Idle;
     private EPlayerState _previousState = 0;
     private bool _isLeftAttackReady = false;
@@ -381,26 +382,52 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         if (Managers.GUIManager.Instance.GameUIController.WorldMap.activeSelf) return;
         if (Managers.GUIManager.Instance.GameUIController.PauseUI.activeSelf) return;
 
+        // PC 버전 기준, 추후 빌드 플랫폼에 따라 다르게 적용되도록 수정 필요
+        //if (context.started)
+        //{
+        //    // UI 활성화 시 커서 보이기, 자유롭게
+        //    Managers.GUIManager.Instance.GameUIController.ToggleRadialUI(true);
+        //    Managers.GUIManager.Instance.GameUIController.ActivateRedDot(false);
+        //    Cursor.lockState = CursorLockMode.None;
+        //    Cursor.visible = true;
+
+        //    // To-do: 공격 등 다른 조작도 불가능하도록 설정
+        //    // 컨트롤러를 바꿔버리는 것도 방법인 듯
+        //    SetMovable(false);
+        //    _followCamera.SetCameraRotatable(false);
+
+        //    Time.timeScale = 0.1f;
+        //}
+
+        //if (context.canceled)
+        //{
+        //    if (!Managers.GUIManager.Instance.GameUIController.RadialUI.activeSelf) return;
+        //    CloseRadialUI();
+        //}
+
         if (context.started)
         {
-            // UI 활성화 시 커서 보이기, 자유롭게
-            Managers.GUIManager.Instance.GameUIController.ToggleRadialUI(true);
-            Managers.GUIManager.Instance.GameUIController.ActivateRedDot(false);
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            // Radial UI가 꺼져있을 경우
+            if (!Managers.GUIManager.Instance.GameUIController.RadialUI.activeSelf)
+            {
+                // UI 활성화 시 커서 보이기, 자유롭게
+                Managers.GUIManager.Instance.GameUIController.ToggleRadialUI(true);
+                Managers.GUIManager.Instance.GameUIController.ActivateRedDot(false);
+                //Cursor.lockState = CursorLockMode.None;
+                //Cursor.visible = true;
 
-            // To-do: 공격 등 다른 조작도 불가능하도록 설정
-            // 컨트롤러를 바꿔버리는 것도 방법인 듯
-            SetMovable(false);
-            _followCamera.SetCameraRotatable(false);
+                // To-do: 공격 등 다른 조작도 불가능하도록 설정
+                // 컨트롤러를 바꿔버리는 것도 방법인 듯
+                SetMovable(false);
+                _followCamera.SetCameraRotatable(false);
 
-            Time.timeScale = 0.1f;
-        }
-
-        if (context.canceled)
-        {
-            if (!Managers.GUIManager.Instance.GameUIController.RadialUI.activeSelf) return;
-            CloseRadialUI();
+                Time.timeScale = 0.1f;
+            }
+            else
+            {
+                // UI가 켜져있을 경우
+                CloseRadialUI();
+            }
         }
     }
 
@@ -568,8 +595,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                 {
                     _followCamera.OnUIClose();
 
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                    //Cursor.lockState = CursorLockMode.Locked;
+                    //Cursor.visible = false;
                     Managers.GUIManager.Instance.GameUIController.HUD.SetActive(true);
                     Time.timeScale = 1.0f;
                 }
@@ -586,8 +613,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                 {
                     _followCamera.OnUIClose();
 
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                    //Cursor.lockState = CursorLockMode.Locked;
+                    //Cursor.visible = false;
                     Managers.GUIManager.Instance.GameUIController.HUD.SetActive(true);
                     Time.timeScale = 1.0f;
                 }
@@ -611,8 +638,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             {
                 _followCamera.OnUIOpen();
 
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                //Cursor.lockState = CursorLockMode.None;
+                //Cursor.visible = true;
 
                 Managers.GUIManager.Instance.GameUIController.PauseUI.SetActive(true);
                 Managers.GUIManager.Instance.GameUIController.HUD.SetActive(false);
@@ -622,8 +649,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             {
                 _followCamera.OnUIClose();
 
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                //Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.visible = false;
 
                 Managers.GUIManager.Instance.GameUIController.PauseUI.SetActive(false);
                 Managers.GUIManager.Instance.GameUIController.HUD.SetActive(true);
@@ -635,6 +662,18 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     void PlayerActions.IPlayerActionMapActions.OnLook(InputAction.CallbackContext context)
     {
         
+    }
+
+    void PlayerActions.IPlayerActionMapActions.OnQuickTurn(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            // 특정 상태일 때 뒤돌기 불가능
+            if ((_currentPlayerState & quickTurnBlockMask) != 0) return;
+
+            SetPlayerState(EPlayerState.QuickTurning, true);
+            _followCamera.StartQuickTurn();
+        }
     }
 
     // 우클릭을 통해 사격을 위한 줌을 준비하는 기능
@@ -859,6 +898,10 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     public void CancleAttack(bool isLeft)
     {
         if ((_currentPlayerState & EPlayerState.ShootState) == 0) return;
+
+        // 기본 무기일 경우 자동으로 사격을 종료하므로 사격 취소 로직을 실행하지 않도록 함
+        PartBaseArm weapon = (PartBaseArm)(isLeft ? inventory.EquippedItems[EPartType.ArmL][0] : inventory.EquippedItems[EPartType.ArmR][0]);
+        if (weapon is ArmBasic && !weapon.IsOverheat) return;
 
         if (isLeft)
         {
@@ -1326,6 +1369,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             SetOvrrideAnimator();
             stats.AddModifier(new StatModifier(EStatType.WalkSpeed, EStackType.PercentMul, -0.3f, this));
         }
+
+        _followCamera.ApplyAimAssist();
 
         if ((_currentPlayerState & EPlayerState.LeftShooting) != 0 && isLeft)
         {
