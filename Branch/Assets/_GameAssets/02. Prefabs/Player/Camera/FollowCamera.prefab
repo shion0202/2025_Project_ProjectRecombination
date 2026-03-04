@@ -564,7 +564,7 @@ MonoBehaviour:
   currentCameraState: 0
   _owner: {fileID: 0}
   quickTurnDuration: 0.1
-  dragSensitivity: 0.2
+  dragSensitivity: 0.8
   assistRadius: 100
   assistStrength: 0.2
   targetLayer:

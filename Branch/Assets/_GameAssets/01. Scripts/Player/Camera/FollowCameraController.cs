@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 // 기획자 작업 편의를 위해, 씬에서 SO 값을 변경하여 바로 적용할 수 있도록 ExecuteInEditMode 속성 추가
 [ExecuteInEditMode]
@@ -218,17 +219,20 @@ public class FollowCameraController : MonoBehaviour
         ZoomCamera();
         HandleRecoil();
 
+        _cameraAim.m_HorizontalAxis.m_InputAxisName = ""; // 입력 비활성화
+        _cameraAim.m_VerticalAxis.m_InputAxisName = "";
+
         if (_isLock)
         {
-            _cameraAim.m_HorizontalAxis.m_InputAxisName = ""; // 입력 비활성화
-            _cameraAim.m_VerticalAxis.m_InputAxisName = "";
+            //_cameraAim.m_HorizontalAxis.m_InputAxisName = "";
+            //_cameraAim.m_VerticalAxis.m_InputAxisName = "";
             _cameraAim.m_HorizontalAxis.m_InputAxisValue = 0.0f;
             _cameraAim.m_VerticalAxis.m_InputAxisValue = 0.0f;
         }
         else
         {
-            _cameraAim.m_HorizontalAxis.m_InputAxisName = "Mouse X";
-            _cameraAim.m_VerticalAxis.m_InputAxisName = "Mouse Y";
+            //_cameraAim.m_HorizontalAxis.m_InputAxisName = "Mouse X";
+            //_cameraAim.m_VerticalAxis.m_InputAxisName = "Mouse Y";
         }
     }
 
@@ -468,23 +472,13 @@ public class FollowCameraController : MonoBehaviour
         _quickTurnCoroutine = null;
     }
 
-    private bool IsPointerOverUI(int fingerId = -1)
+    private bool IsPointerOverUI(int fingerId, Vector2 position)
     {
         if (EventSystem.current == null) return false;
 
-        // 포인터 위치 결정
-        Vector2 pointerPosition;
-        if (fingerId == -1)
-            pointerPosition = Input.mousePosition;
-        else if (Input.touchCount > fingerId)
-            pointerPosition = Input.GetTouch(fingerId).position;
-        else
-            return false;
-
         PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = pointerPosition;
+        eventData.position = position;
 
-        // 모든 UI 요소를 대상으로 레이캐스트 실행
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
 
@@ -493,43 +487,54 @@ public class FollowCameraController : MonoBehaviour
 
     private void HandleMobileCameraDrag()
     {
-        // 특정 상황에서 카메라 회전이 불가능하도록 제어
         if (_isQuickTurning || _isLockedByUI || _isLock || _quickTurnCoroutine != null) return;
+        if (EventSystem.current == null) return;
 
-        // EventSystem 안전 장치 (씬에 EventSystem이 없거나 초기화 안 된 경우 방지)
-        if (UnityEngine.EventSystems.EventSystem.current == null) return;
+        // 터치스크린 하드웨어 체크
+        var touchscreen = Touchscreen.current;
+        if (touchscreen == null) return;
 
-        // 모바일 터치 처리 (멀티 터치 대응)
-        if (Input.touchCount > 0)
+        // 매 프레임 입력값 초기화
+        _cameraAim.m_HorizontalAxis.m_InputAxisValue = 0.0f;
+        _cameraAim.m_VerticalAxis.m_InputAxisValue = 0.0f;
+
+        var allTouches = touchscreen.touches;
+        foreach (var touch in allTouches)
         {
-            foreach (Touch touch in Input.touches)
+            // 활성화되지 않은 터치 슬롯은 건너뜀
+            if (!touch.isInProgress) continue;
+
+            int fingerId = touch.touchId.ReadValue();
+            Vector2 currentTouchPos = touch.position.ReadValue();
+
+            // 터치 시작 시 (Began)
+            if (touch.press.wasPressedThisFrame)
             {
-                // 터치 시작 시: UI 버튼 위가 아닌 경우에만 드래그 시작
-                if (touch.phase == TouchPhase.Began)
-                {
-                    if (IsPointerOverUI(touch.fingerId)) continue;
+                if (IsPointerOverUI(fingerId, currentTouchPos)) continue;
 
-                    _dragFingerId = touch.fingerId;
-                    _lastMousePosition = touch.position;
+                _dragFingerId = fingerId;
+                _lastMousePosition = currentTouchPos;
+            }
+            // 드래그 중 (Moved)
+            else if (fingerId == _dragFingerId)
+            {
+                // 진행 중인 터치인지 다시 확인
+                if (touch.isInProgress)
+                {
+                    // 해상도 대응을 위한 델타 계산
+                    float deltaX = (currentTouchPos.x - _lastMousePosition.x) / Screen.width;
+                    float deltaY = (currentTouchPos.y - _lastMousePosition.y) / Screen.height;
+
+                    _cameraAim.m_HorizontalAxis.m_InputAxisValue = deltaX * dragSensitivity * 1000f;
+                    _cameraAim.m_VerticalAxis.m_InputAxisValue = deltaY * dragSensitivity * 1000f;
+
+                    _lastMousePosition = currentTouchPos;
                 }
-                // 드래그 중: 시작할 때 잡은 손가락만 추적 (UI 영역 무시)
-                else if (touch.fingerId == _dragFingerId)
+
+                // 터치 종료 시 (Ended / Canceled)
+                if (touch.press.wasReleasedThisFrame)
                 {
-                    if (touch.phase == TouchPhase.Moved)
-                    {
-                        float deltaX = touch.position.x - _lastMousePosition.x;
-                        float deltaY = touch.position.y - _lastMousePosition.y;
-
-                        // 시네머신 축 값에 직접 더함 (떨림 방지)
-                        _cameraAim.m_HorizontalAxis.Value += deltaX * dragSensitivity;
-                        _cameraAim.m_VerticalAxis.Value -= deltaY * dragSensitivity;
-
-                        _lastMousePosition = touch.position;
-                    }
-                    else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
-                    {
-                        _dragFingerId = -1;
-                    }
+                    _dragFingerId = -1;
                 }
             }
         }

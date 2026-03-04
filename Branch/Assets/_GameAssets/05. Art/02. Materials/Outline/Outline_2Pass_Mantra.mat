@@ -110,7 +110,7 @@ Material:
     - _OcclusionStrength: 1
     - _Outline: 1
     - _OutlineSize: 0.001
-    - _OutlineWidth: 0.4
+    - _OutlineWidth: 0.9
     - _Outline_Thickness: 0.005
     - _Parallax: 0.005
     - _QueueControl: 0

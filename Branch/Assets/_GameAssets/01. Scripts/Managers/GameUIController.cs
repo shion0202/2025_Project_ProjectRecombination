@@ -247,7 +247,12 @@ namespace Managers
         // UI_Global Scene 에서 Init Method 가 실행 되면 이후에 호출 되는 Initialization
         public void Initialization()
         {
-            for (int i = 0; i < setButtons.Count; ++i)
+            //for (int i = 0; i < setButtons.Count; ++i)
+            //{
+            //    _unlockSets.Add(false);
+            //}
+
+            for (int i = 0; i < 3; ++i)
             {
                 _unlockSets.Add(false);
             }
