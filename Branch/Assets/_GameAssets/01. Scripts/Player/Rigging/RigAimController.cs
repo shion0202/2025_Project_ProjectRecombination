@@ -168,6 +168,7 @@ public class RigAimController : MonoBehaviour
         if (_isInit) return;
         
         _ownerTransform = transform;
+        targetObject = getComponentInChildren.transform;
 
         MultiAimConstraint[] constraintArray = gameObject.GetComponentsInChildren<MultiAimConstraint>();
         foreach (MultiAimConstraint constraint in constraintArray)
@@ -175,7 +176,7 @@ public class RigAimController : MonoBehaviour
             var data = constraint.data;
             var sources = constraint.data.sourceObjects;
             sources.Clear();
-            sources.Add(new WeightedTransform(getComponentInChildren.transform, 1.0f));
+            sources.Add(new WeightedTransform(targetObject, 1.0f));
             data.sourceObjects = sources;
             constraint.data = data;
             constraint.weight = 0.0f;
@@ -183,8 +184,6 @@ public class RigAimController : MonoBehaviour
             _constraints.Add(constraint.gameObject.name, constraint);
             _changeRoutines.Add(constraint.gameObject.name, null);
         }
-        
-        targetObject = getComponentInChildren.transform;
         
         _isInit = true;
     }

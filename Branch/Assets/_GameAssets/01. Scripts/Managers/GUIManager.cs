@@ -54,7 +54,7 @@ namespace Managers
                 CheckValidation(EUIType.Epilogue, epilogueUI);
                 CheckValidation(EUIType.Loading, loadingUI);
                 CheckValidation(EUIType.Credit, creditUI);
-                
+
                 _isInit = true;
             }
             catch (Exception e)

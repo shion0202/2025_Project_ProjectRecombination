@@ -107,7 +107,11 @@ public class InitPlayer : MonoBehaviour
             RigAimController rigAimController = GameManager.Instance.Player.GetComponent<RigAimController>();
             if (Camera.main != null)
             {
-                rigAimController.Init(Camera.main.gameObject);
+                RigTarget rigTarget = Camera.main.GetComponentInChildren<RigTarget>();
+                if (rigTarget != null)
+                {
+                    rigAimController.Init(rigTarget.gameObject);
+                }
             }
         }
     }

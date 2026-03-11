@@ -242,11 +242,7 @@ namespace Managers
         {
             _originalMessageColor = messageImage.color;
             _originalMessageTextColor = messageText.color;
-        }
 
-        // UI_Global Scene 에서 Init Method 가 실행 되면 이후에 호출 되는 Initialization
-        public void Initialization()
-        {
             //for (int i = 0; i < setButtons.Count; ++i)
             //{
             //    _unlockSets.Add(false);
@@ -256,7 +252,11 @@ namespace Managers
             {
                 _unlockSets.Add(false);
             }
+        }
 
+        // UI_Global Scene 에서 Init Method 가 실행 되면 이후에 호출 되는 Initialization
+        public void Initialization()
+        {
             if (!HelpUI.activeSelf)
             {
                 HelpUI.SetActive(true);
