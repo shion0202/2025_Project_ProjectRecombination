@@ -7,6 +7,6 @@ public class TutorialDataSO : ScriptableObject
 {
     public string key;
     public string title;
-    [TextArea(3, 10)] public string description;
+    [TextArea(3, 10)] public string[] descriptions;
     public Sprite exampleImage;
 }

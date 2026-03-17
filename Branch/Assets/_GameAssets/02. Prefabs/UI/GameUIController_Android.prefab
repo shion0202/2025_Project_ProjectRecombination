@@ -14536,8 +14536,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16529,8 +16529,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 1477774030286471040}
   descriptionText: {fileID: 583559434390678607}
+  pageIndicatorText: {fileID: 3221665844249584790}
   exampleImage: {fileID: 2690168689996390141}
   defaultKey: Move
+  prevButton: {fileID: 3663156459825050454}
+  nextButton: {fileID: 8553646681644458265}
 --- !u!1 &6283519368365486111
 GameObject:
   m_ObjectHideFlags: 0

@@ -133,37 +133,37 @@ PrefabInstance:
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.41056016
+      value: -239.02
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6618803
+      value: 33.3
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -112.46
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.98768836
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.1564345
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 185256935588619478, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
@@ -184,6 +184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ClearFlags
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394661958267442624, guid: 5e79e7363f9924635a6fbf1356d14900,
+        type: 3}
+      propertyPath: near clip plane
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1394661958267442624, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
