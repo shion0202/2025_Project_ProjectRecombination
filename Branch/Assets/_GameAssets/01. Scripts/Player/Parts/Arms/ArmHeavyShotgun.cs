@@ -91,6 +91,8 @@ public class ArmHeavyShotgun : PartBaseArm
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         // 실제 발사 방향
         Vector3 origin = bulletSpawnPoint.position;
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);

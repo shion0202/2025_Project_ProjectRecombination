@@ -7,7 +7,7 @@ public class ParticleFollower : MonoBehaviour
 {
     [SerializeField] private ParticleSystem[] ps;
     [SerializeField] private float minAliveTime = 0.2f;
-    [SerializeField] private float arrivalThreshold = 1.0f; // 목적지와 이 거리 안에 들어오면 도착으로 간주
+    [SerializeField] private float arrivalThreshold = 3.0f; // 목적지와 이 거리 안에 들어오면 도착으로 간주
 
     [Header("Wait Time Settings")]
     [SerializeField] private float arrivalStopDelay = 0.5f; // 목적지 도착 시 대기 시간
@@ -35,20 +35,8 @@ public class ParticleFollower : MonoBehaviour
         // 대기 및 재경로 인식 로직
         if (_isWaitingToStop)
         {
-            // 대기 중이라도 다시 길이 뚫리면 복귀 (막혔을 때만 해당)
-            if (!agent.pathPending && agent.pathStatus == NavMeshPathStatus.PathComplete)
-            {
-                Vector3 currentDiff = target.position - transform.position;
-                currentDiff.y = 0;
-
-                if (currentDiff.sqrMagnitude > arrivalThreshold * arrivalThreshold)
-                {
-                    ResumeMovement();
-                    return;
-                }
-            }
-
             _stopTimer += Time.deltaTime;
+
             if (_stopTimer >= _currentWaitTime)
             {
                 ExecuteStop();
@@ -60,25 +48,24 @@ public class ParticleFollower : MonoBehaviour
         _aliveTimer += Time.deltaTime;
         if (_aliveTimer < minAliveTime) return;
 
-        if (!agent.isOnNavMesh) return;
-
-        // 상황별 판정 및 시간 설정
-        Vector3 diff = target.position - transform.position;
-        diff.y = 0;
-
-        // 목적지 도착 판정 (우선순위 높음)
-        if (diff.sqrMagnitude < arrivalThreshold * arrivalThreshold)
-        {
-            StartStopSequence(arrivalStopDelay);
-            return;
-        }
-
-        // 경로 차단 판정
+        // 목적지 도달 및 경로 불능 판정
         if (!agent.pathPending)
         {
-            if (agent.pathStatus == NavMeshPathStatus.PathPartial ||
-                agent.pathStatus == NavMeshPathStatus.PathInvalid ||
-                (!agent.hasPath && agent.velocity.sqrMagnitude < 0.01f))
+            float distSqr = (target.position - transform.position).sqrMagnitude;
+            float thresholdSqr = arrivalThreshold * arrivalThreshold;
+
+            // 거리상으로 가깝거나, 에이전트가 목적지 근처에서 멈춘 경우
+            bool isArrived = distSqr < thresholdSqr ||
+                             (agent.remainingDistance <= agent.stoppingDistance + 0.1f && agent.velocity.sqrMagnitude < 0.01f);
+
+            if (isArrived)
+            {
+                StartStopSequence(arrivalStopDelay);
+                return;
+            }
+
+            // 경로 차단 판정
+            if (agent.pathStatus != NavMeshPathStatus.PathComplete)
             {
                 StartStopSequence(blockedStopDelay);
             }
@@ -165,11 +152,18 @@ public class ParticleFollower : MonoBehaviour
         if (ps != null)
         {
             foreach (var particle in ps)
-                if (particle != null) particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            {
+                if (particle != null)
+                {
+                    particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear); // Clear까지 하면 즉시 사라짐
+                }
+            }
         }
 
         if (agent != null && agent.isOnNavMesh)
             agent.ResetPath();
+
+        gameObject.SetActive(false);
     }
 
     private void ResumeMovement()

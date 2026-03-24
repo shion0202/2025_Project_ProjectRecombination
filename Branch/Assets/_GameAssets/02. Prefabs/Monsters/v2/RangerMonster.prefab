@@ -972,7 +972,8 @@ AudioSource:
   m_GameObject: {fileID: 4824824580668905919}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3255133022743001703, guid: 61a5faa6522bc9b4a9fde3fa6711f734,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.2
@@ -2617,7 +2618,7 @@ MonoBehaviour:
   m_Transforms:
   - {fileID: 557314330539827423}
   - {fileID: 812981155810252265}
-  - {fileID: 6751851320348681637}
+  - {fileID: 0}
   - {fileID: 1751754685564772745}
   - {fileID: 3442640302922765542}
   - {fileID: 4301242239655320129}
@@ -3190,7 +3191,7 @@ MonoBehaviour:
   baseTransform: {fileID: 0}
   Hips: {fileID: 1751754685564772745}
   ScaleReferenceMode: 3
-  finalScaleReference: 1.2259654
+  finalScaleReference: 1.2259657
   finalScaleReferenceSqrt: 0.1
   customScaleReferenceValue: 0.5
   DelayedInitialization: 0
@@ -3235,6 +3236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6927be6febe14209865ffc4b0fd611d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigConstraints: []
+  blendSpeed: 10
+  targetWeight: 0
   reactionDuration: 0.2
 --- !u!1 &996155038232706400 stripped
 GameObject:
@@ -3975,12 +3979,6 @@ Rigidbody:
 --- !u!4 &6486226187166264958 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2723842930756064950, guid: 90eb490d583ea264da38d77de347a262,
-    type: 3}
-  m_PrefabInstance: {fileID: 13866023592838964}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6751851320348681637 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -2485382177163812207, guid: 90eb490d583ea264da38d77de347a262,
     type: 3}
   m_PrefabInstance: {fileID: 13866023592838964}
   m_PrefabAsset: {fileID: 0}

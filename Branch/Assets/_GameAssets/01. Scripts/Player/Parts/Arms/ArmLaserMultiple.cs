@@ -113,6 +113,13 @@ public class ArmLaserMultiple : PartBaseArm
         if (_currentAmmo <= 0) return;
 
         base.UseAbility();
+
+        // 차지 시작 시 지속 에임 보정 활성화
+        if (_owner != null)
+        {
+            _owner.FollowCamera.SetContinuousAimAssist(true);
+        }
+
         if (chargeEffectPrefab)
         {
             if (!chargeEffect)
@@ -127,6 +134,13 @@ public class ArmLaserMultiple : PartBaseArm
         if (!_isShooting || _currentAmmo <= 0) return;
 
         base.UseCancleAbility();
+
+        // 차지 중단/발사 시 지속 에임 보정 비활성화
+        if (_owner.FollowCamera != null)
+        {
+            _owner.FollowCamera.SetContinuousAimAssist(false);
+        }
+
         if (chargeEffect)
         {
             Utils.Destroy(chargeEffect);
@@ -171,6 +185,11 @@ public class ArmLaserMultiple : PartBaseArm
         }
         _recoilRoutine = StartCoroutine(CoDelayRecoil());
 
+        if (_owner.FollowCamera != null)
+        {
+            _owner.FollowCamera.SetContinuousAimAssist(false);
+        }
+
         //// 파티클 시스템 참조
         //if (_targetRoutine == null && currentTargetIndicator != null)
         //{
@@ -184,6 +203,8 @@ public class ArmLaserMultiple : PartBaseArm
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         if (_currentShootTime > maxChargeTime)
         {
             _currentShootTime = maxChargeTime;

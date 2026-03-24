@@ -140,6 +140,8 @@ public class PartBaseArm : PartBase
 
     protected virtual void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
         Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
 

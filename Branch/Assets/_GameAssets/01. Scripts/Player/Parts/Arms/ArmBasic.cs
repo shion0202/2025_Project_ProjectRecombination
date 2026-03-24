@@ -59,6 +59,8 @@ public class ArmBasic : PartBaseArm
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
         Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
 

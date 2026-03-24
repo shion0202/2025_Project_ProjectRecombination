@@ -62,6 +62,8 @@ public class ArmHeavyMissile : PartBaseArm
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         if (_morphBlendRoutine != null)
         {
             StopCoroutine(_morphBlendRoutine);

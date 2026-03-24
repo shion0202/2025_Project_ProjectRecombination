@@ -17,6 +17,8 @@ public class ArmRapidBounce : PartBaseArm
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
         Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position).normalized;
         Vector3 randomDir = GetRandomDirection(camShootDirection);

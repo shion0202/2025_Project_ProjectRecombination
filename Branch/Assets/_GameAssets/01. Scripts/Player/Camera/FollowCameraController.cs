@@ -40,6 +40,8 @@ public class FollowCameraController : MonoBehaviour
     [SerializeField] private float assistStrength = 0.2f;       // 보정 강도 (0~1)
     [SerializeField] private LayerMask targetLayer;             // 보정을 할 타겟 레이어
     private Coroutine _aimAssistCoroutine = null;
+    private Transform _currentAssistTarget = null;
+    private bool _isContinuousAssist = false;
 
     [Header("Recoil Settings")]
     [SerializeField] private float recoilRecoverySpeed = 20.0f;
@@ -218,6 +220,7 @@ public class FollowCameraController : MonoBehaviour
         SmoothChangeCamera();
         ZoomCamera();
         HandleRecoil();
+        HandleContinuousAimAssist();
 
         _cameraAim.m_HorizontalAxis.m_InputAxisName = ""; // 입력 비활성화
         _cameraAim.m_VerticalAxis.m_InputAxisName = "";
@@ -375,6 +378,20 @@ public class FollowCameraController : MonoBehaviour
             }
 
             _aimAssistCoroutine = StartCoroutine(AimAssistCoroutine(bestTarget));
+        }
+    }
+
+    // 외부 호출용: 보정 시작/중지
+    public void SetContinuousAimAssist(bool enable)
+    {
+        _isContinuousAssist = enable;
+        if (enable)
+        {
+            _currentAssistTarget = FindBestTarget(); // 기존 ApplyAimAssist의 타겟 탐색 로직 분리 필요
+        }
+        else
+        {
+            _currentAssistTarget = null;
         }
     }
     #endregion
@@ -538,6 +555,57 @@ public class FollowCameraController : MonoBehaviour
                 }
             }
         }
+    }
+
+    // 매 프레임 업데이트되는 보정 로직 (UpdateFollowCamera에서 호출)
+    private void HandleContinuousAimAssist()
+    {
+        if (!_isContinuousAssist || _currentAssistTarget == null) return;
+
+        // 화면 중앙 좌표 계산
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(_currentAssistTarget.position);
+
+        // 타겟이 화면 밖으로 나가거나 카메라 뒤로 가면 해제
+        float dist = Vector2.Distance(screenCenter, new Vector2(screenPos.x, screenPos.y));
+        if (screenPos.z < 0 || dist > assistRadius * 1.5f) // 약간의 여유 거리를 둠
+        {
+            _currentAssistTarget = null;
+            return;
+        }
+
+        // 보정 로직 (코루틴의 내용을 프레임 단위로 실행)
+        Vector3 dirToTarget = (_currentAssistTarget.position - Camera.main.transform.position).normalized;
+        Quaternion targetRot = Quaternion.LookRotation(dirToTarget);
+
+        float targetX = targetRot.eulerAngles.y;
+        float targetY = targetRot.eulerAngles.x;
+        if (targetY > 180) targetY -= 360.0f;
+
+        float deltaX = Mathf.DeltaAngle(_cameraAim.m_HorizontalAxis.Value, targetX);
+        float deltaY = Mathf.DeltaAngle(_cameraAim.m_VerticalAxis.Value, targetY);
+
+        // Time.deltaTime을 곱해 매 프레임 부드럽게 추적
+        _cameraAim.m_HorizontalAxis.Value += deltaX * assistStrength * Time.deltaTime * 10f;
+        _cameraAim.m_VerticalAxis.Value += deltaY * assistStrength * Time.deltaTime * 10f;
+    }
+
+    // 기존 ApplyAimAssist의 탐색 로직만 따로 뺀 헬퍼 함수
+    private Transform FindBestTarget()
+    {
+        Vector2 screenCenter = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Collider[] targets = Physics.OverlapSphere(_cameraTarget.position, 30f, targetLayer);
+        Transform best = null;
+        float closestDist = assistRadius;
+
+        foreach (var t in targets)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(t.bounds.center);
+            if (screenPos.z < 0) continue;
+            float dist = Vector2.Distance(screenCenter, new Vector2(screenPos.x, screenPos.y));
+            if (dist < closestDist) { closestDist = dist; best = t.transform; }
+        }
+        return best;
     }
 
     private IEnumerator AimAssistCoroutine(Transform target)

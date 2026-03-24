@@ -99,6 +99,12 @@ public class ArmLaserCharge : PartBaseArm
 
         if (_isDelay) return;
 
+        // 차지 시작 시 지속 에임 보정 활성화
+        if (_owner != null)
+        {
+            _owner.FollowCamera.SetContinuousAimAssist(true);
+        }
+
         if (chargeEffectPrefab)
         {
             if (!chargeEffect)
@@ -120,6 +126,12 @@ public class ArmLaserCharge : PartBaseArm
         if (!_isAnimating) return;
 
         base.UseCancleAbility();
+
+        // 차지 중단/발사 시 지속 에임 보정 비활성화
+        if (_owner.FollowCamera != null)
+        {
+            _owner.FollowCamera.SetContinuousAimAssist(false);
+        }
 
         if (chargeEffect)
         {
@@ -179,12 +191,19 @@ public class ArmLaserCharge : PartBaseArm
             smr.SetBlendShapeWeight(1, 0.0f);
         }
 
+        if (_owner.FollowCamera != null)
+        {
+            _owner.FollowCamera.SetContinuousAimAssist(false);
+        }
+
         _damagedTargets.Clear();
         _isDelay = false;
     }
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         if (currentLaserObject == null)
         {
             currentLaserObject = Utils.Instantiate(laserPrefab);

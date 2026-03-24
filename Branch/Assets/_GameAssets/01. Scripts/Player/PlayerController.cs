@@ -1370,7 +1370,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             stats.AddModifier(new StatModifier(EStatType.WalkSpeed, EStackType.PercentMul, -0.3f, this));
         }
 
-        _followCamera.ApplyAimAssist();
+        //_followCamera.ApplyAimAssist();
 
         if ((_currentPlayerState & EPlayerState.LeftShooting) != 0 && isLeft)
         {

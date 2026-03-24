@@ -131,6 +131,8 @@ public class ArmRapidCastProjectile : PartBaseArm
 
     protected override void Shoot()
     {
+        _owner.FollowCamera.ApplyAimAssist();
+
         if (_currentChargeTime > maxChargeTime)
         {
             _currentChargeTime = maxChargeTime;
