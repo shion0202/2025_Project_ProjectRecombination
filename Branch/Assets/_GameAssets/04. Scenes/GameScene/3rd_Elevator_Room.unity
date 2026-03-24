@@ -7167,6 +7167,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heal_Pack
       objectReference: {fileID: 0}
+    - target: {fileID: 3073862898507768334, guid: 4efdfc25d97fa394692df847b0328501,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 125
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26726,6 +26731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Heal_Pack
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073862898507768334, guid: 4efdfc25d97fa394692df847b0328501,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 125
       objectReference: {fileID: 0}
     - target: {fileID: 6069556246658848254, guid: 4efdfc25d97fa394692df847b0328501,
         type: 3}
@@ -51756,7 +51766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &950462114
 Transform:
   m_ObjectHideFlags: 0
