@@ -133,6 +133,8 @@
     <type fullname="PartBaseMask" preserve="all" />
     <type fullname="ParticleFollower" preserve="all" />
     <type fullname="PartsBox" preserve="all" />
+    <type fullname="PlatformCheck" preserve="all" />
+    <type fullname="PlatformEndCheck" preserve="all" />
     <type fullname="PlayAnimation" preserve="all" />
     <type fullname="PlayerController" preserve="all" />
     <type fullname="ProjectileBlade" preserve="all" />
