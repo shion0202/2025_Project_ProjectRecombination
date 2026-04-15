@@ -1275,6 +1275,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             return;
         }
 
+        // 플랫폼 위에 있는 플랫폼 상태일 경우 따로 로직 적용
         if (_isOnPlatform)
         {
             Vector3 platformDelta = (_postPlatform.position - _lastPlatformPosition);

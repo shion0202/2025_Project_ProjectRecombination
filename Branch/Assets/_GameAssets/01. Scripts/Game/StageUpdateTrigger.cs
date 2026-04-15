@@ -14,7 +14,7 @@ public class StageUpdateTrigger : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
 
-        // DungeonManager.Instance.UpdateStage(stageIndex);
+        //DungeonManager.Instance.UpdateStage(stageIndex);
         _previousStageIndex = DungeonManager.Instance.CurrentPlayerStageIndex;
     }
     

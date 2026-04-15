@@ -30,6 +30,9 @@ namespace Managers
         // 로딩된 스테이지 딕셔너리
         private Dictionary<int, string> LoadedStages { get; set; } = new();
 
+        // 스테이지 갱신 중 여부
+        private bool _isUpdatingStage = false;
+
         #region Initialization
 
         private bool _isInit;
@@ -94,27 +97,31 @@ namespace Managers
         private async Task LoadStage(StageData stageData)
         {
             if (LoadedStages.ContainsKey(stageData.stageIndex)) return;
-            
-            await SceneController.Instance.LoadSceneAdditive(stageData.stageName);
-            
+
             LoadedStages.Add(stageData.stageIndex, stageData.stageName);
+
+            await SceneController.Instance.LoadSceneAdditive(stageData.stageName);
         }
         
         private async Task UnloadStage(StageData stageData)
         {
             if (!LoadedStages.ContainsKey(stageData.stageIndex)) return;
-            
-            await SceneController.Instance.UnloadScene(stageData.stageName);
-            
+
             LoadedStages.Remove(stageData.stageIndex);
+
+            await SceneController.Instance.UnloadScene(stageData.stageName);
         }
         
         public async void UpdatePlayerStageIndex(int newStageIndex)
         {
+            // 이미 스테이지 갱신 작업 중이라면 추가 요청 무시
+            if (_isUpdatingStage) return;
+
             try
             {
                 if (newStageIndex == CurrentPlayerStageIndex) return;
-                
+                _isUpdatingStage = true;
+
                 // 새로운 스테이지 인덱스에 따라 필요한 스테이지 로드/언로드
                 {
                     // newStageIndex 값이 현재 플레이어 스테이지 인덱스보다 작아지는 경우 (뒤로 이동)
@@ -143,6 +150,10 @@ namespace Managers
             catch (Exception e)
             {
                 Debug.LogWarning($"[DungeonManager] 플레이어 스테이지 인덱스 업데이트 중 예외 발생: {e}");
+            }
+            finally
+            {
+                _isUpdatingStage = false;
             }
         }
 
