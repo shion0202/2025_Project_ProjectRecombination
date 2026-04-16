@@ -93,7 +93,7 @@ namespace Monster.AI.FSM
         
         private void OnEnable()
         {
-            if (!isInit)
+            //if (!isInit)
                 Init();
         }
 

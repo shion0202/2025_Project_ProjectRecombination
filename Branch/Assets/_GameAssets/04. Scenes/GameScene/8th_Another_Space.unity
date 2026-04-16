@@ -2592,6 +2592,76 @@ Transform:
   - {fileID: 217811288}
   m_Father: {fileID: 8646081798500029344}
   m_LocalEulerAnglesHint: {x: 127.045, y: 99.557, z: -11.929993}
+--- !u!1 &829528745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 829528748}
+  - component: {fileID: 829528747}
+  - component: {fileID: 829528746}
+  m_Layer: 0
+  m_Name: BossTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &829528746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829528745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c7ba9fb6f44f1a49b6cac39756e5006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amonFirstPhasePrefab: {fileID: 0}
+  amonSecondPhasePrefab: {fileID: 1755014605}
+  playerTeleportPoint: {fileID: 548642508}
+  playerRespawnPoint: {fileID: 0}
+--- !u!65 &829528747
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829528745}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15.673809, y: 2.5203066, z: 10.936386}
+  m_Center: {x: 0.3548069, y: 0.7601533, z: -0.20919037}
+--- !u!4 &829528748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829528745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63.08, y: 6.12, z: 173.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &836643543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4862,6 +4932,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e1341dab2ab244298704013c9319f95, type: 3}
+--- !u!114 &1755014605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3007356906683536869, guid: 9e1341dab2ab244298704013c9319f95,
+    type: 3}
+  m_PrefabInstance: {fileID: 1755014604}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd7148c0cd124929a991a0cbde41b96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1755014606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8603632694229441094, guid: 9e1341dab2ab244298704013c9319f95,
@@ -5326,6 +5408,37 @@ MonoBehaviour:
   outputData:
   - process: {fileID: 193984975}
     isNot: 0
+--- !u!1 &1948383114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1948383115}
+  m_Layer: 0
+  m_Name: TeleportPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1948383115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1948383114}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1528.5, y: -182.50002, z: 1065}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1951886329
 GameObject:
   m_ObjectHideFlags: 0
@@ -10776,3 +10889,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 3396309565721652597}
+  - {fileID: 829528748}
+  - {fileID: 1948383115}

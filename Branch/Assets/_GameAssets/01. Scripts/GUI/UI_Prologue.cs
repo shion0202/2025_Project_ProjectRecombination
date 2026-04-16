@@ -71,12 +71,7 @@ public class UI_Prologue : MonoBehaviour, PlayerActions.IUIActionMapActions
             if (!nextSceneName.Equals("GameScene"))
             {
                 _uiActions.UIActionMap.Disable();
-
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;    // 에디터에서는 플레이 중단
-#else
-                Application.Quit();                                 // 빌드에서는 프로그램 종료
-#endif
+                GameManager.Instance.EnterCredit();
                 return;
             }
 

@@ -633,7 +633,7 @@ MonoBehaviour:
   - videoName: Epilogue_New_6.mp4
     dialog: 
   videoPlayer: {fileID: 234190986505745482}
-  nextSceneName: GameScene
+  nextSceneName: CreditScene
   isAutoStart: 1
   typeSpeed: 0.04
   fadeDuration: 1

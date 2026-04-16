@@ -237,8 +237,13 @@ namespace Managers
         [SerializeField] private Transform playerTeleportPoint;
         [SerializeField] private Transform playerRespawnPoint;
 
+        public FSM AmonFirstPhasePrefab { set { amonFirstPhase = value; } }
+        public FSM AmonSecondPhasePrefab { set { amonSecondPhasePrefab = value; } }
+        public Transform PlayerTeleportPoint { set { playerTeleportPoint = value; } }
+        public Transform PlayerRespawnPoint { set { playerRespawnPoint = value; } }
+
         #endregion
-        
+
         #region 아몬 페이즈 관리
 
         public void AmonFirstPhase()
@@ -252,9 +257,18 @@ namespace Managers
             // amonSecondPhasePrefab.SetActive(true);
             amonFirstPhase.isEnabled = false;
             // playerRespawnPoint.position = MonsterManager.Instance.Player.transform.position;
-            MonsterManager.Instance.Player.SetActive(false);
-            MonsterManager.Instance.Player.transform.position = playerTeleportPoint.position;
-            MonsterManager.Instance.Player.SetActive(true);
+            //MonsterManager.Instance.Player.SetActive(false);
+            //MonsterManager.Instance.Player.transform.position = playerTeleportPoint.position;
+            //MonsterManager.Instance.Player.SetActive(true);
+
+            // Player를 끄지 말고 이동에 방해되는 컴포넌트만 제어
+            GameObject playerObj = MonsterManager.Instance.Player;
+            CharacterController controller = playerObj.GetComponent<CharacterController>();
+            // 위치 강제 수정을 위해 컨트롤러를 비활성화
+            if (controller != null) controller.enabled = false;
+            playerObj.transform.position = playerTeleportPoint.position;
+            if (controller != null) controller.enabled = true;
+
             amonSecondPhasePrefab.isEnabled = true;
         }
         
@@ -262,9 +276,12 @@ namespace Managers
         public void AmonEndPhase()
         {
             amonSecondPhasePrefab.isEnabled = false;
-            MonsterManager.Instance.Player.SetActive(false);
-            MonsterManager.Instance.Player.transform.position = playerRespawnPoint.position;
-            MonsterManager.Instance.Player.SetActive(true);
+
+            GameObject playerObj = MonsterManager.Instance.Player;
+            CharacterController controller = playerObj.GetComponent<CharacterController>();
+            if (controller != null) controller.enabled = false;
+            playerObj.transform.position = playerRespawnPoint.position;
+            if (controller != null) controller.enabled = true;
         }
 
         #endregion

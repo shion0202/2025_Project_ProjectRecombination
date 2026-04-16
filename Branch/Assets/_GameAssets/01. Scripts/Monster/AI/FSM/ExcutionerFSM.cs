@@ -18,7 +18,7 @@ public class ExcutionerFSM : FSM
     // Init
     protected override void Init()
     {
-        if (isInit) return;
+        //if (isInit) return;
         if (blackboard is null)
         {
             Debug.LogError("Blackboard is null in ExcutionerFSM");

@@ -216,6 +216,7 @@ public class FollowCameraController : MonoBehaviour
     // Update에서 매 프레임마다 실행되는 카메라 관련 함수
     public void UpdateFollowCamera()
     {
+        HandleGamepadLook();
         HandleMobileCameraDrag();
         SmoothChangeCamera();
         ZoomCamera();
@@ -500,6 +501,41 @@ public class FollowCameraController : MonoBehaviour
         EventSystem.current.RaycastAll(eventData, results);
 
         return results.Count > 0;
+    }
+
+    private void HandleGamepadLook()
+    {
+        // UI 오픈 상태이거나 카메라 잠금 상태면 입력 무시
+        if (_isLockedByUI || _isLock || _isQuickTurning) return;
+
+        var gamepad = Gamepad.current;
+        if (gamepad == null)
+        {
+            // 패드가 연결 해제되었을 때를 대비해 입력값 초기화
+            _cameraAim.m_HorizontalAxis.m_InputAxisValue = 0.0f;
+            _cameraAim.m_VerticalAxis.m_InputAxisValue = 0.0f;
+            return;
+        }
+
+        // 오른쪽 스틱(Right Stick) 입력 받기
+        Vector2 stickInput = gamepad.rightStick.ReadValue();
+
+        // 입력이 데드존(Deadzone) 이상일 때만 처리
+        if (stickInput.magnitude > 0.05f)
+        {
+            // 시네머신 POV 축에 직접 입력값 전달
+            float padSensitivityX = 20.0f;
+            float padSensitivityY = 20.0f;
+
+            _cameraAim.m_HorizontalAxis.m_InputAxisValue = stickInput.x * padSensitivityX;
+            _cameraAim.m_VerticalAxis.m_InputAxisValue = stickInput.y * padSensitivityY;
+        }
+        else
+        {
+            // 스틱을 놓았을 때(데드존 이내) 반드시 0으로 초기화하여 회전을 멈춤
+            _cameraAim.m_HorizontalAxis.m_InputAxisValue = 0.0f;
+            _cameraAim.m_VerticalAxis.m_InputAxisValue = 0.0f;
+        }
     }
 
     private void HandleMobileCameraDrag()
