@@ -62,7 +62,7 @@ public class ArmBasic : PartBaseArm
         _owner.FollowCamera.ApplyAimAssist();
 
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
-        Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
+        Vector3 camShootDirection = GetShootDirection(targetPoint);
 
         GameObject bullet = Utils.Instantiate(bulletPrefab, bulletSpawnPoint.position + camShootDirection.normalized * 1.5f, Quaternion.LookRotation(camShootDirection.normalized));
         Bullet bulletComponent = bullet.GetComponent<Bullet>();

@@ -139,8 +139,7 @@ public class ArmRapidCastProjectile : PartBaseArm
         }
 
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
-        Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
-        camShootDirection.Normalize();
+        Vector3 camShootDirection = GetShootDirection(targetPoint);
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
         Bullet bulletComponent = bullet.GetComponent<Bullet>();

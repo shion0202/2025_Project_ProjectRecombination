@@ -14,11 +14,33 @@ public class ArmHeavyMissile : PartBaseArm
     protected SkinnedMeshRenderer smr;
     protected Coroutine _morphBlendRoutine = null;
 
+    // _currentShootTime은 발사 후 0에서 발사 간격까지 증가한다. (다른 팔은 감소)
+    // 시작 시점에 발사 간격 스탯을 알 수 없으므로 어떤 간격보다도 큰 값으로 두어 바로 발사 가능한 상태로 시작한다.
+    private const float ReadyShootTime = 1000000.0f;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _currentShootTime = ReadyShootTime;
+    }
+
     protected void OnEnable()
     {
         GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.red);
         GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
-        _currentShootTime = (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value);
+
+        // 장착 시 발사 간격으로 초기화하면 안 된다.
+        // 파츠 교체 중에는 스탯이 아직 이전 파츠 기준이라 짧은 간격이 들어가 쿨타임이 처음부터 다시 돌았다.
+        // 다른 팔 파츠처럼 해제 시점의 진행 상태에서 이어서 회복한다.
+    }
+
+    public override void FinishActionForced()
+    {
+        // 기본 처리가 _currentShootTime을 0으로 만드는데, 증가형인 이 파츠에서는 "방금 발사함"이 된다.
+        // 파츠 교체로 쿨타임이 초기화되지 않도록 진행 상태를 유지한다.
+        float shootTime = _currentShootTime;
+        base.FinishActionForced();
+        _currentShootTime = shootTime;
     }
 
     protected override void Update()

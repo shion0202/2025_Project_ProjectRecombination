@@ -213,7 +213,7 @@ public class ArmLaserMultiple : PartBaseArm
 
         RaycastHit hit;
         Vector3 targetPoint = GetTargetPoint(out hit);
-        Vector3 shootDirection = (targetPoint - bulletSpawnPoint.position).normalized;
+        Vector3 shootDirection = GetShootDirection(targetPoint);
 
         int bulletCount = (int)(bulletPerShot * _currentChargeTime) + 1;
 
