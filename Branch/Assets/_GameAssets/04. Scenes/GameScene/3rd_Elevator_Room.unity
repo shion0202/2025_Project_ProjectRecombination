@@ -26933,7 +26933,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 797a6ec4e03902945b40bc02547adc6b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -45194,6 +45194,7 @@ MonoBehaviour:
   isOn: 0
   noticeMessage: "\uB2E4\uB978 \uC2B9\uAC15\uAE30\uB97C \uCC3E\uC544 \uC774\uB3D9\uD558\uC138\uC694."
   enNoticeMessage: Locate another elevator and move.
+  displayDuration: 5
 --- !u!1 &775022291
 GameObject:
   m_ObjectHideFlags: 0
@@ -88592,7 +88593,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: a19fe9a9aa9bf744495630445667d2d2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -89358,7 +89359,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -100371,6 +100372,7 @@ MonoBehaviour:
   noticeMessage: "\uC2B9\uAC15\uAE30\uB97C \uD655\uBCF4\uD558\uC5EC \uC9C0\uD558\uB85C
     \uC774\uB3D9\uD558\uC138\uC694."
   enNoticeMessage: Secure the elevator and proceed underground.
+  displayDuration: 5
 --- !u!1 &1643647786
 GameObject:
   m_ObjectHideFlags: 0
@@ -137800,7 +137802,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

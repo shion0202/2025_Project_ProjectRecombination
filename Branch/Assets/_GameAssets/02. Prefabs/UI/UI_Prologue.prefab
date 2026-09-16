@@ -49,7 +49,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e6721ae4746d12146babc198e84b1fac, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -804,6 +804,7 @@ MonoBehaviour:
   isAutoStart: 1
   typeSpeed: 0.04
   fadeDuration: 0.5
+  inputDebounceTime: 0.1
 --- !u!114 &4727851140629154517
 MonoBehaviour:
   m_ObjectHideFlags: 0

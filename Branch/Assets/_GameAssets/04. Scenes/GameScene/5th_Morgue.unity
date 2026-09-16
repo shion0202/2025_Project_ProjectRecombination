@@ -49603,6 +49603,7 @@ MonoBehaviour:
   noticeMessage: "\uCD9C\uAD6C\uB97C \uCC3E\uC544 \uB2E4\uC74C \uAD6C\uC5ED\uC73C\uB85C
     \uC774\uB3D9\uD558\uC138\uC694."
   enNoticeMessage: Find the exit and move to the next area.
+  displayDuration: 5
 --- !u!1 &125501678
 GameObject:
   m_ObjectHideFlags: 0
@@ -65608,6 +65609,7 @@ MonoBehaviour:
   isOn: 0
   noticeMessage: "\uB2E4\uB978 \uC2B9\uAC15\uAE30\uB97C \uCC3E\uC544 \uD0D1\uC2B9\uD558\uC138\uC694."
   enNoticeMessage: Locate and board another elevator.
+  displayDuration: 5
 --- !u!1 &155211393
 GameObject:
   m_ObjectHideFlags: 0
@@ -126766,7 +126768,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -140552,7 +140554,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4b58142b1a3740b48bb5a807dc9296a7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -163988,7 +163990,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 488f1c95844c8794396c373ddb826b9e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -200766,7 +200768,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4b58142b1a3740b48bb5a807dc9296a7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 0.7
   Loop: 0
   Mute: 0
@@ -227572,6 +227574,7 @@ MonoBehaviour:
   isOn: 0
   noticeMessage: "\uD68C\uB85C\uB97C \uBCC0\uACBD\uD558\uC5EC \uBB38\uC744 \uAC1C\uBC29\uD558\uC138\uC694."
   enNoticeMessage: Modify the circuit to open the door.
+  displayDuration: 5
 --- !u!1 &1161543238
 GameObject:
   m_ObjectHideFlags: 0
@@ -245367,7 +245370,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4b58142b1a3740b48bb5a807dc9296a7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.8
+  m_Volume: 1
   m_Pitch: 0.7
   Loop: 0
   Mute: 0
@@ -264007,7 +264010,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e06d81304f788ee4b8f8c0e2f88e32d0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.45
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -285231,6 +285234,7 @@ MonoBehaviour:
   noticeMessage: "\uC2B9\uAC15\uAE30\uC5D0 \uD0D1\uC2B9\uD558\uC5EC \uC704\uCE35\uC73C\uB85C
     \uC774\uB3D9\uD558\uC138\uC694."
   enNoticeMessage: Board the elevator and proceed to the upper floor.
+  displayDuration: 5
 --- !u!1 &1495345595
 GameObject:
   m_ObjectHideFlags: 0
@@ -314612,7 +314616,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -317533,7 +317537,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -332937,6 +332941,7 @@ MonoBehaviour:
   noticeMessage: "\uD68C\uB85C\uB97C \uBCC0\uACBD\uD558\uC5EC \uC2B9\uAC15\uAE30\uB97C
     \uD65C\uC131\uD654\uD558\uC138\uC694."
   enNoticeMessage: Modify the circuit to activate the elevator.
+  displayDuration: 5
 --- !u!1001 &1839973889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -340815,7 +340820,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

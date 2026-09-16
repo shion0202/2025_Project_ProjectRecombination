@@ -12201,6 +12201,7 @@ MonoBehaviour:
   noticeMessage: "\uAD6C\uC5ED\uC5D0 \uBC30\uCE58\uB41C 2\uAC1C\uC758 \uC911\uC559
     \uD328\uB110 \uC7A5\uCE58\uB97C \uC870\uC791\uD558\uC138\uC694."
   enNoticeMessage: Interact with the 2 central panel devices in the area.
+  displayDuration: 5
 --- !u!1 &201022686
 GameObject:
   m_ObjectHideFlags: 0
@@ -36652,7 +36653,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -55496,6 +55497,7 @@ MonoBehaviour:
   isOn: 0
   noticeMessage: "\uD568\uC815\uC744 \uD53C\uD574 \uB0B4\uBD80\uB85C \uC9C4\uC785\uD558\uC138\uC694."
   enNoticeMessage: Evade traps and enter the interior.
+  displayDuration: 5
 --- !u!1 &988497934
 GameObject:
   m_ObjectHideFlags: 0
@@ -62105,7 +62107,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -84746,7 +84748,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -87114,6 +87116,7 @@ MonoBehaviour:
   noticeMessage: "\uB0A8\uC740 \uC911\uC559 \uD328\uB110 \uC7A5\uCE58\uB97C \uCC3E\uC544
     \uC870\uC791\uD558\uC138\uC694."
   enNoticeMessage: Locate and interact with the remaining central panel device.
+  displayDuration: 5
 --- !u!1 &1463770962
 GameObject:
   m_ObjectHideFlags: 0

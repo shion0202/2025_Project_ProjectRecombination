@@ -18,6 +18,9 @@ public class ArmHeavyShotgun : PartBaseArm
     protected AudioSource _audioSource;
     protected Coroutine _soundRoutine = null;
 
+    // 한 발의 펠릿 적중 정보. 타격음을 한 번만 내기 위해 모든 펠릿을 판정한 뒤 이펙트를 생성한다.
+    private readonly List<(RaycastHit hit, float coefficient)> _pelletHits = new();
+
     protected override void Awake()
     {
         base.Awake();
@@ -104,6 +107,8 @@ public class ArmHeavyShotgun : PartBaseArm
             Utils.Destroy(muzzleFlashEffect, 0.5f);
         }
 
+        _pelletHits.Clear();
+
         for (int i = 0; i < pelletCount; i++)
         {
             // 1단계 발사 방향 (좁은 스프레드)
@@ -115,7 +120,7 @@ public class ArmHeavyShotgun : PartBaseArm
             if (Physics.Raycast(origin, narrowDir, out RaycastHit denseHit, denseRange, ignoreMask))
             {
                 // 밀집 히트 처리
-                ProcessPelletHit(denseHit);
+                _pelletHits.Add((denseHit, 1.0f));
                 DebugDrawPelletRays(origin, narrowDir, Vector3.zero, Vector3.zero);
                 continue;
             }
@@ -128,11 +133,29 @@ public class ArmHeavyShotgun : PartBaseArm
 
                 if (Physics.Raycast(denseEndPos, spreadDir, out RaycastHit spreadHit, maxRange - denseRange, ignoreMask))
                 {
-                    ProcessPelletHit(spreadHit, 1.5f);
+                    _pelletHits.Add((spreadHit, 1.5f));
                 }
 
                 DebugDrawPelletRays(origin, narrowDir, denseEndPos, spreadDir);
             }
+        }
+
+        // 같은 타격음이 펠릿 수만큼 동시에 겹치면 음량이 크게 합쳐지고 파형 간섭으로 먹먹하게 울린다.
+        // 이펙트는 펠릿마다 생성하되, 소리는 플레이어에게 가장 가까운 적중 지점에서 한 번만 낸다.
+        int soundHitIndex = -1;
+        float nearestDistance = float.MaxValue;
+        for (int i = 0; i < _pelletHits.Count; i++)
+        {
+            if (_pelletHits[i].hit.distance < nearestDistance)
+            {
+                nearestDistance = _pelletHits[i].hit.distance;
+                soundHitIndex = i;
+            }
+        }
+
+        for (int i = 0; i < _pelletHits.Count; i++)
+        {
+            ProcessPelletHit(_pelletHits[i].hit, _pelletHits[i].coefficient, i == soundHitIndex);
         }
 
         _audioSource.Stop();
@@ -190,10 +213,21 @@ public class ArmHeavyShotgun : PartBaseArm
     }
 
     // 히트 처리 함수 (적중 시 데미지, 이펙트 등)
-    private void ProcessPelletHit(RaycastHit hit, float coefficient = 1.0f)
+    private void ProcessPelletHit(RaycastHit hit, float coefficient, bool playSound)
     {
         TakeDamage(hit.transform, coefficient);
-        Utils.Destroy(Utils.Instantiate(hitEffectPrefab, hit.point, Quaternion.identity), 0.5f);
+
+        GameObject hitEffect = Utils.Instantiate(hitEffectPrefab, hit.point, Quaternion.identity);
+        if (!playSound)
+        {
+            // 타격 이펙트의 AudioSource는 Play On Awake라 활성화되는 순간 재생을 시작한다.
+            // 같은 프레임에 멈추면 소리가 출력되지 않는다. (풀에서 다시 꺼내면 다시 재생된다)
+            foreach (AudioSource source in hitEffect.GetComponentsInChildren<AudioSource>())
+            {
+                source.Stop();
+            }
+        }
+        Utils.Destroy(hitEffect, 0.5f);
         Utils.Destroy(Utils.Instantiate(bulletPrefab, hit.point, Quaternion.identity), 0.1f);
 
         _damagedTargets.Clear();

@@ -17262,7 +17262,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -24326,7 +24326,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 35df3edf128c4f6458319ae25d0457b7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -45186,7 +45186,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 16416b408ed6c494fa07660a60703e6e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -53568,6 +53568,7 @@ MonoBehaviour:
   noticeMessage: "\uACBD\uBCF4 \uBC1C\uC0DD. \uC804\uB825\uC744 \uBCF5\uAD6C\uD558\uC5EC
     \uACBD\uBCF4\uB97C \uD574\uC81C\uD558\uC138\uC694."
   enNoticeMessage: Alarm triggered. Restore power to deactivate the alarm.
+  displayDuration: 5
 --- !u!1 &641609022
 GameObject:
   m_ObjectHideFlags: 0
@@ -78759,6 +78760,7 @@ MonoBehaviour:
   noticeMessage: "\uCC28\uB2E8\uAE30\uB97C \uD30C\uAD34\uD558\uC5EC \uB0B4\uBD80\uB85C
     \uC774\uB3D9\uD558\uC138\uC694."
   enNoticeMessage: Destroy the breaker and move inside.
+  displayDuration: 5
 --- !u!1 &901139786
 GameObject:
   m_ObjectHideFlags: 0
@@ -148370,6 +148372,7 @@ MonoBehaviour:
   noticeMessage: "\uACBD\uBCF4 \uD574\uC81C. \uB2E4\uC74C \uAD6C\uC5ED\uC73C\uB85C
     \uC774\uB3D9\uD558\uC138\uC694."
   enNoticeMessage: Alarm deactivated. Move to the next area.
+  displayDuration: 5
 --- !u!1 &1650096889
 GameObject:
   m_ObjectHideFlags: 0
@@ -179789,7 +179792,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: e3beca0bd3b9ad44ab3a241a71922d91, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 0.95
   Loop: 1
   Mute: 0

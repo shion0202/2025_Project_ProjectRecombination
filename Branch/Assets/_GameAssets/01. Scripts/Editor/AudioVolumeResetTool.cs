@@ -13,14 +13,54 @@ using UnityEngine.SceneManagement;
 /// 음원 파일 자체를 라우드니스 정규화로 맞추면서 개별 볼륨 조정이 필요 없어졌다.
 /// 남겨두면 정규화 결과와 겹쳐 이중으로 작아지므로 전부 1로 통일한다.
 ///
-/// 대상: 06. Audio 폴더의 클립을 쓰고 볼륨이 1이 아닌 AudioSource (프리팹, 04. Scenes 아래 씬)
+/// 대상: 06. Audio 폴더 클립 또는 함께 정규화한 에셋 음원을 쓰고 볼륨이 1이 아닌 AudioSource
+///       (_GameAssets·_ExAssets 프리팹, 04. Scenes 아래 씬)
 /// 씬 파일을 열고 저장하므로 라이트 베이크 중에는 실행하지 않는다.
+/// IntentionalVolumePrefabs에 등록한 프리팹은 볼륨을 의도적으로 조절했으므로 건너뛴다.
 /// </summary>
 public class AudioVolumeResetTool : EditorWindow
 {
     private const string AudioFolder = "Assets/_GameAssets/05. Art/06. Audio/";
-    private const string PrefabFolder = "Assets/_GameAssets";
     private const string SceneFolder = "Assets/_GameAssets/04. Scenes";
+
+    // 에셋(서브모듈)에 포함된 VFX 프리팹도 음원을 직접 들고 있으므로 함께 검색한다.
+    private static readonly string[] PrefabFolders = { "Assets/_GameAssets", "Assets/_ExAssets" };
+
+    // 볼륨을 의도적으로 낮춘 프리팹. 같은 음원을 다른 곳(부활 이펙트, 보스 투사체 등)과 공유해서
+    // 파일 대신 이 프리팹의 AudioSource 볼륨으로 조절했으므로 초기화 대상에서 제외한다.
+    private static readonly HashSet<string> IntentionalVolumePrefabs = new()
+    {
+        "Assets/_GameAssets/02. Prefabs/Player/Effect/Vfx_Dash.prefab",
+        "Assets/_GameAssets/02. Prefabs/PublicObjects/Bullets/Vfx_Bullet_Rapid.prefab",
+        "Assets/_GameAssets/02. Prefabs/PublicObjects/Bullets/Vfx_Bullet_RapidBounce.prefab",
+        "Assets/_GameAssets/02. Prefabs/PublicObjects/Bullets/Vfx_HeavyMissile.prefab",
+        "Assets/_GameAssets/02. Prefabs/PublicObjects/Bullets/Vfx_HeavyOrb.prefab",
+    };
+
+    // 06. Audio 밖에 있지만 함께 라우드니스 정규화한 에셋 음원
+    private static readonly HashSet<string> NormalizedExternalClips = new()
+    {
+        "Assets/_ExAssets/Models/_Creepy_Cat/_3D Scifi Kit Starter Kit_HD/_Sounds/Pneumatic-door.wav",
+        "Assets/_ExAssets/Sounds/Enviroment/Drop_Metalic.wav",
+        "Assets/_ExAssets/Sounds/Enviroment/Elevator_Short_Sound.mp3",
+        "Assets/_ExAssets/Sounds/Enviroment/Elevator_Sound01.mp3",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/explosion_energy.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/explosion_energy2.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/explosion_laser3.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/explosion_laser4.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/explosion_rocket3.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/shoot_energy.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/shoot_energy2.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/shoot_laser2.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/shoot_pulsegun.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/shoot_rift.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Impact/shoot_rocket.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Loops/loop_energy.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Loops/loop_fire.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Loops/loop_laser2.wav",
+        "Assets/_ExAssets/VFX/Archanor/Sci-Fi Arsenal/Sci-Fi Effects/Sound/Loops/loop_rocket2.wav",
+        "Assets/_ExAssets/VFX/_Creepy_Cat/3D Cartoon_Explosions_Pack_Vol_2/explosion.wav",
+    };
 
     private class Target
     {
@@ -44,7 +84,7 @@ public class AudioVolumeResetTool : EditorWindow
     private void OnGUI()
     {
         EditorGUILayout.HelpBox(
-            "06. Audio 폴더의 음원을 쓰는 AudioSource 중 볼륨이 1이 아닌 것을 찾아 1로 바꾼다.\n" +
+            "06. Audio 폴더 음원과 함께 정규화한 에셋 음원을 쓰는 AudioSource 중 볼륨이 1이 아닌 것을 찾아 1로 바꾼다.\n" +
             "씬을 열고 저장하므로 저장하지 않은 변경은 먼저 저장하고, 라이트 베이크가 끝난 뒤 실행한다.",
             MessageType.None);
 
@@ -106,9 +146,11 @@ public class AudioVolumeResetTool : EditorWindow
 
     private void ScanPrefabs()
     {
-        foreach (string guid in AssetDatabase.FindAssets("t:Prefab", new[] { PrefabFolder }))
+        foreach (string guid in AssetDatabase.FindAssets("t:Prefab", PrefabFolders))
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
+            if (IntentionalVolumePrefabs.Contains(path)) continue;
+
             GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
             if (prefab == null) continue;
 
@@ -141,7 +183,8 @@ public class AudioVolumeResetTool : EditorWindow
         if (source.clip == null) return false;
         if (Mathf.Approximately(source.volume, 1.0f)) return false;
 
-        return AssetDatabase.GetAssetPath(source.clip).StartsWith(AudioFolder);
+        string clipPath = AssetDatabase.GetAssetPath(source.clip);
+        return clipPath.StartsWith(AudioFolder) || NormalizedExternalClips.Contains(clipPath);
     }
 
     #endregion
