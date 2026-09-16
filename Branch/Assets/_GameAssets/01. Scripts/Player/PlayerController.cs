@@ -91,6 +91,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     private EAnimationType _currentAnimType = EAnimationType.Base;
     private EAnimationType _shootAnimType = EAnimationType.ShootingBase;
 
+    // 사격 중 이동 애니메이션 전환. 컨트롤러를 교체하면 모든 레이어가 초기화되어 이동 모션이 처음부터 다시 재생되므로,
+    // BT_Move 블렌드 트리 안에서 aimWeight 파라미터로 일반 이동과 사격 중 이동을 섞는다.
+    [SerializeField] private float aimMoveBlendTime = 0.15f;
+    private static readonly int AimWeightHash = Animator.StringToHash("aimWeight");
+    private bool _isAimMove = false;
+    private float _aimMoveWeight = 0.0f;
+
     [Header("Parts")]
     [SerializeField] private List<SkinnedMeshRenderer> bodyRenderers = new();
     [SerializeField] private List<Material> basicMaterials = new();
@@ -184,6 +191,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         if (!_isInit) return;
         
         AnimCheckShoot();
+        UpdateAimMoveWeight();
         GUIManager.Instance.GameUIController.SetHpSlider(stats.CurrentHealth, stats.MaxHealth);
     }
 
@@ -732,6 +740,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         _isLeftAttackReady = false;
         _isRightAttackReady = false;
         Stats.RemoveModifier(this);
+        _isAimMove = false;
+        _aimMoveWeight = 0.0f;
         SetOvrrideAnimator(_currentAnimType);
 
         for (int i = 0; i < Enum.GetValues(typeof(EPartType)).Length; ++i)
@@ -824,13 +834,6 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         _currentPlayerState |= _previousState;
         _currentPlayerState &= ~EPlayerState.Dashing;
 
-        // 대시 중 사격이 취소됐다면 CancleAttack에서 미뤄둔 애니메이터 복원을 여기서 처리한다.
-        if ((_currentPlayerState & EPlayerState.ShootState) == 0 && (int)_currentAnimType < animations.Count &&
-            animator.runtimeAnimatorController != animations[(int)_currentAnimType].overrideController)
-        {
-            SetOvrrideAnimator(_currentAnimType);
-        }
-
         if ((_currentPlayerState & EPlayerState.LeftShooting) != 0)
         {
             Shoot(true);
@@ -883,13 +886,9 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             Stats.RemoveModifier(this);
             _followCamera.CurrentCameraState = (ECameraState)(_currentAnimType);
 
-            if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic && isLeft) return;
+            _isAimMove = false;
 
-            // 대시 중 컨트롤러를 교체하면 대시 애니메이터 파라미터가 초기화되므로 FinishDash에서 복원한다.
-            if ((_currentPlayerState & EPlayerState.Dashing) == 0)
-            {
-                SetOvrrideAnimator(_currentAnimType);
-            }
+            if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic && isLeft) return;
 
             rigAimController.SmoothChangeWeight("ArmLAim", false);
             rigAimController.SmoothChangeWeight("ArmRAim", false);
@@ -1005,6 +1004,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         animator.runtimeAnimatorController = animations[(int)type].overrideController;
         animator.SetBool("isOnlyLoop", animations[(int)type].isOnlyLoop);
+        // 컨트롤러 교체로 파라미터가 기본값으로 초기화되므로, 사격 중 다리 파츠를 바꿔도 이동 블렌드가 끊기지 않게 즉시 되돌린다.
+        animator.SetFloat(AimWeightHash, _aimMoveWeight);
 
         rigBuilder.enabled = false;
         rigBuilder.enabled = true;
@@ -1035,24 +1036,21 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     public bool SetOvrrideAnimator()
     {
         // 기본 팔 파츠일 경우 애니메이션 전환 X
+        // 단발 사격이라 사격 상태가 짧아, 이동 블렌드가 잠깐 섞였다 돌아가는 것이 오히려 부자연스럽다.
         if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic) return false;
 
-        animator.runtimeAnimatorController = animations[(int)_shootAnimType].overrideController;
-        animator.SetBool("isOnlyLoop", animations[(int)_shootAnimType].isOnlyLoop);
-
-        rigBuilder.enabled = false;
-        rigBuilder.enabled = true;
-
-        if ((_currentPlayerState & EPlayerState.Spawning) == 0)
-        {
-            rigAimController.SmoothChangeBaseWeight(true);
-        }
-
-        //SwitchStateToIdle();
-        _currentPlayerState &= ~EPlayerState.Moving;
-        _currentPlayerState |= EPlayerState.Idle;
+        // 컨트롤러를 교체하지 않고 사격 중 이동 블렌드만 켠다. (실제 보간은 UpdateAimMoveWeight)
+        _isAimMove = true;
 
         return true;
+    }
+
+    private void UpdateAimMoveWeight()
+    {
+        float target = _isAimMove ? 1.0f : 0.0f;
+        float step = aimMoveBlendTime > 0.0f ? Time.deltaTime / aimMoveBlendTime : 1.0f;
+        _aimMoveWeight = Mathf.MoveTowards(_aimMoveWeight, target, step);
+        animator.SetFloat(AimWeightHash, _aimMoveWeight);
     }
 
     public void ApplyRecoil(CinemachineImpulseSource source, float recoilX, float recoilY)
