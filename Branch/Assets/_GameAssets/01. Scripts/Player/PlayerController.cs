@@ -719,6 +719,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         // 사망 로직
         _currentPlayerState = 0;
+        // 대시 중 사망하면 아래 FinishActionForced -> FinishDash가 _previousState의 사격 플래그를 사망 상태에 다시 붙이므로 함께 비운다.
+        _previousState = 0;
         _invincibilityRefCount = 0;
         _currentPlayerState |= EPlayerState.Dead;
 
@@ -727,7 +729,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         SetMovable(false);
 
         rigAimController.IsAim = false;
-        rigAimController.SetAllWeight(0.0f);
+        // SetAllWeight는 진행 중인 가중치 보간 코루틴을 멈추지 않아, 사격 시작 직후 사망하면 팔 조준 가중치가 다시 올라간다.
+        rigAimController.ClearWeight(0.0f);
 
         // 사격 중 또는 스킬 시전 중 사망하는 경우 고려
         // 거의 없는 상황이지만 공중에 있을 떄 사망하는 경우도 고려할 것
@@ -1010,7 +1013,9 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         rigBuilder.enabled = false;
         rigBuilder.enabled = true;
 
-        if ((_currentPlayerState & EPlayerState.Spawning) == 0)
+        // Die()도 이 함수를 호출하므로 사망 상태를 함께 제외한다.
+        // 그렇지 않으면 Die()에서 0으로 내린 머리/가슴 조준 가중치가 다시 올라가 사망 후에도 상체가 카메라를 따라간다.
+        if ((_currentPlayerState & (EPlayerState.Spawning | EPlayerState.Dead)) == 0)
         {
             rigAimController.SmoothChangeBaseWeight(true);
         }

@@ -1615,6 +1615,7 @@ MonoBehaviour:
   - overrideController: {fileID: 22100000, guid: cadc066377b653f4bad76fd452ad76c3,
       type: 2}
     isOnlyLoop: 1
+  aimMoveBlendTime: 0.15
   bodyRenderers:
   - {fileID: 3860552288760064051}
   - {fileID: 4684638248327942808}
@@ -23617,7 +23618,7 @@ GameObject:
   - component: {fileID: 1909670744297257190}
   - component: {fileID: 683177517069179058}
   - component: {fileID: 1834197408937834259}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Head_SDF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
