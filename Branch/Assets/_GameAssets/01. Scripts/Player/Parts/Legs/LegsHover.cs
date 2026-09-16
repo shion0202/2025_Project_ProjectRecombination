@@ -22,7 +22,6 @@ public class LegsHover : PartBaseLegs
     protected Vector3 _currentMoveDirection = Vector3.zero;
     protected float groundY = 0.0f;
     protected bool isInit = false;
-    protected AudioSource _audioSource;
 
     [SerializeField] protected float largeGroundYChangeThreshold = 0.3f;    // 큰 높이 변화 임계값
     protected float previousGroundY = 0f;
@@ -36,7 +35,7 @@ public class LegsHover : PartBaseLegs
         _partModifiers.Add(new StatModifier(EStatType.DamageReductionRate, EStackType.PercentMul, 0.7f, this));
 
         _legsAnimType = EAnimationType.Hover;
-        _audioSource = gameObject.GetComponent<AudioSource>();
+        InitMoveLoopSound(gameObject.GetComponent<AudioSource>());
     }
 
     protected void OnEnable()
@@ -58,8 +57,7 @@ public class LegsHover : PartBaseLegs
             _skillCoroutine = null;
         }
 
-        _audioSource.volume = 0.0f;
-        _audioSource.Play();
+        StopMoveLoopSound();
     }
 
     protected void OnDisable()
@@ -88,8 +86,7 @@ public class LegsHover : PartBaseLegs
             GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
 
-        _audioSource.volume = 1.0f;
-        _audioSource.Stop();
+        StopMoveLoopSound();
     }
 
     public override void UseAbility()
@@ -126,8 +123,7 @@ public class LegsHover : PartBaseLegs
             GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
 
-        _audioSource.volume = 0.0f;
-        _audioSource.Play();
+        StopMoveLoopSound();
     }
 
     public override Vector3 GetMoveDirection(Vector2 moveInput, Transform characterTransform, Transform cameraTransform)
@@ -139,14 +135,7 @@ public class LegsHover : PartBaseLegs
         camForward.Normalize(); camRight.Normalize();
 
         Vector3 inputDir = (camForward * moveInput.y + camRight * moveInput.x).normalized;
-        if (inputDir.sqrMagnitude < 0.01f)
-        {
-            _audioSource.volume = 0.0f;
-        }
-        else
-        {
-            _audioSource.volume = 1.0f;
-        }
+        UpdateMoveLoopSound(inputDir.sqrMagnitude >= 0.01f);
 
         float moveSpeed = (_owner.Stats.TotalStats[EStatType.WalkSpeed].value + _owner.Stats.TotalStats[EStatType.AddMoveSpeed].value);
         Vector3 targetVelocity = inputDir * moveSpeed;

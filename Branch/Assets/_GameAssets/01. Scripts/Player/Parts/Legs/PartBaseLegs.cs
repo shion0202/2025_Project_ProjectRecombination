@@ -16,7 +16,62 @@ public class PartBaseLegs : PartBase, ILegsMovement
     protected Coroutine _skillCoroutine = null;
     protected EAnimationType _legsAnimType = EAnimationType.Base;
 
+    // 이동 루프음 (호버 비행음, 캐터필러 바퀴음, 롤러음)
+    // 이동을 시작하면 처음부터 재생하고, 이동하는 동안 반복하며, 멈추면 정지한다.
+    // 볼륨을 0/1로 켜고 끄는 방식은 소리가 계속 흘러가고 있어 다시 움직일 때 중간부터 들렸다.
+    protected AudioSource _moveLoopSource;
+    private int _lastMoveSoundFrame = -1;
+
     public EAnimationType LegsAnimType => _legsAnimType;
+
+    protected void InitMoveLoopSound(AudioSource source)
+    {
+        _moveLoopSource = source;
+        if (_moveLoopSource == null) return;
+
+        _moveLoopSource.loop = true;
+        _moveLoopSource.playOnAwake = false;
+    }
+
+    // GetMoveDirection에서 매 프레임 호출한다.
+    protected void UpdateMoveLoopSound(bool isMoving)
+    {
+        if (_moveLoopSource == null) return;
+
+        // 일시정지 등으로 시간이 멈춘 동안에는 이동으로 보지 않는다.
+        if (!isMoving || Time.timeScale <= 0.0f)
+        {
+            StopMoveLoopSound();
+            return;
+        }
+
+        _lastMoveSoundFrame = Time.frameCount;
+        if (!_moveLoopSource.isPlaying)
+        {
+            _moveLoopSource.Play();
+        }
+    }
+
+    protected void StopMoveLoopSound()
+    {
+        if (_moveLoopSource != null && _moveLoopSource.isPlaying)
+        {
+            _moveLoopSource.Stop();
+        }
+    }
+
+    // 이동이 막힌 상태(스킬, 컷씬, 라디얼 UI, 사망 등)에서는 PlayerController가 GetMoveDirection을 호출하지 않는다.
+    // 이동 중에 막히면 정지 요청이 오지 않아 루프음이 계속 남으므로, 갱신이 끊기면 여기서 멈춘다.
+    // (PlayerController.LateUpdate와의 실행 순서에 따라 한 프레임 차이가 날 수 있어 1프레임은 허용한다)
+    protected virtual void LateUpdate()
+    {
+        if (_moveLoopSource == null || !_moveLoopSource.isPlaying) return;
+
+        if (Time.frameCount - _lastMoveSoundFrame > 1)
+        {
+            StopMoveLoopSound();
+        }
+    }
 
     public override void UseAbility()
     {

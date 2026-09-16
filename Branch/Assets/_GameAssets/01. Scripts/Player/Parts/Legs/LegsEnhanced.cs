@@ -24,7 +24,6 @@ public class LegsEnhanced : PartBaseLegs
     private bool _isCooldown = false;
     private bool _isAttack = false;
     protected CinemachineImpulseSource source;
-    protected AudioSource _audioSource;
 
     public bool IsAttack
     {
@@ -37,7 +36,7 @@ public class LegsEnhanced : PartBaseLegs
         base.Awake();
         _legsAnimType = EAnimationType.Roller;
         source = gameObject.GetComponent<CinemachineImpulseSource>();
-        _audioSource = gameObject.GetComponent<AudioSource>();
+        InitMoveLoopSound(gameObject.GetComponent<AudioSource>());
     }
 
     protected void OnEnable()
@@ -62,8 +61,7 @@ public class LegsEnhanced : PartBaseLegs
             GUIManager.Instance.GameUIController.RapidInfo.SetActive(false);
         }
 
-        _audioSource.volume = 0.0f;
-        _audioSource.Play();
+        StopMoveLoopSound();
     }
 
     protected void OnDisable()
@@ -89,8 +87,7 @@ public class LegsEnhanced : PartBaseLegs
             GUIManager.Instance.GameUIController.SetLegsSkillCooldown(false);
         }
 
-        _audioSource.volume = 1.0f;
-        _audioSource.Stop();
+        StopMoveLoopSound();
     }
 
     private void Update()
@@ -141,8 +138,7 @@ public class LegsEnhanced : PartBaseLegs
 
         _owner.SetPlayerState(EPlayerState.Skilling, false);
 
-        _audioSource.volume = 0.0f;
-        _audioSource.Play();
+        StopMoveLoopSound();
     }
 
     public override void SetCurrentCooldown(EPartType currentPartType)
@@ -163,8 +159,7 @@ public class LegsEnhanced : PartBaseLegs
     {
         if (_currentCooldown > 0.0f || _isCooldown) return;
 
-        _audioSource.volume = 1.0f;
-        _audioSource.Stop();
+        StopMoveLoopSound();
 
         // 점프 연출 이후 실행
         Utils.Destroy(
@@ -200,8 +195,7 @@ public class LegsEnhanced : PartBaseLegs
         GUIManager.Instance.GameUIController.SetLegsSkillTimer(Color.white);
         GUIManager.Instance.GameUIController.RapidInfo.SetActive(false);
 
-        _audioSource.volume = 1.0f;
-        _audioSource.Stop();
+        StopMoveLoopSound();
     }
 
     protected void JumpAttackFinish()
@@ -297,14 +291,14 @@ public class LegsEnhanced : PartBaseLegs
         if (moveInput.sqrMagnitude < 0.01f)
         {
             _skateTime = 0f;
-            _audioSource.volume = 0.0f;
+            UpdateMoveLoopSound(false);
         }
         else
         {
             // 애니메이션은 재생 중이되 S자 파형 움직임을 멈추는 경우를 고려하여 Skate Time은 계속 누적
             // 롤러스케이트 S자 파형 - 앞방향 키(Y>0)일 때만 S자 진동 추가 (X 입력시 덜 흔들릴 수 있음)
             _skateTime += Time.deltaTime * skateSpeed;                  // 3.0f: S자 횡진동 속도
-            _audioSource.volume = 1.0f;
+            UpdateMoveLoopSound(true);
 
             if (isSkateStraight)
             {

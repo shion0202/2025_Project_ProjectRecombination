@@ -21,7 +21,6 @@ public class LegsCaterpillar : PartBaseLegs
     private bool _isBackward = false;
     protected CinemachineImpulseSource source;
     private bool _isCooldown = false;
-    protected AudioSource _audioSource;
 
     [Header("캐터필러 피벗 설정")]
     [SerializeField] private Transform caterpillarPivot;
@@ -37,7 +36,7 @@ public class LegsCaterpillar : PartBaseLegs
         _legsAnimType = EAnimationType.Caterpillar;
         _isAnimating = false;
         source = gameObject.GetComponent<CinemachineImpulseSource>();
-        _audioSource = gameObject.GetComponent<AudioSource>();
+        InitMoveLoopSound(gameObject.GetComponent<AudioSource>());
 
         _partModifiers.Add(new StatModifier(EStatType.IntervalBetweenShots, EStackType.PercentMul, -0.5f, this));
         _partModifiers.Add(new StatModifier(EStatType.DamageReductionRate, EStackType.PercentMul, 0.5f, this));
@@ -55,8 +54,7 @@ public class LegsCaterpillar : PartBaseLegs
             subWheelObject.SetActive(true);
         }
 
-        _audioSource.volume = 0.0f;
-        _audioSource.Play();
+        StopMoveLoopSound();
 
         _owner.Stats.RemoveModifier(this);
         _damagedTargets.Clear();
@@ -72,8 +70,7 @@ public class LegsCaterpillar : PartBaseLegs
         _owner.FollowCamera.SetCameraRotatable(true);
         _isCooldown = false;
 
-        _audioSource.volume = 1.0f;
-        _audioSource.Stop();
+        StopMoveLoopSound();
 
         if (_skillCoroutine != null)
         {
@@ -103,8 +100,7 @@ public class LegsCaterpillar : PartBaseLegs
         base.FinishActionForced();
 
         _currentMoveDirection = _owner.transform.forward;
-        _audioSource.volume = 0.0f;
-        _audioSource.Play();
+        StopMoveLoopSound();
 
         _currentSkillCount = 0;
         _owner.SetMovable(true);
@@ -145,7 +141,7 @@ public class LegsCaterpillar : PartBaseLegs
                 caterpillarMaterial.SetVector("_AnimSpeed", Vector2.zero);
             }
 
-            _audioSource.volume = 0.0f;
+            UpdateMoveLoopSound(false);
 
             // CurrentMoveDirectionWorld는 일부러 비우지 않는다.
             // 멈췄을 때 하체가 마지막 이동 방향을 유지하는 것이 의도된 동작이다.
@@ -161,7 +157,7 @@ public class LegsCaterpillar : PartBaseLegs
         camRight.Normalize();
         Vector3 targetDirection = (camForward * moveInput.y + camRight * moveInput.x).normalized;
 
-        _audioSource.volume = 1.0f;
+        UpdateMoveLoopSound(true);
 
         // 현재 하체(캐릭터) 정면 방향과 목표 방향 각도(dot) 계산
         // 후진 모드 전환: dot가 threshold(예: -0.7) 이하이면 true로, threshold 이상이면 false로 딱 한 번만 전환
