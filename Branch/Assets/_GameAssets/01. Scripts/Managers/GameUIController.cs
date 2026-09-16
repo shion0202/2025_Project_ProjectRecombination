@@ -839,6 +839,21 @@ namespace Managers
             GameManager.Instance.ExitGame();
         }
 
+        // 타이틀로 복귀 (데모 빌드에서 게임 종료 버튼 대신 사용)
+        // 클리어 후 크레딧이 끝났을 때와 같은 경로로 세션 상태를 초기화한다.
+        public void ReturnToTitle()
+        {
+            // 복귀가 진행 중이면 CurrentState가 Loading이다. 버튼 연타로 정리가 중복 실행되는 것을 막는다.
+            if (GameManager.Instance.CurrentState == GameManager.GameState.Loading) return;
+
+            // 일시정지 UI에서 호출되므로 timeScale이 0인 상태다.
+            // 되돌리지 않으면 Time.deltaTime 기반인 프롤로그 연출이 다음 판에서 멈춘다.
+            Time.timeScale = 1.0f;
+            StopVibration();
+
+            GameManager.Instance.ReturnToTitleFromDemo();
+        }
+
         public void OpenKeyGuide()
         {
             var player = MonsterManager.Instance.Player.GetComponent<PlayerController>();

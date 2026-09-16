@@ -36,6 +36,12 @@ public class PartBaseArm : PartBase
 
     public bool IsOverheat => _isOverheat;
 
+    // [임시] 사격 불가 버그 추적용. PlayerController.BuildShootDebugReport()에서 사용한다.
+    public string BuildDebugState()
+    {
+        return $"isShooting={_isShooting}, ammo={_currentAmmo}/{maxAmmo}, overheat={_isOverheat}, shootTime={_currentShootTime:F2}, active={gameObject.activeInHierarchy}";
+    }
+
     protected override void Awake()
     {
         base.Awake();

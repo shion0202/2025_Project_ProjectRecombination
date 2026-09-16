@@ -3647,8 +3647,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6242182105219022332}
-        m_TargetAssemblyTypeName: Managers.GUIManager, Assembly-CSharp
-        m_MethodName: Shutdown
+        m_TargetAssemblyTypeName: Managers.GameUIController, Assembly-CSharp
+        m_MethodName: ReturnToTitle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

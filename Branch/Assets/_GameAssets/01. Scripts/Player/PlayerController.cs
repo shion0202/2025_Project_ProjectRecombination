@@ -787,7 +787,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         _dashSpeed = dashSpeed;
 
-        _previousState = _currentPlayerState & EPlayerState.ShootState;
+        // 대시 중 재대시하면 사격 플래그가 이미 지워진 상태이므로, 덮어쓰면 첫 대시에서 저장한 사격 상태가 사라진다.
+        _previousState |= _currentPlayerState & EPlayerState.ShootState;
         animator.SetBool("isLeftAttack", false);
         animator.SetBool("isRightAttack", false);
 
@@ -822,6 +823,14 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         _currentPlayerState |= _previousState;
         _currentPlayerState &= ~EPlayerState.Dashing;
+
+        // 대시 중 사격이 취소됐다면 CancleAttack에서 미뤄둔 애니메이터 복원을 여기서 처리한다.
+        if ((_currentPlayerState & EPlayerState.ShootState) == 0 && (int)_currentAnimType < animations.Count &&
+            animator.runtimeAnimatorController != animations[(int)_currentAnimType].overrideController)
+        {
+            SetOvrrideAnimator(_currentAnimType);
+        }
+
         if ((_currentPlayerState & EPlayerState.LeftShooting) != 0)
         {
             Shoot(true);
@@ -840,7 +849,9 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
     public void CancleAttack(bool isLeft)
     {
-        if ((_currentPlayerState & EPlayerState.ShootState) == 0) return;
+        // 대시 중에는 사격 플래그가 _previousState로 옮겨져 있으므로 함께 확인한다.
+        // 현재 상태만 보면 대시 중 버튼을 떼거나 탄이 떨어졌을 때 취소가 무시된다.
+        if (((_currentPlayerState | _previousState) & EPlayerState.ShootState) == 0) return;
 
         // 기본 무기일 경우 자동으로 사격을 종료하므로 사격 취소 로직을 실행하지 않도록 함
         PartBaseArm weapon = (PartBaseArm)(isLeft ? inventory.EquippedItems[EPartType.ArmL][0] : inventory.EquippedItems[EPartType.ArmR][0]);
@@ -867,13 +878,18 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             rigAimController.SmoothChangeWeight("ArmRAim", false);
         }
 
-        if ((_currentPlayerState & EPlayerState.ShootState) == 0)
+        if (((_currentPlayerState | _previousState) & EPlayerState.ShootState) == 0)
         {
             Stats.RemoveModifier(this);
             _followCamera.CurrentCameraState = (ECameraState)(_currentAnimType);
 
             if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic && isLeft) return;
-            SetOvrrideAnimator(_currentAnimType);
+
+            // 대시 중 컨트롤러를 교체하면 대시 애니메이터 파라미터가 초기화되므로 FinishDash에서 복원한다.
+            if ((_currentPlayerState & EPlayerState.Dashing) == 0)
+            {
+                SetOvrrideAnimator(_currentAnimType);
+            }
 
             rigAimController.SmoothChangeWeight("ArmLAim", false);
             rigAimController.SmoothChangeWeight("ArmRAim", false);
@@ -1939,4 +1955,47 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         _playerActions.PlayerActionMap.Enable();
         onComplete?.Invoke();
     }
+
+    #region Debug
+    // [임시] 사격 불가 버그 추적용 상태 덤프. DebugPlayerStateDump(F10)가 호출한다. 원인 확정 후 함께 제거한다.
+    public string BuildShootDebugReport()
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("===== [ShootDebug] 플레이어 상태 덤프 =====");
+        sb.AppendLine($"CurrentState: {_currentPlayerState}");
+        sb.AppendLine($"PreviousState: {_previousState}");
+        sb.AppendLine($"AttackReady L/R: {_isLeftAttackReady} / {_isRightAttackReady}");
+        sb.AppendLine($"CanMove/CanRotate: {_canMove} / {_canRotatable}, TimeScale: {Time.timeScale}");
+        sb.AppendLine($"WalkSpeed(Total): {stats.TotalStats[EStatType.WalkSpeed].value}");
+
+        foreach (EPartType type in new[] { EPartType.ArmL, EPartType.ArmR })
+        {
+            PartBase part = inventory.EquippedItems[type][0];
+            string armState = part is PartBaseArm arm ? arm.BuildDebugState() : "(PartBaseArm 아님)";
+            sb.AppendLine($"{type}: {part.GetType().Name} {armState}");
+        }
+
+        if (animator != null)
+        {
+            string controllerName = animator.runtimeAnimatorController != null ? animator.runtimeAnimatorController.name : "null";
+            sb.AppendLine($"Animator Controller: {controllerName} (CurrentAnimType: {_currentAnimType}, ShootAnimType: {_shootAnimType})");
+            sb.AppendLine($"Animator Params: isLeftAttack={animator.GetBool("isLeftAttack")}, isRightAttack={animator.GetBool("isRightAttack")}, isDashing={animator.GetBool("isDashing")}, isDead={animator.GetBool("isDead")}");
+
+            for (int layer = 0; layer < animator.layerCount; ++layer)
+            {
+                AnimatorStateInfo info = animator.GetCurrentAnimatorStateInfo(layer);
+                AnimatorClipInfo[] clips = animator.GetCurrentAnimatorClipInfo(layer);
+                string clipName = clips.Length > 0 ? clips[0].clip.name : "-";
+                sb.AppendLine($"Layer {layer} ({animator.GetLayerName(layer)}): weight={animator.GetLayerWeight(layer):F2}, IsName(Shoot)={info.IsName("Shoot")}, clip={clipName}, normalizedTime={info.normalizedTime:F2}, inTransition={animator.IsInTransition(layer)}");
+            }
+        }
+
+        if (rigAimController != null)
+        {
+            sb.AppendLine($"Rig: {rigAimController}");
+        }
+
+        return sb.ToString();
+    }
+    #endregion
 }
