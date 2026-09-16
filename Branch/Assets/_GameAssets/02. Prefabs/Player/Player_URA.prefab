@@ -1647,6 +1647,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f5ae46f476c659749b1b6e1319cd19a5, type: 3}
   deadClip: {fileID: 8300000, guid: 82ba3e0ee0703a94290c77d1a7d46616, type: 3}
   seSource: {fileID: 387769054366828555}
+  reviveEffectPrefabs:
+  - {fileID: 178932, guid: 86e9317ab11091c4c981b09f5d05a9ab, type: 3}
+  reviveEffectLifetime: 3
+  restoredClip: {fileID: 8300000, guid: 1a52615b0ca52ba41a0507e3759ba8c7, type: 3}
+  restoredClipStartTime: 0.4
 --- !u!114 &1874341672980470719
 MonoBehaviour:
   m_ObjectHideFlags: 0

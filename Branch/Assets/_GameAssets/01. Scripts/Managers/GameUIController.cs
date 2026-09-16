@@ -121,6 +121,27 @@ namespace Managers
         [SerializeField] private GameObject tutorial;
         [SerializeField] private GameObject option;
 
+        [Header("Death UI")]
+        // HUD(GUI) 밖에 배치해야 사망 중 HUD를 숨겨도 보인다.
+        [SerializeField] private GameObject deathUI;
+        [SerializeField] private TextMeshProUGUI systemFailureText;
+        [SerializeField] private TextMeshProUGUI rebootingText;
+        // 복구 완료 문구. 실패 문구와 색을 다르게 쓰기 위해 텍스트 내용 교체가 아니라 별도 오브젝트로 둔다.
+        [SerializeField] private TextMeshProUGUI systemRestoredText;
+        [SerializeField] private float rebootingDotInterval = 0.4f;
+        // System Failure가 고장 난 화면처럼 깜빡이며 켜지는 구간 길이. 켬/끔/켬/끔... 순으로 전환한 뒤 켜진 채로 끝난다.
+        // 간격을 일정하지 않게 두어야 기계적인 깜빡임이 아니라 접촉 불량처럼 보인다.
+        [SerializeField] private float[] deathUIFlickerPattern = { 0.05f, 0.07f, 0.04f, 0.1f };
+        private Coroutine _rebootingDotRoutine;
+        private Coroutine _deathUIFlickerRoutine;
+
+        // 사망~부활 동안 HUD가 다른 UI(일시정지, 도움말, 월드맵)를 닫는 경로로 되살아나지 않게 막는다.
+        private bool _isHudLocked = false;
+
+        private const string SystemFailureMessage = "System Failure";
+        private const string RebootingMessage = "REBOOTING";
+        private const string SystemRestoredMessage = "System Restored";
+
         private static Coroutine _hapticCoroutine;
 
         public GameObject HUD
@@ -828,7 +849,7 @@ namespace Managers
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            GUI.SetActive(true);
+            RestoreHUD();
             pauseUI.SetActive(false);
             Time.timeScale = 1.0f;
         }
@@ -936,7 +957,7 @@ namespace Managers
                     player.FollowCamera.OnUIClose();
                 }
 
-                HUD.SetActive(true);
+                RestoreHUD();
                 worldMap.SetActive(false);
                 Time.timeScale = 1.0f;
             }
@@ -1042,6 +1063,150 @@ namespace Managers
 
             option.SetActive(true);
         }
+
+        #region Death UI
+
+        public bool IsHudLocked => _isHudLocked;
+
+        public void SetHudLocked(bool isLocked)
+        {
+            _isHudLocked = isLocked;
+            GUI.SetActive(!isLocked);
+        }
+
+        // 다른 UI를 닫으면서 HUD를 되돌릴 때 사용한다. 사망 연출 중에는 켜지 않는다.
+        public void RestoreHUD()
+        {
+            if (_isHudLocked) return;
+            GUI.SetActive(true);
+        }
+
+        // 사망 순간 사망 표시 루트(패널)를 텍스트 없이 켠다. 노이즈와 함께 들어온다.
+        public void ShowDeathUI()
+        {
+            // UI 연결이 빠져 있어도 부활 흐름 자체는 멈추지 않게 한다.
+            if (deathUI == null || systemFailureText == null || rebootingText == null)
+            {
+                Debug.LogWarning("[GameUIController] Death UI 참조가 연결되지 않아 사망 표시를 생략함");
+                return;
+            }
+
+            StopRebootingDots();
+            StopDeathUIFlicker();
+
+            systemFailureText.gameObject.SetActive(false);
+            rebootingText.gameObject.SetActive(false);
+            if (systemRestoredText != null)
+            {
+                systemRestoredText.gameObject.SetActive(false);
+            }
+
+            deathUI.SetActive(true);
+        }
+
+        // System Failure 텍스트만 깜빡이며 켠다.
+        // 패널까지 깜빡이면 노이즈 연출이 아니라 텍스트 판이 튀어나오는 것처럼 보인다.
+        public void ShowSystemFailureText()
+        {
+            if (deathUI == null || !deathUI.activeSelf || systemFailureText == null) return;
+
+            StopDeathUIFlicker();
+
+            systemFailureText.text = SystemFailureMessage;
+            _deathUIFlickerRoutine = StartCoroutine(CoFlickerIn(systemFailureText.gameObject));
+        }
+
+        // 리부팅이 끝난 순간 실패 문구를 복구 완료 문구로 바꾼다. 부활 직전에 호출한다.
+        public void ShowRestoredText()
+        {
+            if (deathUI == null || !deathUI.activeSelf) return;
+
+            StopRebootingDots();
+            StopDeathUIFlicker();
+
+            if (systemFailureText != null)
+            {
+                systemFailureText.gameObject.SetActive(false);
+            }
+            if (rebootingText != null)
+            {
+                rebootingText.gameObject.SetActive(false);
+            }
+
+            if (systemRestoredText == null)
+            {
+                Debug.LogWarning("[GameUIController] System Restored 텍스트가 연결되지 않아 복구 문구를 생략함");
+                return;
+            }
+
+            systemRestoredText.text = SystemRestoredMessage;
+            systemRestoredText.gameObject.SetActive(true);
+        }
+
+        public void ShowRebootingText()
+        {
+            if (rebootingText == null) return;
+
+            StopRebootingDots();
+
+            rebootingText.gameObject.SetActive(true);
+            _rebootingDotRoutine = StartCoroutine(CoRebootingDots());
+        }
+
+        // 사망 표시를 즉시 끈다.
+        public void HideDeathUI()
+        {
+            StopRebootingDots();
+            StopDeathUIFlicker();
+
+            if (deathUI != null)
+            {
+                deathUI.SetActive(false);
+            }
+        }
+
+        private void StopDeathUIFlicker()
+        {
+            if (_deathUIFlickerRoutine == null) return;
+
+            StopCoroutine(_deathUIFlickerRoutine);
+            _deathUIFlickerRoutine = null;
+        }
+
+        private IEnumerator CoFlickerIn(GameObject target)
+        {
+            // 패턴의 짝수 칸은 켜짐, 홀수 칸은 꺼짐으로 번갈아 전환한 뒤 켜진 채로 끝낸다.
+            for (int i = 0; i < deathUIFlickerPattern.Length; ++i)
+            {
+                target.SetActive(i % 2 == 0);
+                yield return new WaitForSeconds(deathUIFlickerPattern[i]);
+            }
+
+            target.SetActive(true);
+            _deathUIFlickerRoutine = null;
+        }
+
+        private void StopRebootingDots()
+        {
+            if (_rebootingDotRoutine == null) return;
+
+            StopCoroutine(_rebootingDotRoutine);
+            _rebootingDotRoutine = null;
+        }
+
+        // REBOOTING. -> REBOOTING.. -> REBOOTING... 순환
+        private IEnumerator CoRebootingDots()
+        {
+            int dotCount = 0;
+            while (true)
+            {
+                dotCount = dotCount % 3 + 1;
+                rebootingText.text = RebootingMessage + new string('.', dotCount);
+                yield return new WaitForSeconds(rebootingDotInterval);
+            }
+        }
+
+        #endregion
 
         #region Fade In/Out
 

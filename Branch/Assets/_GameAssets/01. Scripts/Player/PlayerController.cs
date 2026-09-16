@@ -9,6 +9,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 
 [Serializable]
 public struct BaseAnimation
@@ -110,6 +111,16 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField] private List<AudioClip> hitClips = new();
     [SerializeField] private AudioClip deadClip;
     [SerializeField] private AudioSource seSource;
+
+    [Header("Revive")]
+    // 부활 순간 플레이어 위치에 동시에 생성할 이펙트들 (예: 전기 + 충격파)
+    [SerializeField] private List<GameObject> reviveEffectPrefabs = new();
+    [SerializeField] private float reviveEffectLifetime = 3.0f;
+    // 복구 완료 알림음. 부활 순간에는 이펙트 소리에 묻히므로 System Restored 문구가 뜰 때 먼저 재생한다.
+    [FormerlySerializedAs("reviveClip")]
+    [SerializeField] private AudioClip restoredClip;
+    // 음원 앞부분 무음 구간을 건너뛸 시간(초). 문구가 켜지는 순간 소리가 바로 들리도록 맞춘다.
+    [SerializeField, Min(0.0f)] private float restoredClipStartTime = 0.0f;
 
     private Coroutine _indicatorRoutine = null;
     private Coroutine _hitRoutine = null;
@@ -549,7 +560,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                 {
                     _followCamera.OnUIClose();
 
-                    Managers.GUIManager.Instance.GameUIController.HUD.SetActive(true);
+                    Managers.GUIManager.Instance.GameUIController.RestoreHUD();
                     Time.timeScale = 1.0f;
                 }
             }
@@ -583,7 +594,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                 {
                     _followCamera.OnUIClose();
 
-                    Managers.GUIManager.Instance.GameUIController.HUD.SetActive(true);
+                    Managers.GUIManager.Instance.GameUIController.RestoreHUD();
                     Time.timeScale = 1.0f;
                 }
             }
@@ -709,6 +720,33 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         rigAimController.ClearWeight(0.0f);
 
         SetMovable(false);
+    }
+
+    // 사망 후 부활 연출. Spawn()은 부활 외의 경로에서도 호출될 수 있으므로
+    // 연출은 분리해 부활 흐름(GameManager.RebirthGame)에서만 호출한다.
+
+    // 리부팅이 끝나 System Restored 문구가 뜨는 순간의 알림음
+    public void PlayRestoredSound()
+    {
+        if (restoredClip == null) return;
+
+        seSource.Stop();
+        seSource.clip = restoredClip;
+        // 클립 길이를 넘기면 AudioSource.time이 에러를 내므로 끝 직전으로 제한한다.
+        seSource.time = Mathf.Min(restoredClipStartTime, Mathf.Max(0.0f, restoredClip.length - 0.01f));
+        seSource.Play();
+    }
+
+    // 부활 순간 플레이어 위치에 이펙트 생성
+    public void PlayReviveEffect()
+    {
+        foreach (GameObject prefab in reviveEffectPrefabs)
+        {
+            if (prefab == null) continue;
+
+            GameObject effect = Utils.Instantiate(prefab, transform.position, Quaternion.identity);
+            Utils.Destroy(effect, reviveEffectLifetime);
+        }
     }
 
     public void Die()
@@ -1597,12 +1635,12 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         if (uiController.HelpUI.activeSelf)
         {
             uiController.HelpUI.SetActive(false);
-            uiController.HUD.SetActive(true);
+            uiController.RestoreHUD();
 
             if (!uiController.PauseUI.activeSelf)
             {
                 _followCamera.OnUIClose();
-                uiController.HUD.SetActive(true);
+                uiController.RestoreHUD();
                 Time.timeScale = 1.0f;
             }
             yield break;
@@ -1612,12 +1650,12 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         if (uiController.WorldMap.activeSelf)
         {
             uiController.WorldMap.SetActive(false);
-            uiController.HUD.SetActive(true);
+            uiController.RestoreHUD();
 
             if (!uiController.PauseUI.activeSelf)
             {
                 _followCamera.OnUIClose();
-                uiController.HUD.SetActive(true);
+                uiController.RestoreHUD();
                 Time.timeScale = 1.0f;
             }
             yield break;
@@ -1655,7 +1693,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
             _followCamera.OnUIClose();
             uiController.PauseUI.SetActive(false);
-            uiController.HUD.SetActive(true);
+            uiController.RestoreHUD();
             Time.timeScale = 1.0f;
         }
     }

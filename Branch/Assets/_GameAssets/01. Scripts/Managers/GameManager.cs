@@ -32,6 +32,13 @@ namespace Managers
         public GameObject MinimapObject { get; set; }
         private Coroutine _rebirthRoutine;
 
+        [Header("Death / Revive")]
+        [SerializeField] private float rebirthDelay = 5.0f;             // 사망부터 부활까지 전체 시간 (기존 값)
+        [SerializeField] private float deathUIDelay = 0.4f;             // 사망 후 System Failure 텍스트가 깜빡이며 켜지기 시작하는 시점 (노이즈와 패널이 먼저 들어온다)
+        [SerializeField] private float rebootStartTime = 1.0f;          // REBOOTING 표시 및 화면 회복 시작 시점
+        [SerializeField] private float rebootRecoverIntensity = 0.0f;   // 회복이 끝났을 때의 노이즈 강도 (0이면 완전히 회복)
+        [SerializeField] private float recoveredHoldTime = 0.5f;        // 회복을 마치고 System Restored를 보여준 뒤 부활하기까지의 시간
+
         public bool IsLoad { get; private set; }
         public GameState CurrentState { get; private set; } = GameState.Loading;
 
@@ -69,18 +76,53 @@ namespace Managers
 
             if (_rebirthRoutine != null) return;    // 이미 부활 코루틴이 실행 중이면 무시
             // CurrentState = GameState.GameOver;
-            
-            GUIManager.Instance.GameUIController.OnGameOverPanel();
 
-            // 부활 코루틴 시작
+            // 부활 코루틴 시작 (사망 표시도 코루틴이 담당)
             _rebirthRoutine = StartCoroutine(RebirthGame());
         }
 
-        // 플레이어 부활 코루틴 (5초 대기 후 부활)
+        // 플레이어 사망 연출 및 부활 코루틴
+        // 사망: 화면 노이즈 최대 + HUD 숨김 + 사망 표시 패널, deathUIDelay 뒤 System Failure가 깜빡이며 켜짐
+        //      (노이즈와 텍스트가 같은 프레임에 들어오면 화면 전환이 급작스럽다)
+        // 리부팅: REBOOTING 표시, 화면을 rebootRecoverIntensity까지 서서히 회복
+        // 복구 완료: 노이즈가 걷히는 순간 System Restored로 바꾸고 알림음, recoveredHoldTime 동안 유지
+        //          (곧 부활한다는 신호를 준다. 알림음을 부활 순간에 내면 이펙트 소리에 묻힌다)
+        // 부활: 사망 표시를 치우고 HUD 복구, 부활 이펙트
+        // 대기와 회복 모두 게임 시간 기준이라 일시정지 중에는 함께 멈춘다.
         private IEnumerator RebirthGame()
         {
-            yield return new WaitForSeconds(5.0f);
-            GUIManager.Instance.GameUIController.CloseGameOverPanel();
+            GameUIController ui = GUIManager.Instance.GameUIController;
+
+            // 1. 사망
+            ScreenGlitch.SetIntensity(1.0f);
+            ui.SetHudLocked(true);
+            ui.ShowDeathUI();
+
+            yield return new WaitForSeconds(deathUIDelay);
+            ui.ShowSystemFailureText();
+
+            yield return new WaitForSeconds(Mathf.Max(0.0f, rebootStartTime - deathUIDelay));
+
+            // 2. 리부팅
+            ui.ShowRebootingText();
+
+            float recoverDuration = Mathf.Max(0.0f, rebirthDelay - rebootStartTime - recoveredHoldTime);
+            float elapsed = 0.0f;
+            while (elapsed < recoverDuration)
+            {
+                elapsed += Time.deltaTime;
+                float t = Mathf.Clamp01(elapsed / recoverDuration);
+                float easeOut = 1.0f - (1.0f - t) * (1.0f - t);   // 초반에 빨리 걷히고 후반은 천천히
+                ScreenGlitch.SetIntensity(Mathf.Lerp(1.0f, rebootRecoverIntensity, easeOut));
+                yield return null;
+            }
+            ScreenGlitch.SetIntensity(rebootRecoverIntensity);
+
+            // 3. 복구 완료
+            ui.ShowRestoredText();
+            Player.PlayRestoredSound();
+
+            yield return new WaitForSeconds(recoveredHoldTime);
 
             if (IsHardMode)
             {
@@ -95,6 +137,12 @@ namespace Managers
             
             Player.Stats.CurrentHealth = Player.Stats.MaxHealth;
             Player.Spawn();
+
+            // 4. 부활
+            ScreenGlitch.Clear();
+            ui.HideDeathUI();
+            ui.SetHudLocked(false);
+            Player.PlayReviveEffect();
 
             _rebirthRoutine = null;
             
@@ -164,6 +212,9 @@ namespace Managers
             {
                 Debug.Log($"[GameManager] 게임 실행 준비 중... (mode: {mode})");
                 CurrentState = GameState.Loading;
+
+                // 이전 판이 사망 연출 도중 끝났을 수 있으므로 화면 노이즈를 확실히 끈다.
+                ScreenGlitch.Clear();
 
                 PlayMode = mode;
 
@@ -275,6 +326,9 @@ namespace Managers
                 StopCoroutine(_rebirthRoutine);
                 _rebirthRoutine = null;
             }
+
+            // 부활 코루틴을 중간에 멈추면 노이즈 강도(전역 셰이더 값)가 그대로 남는다.
+            ScreenGlitch.Clear();
 
             // 3. 씬 언로드
             await DungeonManager.Instance.UnloadAllStage();

@@ -234,13 +234,14 @@ MonoBehaviour:
   - {fileID: -1510027453311653109}
   - {fileID: 1652995552539394585}
   - {fileID: 3935896436674868693}
+  - {fileID: 7122053137647757773}
   - {fileID: 1801289326048895534}
   - {fileID: 2263948989350165309}
   - {fileID: 6150364840990455862}
   - {fileID: 1696145900672956163}
   - {fileID: -1439696652470374106}
   - {fileID: -2718153728886513888}
-  m_RendererFeatureMap: e6010d85337d7dcbfa6991f0e1dcdb5fe3e886b192dcc31ab8fe7c01661930ea0b6b451c084e0beb19426974b29ef016d535bbb4f41c9f362ee2d8301977ff183d3bd2639c296b1f36b849a23c7c5a5503b7d8c8b5eb891726312fbd852b05ec20dfd0c0952d47da
+  m_RendererFeatureMap: e6010d85337d7dcbfa6991f0e1dcdb5fe3e886b192dcc31ab8fe7c01661930ea0b6b451c084e0beb19426974b29ef016d535bbb4f41c9f36cd69f32c989dd6622ee2d8301977ff183d3bd2639c296b1f36b849a23c7c5a5503b7d8c8b5eb891726312fbd852b05ec20dfd0c0952d47da
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -585,3 +586,23 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &7122053137647757773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d613f08f173d4dd895bb07b3230baa9, type: 3}
+  m_Name: FSScreenGlitch
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  injectionPoint: 600
+  fetchColorBuffer: 1
+  requirements: 4
+  passMaterial: {fileID: 2100000, guid: c1beaaa70210562428aa027336b65ae6, type: 2}
+  passIndex: 0
+  bindDepthStencilAttachment: 0
+  m_Version: 1
