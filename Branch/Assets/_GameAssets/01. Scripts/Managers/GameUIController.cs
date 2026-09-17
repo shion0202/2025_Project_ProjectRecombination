@@ -97,6 +97,10 @@ namespace Managers
         [SerializeField] private List<GameObject> armRParts = new();
         [SerializeField] private List<GameObject> legsParts = new();
 
+        [Header("Tutorial Highlight")]
+        // 튜토리얼 강조 연출. 비워 두면 재생 시 이 오브젝트에 자동으로 추가된다.
+        [SerializeField] private TutorialHighlightController tutorialHighlight;
+
         [Header("Notice UI")]
         [SerializeField] private GameObject redDot;
         [SerializeField] private GameObject messageObject;
@@ -875,6 +879,27 @@ namespace Managers
             GameManager.Instance.ReturnToTitleFromDemo();
         }
 
+        /// <summary>
+        /// 키 가이드를 F1로 연 것과 같은 상태로 띄운다. (HUD 숨김 + 일시정지)
+        /// 게임 시작 연출 직후 자동으로 띄울 때 사용한다. 닫는 것은 F1 입력이 처리한다.
+        /// </summary>
+        public void ShowKeyGuide()
+        {
+            if (HelpUI.activeSelf) return;
+
+            var player = MonsterManager.Instance.Player != null
+                ? MonsterManager.Instance.Player.GetComponent<PlayerController>()
+                : null;
+            if (player)
+            {
+                player.FollowCamera.OnUIOpen();
+            }
+
+            HelpUI.SetActive(true);
+            HUD.SetActive(false);
+            Time.timeScale = 0.0f;
+        }
+
         public void OpenKeyGuide()
         {
             var player = MonsterManager.Instance.Player.GetComponent<PlayerController>();
@@ -884,6 +909,27 @@ namespace Managers
             }
 
             GUIManager.Instance.GameUIController.HelpUI.SetActive(true);
+        }
+
+        /// <summary>
+        /// 튜토리얼 강조 연출. VisualScripting의 HighlightTarget / ClearHighlight 노드가 사용한다.
+        /// 프리팹에 컴포넌트를 올려 두지 않았더라도 동작하도록 없으면 직접 추가한다.
+        /// </summary>
+        public TutorialHighlightController TutorialHighlight
+        {
+            get
+            {
+                if (tutorialHighlight == null)
+                {
+                    tutorialHighlight = GetComponentInChildren<TutorialHighlightController>(true);
+                }
+                if (tutorialHighlight == null)
+                {
+                    tutorialHighlight = gameObject.AddComponent<TutorialHighlightController>();
+                }
+
+                return tutorialHighlight;
+            }
         }
 
         public void ActivateMessage(string message, float activeTime = 5.0f)

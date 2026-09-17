@@ -796,8 +796,8 @@ Material:
     - _EmissionBlink: {r: 0, g: 0, b: 3.141593, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionMap_ScrollRotate: {r: 0, g: 0, b: 0, a: 0}
-    - _FaceForwardDirection: {r: 0.14437346, g: 0, b: 0.9895233, a: 0}
-    - _FaceRightDirection: {r: 0.9895233, g: 0, b: -0.14437346, a: 0}
+    - _FaceForwardDirection: {r: 0.76189107, g: 0, b: 0.6477052, a: 0}
+    - _FaceRightDirection: {r: 0.6477052, g: 0, b: -0.76189107, a: 0}
     - _GlitterAtras: {r: 1, g: 1, b: 0, a: 0}
     - _GlitterColor: {r: 1, g: 1, b: 1, a: 1}
     - _GlitterParams1: {r: 256, g: 256, b: 0.16, a: 50}

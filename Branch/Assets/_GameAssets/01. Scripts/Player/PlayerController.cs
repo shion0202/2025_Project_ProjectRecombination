@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField] private Transform groundCheck;
     [SerializeField] private GameObject followCameraPrefab;
     [SerializeField] private CinemachineVirtualCamera startCam;
+    [Tooltip("시작 카메라 연출이 끝난 뒤 키 가이드(F1 화면)를 자동으로 띄운다.")]
+    [SerializeField] private bool showKeyGuideOnStart = true;
     [SerializeField] private Volume volume;
     [SerializeField] private ParticleFollower navi;
     private FollowCameraController _followCamera;
@@ -266,6 +268,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     #endregion
 
     #region Input Actions
+    /// <summary>
+    /// 일시정지, 키 가이드, 맵처럼 시간이 멈춘 동안에는 전투 조작이 들어가면 안 된다.
+    /// UI를 닫는 입력(Esc, F1 등)은 계속 받아야 하므로 액션맵 자체를 끄지 않고 여기서만 걸러낸다.
+    /// 파츠 교체 메뉴는 timeScale을 0.1로 쓰므로 이 조건에 걸리지 않는다.
+    /// </summary>
+    private bool IsTimeStopped => Time.timeScale <= 0.0f;
+
     void PlayerActions.IPlayerActionMapActions.OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
@@ -287,6 +296,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & dashBlockMask) != 0) return;
 
             if (_moveInput == null || _moveInput == Vector2.zero)
@@ -308,6 +318,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & skillBlockMask) != 0) return;
 
             inventory.EquippedItems[EPartType.Shoulder][0].UseAbility();
@@ -319,6 +330,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
 
             PartBaseArm weapon = inventory.EquippedItems[EPartType.ArmL][0].GetComponent<PartBaseArm>();
@@ -338,6 +350,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
 
             PartBaseArm weapon = inventory.EquippedItems[EPartType.ArmR][0].GetComponent<PartBaseArm>();
@@ -357,6 +370,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
 
             PartBaseArm left = inventory.EquippedItems[EPartType.ArmL][0].GetComponent<PartBaseArm>();
@@ -387,6 +401,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         if (context.started)
         {
+            if (IsTimeStopped) return;
+
             EventManager.Instance.PostNotification(EEventType.Interaction, this, null);
         }
     }
@@ -2017,6 +2033,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _followCamera.SetCameraRotatable(true);
         }
         _playerActions.PlayerActionMap.Enable();
+
+        // 시작 연출이 끝나면 조작법을 먼저 보여준다. F1로 여는 것과 같은 상태(일시정지)이며 F1로 닫는다.
+        if (showKeyGuideOnStart)
+        {
+            GUIManager.Instance.GameUIController.ShowKeyGuide();
+        }
+
         onComplete?.Invoke();
     }
 
