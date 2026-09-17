@@ -757,8 +757,6 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         // 사망 로직
         _currentPlayerState = 0;
-        // 대시 중 사망하면 아래 FinishActionForced -> FinishDash가 _previousState의 사격 플래그를 사망 상태에 다시 붙이므로 함께 비운다.
-        _previousState = 0;
         _invincibilityRefCount = 0;
         _currentPlayerState |= EPlayerState.Dead;
 
@@ -770,10 +768,41 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         // SetAllWeight는 진행 중인 가중치 보간 코루틴을 멈추지 않아, 사격 시작 직후 사망하면 팔 조준 가중치가 다시 올라간다.
         rigAimController.ClearWeight(0.0f);
 
-        // 사격 중 또는 스킬 시전 중 사망하는 경우 고려
         // 거의 없는 상황이지만 공중에 있을 떄 사망하는 경우도 고려할 것
-        // 스킬 등이 사용 중일 경우 모두 초기화
         // 버프, 디버프도 마찬가지
+        CancelAllActions();
+
+        _isLowHp = false;
+        if (lowHpController != null)
+        {
+            lowHpController.SetEffectActive(false);
+        }
+    }
+
+    // 컷씬 등으로 조작이 잠기는 순간 호출해 기본 서 있는 상태로 되돌린다.
+    // 사격 취소와 이동 정지는 키를 뗄 때(canceled)만 처리되므로, 누른 채로 잠기면 잠금 중에도 사격이 계속되고
+    // HandleMove가 멈춰 애니메이터 이동 값이 마지막 입력에 고정된 채 걷기 애니메이션(과 발소리)이 이어진다.
+    // 잠금이 풀린 뒤 이동은 키를 누르고 있으면 바로 이어지고, 사격은 다시 눌러야 한다.
+    public void ResetToIdle()
+    {
+        CancelAllActions();
+
+        _followCamera.CurrentCameraState = (ECameraState)(_currentAnimType);
+        rigAimController.SmoothChangeWeight("ArmLAim", false);
+        rigAimController.SmoothChangeWeight("ArmRAim", false);
+
+        _currentMoveInput = Vector2.zero;
+        SwitchStateToIdle();
+    }
+
+    // 사격, 대시, 스킬 등 진행 중인 행동을 모두 강제로 끝낸다. (사망, 컷씬 공용)
+    // CancleAttack은 과열 전 기본 팔이면 취소를 건너뛰므로 여기서는 쓰지 않는다.
+    private void CancelAllActions()
+    {
+        // 대시 중이면 아래 FinishActionForced -> FinishDash가 _previousState와 현재 사격 플래그로 사격을 다시 시작하므로 먼저 비운다.
+        _previousState = 0;
+        _currentPlayerState &= ~(EPlayerState.ShootState | EPlayerState.Rotating);
+
         inventory.EquippedItems[EPartType.ArmL][0].UseCancleAbility();
         inventory.EquippedItems[EPartType.ArmR][0].UseCancleAbility();
         animator.SetBool("isLeftAttack", false);
@@ -788,12 +817,6 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         for (int i = 0; i < Enum.GetValues(typeof(EPartType)).Length; ++i)
         {
             inventory.EquippedItems[(EPartType)(1 << i)][0].FinishActionForced();
-        }
-
-        _isLowHp = false;
-        if (lowHpController != null)
-        {
-            lowHpController.SetEffectActive(false);
         }
     }
 

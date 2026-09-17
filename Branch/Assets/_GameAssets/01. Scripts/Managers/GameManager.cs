@@ -156,6 +156,10 @@ namespace Managers
         // 플레이어, 카메라, 몬스터 등 일부 오브젝트들을 정지시켜야할 때 사용
         public void PauseObjects()
         {
+            // 누르고 있던 공격·이동 키의 동작이 컷씬 중에도 이어지지 않도록 기본 상태로 되돌린다.
+            // 일부 파츠의 강제 종료가 이동·카메라 회전을 다시 켜므로 잠그기 전에 호출한다.
+            Player.ResetToIdle();
+
             // 플레이어 캐릭터와 카메라 Pause
             Player.FollowCamera.SetCameraRotatable(false);
             Player.SetMovable(false);
