@@ -62,6 +62,33 @@ namespace _Test.Skills
             }
         }
         
+        /// <summary>
+        /// 시전/실행 중인 스킬을 강제로 중단하고 쿨타임으로 넘긴다.
+        /// 코루틴은 시작한 MonoBehaviour(_owner)에서 멈춰야 하고, StopCoroutine은 finally를 실행하지 않으므로
+        /// C_Execute의 finally가 하던 정리(OnDeactivate, 쿨타임)를 여기서 대신한다.
+        /// </summary>
+        public void Interrupt(Blackboard blackboard)
+        {
+            if (CurrentState is not (SkillState.isCasting or SkillState.isRunning)) return;
+
+            skillData.OnInterrupt(blackboard);
+            if (CUseSkill != null) _owner.StopCoroutine(CUseSkill);
+            CUseSkill = null;
+
+            OnDeactivate?.Invoke();
+
+            // 보스가 비활성화되는 중이면 코루틴을 시작할 수 없으므로 바로 사용 가능 상태로 둔다.
+            if (_owner.isActiveAndEnabled)
+            {
+                CurrentState = SkillState.isCooltime;
+                _owner.StartCoroutine(ApplyCooldown());
+            }
+            else
+            {
+                CurrentState = SkillState.isReady;
+            }
+        }
+
         private IEnumerator ApplyCooldown()
         {
             Debug.Log($"스킬 {skillData.skillName} 쿨타임 시작: {skillData.cooldown}초");

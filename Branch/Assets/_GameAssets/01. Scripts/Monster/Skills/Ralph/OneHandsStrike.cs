@@ -11,8 +11,7 @@ namespace _Test.Skills.Ralph
         {
             Debug.Log("한손 공격 시전!");
             data.AudioSource.PlayOneShot(audioClip);
-            data.AnimatorParameterSetter.Animator.SetTrigger("Attack1H");
-            yield return null;
+            yield return PlayAnimationAndWait(data.AnimatorParameterSetter.Animator, "Attack1H");
         }
     }
 }

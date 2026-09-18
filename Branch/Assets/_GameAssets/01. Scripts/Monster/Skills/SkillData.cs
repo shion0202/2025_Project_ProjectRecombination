@@ -52,6 +52,46 @@ namespace _Test.Skills
         public abstract IEnumerator Activate(Blackboard data);
 
         /// <summary>
+        /// 트리거로 공격 애니메이션을 재생하고, 그 상태를 빠져나가기 시작할 때까지 기다린다.
+        /// 트리거만 걸고 바로 끝내면 애니메이션이 도는 중에 FSM이 다음 행동(추격 등)을 시작해
+        /// 공격 자세로 미끄러지는 문제가 생기므로, 공격 스킬의 Activate는 이걸로 끝을 맞춘다.
+        /// timeout은 트리거가 소비되지 않거나 상태가 끝나지 않을 때 스킬이 영영 안 끝나는 것을 막는 안전장치.
+        /// </summary>
+        protected static IEnumerator PlayAnimationAndWait(Animator animator, string trigger, float timeout = 5.0f)
+        {
+            animator.SetTrigger(trigger);
+            float elapsed = 0.0f;
+
+            // 1. 트리거가 소비되어 공격 상태로 전환이 시작될 때까지
+            while (animator.GetBool(trigger))
+            {
+                elapsed += Time.deltaTime;
+                if (elapsed > timeout)
+                {
+                    animator.ResetTrigger(trigger);
+                    yield break;
+                }
+                yield return null;
+            }
+
+            int attackStateHash = animator.IsInTransition(0)
+                ? animator.GetNextAnimatorStateInfo(0).fullPathHash
+                : animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+
+            // 2. 공격 상태에서 다른 상태로 넘어가기 시작할 때까지
+            while (elapsed < timeout)
+            {
+                int stateHash = animator.IsInTransition(0)
+                    ? animator.GetNextAnimatorStateInfo(0).fullPathHash
+                    : animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+                if (stateHash != attackStateHash) yield break;
+
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+        }
+
+        /// <summary>
         /// 시전 중(Casting/Activate) 스킬이 외부에서 강제 중단될 때 호출된다.
         /// (예: 몬스터 피격으로 MonsterFSM이 StopCoroutine 하는 경우)
         /// StopCoroutine은 코루틴의 finally를 실행하지 않으므로, 생성한 이펙트/오브젝트 등

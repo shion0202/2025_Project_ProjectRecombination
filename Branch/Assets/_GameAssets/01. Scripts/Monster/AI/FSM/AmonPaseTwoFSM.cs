@@ -43,9 +43,8 @@ public class AmonPaseTwoFSM : FSM
     ///
     /// 스킬이 진행 중인 상태에서 보스가 파괴/비활성화되거나 사망하면
     /// Activate가 실행되지 못해 이펙트/스폰물/안전지대/플레이어 무적이 잔존한다.
-    /// StopCoroutine은 코루틴의 finally를 실행하지 않으므로,
-    /// 반드시 OnInterrupt를 먼저 호출해 각 스킬이 자기 잔여물을 치우게 한다.
-    /// (MonsterFSM.ActHit과 동일한 패턴)
+    /// Skill.Interrupt가 OnInterrupt로 잔여물을 치운 뒤 코루틴을 멈추고 쿨타임으로 넘긴다.
+    /// (스킬 코루틴은 Blackboard가 시작하므로 이 FSM에서 StopCoroutine을 호출하면 멈추지 않는다)
     /// </summary>
     private void InterruptRunningSkills()
     {
@@ -55,13 +54,13 @@ public class AmonPaseTwoFSM : FSM
         {
             try
             {
-                if (skill.CurrentState is Skill.SkillState.isCasting or Skill.SkillState.isRunning)
-                {
-                    skill.skillData.OnInterrupt(blackboard);
-                }
-                if (skill.CUseSkill != null) StopCoroutine(skill.CUseSkill);
+                skill?.Interrupt(blackboard);
             }
-            catch { }
+            catch (System.Exception e)
+            {
+                // 한 스킬의 정리 실패가 나머지 스킬 정리를 막지 않도록 로그만 남긴다.
+                Debug.LogException(e);
+            }
         }
     }
     
