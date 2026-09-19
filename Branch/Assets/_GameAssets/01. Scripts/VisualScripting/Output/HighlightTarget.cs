@@ -66,6 +66,15 @@ namespace _Project.Scripts.VisualScripting
             IsOn = true;
         }
 
+        /// <summary>
+        /// 이 노드가 속한 튜토리얼 단계가 끝났음을 표시한다. 이후 Execute()가 불려도 강조를 켜지 않는다.
+        /// ClearHighlight가 호출한다.
+        /// </summary>
+        public void Finish()
+        {
+            IsOn = true;
+        }
+
         public override string ToString()
         {
             string targetName = mode == EHighlightMode.UI

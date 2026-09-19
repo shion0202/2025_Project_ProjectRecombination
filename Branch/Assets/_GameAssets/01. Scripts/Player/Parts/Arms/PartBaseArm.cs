@@ -36,7 +36,12 @@ public class PartBaseArm : PartBase
     [SerializeField, Tooltip("조준점이 플레이어로부터 이 거리보다 가까우면 조준선 위 이 거리 지점을 향해 발사한다. 총구가 조준선 옆에 있어 가까운 조준점일수록 탄이 옆으로 크게 꺾이는 문제 완화용")]
     protected float minAimDistance = 5.0f;
 
+    [Header("사격 자세")]
+    [Tooltip("이 파츠를 장착했을 때의 사격 IK 자세 값. 비우면 ArmShootIKTargets의 기본값을 쓴다.")]
+    [SerializeField] protected ArmIKProfile ikProfile;
+
     public bool IsOverheat => _isOverheat;
+    public ArmIKProfile IKProfile => ikProfile;
 
     // [임시] 사격 불가 버그 추적용. PlayerController.BuildShootDebugReport()에서 사용한다.
     public string BuildDebugState()

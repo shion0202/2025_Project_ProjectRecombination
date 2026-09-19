@@ -101,6 +101,19 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     private bool _isAimMove = false;
     private float _aimMoveWeight = 0.0f;
 
+    // 사격 애니메이션은 한 팔 기준이라, 팔을 뻗으면서 허리도 그쪽으로 돌린다.
+    // 팔 레이어(LeftArmLayer/RightArmLayer)는 팔만 담당하고, 허리는 팔 레이어와 Sync된 허리 레이어가 따로 담당한다.
+    // 한 팔 사격에서는 그쪽 허리 레이어를 켜 허리 움직임을 살리고,
+    // 양팔 사격에서는 허리를 펴야 두 팔이 함께 앞을 향할 수 있으므로 허리 레이어를 낮춘다.
+    [Tooltip("한 팔 사격 시 허리 레이어 가중치. 낮추면 사격할 때 허리가 덜 돌아간다.")]
+    [SerializeField, Range(0.0f, 1.0f)] private float singleShootTorsoWeight = 1.0f;
+    [Tooltip("양팔 사격 시 허리 레이어 가중치. 0이면 허리는 이동 애니메이션을 그대로 따른다.")]
+    [SerializeField, Range(0.0f, 1.0f)] private float dualShootTorsoWeight = 0.0f;
+    [Tooltip("허리 레이어 가중치가 바뀌는 시간(초). 사격을 누르고 뗄 때 허리가 튀지 않게 한다.")]
+    [SerializeField] private float shootTorsoBlendTime = 0.2f;
+    private const string LeftTorsoLayerName = "LeftTorsoLayer";
+    private const string RightTorsoLayerName = "RightTorsoLayer";
+
     [Header("Parts")]
     [SerializeField] private List<SkinnedMeshRenderer> bodyRenderers = new();
     [SerializeField] private List<Material> basicMaterials = new();
@@ -205,6 +218,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         
         AnimCheckShoot();
         UpdateAimMoveWeight();
+        UpdateShootTorsoBlend();
         GUIManager.Instance.GameUIController.SetHpSlider(stats.CurrentHealth, stats.MaxHealth);
     }
 
@@ -1133,6 +1147,31 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         float step = aimMoveBlendTime > 0.0f ? Time.deltaTime / aimMoveBlendTime : 1.0f;
         _aimMoveWeight = Mathf.MoveTowards(_aimMoveWeight, target, step);
         animator.SetFloat(AimWeightHash, _aimMoveWeight);
+    }
+
+    // 사격 중인 팔에 따라 허리 레이어 가중치와 팔 조준 IK 상한을 바꾼다.
+    private void UpdateShootTorsoBlend()
+    {
+        bool isLeft = (_currentPlayerState & EPlayerState.LeftShooting) != 0;
+        bool isRight = (_currentPlayerState & EPlayerState.RightShooting) != 0;
+        bool isDual = isLeft && isRight;
+        rigAimController.IsDualAim = isDual;
+
+        // 사격하지 않는 쪽 허리 레이어는 꺼 둔다. 팔 레이어가 대기 상태일 때 허리를 덮어쓰지 않게 한다.
+        float torsoWeight = isDual ? dualShootTorsoWeight : singleShootTorsoWeight;
+        BlendLayerWeight(LeftTorsoLayerName, isLeft ? torsoWeight : 0.0f);
+        BlendLayerWeight(RightTorsoLayerName, isRight ? torsoWeight : 0.0f);
+    }
+
+    private void BlendLayerWeight(string layerName, float target)
+    {
+        // 파츠 교체로 컨트롤러가 바뀌어도 레이어 구성은 같지만, 순서가 바뀔 수 있어 이름으로 찾는다.
+        int layerIndex = animator.GetLayerIndex(layerName);
+        if (layerIndex < 0) return;
+
+        float step = shootTorsoBlendTime > 0.0f ? Time.deltaTime / shootTorsoBlendTime : 1.0f;
+        float weight = Mathf.MoveTowards(animator.GetLayerWeight(layerIndex), target, step);
+        animator.SetLayerWeight(layerIndex, weight);
     }
 
     public void ApplyRecoil(CinemachineImpulseSource source, float recoilX, float recoilY)
