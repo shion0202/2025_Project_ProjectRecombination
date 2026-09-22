@@ -283,6 +283,10 @@ namespace Monster.AI.Blackboard
             CurrentHealth = MaxHealth;
             GroggyEndTime = 0.0f;
 
+            // 스킬 도중 사망해 코루틴이 강제 종료되면 OnDeactivate가 불리지 않아 true로 남는다.
+            // 풀에서 재사용된 몬스터가 "스킬 실행 중"으로 굳어 아무 행동도 안 하는 것을 막는다.
+            IsAnySkillRunning = false;
+
             // 체력 임계값(80/50/20%)으로 한 번씩만 발동하는 패턴의 사용 여부.
             // 위에서 체력을 최대치로 되돌렸으므로 이 플래그들도 함께 초기화해야 한다.
             // 초기화하지 않으면 재초기화된 보스가 임계값을 지나쳐도 해당 패턴을 영영 쓰지 않는다.

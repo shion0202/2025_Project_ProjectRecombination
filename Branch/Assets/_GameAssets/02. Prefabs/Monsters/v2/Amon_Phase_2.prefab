@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 8202195718756793635}
   - component: {fileID: 3007356906683536869}
   - component: {fileID: 1987053423265468178}
+  - component: {fileID: 83634474107362565}
   m_Layer: 19
   m_Name: Amon_Phase_2
   m_TagString: Enemy
@@ -508,6 +509,7 @@ MonoBehaviour:
   amonBody: {fileID: 7768882004021664671}
   spawnWaitTime: 5.5
   deathWaitTime: 5.5
+  walkClip: {fileID: 8300000, guid: 37ad595117c344a618b2f1eda2e753b2, type: 3}
 --- !u!114 &1987053423265468178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +582,103 @@ MonoBehaviour:
   - {fileID: 3761949865861921245}
   - {fileID: 678262496191001772}
   - {fileID: 2376564455574308210}
+--- !u!82 &83634474107362565
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906482552251351476}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -3255133022743001703, guid: 61a5faa6522bc9b4a9fde3fa6711f734,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 50
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5695001238483267493
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +901,7 @@ MonoBehaviour:
     bulletPrefab:
     - {fileID: 196044, guid: 3762a5ec8feb04b7f8a3d403b9b745c3, type: 3}
     firePoint: {fileID: 0}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 83634474107362565}
   legAnimator: {fileID: 0}
   amonBody: {fileID: 7768882004021664671}
   amonShield: {fileID: 0}

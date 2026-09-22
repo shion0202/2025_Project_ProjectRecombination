@@ -17,8 +17,7 @@ namespace _Test.Skills.Ranger
         public override IEnumerator Activate(Blackboard data)
         {
             Debug.Log("원샷 시전!");
-            data.AnimatorParameterSetter.Animator.SetTrigger("Fire");
-            yield return null;
+            yield return PlayAnimationAndWait(data.AnimatorParameterSetter.Animator, "Fire");
         }
     }
 }

@@ -23,6 +23,15 @@ namespace _Test.Skills
 
         public bool IsShieldRemovedByPlayer { get; set; }
 
+        // 시전 중 보스 사망/비활성화로 중단되면 보스에 붙은 보호막이 사망 연출 위에 남으므로 치운다.
+        // (흡수 판정은 Activate에서만 일어나므로 중단 시 플레이어 체력은 건드리지 않는다)
+        public override void OnInterrupt(Blackboard data)
+        {
+            data.AnimatorParameterSetter?.Animator?.SetBool("isBarrier", false);
+            Utils.Destroy(_barrierInstance);
+            _barrierInstance = null;
+        }
+
         public override IEnumerator Casting(Blackboard data)
         {
             Debug.Log("[Amon Phase 2] 영혼 흡수 준비");

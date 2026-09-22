@@ -48,6 +48,12 @@ namespace _Test.Skills
             
             Vector3 rushStartPos = data.Agent.transform.position;
             Vector3 targetPos = data.Target.transform.position + data.Agent.transform.forward * 2.0f;
+
+            // 도착 지점이 벽 너머일 수 있으므로 NavMesh 경계(벽 앞)에서 멈추게 자른다.
+            if (NavMeshMoveUtil.TryClampPath(rushStartPos, targetPos, out Vector3 clampedPos))
+                targetPos = clampedPos;
+            targetPos.y = rushStartPos.y;
+
             float distance = Vector3.Distance(rushStartPos, targetPos);
             
             // data.NavMeshAgent.enabled = false;

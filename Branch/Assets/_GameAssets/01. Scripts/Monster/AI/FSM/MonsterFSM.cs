@@ -23,12 +23,23 @@ namespace Monster.AI.FSM
         [Header("경직 시간")]
         [SerializeField] private float hitStunTime = 0.5f;
 
+        [Header("공격 시전 중 회전 속도 (도/초)")]
+        [SerializeField] private float attackTurnSpeed = 360f;
+
+        private static readonly int IsWalkHash = Animator.StringToHash("IsWalk");
+        private static readonly int IsRunHash = Animator.StringToHash("IsRun");
+
+        // 추격 중 동료 분리 계산용 버퍼. 매 프레임 새로 만들지 않도록 공유한다 (메인 스레드에서 즉시 사용).
+        private static readonly Collider[] SeparationHits = new Collider[16];
+
         #region private Fields
-        
+
         // 상태별 로직에 필요한 내부 변수들
         private float _waitTimer;
         private Skill _useSkill;
         private bool _isDeath;
+        private Coroutine _hitStunRoutine;
+        private int[] _triggerHashes;
 
         // private AmonMeleeCollision _amonMeleeCollision;
         private AmonMeleeCollision _meleeCollision;
@@ -124,15 +135,24 @@ namespace Monster.AI.FSM
         {
             if (!isEnabled || blackboard?.State is null || _isDeath) return;
 
+            string stateName = blackboard.State?.GetStates() ?? "None";
+
+            // 사망은 스킬 실행 여부와 무관하게 바로 처리한다.
+            // 아래 스킬 실행 검사에 막히면 공격 애니메이션이 끝날 때까지 사망이 미뤄진다.
+            if (stateName == "Death")
+            {
+                ActDeath();
+                return;
+            }
+
             if (blackboard.IsAnySkillRunning)
             {
-                if (_isDeath)
-                    blackboard.StopAllCoroutines();
+                // 시전(예비 동작) 중에는 제자리에서 타겟 쪽으로 몸만 돌린다.
+                if (_useSkill is { CurrentState: Skill.SkillState.isCasting })
+                    FaceTarget(attackTurnSpeed * Time.deltaTime);
                 return; // 스킬이 실행 중이면 상태 전환을 하지 않음
             }
-            
-            string stateName = blackboard.State?.GetStates() ?? "None";
-            
+
             switch (stateName)
             {
                 case "None":
@@ -144,9 +164,6 @@ namespace Monster.AI.FSM
                 case "Idle":
                     // Idle 상태에서는 특별한 행동이 없으므로 EnterState에서 처리한 isStopped = true가 유지됩니다.
                     break;
-                case "Death":
-                    ActDeath();
-                    break;
                 case "Patrol":
                     ActPatrol();
                     break;
@@ -156,45 +173,44 @@ namespace Monster.AI.FSM
                 case "Attack":
                     ActAttack();
                     break;
-                case "Hit":
-                    ActHit();
-                    break;
+                // Hit은 EnterState에서 한 번만 처리한다. (매 프레임 ActHit을 부르면 경직 코루틴이 쌓여
+                // 경직이 끝난 뒤에도 늦게 도착한 코루틴이 상태를 Idle로 되돌려 행동이 끊겼다)
             }
         }
 
         // 상태 진입 시 1회 호출되는 초기화 메서드 (기존 코드와 동일)
         protected override void EnterState(string stateName)
         {
-            // InitAnimationFlags();
             blackboard.NavMeshAgent.isStopped = false;
-            Debug.Log("Entered " + stateName);
+
+            // 이동 애니메이션은 상태마다 새로 정한다.
+            // 이전 상태의 IsRun이 남아 있으면 공격/대기 중에도 달리기 모션으로 돌아간다.
+            SetMoveAnimation(stateName == "Patrol", stateName == "Chase");
+
+            // 소비되지 않고 남은 공격 트리거(FireReady 등)가 이동 중에 뒤늦게 발동하면
+            // 조준/공격 자세로 미끄러지므로, 공격이 아닌 상태로 들어갈 때 모두 지운다.
+            if (stateName is "Idle" or "Chase" or "Patrol")
+                ResetAnimationTriggers();
 
             switch (stateName)
             {
                 case "Idle":
-                    blackboard.NavMeshAgent.isStopped = true;
-                    break;
+                case "Attack":
                 case "Death":
-                    blackboard.NavMeshAgent.isStopped = true;
-                    blackboard.NavMeshAgent.ResetPath();
+                    StopAgent();
                     break;
                 case "Patrol":
                     blackboard.PatrolInfo.isPatrol = true;
                     blackboard.PatrolInfo.CurrentWayPointIndex = blackboard.PatrolInfo.GetNextWayPointIndex();
                     blackboard.NavMeshAgent.SetDestination(blackboard.PatrolInfo.GetCurrentWayPoint());
                     blackboard.NavMeshAgent.speed = blackboard.WalkSpeed;
-                    blackboard.AnimatorParameterSetter.Animator.SetBool("IsWalk", true);
                     break;
                 case "Chase":
                     blackboard.NavMeshAgent.speed = blackboard.RunSpeed;
-                    blackboard.AnimatorParameterSetter.Animator.SetBool("IsRun", true);
-                    break;
-                case "Attack":
-                    blackboard.NavMeshAgent.isStopped = true;
                     break;
                 case "Hit":
-                    blackboard.NavMeshAgent.isStopped = true;
-                    blackboard.NavMeshAgent.ResetPath();
+                    StopAgent();
+                    ActHit();
                     break;
             }
         }
@@ -216,7 +232,10 @@ namespace Monster.AI.FSM
         {
             if (_isDeath)  return;
             _isDeath = true;
-            
+
+            // 시전 중이던 스킬을 정리한다. (공격 애니메이션을 기다리는 스킬 코루틴이 사망 뒤에도 남지 않게)
+            InterruptSkills();
+
             // blackboard.AnimatorParameterSetter.Animator.SetTrigger("Death");
             
             // 2. 죽음 이팩트가 있는지 확인
@@ -338,20 +357,19 @@ namespace Monster.AI.FSM
             
             // 추격 상태의 행동: 매 프레임 타겟의 위치로 목적지를 갱신합니다.
             var agent = blackboard.NavMeshAgent;
-            agent.SetDestination(blackboard.Target.transform.position);
+            Vector3 destination = blackboard.Target.transform.position;
             agent.speed = blackboard.RunSpeed;
-            
+
             // 주변 동료와 겹침을 피하기 위한 간단한 분리(separation) 처리
             float separationRadius = Mathf.Max(agent.radius * 2f, 1f);
             int enemyLayerMask = LayerMask.GetMask("Enemy");
             Vector3 separation = Vector3.zero;
             int neighbors = 0;
-            
-            Collider[] hits = new Collider[16];
-            int hitCount = Physics.OverlapSphereNonAlloc(agent.transform.position, separationRadius, hits, enemyLayerMask, QueryTriggerInteraction.Ignore);
+
+            int hitCount = Physics.OverlapSphereNonAlloc(agent.transform.position, separationRadius, SeparationHits, enemyLayerMask, QueryTriggerInteraction.Ignore);
             for (int i = 0; i < hitCount; i++)
             {
-                var hit = hits[i];
+                var hit = SeparationHits[i];
                 if (hit == null || hit.gameObject == gameObject) continue;
                 Vector3 toSelf = agent.transform.position - hit.transform.position;
                 float distSqr = toSelf.sqrMagnitude;
@@ -366,10 +384,11 @@ namespace Monster.AI.FSM
             {
                 separation /= neighbors;
                 float separationStrength = agent.radius * 1.2f;
-                Vector3 adjustedTarget = blackboard.Target.transform.position + separation.normalized * separationStrength;
-                agent.SetDestination(adjustedTarget);
+                destination += separation.normalized * separationStrength;
             }
-            
+
+            agent.SetDestination(destination);
+
             // NavMeshAgent가 위치 업데이트를 처리하도록 유지 (CharacterController와 중복 이동 제거)
             agent.updatePosition = true;
         }
@@ -378,56 +397,114 @@ namespace Monster.AI.FSM
         {
             if (_useSkill is null || blackboard.Target is null) return;
             if (_isDeath)  return;
-            
-            // 타겟을 바라보게 합니다.
-            transform.LookAt(blackboard.Target.transform);
-            
+
+            // 타겟을 바라보게 합니다. (수평 회전만. LookAt은 높이차만큼 몸을 기울였다)
+            FaceTarget(360f);
+
             _useSkill.Execute(blackboard);
+        }
+
+        /// <summary>
+        /// 공격(스킬 시전/실행) 중에는 경직 없이 피격 이펙트만 보여준다.
+        /// 기존에도 공격 중 피격으로 스킬이 실제로 끊기지는 않았는데(StopCoroutine을 스킬 소유자가 아닌
+        /// FSM에서 호출해 효과가 없었음), 스킬이 애니메이션 끝까지 이어지게 되면서 이 동작을 명시적으로 유지한다.
+        /// </summary>
+        public override void ApplyDamage(float inDamage, LayerMask targetMask = default, float unitOfTime = 1.0f, float defenceIgnoreRate = 0.0f)
+        {
+            if (blackboard is null || _isDeath) return;
+
+            OnHit(inDamage);
+            if (blackboard.CurrentHealth <= 0) return; // 사망 처리는 Think에서
+
+            if (blackboard.IsAnySkillRunning)
+            {
+                base.ActHit();
+                return;
+            }
+
+            ChangeState("Hit");
         }
 
         protected override void ActHit()
         {
             base.ActHit();
-            
-            if (blackboard != null)
-            {
-                try
-                {
-                    // 사용 중인 스킬 코루틴 정지
-                    foreach(var skill in blackboard.Skills)
-                    {
-                        // StopCoroutine은 코루틴의 finally를 실행하지 않으므로,
-                        // 시전 중인 스킬은 먼저 OnInterrupt로 잔여 상태(이펙트/스폰물 등)를 정리한다.
-                        if (skill.CurrentState is Skill.SkillState.isCasting or Skill.SkillState.isRunning)
-                        {
-                            skill.skillData.OnInterrupt(blackboard);
-                        }
-                        StopCoroutine(skill.CUseSkill);
-                    }
-                } catch { }
-            
-                if (blackboard.AnimatorParameterSetter?.Animator != null)
-                {
-                    // Animator animator = blackboard.AnimatorParameterSetter.Animator;
-                    // // 초기 애니메이션 플래그 재설정
-                    // InitAnimationFlags();
-                    //
-                    // animator.Rebind();
-                    // animator.Update(0f);
-                }
-            
-                _useSkill = null;
-            }
 
+            _useSkill = null;
             DelAmonMeleeCollision();
-            
-            StartCoroutine(AfterHitEffect());
+
+            if (_hitStunRoutine != null) StopCoroutine(_hitStunRoutine);
+            _hitStunRoutine = StartCoroutine(AfterHitEffect());
         }
 
         private IEnumerator AfterHitEffect()
         {
             yield return new WaitForSeconds(hitStunTime);
-            ChangeState("Idle");
+            _hitStunRoutine = null;
+
+            // 그 사이 사망 등으로 상태가 바뀌었으면 건드리지 않는다.
+            if (!_isDeath && blackboard.State.GetStates() == "Hit")
+                ChangeState("Idle");
+        }
+
+        private void InterruptSkills()
+        {
+            if (blackboard?.Skills is null) return;
+
+            foreach (Skill skill in blackboard.Skills)
+                skill?.Interrupt(blackboard);
+
+            _useSkill = null;
+        }
+
+        private void StopAgent()
+        {
+            NavMeshAgent agent = blackboard.NavMeshAgent;
+            if (!agent.isActiveAndEnabled || !agent.isOnNavMesh) return; // NavMesh 밖에서 ResetPath는 에러를 낸다
+            agent.isStopped = true;
+            agent.ResetPath();
+            agent.velocity = Vector3.zero; // 감속하며 미끄러지지 않게 즉시 정지
+        }
+
+        private void SetMoveAnimation(bool isWalk, bool isRun)
+        {
+            Animator animator = blackboard.AnimatorParameterSetter?.Animator;
+            if (animator is null) return;
+
+            animator.SetBool(IsWalkHash, isWalk);
+            animator.SetBool(IsRunHash, isRun);
+        }
+
+        private void ResetAnimationTriggers()
+        {
+            Animator animator = blackboard.AnimatorParameterSetter?.Animator;
+            if (animator is null) return;
+
+            // animator.parameters는 호출마다 배열을 새로 만들므로 트리거 목록은 한 번만 모아둔다.
+            if (_triggerHashes is null)
+            {
+                var hashes = new List<int>();
+                foreach (AnimatorControllerParameter param in animator.parameters)
+                {
+                    if (param.type == AnimatorControllerParameterType.Trigger)
+                        hashes.Add(param.nameHash);
+                }
+                _triggerHashes = hashes.ToArray();
+            }
+
+            foreach (int hash in _triggerHashes)
+                animator.ResetTrigger(hash);
+        }
+
+        /// <summary>타겟 쪽으로 수평 회전한다. maxDegrees만큼만 돌린다.</summary>
+        private void FaceTarget(float maxDegrees)
+        {
+            if (blackboard.Target is null) return;
+
+            Vector3 lookDir = blackboard.Target.transform.position - transform.position;
+            lookDir.y = 0;
+            if (lookDir.sqrMagnitude < 0.0001f) return;
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(lookDir), maxDegrees);
         }
 
         #endregion

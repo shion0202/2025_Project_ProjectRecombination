@@ -11,8 +11,7 @@ namespace _Test.Skills.Ralph
         {
             Debug.Log("양손 내리찍기 시전!");
             data.AudioSource.PlayOneShot(audioClip);
-            data.AnimatorParameterSetter.Animator.SetTrigger("Smash");
-            yield return null;
+            yield return PlayAnimationAndWait(data.AnimatorParameterSetter.Animator, "Smash");
         }
     }
 }

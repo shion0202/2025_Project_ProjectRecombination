@@ -51,7 +51,13 @@ namespace _Test.Skills
             data.Agent.transform.rotation = Quaternion.LookRotation(lookDir);
 
             Vector3 dashStartPos = data.Agent.transform.position;
-            Vector3 targetPos = data.Target.transform.position + data.Agent.transform.forward * 4.0f;
+            Vector3 targetPos = data.Target.transform.position + data.Agent.transform.forward * forwardDistanceOffset;
+
+            // 플레이어 뒤로 더 나아가는 지점이 벽 너머일 수 있으므로 NavMesh 경계(벽 앞)에서 멈추게 자른다.
+            if (NavMeshMoveUtil.TryClampPath(dashStartPos, targetPos, out Vector3 clampedPos))
+                targetPos = clampedPos;
+            targetPos.y = dashStartPos.y; // 돌진은 수평 이동 (도착 판정이 높이차에 흔들리지 않게)
+
             float distance = Vector3.Distance(dashStartPos, targetPos);
 
             float elapsed = 0f;

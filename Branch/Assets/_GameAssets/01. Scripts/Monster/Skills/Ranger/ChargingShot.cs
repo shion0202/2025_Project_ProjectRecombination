@@ -23,8 +23,7 @@ namespace _Test.Skills.Ranger
         {
             Debug.Log("차징샷 시전!");
             
-            data.AnimatorParameterSetter.Animator.SetTrigger("Fire");
-            yield return null;
+            yield return PlayAnimationAndWait(data.AnimatorParameterSetter.Animator, "Fire");
         }
     }
 }

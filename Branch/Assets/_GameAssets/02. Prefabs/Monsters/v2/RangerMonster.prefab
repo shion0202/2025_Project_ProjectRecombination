@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5854460037228576736}
-  - component: {fileID: 1324630978000573305}
   - component: {fileID: 2226750694646478966}
   - component: {fileID: 5714832464740630732}
+  - component: {fileID: 6563164897364695621}
   m_Layer: 19
   m_Name: Heatbox
   m_TagString: Enemy
@@ -118,29 +118,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7250295056726125705}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1324630978000573305
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1068854158088977474}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.16002668
-  m_Height: 0.7673551
-  m_Direction: 1
-  m_Center: {x: -0.07762402, y: 0.06022385, z: -0.0008746555}
 --- !u!114 &2226750694646478966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,6 +145,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitRigidbody: {fileID: 0}
+--- !u!65 &6563164897364695621
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068854158088977474}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13724245, y: 0.63200396, z: 0.31218818}
+  m_Center: {x: -0.08580012, y: 0.05717147, z: 0.0022461824}
 --- !u!1 &1465840477217535793
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,6 +611,7 @@ MonoBehaviour:
   amonShield: {fileID: 0}
   amonEnergyBall: {fileID: 0}
   amonDeathModel: {fileID: 0}
+  arenaAnchor: {fileID: 0}
   skillDatas:
   - {fileID: 11400000, guid: 4501365d618d543feb6be4867af37755, type: 2}
   - {fileID: 11400000, guid: f8d3ec27399634e30a3e5e272e009bf1, type: 2}
@@ -710,8 +709,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7316117220789139553}
-  - component: {fileID: 4510508534618744291}
   - component: {fileID: 8643164876634135558}
+  - component: {fileID: 3133242909945652716}
   m_Layer: 19
   m_Name: Heatbox
   m_TagString: Enemy
@@ -734,29 +733,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7721585933719622526}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &4510508534618744291
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4378139453089535089}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.1478936
-  m_Height: 0.74333507
-  m_Direction: 1
-  m_Center: {x: -0.071544915, y: 0.071053036, z: 0.0043729204}
 --- !u!114 &8643164876634135558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +747,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partType: 0
   fValue: 0.7
+--- !u!65 &3133242909945652716
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4378139453089535089}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.13724245, y: 0.63200396, z: 0.31218818}
+  m_Center: {x: -0.08580012, y: 0.05717147, z: 0.0022461824}
 --- !u!1 &4800409579581458399
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,7 +68,8 @@ namespace Monster.AI.FSM
             
             // 플레이어와의 거리가 일정 거리 이상 멀어지면 텔레포트 사용
             float distanceToPlayer = Vector3.Distance(blackboard.transform.position, blackboard.Target.transform.position);
-            if (distanceToPlayer > 15f && blackboard.Skills[3].CurrentState == Skill.SkillState.isReady)
+            // 스킬 순서(프리팹 skillDatas): 0 돌진, 1 난사, 2 텔레포트, 3 영혼 구체(SoulSphere)
+            if (distanceToPlayer > 15f && blackboard.Skills[2].CurrentState == Skill.SkillState.isReady)
             {
                 ChangeState("UsingSkill3"); // 텔레포트
                 return;
@@ -120,11 +121,11 @@ namespace Monster.AI.FSM
                     blackboard.Skills[1].Execute(blackboard);
                     break;
                 case "UsingSkill3":
-                    // 영혼 구체 스킬 사용 로직은 애니메이션 이벤트나 별도의 코루틴에서 처리
+                    // 텔레포트
                     blackboard.Skills[2].Execute(blackboard);
                     break;
                 case "UsingSkill4":
-                    // 텔레포트
+                    // 영혼 구체
                     blackboard.Skills[3].Execute(blackboard);
                     break;
                 case "Death":
