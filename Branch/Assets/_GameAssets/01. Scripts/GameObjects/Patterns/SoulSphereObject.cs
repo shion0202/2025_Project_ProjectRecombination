@@ -62,9 +62,28 @@ public class SoulSphereObject : MonoBehaviour
     {
         _hasExploded = true;
 
-        Utils.Destroy(Utils.Instantiate(explosionPrefab, transform.position, Quaternion.identity), 1.5f);
+        // 연출 프리팹이 비어 있어도 폭발 판정과 구체 정리는 반드시 진행되어야 한다.
+        // 여기서 예외가 나면 _hasExploded가 이미 true라 Update가 영영 조기 반환하고,
+        // 구체가 화면에 남은 채 데미지도 들어가지 않는다.
+        if (explosionPrefab)
+        {
+            Utils.Destroy(Utils.Instantiate(explosionPrefab, transform.position, Quaternion.identity), 1.5f);
+        }
+        else
+        {
+            Debug.LogWarning($"[SoulSphereObject] {name}: explosionPrefab이 비어 있어 폭발 연출을 생략한다.");
+        }
 
-        var indicator = Utils.Instantiate(rangeIndicatorPrefab, transform.position, Quaternion.identity);
+        GameObject indicator = null;
+        if (rangeIndicatorPrefab)
+        {
+            indicator = Utils.Instantiate(rangeIndicatorPrefab, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning($"[SoulSphereObject] {name}: rangeIndicatorPrefab이 비어 있어 범위 장판을 생략한다.");
+        }
+
         StartCoroutine(ExpandRangeIndicatorAndDamage(indicator));
     }
 

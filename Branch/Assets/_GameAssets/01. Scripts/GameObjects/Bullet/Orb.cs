@@ -77,12 +77,21 @@ public class Orb : Bullet
 
     private void FireBladeProjectile(int count = 1)
     {
+        // [임시 진단] 칼날이 안 나오는 원인을 특정하기 위한 로그. 원인 확정 후 제거할 것.
+        // 기존 널 체크들이 실패를 조용히 삼켜서 콘솔에 아무 흔적이 남지 않았다.
+        Debug.Log($"[OrbDiag] {name}: FireBladeProjectile(count={count}) " +
+                  $"bladePrefab={(bladePrefab == null ? "NULL" : bladePrefab.name)}");
+
         for (int i = 0; i < count; i++)
         {
             Vector3 direction = Random.onUnitSphere;
 
             GameObject blade = Utils.Instantiate(bladePrefab);
-            if (blade == null) continue;
+            if (blade == null)
+            {
+                Debug.LogWarning($"[OrbDiag] {name}: Utils.Instantiate가 null 반환 (풀 조회 실패 가능)");
+                continue;
+            }
 
             blade.transform.position = transform.position;
             blade.transform.rotation = Quaternion.LookRotation(direction);
@@ -90,6 +99,18 @@ public class Orb : Bullet
             if (bladeComp != null)
             {
                 bladeComp.Init(From, null, transform.position, Vector3.zero, direction.normalized, bladeDamage);
+
+                // 방향과 실제 적용된 속도를 함께 본다. 속도가 0이면 이동 로직이 안 먹은 것이고,
+                // 방향의 y가 계속 음수 쪽이면 분포가 편향된 것이다.
+                Rigidbody rb = blade.GetComponent<Rigidbody>();
+                Debug.Log($"[OrbDiag]   dir=({direction.x:F2},{direction.y:F2},{direction.z:F2}) " +
+                          $"vel={(rb == null ? "RB없음" : rb.velocity.ToString("F1"))} " +
+                          $"speed={(rb == null ? 0f : rb.velocity.magnitude):F1} " +
+                          $"layer={LayerMask.LayerToName(blade.layer)}");
+            }
+            else
+            {
+                Debug.LogWarning($"[OrbDiag]   {blade.name}에 ProjectileBlade가 없어 초기화하지 못함 (속도 0으로 제자리에 남음)");
             }
         }
     }
@@ -119,7 +140,8 @@ public class Orb : Bullet
 
             enemy.ApplyDamage(Damage * coefficient, targetMask);
 
-            if (From.CompareTag("Player"))
+            // 쏜 주체가 이미 파괴된 뒤에 탄이 명중할 수 있으므로 null을 확인한다.
+            if (From != null && From.CompareTag("Player"))
             {
                 GUIManager.Instance.GameUIController.StartHitCrosshair();
             }
@@ -129,13 +151,19 @@ public class Orb : Bullet
             enemy = target.transform.GetComponentInParent<IDamagable>();
             if (enemy != null)
             {
-                Transform otherParent = target.transform.GetComponentInParent<FSM>().transform;
+                // 몬스터는 FSM 루트를 중복 판정 기준으로 쓰지만, 플레이어처럼 FSM이 없는 대상도 맞을 수 있다.
+                // 예전처럼 null.transform을 바로 부르면 보스 오브가 플레이어를 맞히는 순간 예외가 나고,
+                // ExplodeBlades의 순회가 중단되어 소멸 시 칼날 발사까지 통째로 건너뛰어진다.
+                FSM fsm = target.transform.GetComponentInParent<FSM>();
+                Transform otherParent = fsm != null ? fsm.transform : (enemy as Component)?.transform;
+                if (otherParent == null) otherParent = target;
+
                 if (_damagedTargets.Contains(otherParent)) return;
                 _damagedTargets.Add(otherParent);
 
                 enemy.ApplyDamage(Damage * coefficient, targetMask);
 
-                if (From.CompareTag("Player"))
+                if (From != null && From.CompareTag("Player"))
                 {
                     GUIManager.Instance.GameUIController.StartHitCrosshair();
                 }
