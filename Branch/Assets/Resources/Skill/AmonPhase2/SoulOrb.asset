@@ -22,8 +22,12 @@ MonoBehaviour:
   cooldown: 12
   castTime: 1.5
   animSpeed: 1
+  castNotice: 
+  enCastNotice: 
+  castNoticeDuration: 5
+  patternGuideKey: 
   bulletPrefab: {fileID: 364168584227083269, guid: 47a3e8009f5c7844aa19ccb71ff7f656,
     type: 3}
   bulletSpawnOffset:
-  - {x: 0.8, y: 1.8, z: -0.5}
-  - {x: -0.8, y: 1.8, z: -0.5}
+  - {x: 0.8, y: 1, z: -0.5}
+  - {x: -0.8, y: 1, z: -0.5}

@@ -224,32 +224,43 @@ public class RapidPlayer : MonoBehaviour, PlayerActions.IJumpAttackActionMapActi
     {
         if (context.started)
         {
-            if (_isExiting) return;
-            _isExiting = true;
-
-            // 1) 취소 시 플레이어를 원래 시전했던 제자리로 먼저 소환
-            _owner.TeleportGrounded(_originalPlayerPos);
-
-            // 몬스터의 추적 대상을 플레이어로 되돌린다.
-            RetargetMonsters(_owner.gameObject);
-
-            _originalPart.IsAttack = false;
-            RestoreCameraAngle();
-
-            if (_owner.FollowCamera != null)
-            {
-                _owner.FollowCamera.SetTargetPOV(null);
-                _owner.FollowCamera.WarpToTarget();
-            }
-
-            // 2) 플레이어 지상 안착 후 카메라 주도권 반환
-            if (vcam != null) vcam.Priority = 0;
-
-            _originalPart.OnJumpAttackWindowClosed();
-
-            brain.m_DefaultBlend = defaultBlend;
-            Utils.Destroy(gameObject);
+            Cancel();
         }
+    }
+
+    /// <summary>
+    /// 스킬을 취소하고 플레이어·몬스터·카메라를 시전 전 상태로 되돌린다.
+    /// 플레이어의 취소 입력뿐 아니라 컷씬 진입이나 사망처럼 밖에서 강제로 끝낼 때도 이 경로를 쓴다.
+    /// 이 정리를 건너뛰고 오브젝트만 남으면 플레이어가 지하에 남고, 스킬 카메라가 우선순위를 쥔 채
+    /// brain의 기본 블렌드가 Cut으로 고정되어 이후 모든 카메라 전환이 즉시 잘린다.
+    /// </summary>
+    public void Cancel()
+    {
+        if (_isExiting) return;
+        _isExiting = true;
+
+        // 1) 취소 시 플레이어를 원래 시전했던 제자리로 먼저 소환
+        _owner.TeleportGrounded(_originalPlayerPos);
+
+        // 몬스터의 추적 대상을 플레이어로 되돌린다.
+        RetargetMonsters(_owner.gameObject);
+
+        _originalPart.IsAttack = false;
+        RestoreCameraAngle();
+
+        if (_owner.FollowCamera != null)
+        {
+            _owner.FollowCamera.SetTargetPOV(null);
+            _owner.FollowCamera.WarpToTarget();
+        }
+
+        // 2) 플레이어 지상 안착 후 카메라 주도권 반환
+        if (vcam != null) vcam.Priority = 0;
+
+        _originalPart.OnJumpAttackWindowClosed();
+
+        brain.m_DefaultBlend = defaultBlend;
+        Utils.Destroy(gameObject);
     }
 
     private void RestoreCameraAngle()

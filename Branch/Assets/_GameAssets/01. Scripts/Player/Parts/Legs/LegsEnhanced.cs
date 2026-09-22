@@ -11,6 +11,10 @@ public class LegsEnhanced : PartBaseLegs
 {
     [Header("롤러 설정")]
     [SerializeField] private GameObject RapidPlayerPrefab;
+
+    // 시전 중인 스킬 오브젝트. 컷씬·사망 등으로 강제 종료될 때 이쪽 정리까지 태우기 위해 들고 있는다.
+    // 파괴되면 Unity의 == null 이 true가 되므로 별도 해제 없이도 안전하게 검사된다.
+    private RapidPlayer _rapidPlayer;
     [SerializeField] private GameObject jumpEffectPrefab;
     [SerializeField] private GameObject landingEffectPrefab;
     [SerializeField] private float acceleration = 8f;           // 가속 속도 (높을수록 빠른 출발)
@@ -112,6 +116,15 @@ public class LegsEnhanced : PartBaseLegs
     {
         base.FinishActionForced();
 
+        // 스킬 오브젝트가 살아 있으면 플레이어가 지하에 남고 스킬 카메라가 주도권을 쥔 채
+        // brain의 기본 블렌드도 Cut으로 고정되어, 컷씬으로 전환되지 않는다.
+        // 여기서 플래그만 정리하면 화면이 스킬 시점에 묶여버리므로 스킬 쪽 정리를 먼저 태운다.
+        if (_rapidPlayer != null)
+        {
+            _rapidPlayer.Cancel();
+            _rapidPlayer = null;
+        }
+
         _currentSkillCount = 0;
         _currentVelocity = Vector3.zero;
         _skateTime = 0.0f;
@@ -173,6 +186,7 @@ public class LegsEnhanced : PartBaseLegs
         if (rapidPlayer != null)
         {
             _isCooldown = true;
+            _rapidPlayer = rapidPlayer;
             rapidPlayer.Init(_owner, this, _owner.FollowCamera.CameraAim.m_HorizontalAxis.Value);
         }
     }
