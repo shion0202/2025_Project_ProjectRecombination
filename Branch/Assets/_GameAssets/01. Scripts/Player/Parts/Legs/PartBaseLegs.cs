@@ -94,7 +94,13 @@ public class PartBaseLegs : PartBase, ILegsMovement
         }
 
         _currentSkillCount = 0;
-        //GUIManager.Instance.GameUIController.ResetSkillCooldown();
+
+        // 강제 종료는 쿨타임 UI를 "사용 가능"으로 되돌리는데, 여기서 _currentCooldown을 같이 비우지 않으면
+        // 화면과 실제 상태가 어긋난다. Update()는 UI를 끄기만 하고 다시 켜지 않기 때문에
+        // 컷씬이 끝난 뒤 UI는 깨끗한데 스킬만 조용히 막히고, 그 상태로 파츠를 교체하면
+        // PreserveCurrentCooldown이 남은 값을 저장해 쓰지도 않은 쿨타임이 새 파츠에서 돌아간다.
+        // 파츠 교체 경로는 Inventory가 이 호출 전에 Preserve를 끝내므로 인계에는 영향이 없다.
+        _currentCooldown = 0.0f;
     }
 
     public virtual Vector3 GetMoveDirection(Vector2 moveInput, Transform characterTransform, Transform cameraTransform)
@@ -111,15 +117,19 @@ public class PartBaseLegs : PartBase, ILegsMovement
             _cooldownRoutine = null;
         }
 
-        // 쿨타임이 얼마나 지났는지 백분율(%)로 저장 (1 -> 0)
-        _owner.CooldownDictionary[currentPartType] = _currentCooldown / skillCooldown;
+        // 남은 쿨타임을 '초' 그대로 저장한다.
+        // 비율로 저장하면 교체한 파츠의 최대 쿨타임에 비례해 늘어나므로
+        // (남은 3초짜리를 최대 28초인 파츠로 바꾸면 17초가 되는 식) 남은 시간이 그대로 이어지지 않는다.
+        _owner.CooldownDictionary[currentPartType] = Mathf.Max(0.0f, _currentCooldown);
     }
 
     public override void SetCurrentCooldown(EPartType currentPartType)
     {
         if (!_owner) return;
 
-        _currentCooldown = skillCooldown * _owner.CooldownDictionary[currentPartType];
+        // 남은 초를 그대로 이어받는다. 새 파츠의 최대 쿨타임으로 자르지 않는다.
+        // (17초 남은 상태로 최대 3초짜리 파츠에 갈아타도 17초를 그대로 치르게 한다)
+        _currentCooldown = Mathf.Max(0.0f, _owner.CooldownDictionary[currentPartType]);
 
         if (_currentCooldown > 0.0f)
         {

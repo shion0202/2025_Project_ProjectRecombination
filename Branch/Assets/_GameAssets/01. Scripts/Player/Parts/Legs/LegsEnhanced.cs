@@ -158,7 +158,9 @@ public class LegsEnhanced : PartBaseLegs
     {
         if (!_owner) return;
 
-        _currentCooldown = _owner.CooldownDictionary[currentPartType];
+        // 부모와 같은 기준(남은 초)으로 이어받는다. 이 파츠는 코루틴이 아니라 Update에서 감소시키므로
+        // 부모 구현을 그대로 쓰지 않고 여기서 값만 받아 UI를 켠다.
+        _currentCooldown = Mathf.Max(0.0f, _owner.CooldownDictionary[currentPartType]);
 
         if (_currentCooldown > 0.0f)
         {

@@ -77,21 +77,12 @@ public class Orb : Bullet
 
     private void FireBladeProjectile(int count = 1)
     {
-        // [임시 진단] 칼날이 안 나오는 원인을 특정하기 위한 로그. 원인 확정 후 제거할 것.
-        // 기존 널 체크들이 실패를 조용히 삼켜서 콘솔에 아무 흔적이 남지 않았다.
-        Debug.Log($"[OrbDiag] {name}: FireBladeProjectile(count={count}) " +
-                  $"bladePrefab={(bladePrefab == null ? "NULL" : bladePrefab.name)}");
-
         for (int i = 0; i < count; i++)
         {
             Vector3 direction = Random.onUnitSphere;
 
             GameObject blade = Utils.Instantiate(bladePrefab);
-            if (blade == null)
-            {
-                Debug.LogWarning($"[OrbDiag] {name}: Utils.Instantiate가 null 반환 (풀 조회 실패 가능)");
-                continue;
-            }
+            if (blade == null) continue;
 
             blade.transform.position = transform.position;
             blade.transform.rotation = Quaternion.LookRotation(direction);
@@ -99,18 +90,6 @@ public class Orb : Bullet
             if (bladeComp != null)
             {
                 bladeComp.Init(From, null, transform.position, Vector3.zero, direction.normalized, bladeDamage);
-
-                // 방향과 실제 적용된 속도를 함께 본다. 속도가 0이면 이동 로직이 안 먹은 것이고,
-                // 방향의 y가 계속 음수 쪽이면 분포가 편향된 것이다.
-                Rigidbody rb = blade.GetComponent<Rigidbody>();
-                Debug.Log($"[OrbDiag]   dir=({direction.x:F2},{direction.y:F2},{direction.z:F2}) " +
-                          $"vel={(rb == null ? "RB없음" : rb.velocity.ToString("F1"))} " +
-                          $"speed={(rb == null ? 0f : rb.velocity.magnitude):F1} " +
-                          $"layer={LayerMask.LayerToName(blade.layer)}");
-            }
-            else
-            {
-                Debug.LogWarning($"[OrbDiag]   {blade.name}에 ProjectileBlade가 없어 초기화하지 못함 (속도 0으로 제자리에 남음)");
             }
         }
     }
