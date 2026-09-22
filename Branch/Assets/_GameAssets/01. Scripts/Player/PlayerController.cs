@@ -418,6 +418,14 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         {
             if (IsTimeStopped) return;
 
+            // 상호작용 대상이 없으면 튜토리얼 메시지 넘기기로 쓴다. (대기 중인 타이머를 즉시 끝낸다)
+            GameObject interactionUI = Managers.GUIManager.Instance.GameUIController.InteractionUI;
+            if ((interactionUI == null || !interactionUI.activeSelf) &&
+                _Project.Scripts.VisualScripting.Timer.SkipWaiting())
+            {
+                return;
+            }
+
             EventManager.Instance.PostNotification(EEventType.Interaction, this, null);
         }
     }
