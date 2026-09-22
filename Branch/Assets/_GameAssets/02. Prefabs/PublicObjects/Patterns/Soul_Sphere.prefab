@@ -70,8 +70,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 8350594408837622864, guid: a0fb4e952475f764d9bbf3720032cf91,
     type: 3}
+  rangeIndicatorPrefab: {fileID: 1072249392129668219, guid: 6dce9ce24fbab427fb3aae2a09a3d115,
+    type: 3}
+  rangeIndicatorBaseRadius: 0.5
   lifeTime: 5
   explosionRadius: 30
+  explosionGrowDuration: 0.5
 --- !u!114 &3339271869515012335
 MonoBehaviour:
   m_ObjectHideFlags: 0
