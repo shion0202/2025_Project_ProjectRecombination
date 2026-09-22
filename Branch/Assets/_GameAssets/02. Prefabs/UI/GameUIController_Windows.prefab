@@ -508,6 +508,12 @@ MonoBehaviour:
   - {fileID: 4769420808510441981}
   - {fileID: 2028072585849555212}
   - {fileID: 3227217262097859076}
+  hitConfirmClip: {fileID: 8300000, guid: b7ec6b248f1d72648ac6aef71fe447e9, type: 3}
+  hitConfirmMixerGroup: {fileID: -3255133022743001703, guid: 61a5faa6522bc9b4a9fde3fa6711f734,
+    type: 2}
+  hitConfirmVolume: 0.3
+  hitConfirmMinInterval: 0.06
+  hitConfirmPitchRange: 0.05
   tutorialHighlight: {fileID: 0}
   redDot: {fileID: 3198023047221315475}
   messageObject: {fileID: 6289060211119957212}

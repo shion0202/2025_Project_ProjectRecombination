@@ -140,4 +140,9 @@ public abstract class PartBase : MonoBehaviour
     {
         if (!_owner) return;
     }
+
+    // 장착되어 활성화된 직후 인벤토리가 호출한다. 파츠별 장착 시 설정이 필요할 때 사용한다.
+    public virtual void OnEquipped()
+    {
+    }
 }

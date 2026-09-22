@@ -11,6 +11,29 @@ public class InitBootstrap : MonoBehaviour
     [SerializeField] private string persistentSceneAddress = "Scene_Persistent";
     // [SerializeField] private string loadingSceneAddress = "Scene_Loading";
 
+    /// <summary>
+    /// 최대 프레임을 MaxFrameRate로 제한한다.
+    /// 수직 동기화가 켜져 있으면 targetFrameRate가 무시되고 모니터 주사율(144Hz 등)까지 올라가므로,
+    /// 주사율이 목표 이하인 모니터에서는 수직 동기화로 맞추고(화면 찢김 없음),
+    /// 더 높은 모니터에서는 수직 동기화를 끄고 targetFrameRate로 묶는다.
+    /// </summary>
+    private static void ApplyFrameRateLimit()
+    {
+        double refreshRate = Screen.currentResolution.refreshRateRatio.value;
+        if (refreshRate > 0.0 && refreshRate <= MaxFrameRate + 1)
+        {
+            QualitySettings.vSyncCount = 1;
+            Application.targetFrameRate = -1;
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = MaxFrameRate;
+        }
+
+        Debug.Log($"[InitBootstrap] 프레임 제한: 모니터 {refreshRate:F0}Hz, VSync {QualitySettings.vSyncCount}, 목표 {Application.targetFrameRate}");
+    }
+
     private async void Start()
     {
         try
@@ -31,10 +54,13 @@ public class InitBootstrap : MonoBehaviour
         }
     }
 
+    // 목표 프레임. 이보다 높게 올라가면 프레임이 들쭉날쭉해지기 쉬워 상한으로 고정한다.
+    private const int MaxFrameRate = 60;
+
     private static void Init()
     {
-        // Application.targetFrameRate = 60;    // 프레임 레이트를 설정하는 것 때문에 CPU 사용량이 많을 수 있을 수 있다.
-        
+        ApplyFrameRateLimit();
+
         // 현재 기기의 화면 비율(Aspect Ratio) 계산
         float targetAspectRatio = (float)Screen.width / (float)Screen.height;
 

@@ -221,6 +221,7 @@ public class Inventory : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
             _equippedItems[equipItem.PartType].Add(part);
+            part.OnEquipped();
         }
 
         owner.SetPartStat(equipItem);

@@ -111,6 +111,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField, Range(0.0f, 1.0f)] private float dualShootTorsoWeight = 0.0f;
     [Tooltip("허리 레이어 가중치가 바뀌는 시간(초). 사격을 누르고 뗄 때 허리가 튀지 않게 한다.")]
     [SerializeField] private float shootTorsoBlendTime = 0.2f;
+    private ArmShootIKTargets _armShootIK;
     private const string LeftTorsoLayerName = "LeftTorsoLayer";
     private const string RightTorsoLayerName = "RightTorsoLayer";
 
@@ -944,6 +945,23 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         SwitchStateToIdle();
     }
 
+    // 장착한 팔 파츠의 사격 IK 설정. 없으면 null.
+    private ArmIKProfile GetArmProfile(bool isLeft)
+    {
+        EPartType armType = isLeft ? EPartType.ArmL : EPartType.ArmR;
+        if (!inventory.EquippedItems.TryGetValue(armType, out var parts) || parts.Count == 0) return null;
+
+        return parts[0] is PartBaseArm arm ? arm.IKProfile : null;
+    }
+
+    // 사격이 끝난 팔의 IK를 내린다. 파츠에 따라 잠깐 조준 자세를 유지한 뒤 내린다.
+    private void LowerArmIK(bool isLeft)
+    {
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        float holdTime = profile != null ? profile.ikHoldTime : 0.0f;
+        rigAimController.SmoothChangeWeight(isLeft ? "ArmLAim" : "ArmRAim", false, 0.0f, holdTime);
+    }
+
     public void CancleAttack(bool isLeft)
     {
         // 대시 중에는 사격 플래그가 _previousState로 옮겨져 있으므로 함께 확인한다.
@@ -962,7 +980,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _previousState &= ~EPlayerState.LeftShooting;
             _currentPlayerState &= ~EPlayerState.LeftShooting;
             _isLeftAttackReady = false;  // 상태 초기화
-            rigAimController.SmoothChangeWeight("ArmLAim", false);
+            LowerArmIK(true);
         }
         else
         {
@@ -972,7 +990,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _previousState &= ~EPlayerState.RightShooting;
             _currentPlayerState &= ~EPlayerState.RightShooting;
             _isRightAttackReady = false;
-            rigAimController.SmoothChangeWeight("ArmRAim", false);
+            LowerArmIK(false);
         }
 
         if (((_currentPlayerState | _previousState) & EPlayerState.ShootState) == 0)
@@ -984,8 +1002,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
             if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic && isLeft) return;
 
-            rigAimController.SmoothChangeWeight("ArmLAim", false);
-            rigAimController.SmoothChangeWeight("ArmRAim", false);
+            LowerArmIK(true);
+            LowerArmIK(false);
         }
     }
 
@@ -1158,9 +1176,17 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         rigAimController.IsDualAim = isDual;
 
         // 사격하지 않는 쪽 허리 레이어는 꺼 둔다. 팔 레이어가 대기 상태일 때 허리를 덮어쓰지 않게 한다.
-        float torsoWeight = isDual ? dualShootTorsoWeight : singleShootTorsoWeight;
-        BlendLayerWeight(LeftTorsoLayerName, isLeft ? torsoWeight : 0.0f);
-        BlendLayerWeight(RightTorsoLayerName, isRight ? torsoWeight : 0.0f);
+        // 한 팔 사격의 허리 회전은 파츠별 배율을 곱한다. (짧게 쏘는 기본 팔은 허리가 급하게 돌았다 돌아오지 않게 낮춘다)
+        float leftTorso = isDual ? dualShootTorsoWeight : singleShootTorsoWeight * GetTorsoScale(true);
+        float rightTorso = isDual ? dualShootTorsoWeight : singleShootTorsoWeight * GetTorsoScale(false);
+        BlendLayerWeight(LeftTorsoLayerName, isLeft ? leftTorso : 0.0f);
+        BlendLayerWeight(RightTorsoLayerName, isRight ? rightTorso : 0.0f);
+    }
+
+    private float GetTorsoScale(bool isLeft)
+    {
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        return profile != null ? profile.torsoWeightScale : 1.0f;
     }
 
     private void BlendLayerWeight(string layerName, float target)
@@ -1177,6 +1203,25 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     public void ApplyRecoil(CinemachineImpulseSource source, float recoilX, float recoilY)
     {
         _followCamera.ApplyRecoil(source, recoilX, recoilY);
+
+        // 팔 파츠의 발사는 모두 이 경로를 거친다. 반동을 보낸 파츠가 어느 팔인지 찾아 팔 IK에 반동을 준다.
+        if (_armShootIK == null) _armShootIK = GetComponent<ArmShootIKTargets>();
+        if (_armShootIK == null || source == null) return;
+
+        if (IsEquippedArm(EPartType.ArmL, source.gameObject)) _armShootIK.Kick(true);
+        else if (IsEquippedArm(EPartType.ArmR, source.gameObject)) _armShootIK.Kick(false);
+    }
+
+    private bool IsEquippedArm(EPartType armType, GameObject partObject)
+    {
+        if (!inventory.EquippedItems.TryGetValue(armType, out var parts)) return false;
+
+        foreach (PartBase part in parts)
+        {
+            if (part != null && part.gameObject == partObject) return true;
+        }
+
+        return false;
     }
 
     public void SetPartStat(PartBase part)
@@ -1544,6 +1589,30 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                 animator.SetBool("isRightAttack", true);
             }
         }
+
+        // 잠깐 쏘고 내리는 파츠(기본 팔)는 사격 애니메이션 전환을 기다리지 않고 바로 IK를 올린다.
+        // 전환이 끝난 뒤에 올리면 팔이 애니메이션대로 옆으로 들렸다가 앞으로 흐느적거리며 옮겨진다.
+        RaiseArmIKOnInput(isLeft);
+    }
+
+    private void RaiseArmIKOnInput(bool isLeft)
+    {
+        EPlayerState shootFlag = isLeft ? EPlayerState.LeftShooting : EPlayerState.RightShooting;
+        if ((_currentPlayerState & shootFlag) == 0) return;
+
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        if (profile == null || !profile.raiseIKOnInput) return;
+
+        rigAimController.SmoothChangeWeight(isLeft ? "ArmLAim" : "ArmRAim", true, profile.ikRaiseSpeed);
+    }
+
+    // 사격 애니메이션 상태에 들어간 뒤 IK를 올린다. 입력 즉시 올리는 파츠는 이미 올리는 중이므로 건너뛴다.
+    private void RaiseArmIKOnShootState(bool isLeft)
+    {
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        if (profile != null && profile.raiseIKOnInput) return;
+
+        rigAimController.SmoothChangeWeight(isLeft ? "ArmLAim" : "ArmRAim", true);
     }
 
     private void AnimCheckShoot()
@@ -1555,7 +1624,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             if (stateInfo.IsName("Shoot") && !animator.IsInTransition(1))
             {
                 _isLeftAttackReady = true;
-                rigAimController.SmoothChangeWeight("ArmLAim", true);
+                RaiseArmIKOnShootState(true);
                 inventory.EquippedItems[EPartType.ArmL][0].UseAbility();
             }
         }
@@ -1566,7 +1635,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             if (stateInfo.IsName("Shoot") && !animator.IsInTransition(2))
             {
                 _isRightAttackReady = true;
-                rigAimController.SmoothChangeWeight("ArmRAim", true);
+                RaiseArmIKOnShootState(false);
                 inventory.EquippedItems[EPartType.ArmR][0].UseAbility();
             }
         }   

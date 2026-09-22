@@ -38,6 +38,12 @@ public class ArmShootIKTargets : MonoBehaviour
     [SerializeField] private Vector3 shoulderOffset = Vector3.zero;
     [Tooltip("조준 방향에서 팔을 바깥쪽으로 벌리는 각도(도). 0이면 두 팔이 나란히 정면을 향한다.")]
     [SerializeField, Range(0.0f, 30.0f)] private float spreadAngle = 5.0f;
+    [Tooltip("발사할 때 손이 어깨 쪽으로 밀리는 거리(m).")]
+    [SerializeField, Range(0.0f, 0.3f)] private float recoilDistance = 0.06f;
+    [Tooltip("발사할 때 팔이 위로 들리는 각도(도).")]
+    [SerializeField, Range(0.0f, 30.0f)] private float recoilPitch = 5.0f;
+    [Tooltip("반동에서 원래 자세로 돌아오는 빠르기.")]
+    [SerializeField, Range(1.0f, 40.0f)] private float recoilRecoverSpeed = 14.0f;
 
     [Header("공통")]
     [Tooltip("타깃이 목표 위치를 따라가는 빠르기. 높을수록 즉각 반응하고, 낮을수록 부드럽지만 늦게 따라간다.\n" +
@@ -59,6 +65,20 @@ public class ArmShootIKTargets : MonoBehaviour
     // 어깨 기준으로 부드럽게 따라가는 타깃/힌트 오프셋(캐릭터 회전 기준, 스케일 무관). 월드 좌표로 변환해 넣는다.
     private Vector3 _leftHandLocal, _rightHandLocal;
     private Vector3 _leftHintLocal, _rightHintLocal;
+
+    // 발사 반동 강도(1에서 시작해 0으로 줄어든다).
+    private float _leftRecoil;
+    private float _rightRecoil;
+
+    /// <summary>
+    /// 발사 반동을 준다. 손이 어깨 쪽으로 밀리고 팔이 위로 들렸다가 돌아온다.
+    /// PlayerController.ApplyRecoil에서 발사한 팔을 판별해 호출한다.
+    /// </summary>
+    public void Kick(bool isLeft)
+    {
+        if (isLeft) _leftRecoil = 1.0f;
+        else _rightRecoil = 1.0f;
+    }
 
     private void Awake()
     {
@@ -174,7 +194,34 @@ public class ArmShootIKTargets : MonoBehaviour
         if (isLeft) { _leftHandLocal = handOffset; _leftHintLocal = hintOffset; }
         else { _rightHandLocal = handOffset; _rightHintLocal = hintOffset; }
 
-        handTarget.position = shoulder + rootRotation * handOffset;
+        // 발사 반동. 부드럽게 따라가는 보정과 별개로 바로 적용해야 반동이 굼뜨지 않는다.
+        float recoilRecover = profile != null ? profile.recoilRecoverSpeed : recoilRecoverSpeed;
+        float recoil = isLeft ? _leftRecoil : _rightRecoil;
+        recoil *= Mathf.Exp(-recoilRecover * Time.deltaTime);
+        if (recoil < 0.001f) recoil = 0.0f;
+        if (isLeft) _leftRecoil = recoil;
+        else _rightRecoil = recoil;
+
+        Vector3 finalHandOffset = handOffset;
+        if (recoil > 0.0f)
+        {
+            float kickDistance = (profile != null ? profile.recoilDistance : recoilDistance) * recoil;
+            float kickPitch = (profile != null ? profile.recoilPitch : recoilPitch) * recoil;
+
+            // 오프셋은 캐릭터 회전 기준이라 위쪽은 Vector3.up이다. 팔 방향을 오른쪽 축 기준으로 위로 든다.
+            Vector3 armDirection = handOffset.normalized;
+            Vector3 pitchAxis = Vector3.Cross(Vector3.up, armDirection);
+            if (pitchAxis.sqrMagnitude > 0.0001f)
+            {
+                armDirection = Quaternion.AngleAxis(-kickPitch, pitchAxis.normalized) * armDirection;
+            }
+
+            // Reach Ratio가 1보다 크면 타깃이 팔 길이 밖에 있어 조금 당겨서는 팔이 굽지 않으므로 실제 팔 길이 기준으로 당긴다.
+            float kickedLength = Mathf.Min(handOffset.magnitude, armLength) - kickDistance;
+            finalHandOffset = armDirection * Mathf.Max(0.0f, kickedLength);
+        }
+
+        handTarget.position = shoulder + rootRotation * finalHandOffset;
 
         if (elbowHint != null)
         {

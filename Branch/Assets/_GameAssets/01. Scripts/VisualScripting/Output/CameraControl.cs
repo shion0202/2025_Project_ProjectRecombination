@@ -61,7 +61,6 @@ namespace _Project.Scripts.VisualScripting
         public override void Execute()
         {
             if (IsOn) return;
-            BlendToCutscene();                            // 컷씬 모드에 따라 블렌딩 방식이 다르게 설정
             StartCoroutine(SwitchToCutscene());     // ~~컷씬 전환을 GUI Manager에 맞기자.~~ (뭔 소리야 이게 GUI Manager가 Camera를 관리하면 어쩌자는 거야)
             IsOn = true;
         }
@@ -70,6 +69,9 @@ namespace _Project.Scripts.VisualScripting
         {
             int originalPriority = mainVirtualCamera.Priority;
             GameManager.Instance.PauseObjects();        // Game Manager에 의해 특정 오브젝트들만 Pause
+            // 블렌드는 PauseObjects 뒤에 설정한다. PauseObjects가 플레이어 행동을 정리하면서 어깨 파츠 등이
+            // 스킬 연출용으로 바꿨던 블렌드를 저장해 둔 값으로 되돌리므로, 먼저 설정하면 덮어써져 즉시 전환된다.
+            BlendToCutscene();                          // 컷씬 모드에 따라 블렌딩 방식이 다르게 설정
             GUIManager.Instance.GameUIController.SetIndicator(false);
             GUIManager.Instance.GameUIController.HUD.SetActive(false);
             // 컷씬 카메라의 우선순위를 높이고, 메인 카메라의 우선순위를 낮춘다.

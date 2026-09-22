@@ -115,7 +115,8 @@ public class RigAimController : MonoBehaviour
         }
     }
 
-    public void SmoothChangeWeight(string key, bool isIncreasing = true, float changeSpeed = 0.0f)
+    // delay: 변화를 시작하기 전 대기 시간. 대기 중에 다시 호출되면 이전 요청은 취소된다.
+    public void SmoothChangeWeight(string key, bool isIncreasing = true, float changeSpeed = 0.0f, float delay = 0.0f)
     {
         if (changeSpeed <= 0.0f)
         {
@@ -128,7 +129,7 @@ public class RigAimController : MonoBehaviour
             {
                 StopCoroutine(_changeRoutines[name]);
             }
-            _changeRoutines[name] = StartCoroutine(CoSmoothChangeWeight(name, isIncreasing, changeSpeed));
+            _changeRoutines[name] = StartCoroutine(CoSmoothChangeWeight(name, isIncreasing, changeSpeed, delay));
         }
     }
 
@@ -185,8 +186,13 @@ public class RigAimController : MonoBehaviour
         SetAllWeight(inWeight);
     }
 
-    private IEnumerator CoSmoothChangeWeight(string key, bool isIncreasing, float changeSpeed)
+    private IEnumerator CoSmoothChangeWeight(string key, bool isIncreasing, float changeSpeed, float delay = 0.0f)
     {
+        if (delay > 0.0f)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+
         float value = _normalizedWeights[key];
         float weightOperator = changeSpeed * (isIncreasing ? 1 : -1);
 

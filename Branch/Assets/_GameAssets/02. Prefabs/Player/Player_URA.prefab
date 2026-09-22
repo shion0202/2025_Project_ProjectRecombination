@@ -307,6 +307,7 @@ MonoBehaviour:
   recoilY: 1
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: 65677b09885d43aba273cacbe5a6e574, type: 2}
+  spawnPointOffset: {x: 0, y: 0.1, z: 0}
   castEffectPrefab: {fileID: 7235389485592333431, guid: a7dd38ce1a9d9104fb3948b2c29814e7,
     type: 3}
   maxChargeTime: 1.5
@@ -996,6 +997,7 @@ MonoBehaviour:
   recoilY: 7
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   laserPrefab: {fileID: 1962479828434100, guid: a8fc40961f0745142a828fd724d7e5bd,
     type: 3}
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
@@ -1093,6 +1095,7 @@ MonoBehaviour:
   recoilY: 7
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   laserPrefab: {fileID: 1962479828434100, guid: a8fc40961f0745142a828fd724d7e5bd,
     type: 3}
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
@@ -1190,6 +1193,7 @@ MonoBehaviour:
   recoilY: 7
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   laserPrefab: {fileID: 1962479828434100, guid: a8fc40961f0745142a828fd724d7e5bd,
     type: 3}
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
@@ -12997,6 +13001,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: 421401304d2f42ccae84970f2bde2b28, type: 2}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   minSpreadAngle: 10
   maxSpreadAngle: 40
   bulletPerShot: 5
@@ -13538,6 +13543,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: cc928fd5bad94e2192c8a670fd0758f9, type: 2}
+  spawnPointOffset: {x: -0.2, y: -0.2, z: -0.2}
   muzzleFlashPrefab: {fileID: 100000, guid: f91877145e39e3c4ba64812eb1fb9773, type: 3}
   pelletCount: 12
   denseSpreadAngle: 5
@@ -19564,6 +19570,7 @@ MonoBehaviour:
   recoilY: 5
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: cc928fd5bad94e2192c8a670fd0758f9, type: 2}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   maxYawAngle: 20
   maxPitchAngle: 10
   targetRadius: 3
@@ -20095,6 +20102,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   minSpreadAngle: 10
   maxSpreadAngle: 80
   bulletPerShot: 5
@@ -20194,6 +20202,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   minSpreadAngle: 10
   maxSpreadAngle: 80
   bulletPerShot: 5
@@ -20293,6 +20302,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   minSpreadAngle: 10
   maxSpreadAngle: 80
   bulletPerShot: 5
@@ -23002,6 +23012,7 @@ MonoBehaviour:
   recoilY: 7
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: 421401304d2f42ccae84970f2bde2b28, type: 2}
+  spawnPointOffset: {x: 0.1, y: 0.1, z: 0}
   laserPrefab: {fileID: 1962479828434100, guid: a8fc40961f0745142a828fd724d7e5bd,
     type: 3}
   chargeEffectPrefab: {fileID: 6799699376834545599, guid: ed672e191976a2348abca264f99b2529,
@@ -24684,6 +24695,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: 65677b09885d43aba273cacbe5a6e574, type: 2}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
   maxYawAngle: 15
   maxPitchAngle: 10
 --- !u!1 &7881908828915957808
@@ -25536,6 +25548,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 0}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8398031761655120927
 GameObject:
   m_ObjectHideFlags: 0
@@ -26085,6 +26098,7 @@ MonoBehaviour:
   recoilY: 2
   minAimDistance: 5
   ikProfile: {fileID: 11400000, guid: 51985c38316642fb8e81795e8dddd0f4, type: 2}
+  spawnPointOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8513682311442047818
 GameObject:
   m_ObjectHideFlags: 0

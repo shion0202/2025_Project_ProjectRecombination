@@ -39,6 +39,10 @@ public class PartBaseArm : PartBase
     [Header("사격 자세")]
     [Tooltip("이 파츠를 장착했을 때의 사격 IK 자세 값. 비우면 ArmShootIKTargets의 기본값을 쓴다.")]
     [SerializeField] protected ArmIKProfile ikProfile;
+    [Tooltip("발사 지점 보정값. 발사 지점(Bullet Spawner)은 모든 팔 파츠가 공유하므로, " +
+             "이 파츠의 총구 위치에 맞게 장착 시 원래 위치에서 이만큼 옮긴다. (Bullet Spawner 부모 기준 로컬 좌표)")]
+    [SerializeField] protected Vector3 spawnPointOffset = Vector3.zero;
+    private BulletSpawnPoint _bulletSpawner;
 
     public bool IsOverheat => _isOverheat;
     public ArmIKProfile IKProfile => ikProfile;
@@ -148,8 +152,29 @@ public class PartBaseArm : PartBase
         if (bulletSpawner != null)
         {
             bulletSpawnPoint = bulletSpawner.transform;
+            _bulletSpawner = bulletSpawner;
         }
     }
+
+    public override void OnEquipped()
+    {
+        base.OnEquipped();
+
+        if (_bulletSpawner != null)
+        {
+            _bulletSpawner.ApplyOffset(spawnPointOffset);
+        }
+    }
+
+#if UNITY_EDITOR
+    // 플레이 중 인스펙터에서 보정값을 바꾸면 장착 중인 파츠에 한해 바로 반영한다. (조절용)
+    private void OnValidate()
+    {
+        if (!Application.isPlaying || !gameObject.activeInHierarchy || _bulletSpawner == null) return;
+
+        _bulletSpawner.ApplyOffset(spawnPointOffset);
+    }
+#endif
 
     protected virtual void Shoot()
     {
