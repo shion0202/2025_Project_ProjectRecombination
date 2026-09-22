@@ -78,6 +78,18 @@ namespace _Project.Scripts.VisualScripting.Editor
             Selection.activeObject = go;
         }
 
+        [MenuItem("GameObject/VisualScripting/Input/IsRadialMenuOpen", false, 10)]
+        private static void CreateIsRadialMenuOpenAsset(MenuCommand menuCommand)
+        {
+            GameObject go = new GameObject("NewIsRadialMenuOpen");
+            go.AddComponent<IsRadialMenuOpen>();
+
+            GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+
+            Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+            Selection.activeObject = go;
+        }
+
         [MenuItem("GameObject/VisualScripting/Input/OnEvent", false, 10)]
         private static void CreateEventAsset(MenuCommand menuCommand)
         {
@@ -506,6 +518,30 @@ namespace _Project.Scripts.VisualScripting.Editor
         {
             GameObject go = new GameObject("NewSetNoticeMessage");
             go.AddComponent<SetNoticeMessage>();
+
+            GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+
+            Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+            Selection.activeObject = go;
+        }
+
+        [MenuItem("GameObject/VisualScripting/Output/HighlightTarget", false, 10)]
+        private static void CreateHighlightTargetAsset(MenuCommand menuCommand)
+        {
+            GameObject go = new GameObject("NewHighlightTarget");
+            go.AddComponent<HighlightTarget>();
+
+            GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+
+            Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+            Selection.activeObject = go;
+        }
+
+        [MenuItem("GameObject/VisualScripting/Output/ClearHighlight", false, 10)]
+        private static void CreateClearHighlightAsset(MenuCommand menuCommand)
+        {
+            GameObject go = new GameObject("NewClearHighlight");
+            go.AddComponent<ClearHighlight>();
 
             GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
 

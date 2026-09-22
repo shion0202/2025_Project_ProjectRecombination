@@ -33,8 +33,19 @@ public class PartBaseArm : PartBase
     [SerializeField] protected float shootingRange = 100.0f;
     [SerializeField] protected float recoilX = 4.0f;
     [SerializeField] protected float recoilY = 2.0f;
+    [SerializeField, Tooltip("조준점이 플레이어로부터 이 거리보다 가까우면 조준선 위 이 거리 지점을 향해 발사한다. 총구가 조준선 옆에 있어 가까운 조준점일수록 탄이 옆으로 크게 꺾이는 문제 완화용")]
+    protected float minAimDistance = 5.0f;
+
+    [Header("사격 자세")]
+    [Tooltip("이 파츠를 장착했을 때의 사격 IK 자세 값. 비우면 ArmShootIKTargets의 기본값을 쓴다.")]
+    [SerializeField] protected ArmIKProfile ikProfile;
+    [Tooltip("발사 지점 보정값. 발사 지점(Bullet Spawner)은 모든 팔 파츠가 공유하므로, " +
+             "이 파츠의 총구 위치에 맞게 장착 시 원래 위치에서 이만큼 옮긴다. (Bullet Spawner 부모 기준 로컬 좌표)")]
+    [SerializeField] protected Vector3 spawnPointOffset = Vector3.zero;
+    private BulletSpawnPoint _bulletSpawner;
 
     public bool IsOverheat => _isOverheat;
+    public ArmIKProfile IKProfile => ikProfile;
 
     // [임시] 사격 불가 버그 추적용. PlayerController.BuildShootDebugReport()에서 사용한다.
     public string BuildDebugState()
@@ -141,15 +152,36 @@ public class PartBaseArm : PartBase
         if (bulletSpawner != null)
         {
             bulletSpawnPoint = bulletSpawner.transform;
+            _bulletSpawner = bulletSpawner;
         }
     }
+
+    public override void OnEquipped()
+    {
+        base.OnEquipped();
+
+        if (_bulletSpawner != null)
+        {
+            _bulletSpawner.ApplyOffset(spawnPointOffset);
+        }
+    }
+
+#if UNITY_EDITOR
+    // 플레이 중 인스펙터에서 보정값을 바꾸면 장착 중인 파츠에 한해 바로 반영한다. (조절용)
+    private void OnValidate()
+    {
+        if (!Application.isPlaying || !gameObject.activeInHierarchy || _bulletSpawner == null) return;
+
+        _bulletSpawner.ApplyOffset(spawnPointOffset);
+    }
+#endif
 
     protected virtual void Shoot()
     {
         _owner.FollowCamera.ApplyAimAssist();
 
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
-        Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
+        Vector3 camShootDirection = GetShootDirection(targetPoint);
 
         GameObject bullet = Utils.Instantiate(bulletPrefab, bulletSpawnPoint.position + camShootDirection.normalized * 1.5f, Quaternion.LookRotation(camShootDirection.normalized));
         Bullet bulletComponent = bullet.GetComponent<Bullet>();
@@ -208,6 +240,20 @@ public class PartBaseArm : PartBase
         }
 
         return targetPoint;
+    }
+
+    // 총구에서 조준점을 향하는 발사 방향. 조준점이 minAimDistance보다 가까우면 조준선 위 minAimDistance 지점을 향한다.
+    // 조준점 자체(피격 위치, 미사일 목표 등)가 필요한 곳에는 쓰지 않고, 직선 투사체의 방향에만 사용한다.
+    protected Vector3 GetShootDirection(Vector3 targetPoint)
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        float minDepth = Vector3.Dot(_owner.transform.position - ray.origin, ray.direction) + minAimDistance;
+        if (Vector3.Dot(targetPoint - ray.origin, ray.direction) < minDepth)
+        {
+            targetPoint = ray.origin + ray.direction * minDepth;
+        }
+
+        return (targetPoint - bulletSpawnPoint.position).normalized;
     }
 
     protected void CancleShootState(bool isLeft)

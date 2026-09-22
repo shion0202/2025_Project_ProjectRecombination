@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     [SerializeField] private Transform groundCheck;
     [SerializeField] private GameObject followCameraPrefab;
     [SerializeField] private CinemachineVirtualCamera startCam;
+    [Tooltip("시작 카메라 연출이 끝난 뒤 키 가이드(F1 화면)를 자동으로 띄운다.")]
+    [SerializeField] private bool showKeyGuideOnStart = true;
     [SerializeField] private Volume volume;
     [SerializeField] private ParticleFollower navi;
     private FollowCameraController _followCamera;
@@ -98,6 +100,20 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     private static readonly int AimWeightHash = Animator.StringToHash("aimWeight");
     private bool _isAimMove = false;
     private float _aimMoveWeight = 0.0f;
+
+    // 사격 애니메이션은 한 팔 기준이라, 팔을 뻗으면서 허리도 그쪽으로 돌린다.
+    // 팔 레이어(LeftArmLayer/RightArmLayer)는 팔만 담당하고, 허리는 팔 레이어와 Sync된 허리 레이어가 따로 담당한다.
+    // 한 팔 사격에서는 그쪽 허리 레이어를 켜 허리 움직임을 살리고,
+    // 양팔 사격에서는 허리를 펴야 두 팔이 함께 앞을 향할 수 있으므로 허리 레이어를 낮춘다.
+    [Tooltip("한 팔 사격 시 허리 레이어 가중치. 낮추면 사격할 때 허리가 덜 돌아간다.")]
+    [SerializeField, Range(0.0f, 1.0f)] private float singleShootTorsoWeight = 1.0f;
+    [Tooltip("양팔 사격 시 허리 레이어 가중치. 0이면 허리는 이동 애니메이션을 그대로 따른다.")]
+    [SerializeField, Range(0.0f, 1.0f)] private float dualShootTorsoWeight = 0.0f;
+    [Tooltip("허리 레이어 가중치가 바뀌는 시간(초). 사격을 누르고 뗄 때 허리가 튀지 않게 한다.")]
+    [SerializeField] private float shootTorsoBlendTime = 0.2f;
+    private ArmShootIKTargets _armShootIK;
+    private const string LeftTorsoLayerName = "LeftTorsoLayer";
+    private const string RightTorsoLayerName = "RightTorsoLayer";
 
     [Header("Parts")]
     [SerializeField] private List<SkinnedMeshRenderer> bodyRenderers = new();
@@ -203,6 +219,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         
         AnimCheckShoot();
         UpdateAimMoveWeight();
+        UpdateShootTorsoBlend();
         GUIManager.Instance.GameUIController.SetHpSlider(stats.CurrentHealth, stats.MaxHealth);
     }
 
@@ -266,6 +283,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     #endregion
 
     #region Input Actions
+    /// <summary>
+    /// 일시정지, 키 가이드, 맵처럼 시간이 멈춘 동안에는 전투 조작이 들어가면 안 된다.
+    /// UI를 닫는 입력(Esc, F1 등)은 계속 받아야 하므로 액션맵 자체를 끄지 않고 여기서만 걸러낸다.
+    /// 파츠 교체 메뉴는 timeScale을 0.1로 쓰므로 이 조건에 걸리지 않는다.
+    /// </summary>
+    private bool IsTimeStopped => Time.timeScale <= 0.0f;
+
     void PlayerActions.IPlayerActionMapActions.OnMove(InputAction.CallbackContext context)
     {
         _moveInput = context.ReadValue<Vector2>();
@@ -287,6 +311,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & dashBlockMask) != 0) return;
 
             if (_moveInput == null || _moveInput == Vector2.zero)
@@ -308,6 +333,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & skillBlockMask) != 0) return;
 
             inventory.EquippedItems[EPartType.Shoulder][0].UseAbility();
@@ -319,6 +345,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
 
             PartBaseArm weapon = inventory.EquippedItems[EPartType.ArmL][0].GetComponent<PartBaseArm>();
@@ -338,6 +365,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
 
             PartBaseArm weapon = inventory.EquippedItems[EPartType.ArmR][0].GetComponent<PartBaseArm>();
@@ -357,6 +385,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     {
         if (context.started)
         {
+            if (IsTimeStopped) return;
             if ((_currentPlayerState & EPlayerState.UnmanipulableState) != 0) return;
 
             PartBaseArm left = inventory.EquippedItems[EPartType.ArmL][0].GetComponent<PartBaseArm>();
@@ -387,6 +416,16 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         if (context.started)
         {
+            if (IsTimeStopped) return;
+
+            // 상호작용 대상이 없으면 튜토리얼 메시지 넘기기로 쓴다. (대기 중인 타이머를 즉시 끝낸다)
+            GameObject interactionUI = Managers.GUIManager.Instance.GameUIController.InteractionUI;
+            if ((interactionUI == null || !interactionUI.activeSelf) &&
+                _Project.Scripts.VisualScripting.Timer.SkipWaiting())
+            {
+                return;
+            }
+
             EventManager.Instance.PostNotification(EEventType.Interaction, this, null);
         }
     }
@@ -757,8 +796,6 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
         // 사망 로직
         _currentPlayerState = 0;
-        // 대시 중 사망하면 아래 FinishActionForced -> FinishDash가 _previousState의 사격 플래그를 사망 상태에 다시 붙이므로 함께 비운다.
-        _previousState = 0;
         _invincibilityRefCount = 0;
         _currentPlayerState |= EPlayerState.Dead;
 
@@ -770,10 +807,41 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         // SetAllWeight는 진행 중인 가중치 보간 코루틴을 멈추지 않아, 사격 시작 직후 사망하면 팔 조준 가중치가 다시 올라간다.
         rigAimController.ClearWeight(0.0f);
 
-        // 사격 중 또는 스킬 시전 중 사망하는 경우 고려
         // 거의 없는 상황이지만 공중에 있을 떄 사망하는 경우도 고려할 것
-        // 스킬 등이 사용 중일 경우 모두 초기화
         // 버프, 디버프도 마찬가지
+        CancelAllActions();
+
+        _isLowHp = false;
+        if (lowHpController != null)
+        {
+            lowHpController.SetEffectActive(false);
+        }
+    }
+
+    // 컷씬 등으로 조작이 잠기는 순간 호출해 기본 서 있는 상태로 되돌린다.
+    // 사격 취소와 이동 정지는 키를 뗄 때(canceled)만 처리되므로, 누른 채로 잠기면 잠금 중에도 사격이 계속되고
+    // HandleMove가 멈춰 애니메이터 이동 값이 마지막 입력에 고정된 채 걷기 애니메이션(과 발소리)이 이어진다.
+    // 잠금이 풀린 뒤 이동은 키를 누르고 있으면 바로 이어지고, 사격은 다시 눌러야 한다.
+    public void ResetToIdle()
+    {
+        CancelAllActions();
+
+        _followCamera.CurrentCameraState = (ECameraState)(_currentAnimType);
+        rigAimController.SmoothChangeWeight("ArmLAim", false);
+        rigAimController.SmoothChangeWeight("ArmRAim", false);
+
+        _currentMoveInput = Vector2.zero;
+        SwitchStateToIdle();
+    }
+
+    // 사격, 대시, 스킬 등 진행 중인 행동을 모두 강제로 끝낸다. (사망, 컷씬 공용)
+    // CancleAttack은 과열 전 기본 팔이면 취소를 건너뛰므로 여기서는 쓰지 않는다.
+    private void CancelAllActions()
+    {
+        // 대시 중이면 아래 FinishActionForced -> FinishDash가 _previousState와 현재 사격 플래그로 사격을 다시 시작하므로 먼저 비운다.
+        _previousState = 0;
+        _currentPlayerState &= ~(EPlayerState.ShootState | EPlayerState.Rotating);
+
         inventory.EquippedItems[EPartType.ArmL][0].UseCancleAbility();
         inventory.EquippedItems[EPartType.ArmR][0].UseCancleAbility();
         animator.SetBool("isLeftAttack", false);
@@ -788,12 +856,6 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         for (int i = 0; i < Enum.GetValues(typeof(EPartType)).Length; ++i)
         {
             inventory.EquippedItems[(EPartType)(1 << i)][0].FinishActionForced();
-        }
-
-        _isLowHp = false;
-        if (lowHpController != null)
-        {
-            lowHpController.SetEffectActive(false);
         }
     }
 
@@ -891,6 +953,23 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         SwitchStateToIdle();
     }
 
+    // 장착한 팔 파츠의 사격 IK 설정. 없으면 null.
+    private ArmIKProfile GetArmProfile(bool isLeft)
+    {
+        EPartType armType = isLeft ? EPartType.ArmL : EPartType.ArmR;
+        if (!inventory.EquippedItems.TryGetValue(armType, out var parts) || parts.Count == 0) return null;
+
+        return parts[0] is PartBaseArm arm ? arm.IKProfile : null;
+    }
+
+    // 사격이 끝난 팔의 IK를 내린다. 파츠에 따라 잠깐 조준 자세를 유지한 뒤 내린다.
+    private void LowerArmIK(bool isLeft)
+    {
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        float holdTime = profile != null ? profile.ikHoldTime : 0.0f;
+        rigAimController.SmoothChangeWeight(isLeft ? "ArmLAim" : "ArmRAim", false, 0.0f, holdTime);
+    }
+
     public void CancleAttack(bool isLeft)
     {
         // 대시 중에는 사격 플래그가 _previousState로 옮겨져 있으므로 함께 확인한다.
@@ -909,7 +988,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _previousState &= ~EPlayerState.LeftShooting;
             _currentPlayerState &= ~EPlayerState.LeftShooting;
             _isLeftAttackReady = false;  // 상태 초기화
-            rigAimController.SmoothChangeWeight("ArmLAim", false);
+            LowerArmIK(true);
         }
         else
         {
@@ -919,7 +998,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _previousState &= ~EPlayerState.RightShooting;
             _currentPlayerState &= ~EPlayerState.RightShooting;
             _isRightAttackReady = false;
-            rigAimController.SmoothChangeWeight("ArmRAim", false);
+            LowerArmIK(false);
         }
 
         if (((_currentPlayerState | _previousState) & EPlayerState.ShootState) == 0)
@@ -931,8 +1010,8 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
 
             if (inventory.EquippedItems[EPartType.ArmL][0] is ArmBasic && isLeft) return;
 
-            rigAimController.SmoothChangeWeight("ArmLAim", false);
-            rigAimController.SmoothChangeWeight("ArmRAim", false);
+            LowerArmIK(true);
+            LowerArmIK(false);
         }
     }
 
@@ -1096,9 +1175,61 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
         animator.SetFloat(AimWeightHash, _aimMoveWeight);
     }
 
+    // 사격 중인 팔에 따라 허리 레이어 가중치와 팔 조준 IK 상한을 바꾼다.
+    private void UpdateShootTorsoBlend()
+    {
+        bool isLeft = (_currentPlayerState & EPlayerState.LeftShooting) != 0;
+        bool isRight = (_currentPlayerState & EPlayerState.RightShooting) != 0;
+        bool isDual = isLeft && isRight;
+        rigAimController.IsDualAim = isDual;
+
+        // 사격하지 않는 쪽 허리 레이어는 꺼 둔다. 팔 레이어가 대기 상태일 때 허리를 덮어쓰지 않게 한다.
+        // 한 팔 사격의 허리 회전은 파츠별 배율을 곱한다. (짧게 쏘는 기본 팔은 허리가 급하게 돌았다 돌아오지 않게 낮춘다)
+        float leftTorso = isDual ? dualShootTorsoWeight : singleShootTorsoWeight * GetTorsoScale(true);
+        float rightTorso = isDual ? dualShootTorsoWeight : singleShootTorsoWeight * GetTorsoScale(false);
+        BlendLayerWeight(LeftTorsoLayerName, isLeft ? leftTorso : 0.0f);
+        BlendLayerWeight(RightTorsoLayerName, isRight ? rightTorso : 0.0f);
+    }
+
+    private float GetTorsoScale(bool isLeft)
+    {
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        return profile != null ? profile.torsoWeightScale : 1.0f;
+    }
+
+    private void BlendLayerWeight(string layerName, float target)
+    {
+        // 파츠 교체로 컨트롤러가 바뀌어도 레이어 구성은 같지만, 순서가 바뀔 수 있어 이름으로 찾는다.
+        int layerIndex = animator.GetLayerIndex(layerName);
+        if (layerIndex < 0) return;
+
+        float step = shootTorsoBlendTime > 0.0f ? Time.deltaTime / shootTorsoBlendTime : 1.0f;
+        float weight = Mathf.MoveTowards(animator.GetLayerWeight(layerIndex), target, step);
+        animator.SetLayerWeight(layerIndex, weight);
+    }
+
     public void ApplyRecoil(CinemachineImpulseSource source, float recoilX, float recoilY)
     {
         _followCamera.ApplyRecoil(source, recoilX, recoilY);
+
+        // 팔 파츠의 발사는 모두 이 경로를 거친다. 반동을 보낸 파츠가 어느 팔인지 찾아 팔 IK에 반동을 준다.
+        if (_armShootIK == null) _armShootIK = GetComponent<ArmShootIKTargets>();
+        if (_armShootIK == null || source == null) return;
+
+        if (IsEquippedArm(EPartType.ArmL, source.gameObject)) _armShootIK.Kick(true);
+        else if (IsEquippedArm(EPartType.ArmR, source.gameObject)) _armShootIK.Kick(false);
+    }
+
+    private bool IsEquippedArm(EPartType armType, GameObject partObject)
+    {
+        if (!inventory.EquippedItems.TryGetValue(armType, out var parts)) return false;
+
+        foreach (PartBase part in parts)
+        {
+            if (part != null && part.gameObject == partObject) return true;
+        }
+
+        return false;
     }
 
     public void SetPartStat(PartBase part)
@@ -1466,6 +1597,30 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
                 animator.SetBool("isRightAttack", true);
             }
         }
+
+        // 잠깐 쏘고 내리는 파츠(기본 팔)는 사격 애니메이션 전환을 기다리지 않고 바로 IK를 올린다.
+        // 전환이 끝난 뒤에 올리면 팔이 애니메이션대로 옆으로 들렸다가 앞으로 흐느적거리며 옮겨진다.
+        RaiseArmIKOnInput(isLeft);
+    }
+
+    private void RaiseArmIKOnInput(bool isLeft)
+    {
+        EPlayerState shootFlag = isLeft ? EPlayerState.LeftShooting : EPlayerState.RightShooting;
+        if ((_currentPlayerState & shootFlag) == 0) return;
+
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        if (profile == null || !profile.raiseIKOnInput) return;
+
+        rigAimController.SmoothChangeWeight(isLeft ? "ArmLAim" : "ArmRAim", true, profile.ikRaiseSpeed);
+    }
+
+    // 사격 애니메이션 상태에 들어간 뒤 IK를 올린다. 입력 즉시 올리는 파츠는 이미 올리는 중이므로 건너뛴다.
+    private void RaiseArmIKOnShootState(bool isLeft)
+    {
+        ArmIKProfile profile = GetArmProfile(isLeft);
+        if (profile != null && profile.raiseIKOnInput) return;
+
+        rigAimController.SmoothChangeWeight(isLeft ? "ArmLAim" : "ArmRAim", true);
     }
 
     private void AnimCheckShoot()
@@ -1477,7 +1632,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             if (stateInfo.IsName("Shoot") && !animator.IsInTransition(1))
             {
                 _isLeftAttackReady = true;
-                rigAimController.SmoothChangeWeight("ArmLAim", true);
+                RaiseArmIKOnShootState(true);
                 inventory.EquippedItems[EPartType.ArmL][0].UseAbility();
             }
         }
@@ -1488,7 +1643,7 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             if (stateInfo.IsName("Shoot") && !animator.IsInTransition(2))
             {
                 _isRightAttackReady = true;
-                rigAimController.SmoothChangeWeight("ArmRAim", true);
+                RaiseArmIKOnShootState(false);
                 inventory.EquippedItems[EPartType.ArmR][0].UseAbility();
             }
         }   
@@ -1994,6 +2149,13 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
             _followCamera.SetCameraRotatable(true);
         }
         _playerActions.PlayerActionMap.Enable();
+
+        // 시작 연출이 끝나면 조작법을 먼저 보여준다. F1로 여는 것과 같은 상태(일시정지)이며 F1로 닫는다.
+        if (showKeyGuideOnStart)
+        {
+            GUIManager.Instance.GameUIController.ShowKeyGuide();
+        }
+
         onComplete?.Invoke();
     }
 

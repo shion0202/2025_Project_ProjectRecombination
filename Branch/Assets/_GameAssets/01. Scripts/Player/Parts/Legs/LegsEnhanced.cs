@@ -287,6 +287,10 @@ public class LegsEnhanced : PartBaseLegs
         // 30도 이내면 S자 파형 적용(원하는 각도에 맞게 수정 가능)
         bool isSkateStraight = (angleForward < skateRadius || angleBackward < skateRadius) && moveInput.sqrMagnitude > 0.01f;
 
+        // 점프 공격 중에는 이동 입력이 플레이어가 아니라 착지점(RapidPlayer)을 움직인다.
+        // 플레이어가 이동하는 것처럼 들리면 안 되므로 이동음을 내지 않는다.
+        bool isControllingLandingPoint = (_owner.CurrentPlayerState & EPlayerState.Skilling) != 0;
+
         // 입력 값이 없을 경우(즉, 애니메이션 재생이 중지된 경우) S자 파형 초기화
         if (moveInput.sqrMagnitude < 0.01f)
         {
@@ -298,7 +302,7 @@ public class LegsEnhanced : PartBaseLegs
             // 애니메이션은 재생 중이되 S자 파형 움직임을 멈추는 경우를 고려하여 Skate Time은 계속 누적
             // 롤러스케이트 S자 파형 - 앞방향 키(Y>0)일 때만 S자 진동 추가 (X 입력시 덜 흔들릴 수 있음)
             _skateTime += Time.deltaTime * skateSpeed;                  // 3.0f: S자 횡진동 속도
-            UpdateMoveLoopSound(true);
+            UpdateMoveLoopSound(!isControllingLandingPoint);
 
             if (isSkateStraight)
             {

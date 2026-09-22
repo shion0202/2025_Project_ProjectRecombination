@@ -21,10 +21,15 @@ public class ArmHeavyShotgun : PartBaseArm
     // 한 발의 펠릿 적중 정보. 타격음을 한 번만 내기 위해 모든 펠릿을 판정한 뒤 이펙트를 생성한다.
     private readonly List<(RaycastHit hit, float coefficient)> _pelletHits = new();
 
+    // _currentShootTime은 발사 후 0에서 발사 간격까지 증가한다. (다른 팔은 감소)
+    // 시작 시점에 발사 간격 스탯을 알 수 없으므로 어떤 간격보다도 큰 값으로 두어 바로 발사 가능한 상태로 시작한다.
+    private const float ReadyShootTime = 1000000.0f;
+
     protected override void Awake()
     {
         base.Awake();
         _audioSource = GetComponent<AudioSource>();
+        _currentShootTime = ReadyShootTime;
     }
 
     protected void OnEnable()
@@ -32,10 +37,9 @@ public class ArmHeavyShotgun : PartBaseArm
         GUIManager.Instance.GameUIController.SetAmmoColor(partType, Color.red);
         GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
 
-        if (_owner && !_owner.Stats.CombinedPartStats[partType].IsEmpty() && _owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots] != null)
-        {
-            _currentShootTime = (_owner.Stats.CombinedPartStats[partType][EStatType.IntervalBetweenShots].value);
-        }
+        // 장착 시 발사 간격으로 초기화하면 안 된다.
+        // 파츠 교체 중에는 스탯이 아직 이전 파츠 기준이라 짧은 간격이 들어가 쿨타임이 처음부터 다시 돌았다.
+        // 다른 팔 파츠처럼 해제 시점의 진행 상태에서 이어서 회복한다.
 
         _damagedTargets.Clear();
     }
@@ -81,8 +85,12 @@ public class ArmHeavyShotgun : PartBaseArm
 
     public override void FinishActionForced()
     {
+        // 기본 처리가 _currentShootTime을 0으로 만드는데, 증가형인 이 파츠에서는 "방금 발사함"이 된다.
+        // 파츠 교체로 쿨타임이 초기화되지 않도록 진행 상태를 유지한다.
+        float shootTime = _currentShootTime;
         base.FinishActionForced();
-        
+        _currentShootTime = shootTime;
+
         if (_soundRoutine != null)
         {
             StopCoroutine(_soundRoutine);
@@ -99,7 +107,8 @@ public class ArmHeavyShotgun : PartBaseArm
         // 실제 발사 방향
         Vector3 origin = bulletSpawnPoint.position;
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
-        Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position);
+        // 아래 편차 벡터 계산이 정규화되지 않은 길이를 전제로 튜닝되어 있어, 방향만 보정하고 길이는 유지한다.
+        Vector3 camShootDirection = GetShootDirection(targetPoint) * (targetPoint - bulletSpawnPoint.position).magnitude;
 
         if (muzzleFlashPrefab)
         {

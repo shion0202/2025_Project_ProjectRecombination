@@ -70,6 +70,9 @@ namespace Managers
                     {
                         GameObject obj = InstantiateObject(poolData.prefab);
                         AddPoolableComponent(obj);
+                        // 풀이 비어 새로 만든 오브젝트도 GetObject에서 위치를 정한 뒤 활성화되도록 비활성 상태로 넘긴다.
+                        // (미리 생성하는 오브젝트와 같은 상태)
+                        obj.SetActive(false);
                         return obj;
                     },
                     actionOnGet: obj =>
@@ -77,7 +80,7 @@ namespace Managers
                         var poolable = obj.GetComponent<PoolableObject>();
                         if (poolable != null)
                             poolable.OnGetFromPool();
-                        obj.SetActive(true);
+                        // 활성화는 여기서 하지 않고 GetObject에서 위치를 정한 뒤에 한다. (Activate 주석 참고)
                     },
                     actionOnRelease: obj =>
                     {
@@ -149,13 +152,27 @@ namespace Managers
         /// <summary>
         /// 게임 오브젝트 가져오기
         /// </summary>
+        /// <summary>
+        /// 풀에서 꺼낸 오브젝트를 활성화한다. 반드시 위치/부모를 정한 "뒤에" 호출한다.
+        ///
+        /// 반납된 오브젝트는 마지막 위치(탄환이면 벽에 맞은 지점)에 비활성 상태로 남아 있다.
+        /// 먼저 활성화하고 위치를 옮기면, 활성화되는 순간 콜라이더가 이전 위치에서 물리에 등록되어
+        /// 그곳의 벽과 겹친 것으로 판정된다. 탄환이 발사 직후 멀리 있는 벽에 맞은 것처럼 처리되어
+        /// 플레이어 바로 앞에서 터지던 원인이다.
+        /// </summary>
+        private static GameObject Activate(GameObject go)
+        {
+            go.SetActive(true);
+            return go;
+        }
+
         public GameObject GetObject(GameObject prefab)
         {
             string key = GetOriginalKey(prefab.name);
 
             if (_pools.TryGetValue(key, out var pool))
             {
-                return pool.Get();
+                return Activate(pool.Get());
             }
             else
             {
@@ -168,7 +185,7 @@ namespace Managers
         {
             if (_pools.TryGetValue(key, out var pool))
             {
-                return pool.Get();
+                return Activate(pool.Get());
             }
             
             Debug.LogWarning($"Pool not found for key: {key}");
@@ -191,9 +208,9 @@ namespace Managers
             }
 
             go.transform.SetParent(parent);
-            return go;
+            return Activate(go);
         }
-        
+
         public GameObject GetObject(string key, Transform parent)
         {
             GameObject go = null;
@@ -209,9 +226,9 @@ namespace Managers
             }
 
             go.transform.SetParent(parent);
-            return go;
+            return Activate(go);
         }
-        
+
         public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation)
         {
             string key = GetOriginalKey(prefab.name);
@@ -228,7 +245,7 @@ namespace Managers
             }
 
             go.transform.SetPositionAndRotation(position, rotation);
-            return go;
+            return Activate(go);
         }
 
         public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
@@ -248,7 +265,7 @@ namespace Managers
 
             go.transform.SetParent(parent);
             go.transform.SetPositionAndRotation(position, rotation);
-            return go;
+            return Activate(go);
         }
 
         /// <summary>

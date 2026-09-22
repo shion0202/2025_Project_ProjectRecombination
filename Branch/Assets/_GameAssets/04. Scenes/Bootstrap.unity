@@ -225,40 +225,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1394661958267442624, guid: 5e79e7363f9924635a6fbf1356d14900,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1394661958267442624, guid: 5e79e7363f9924635a6fbf1356d14900,
-        type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 1394661958267442624, guid: 5e79e7363f9924635a6fbf1356d14900,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 234749943
-      objectReference: {fileID: 0}
     - target: {fileID: 3761987598488225709, guid: 5e79e7363f9924635a6fbf1356d14900,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 5193072831475968750, guid: 5e79e7363f9924635a6fbf1356d14900,
-        type: 3}
-      propertyPath: m_DefaultBlend.m_Time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5193072831475968750, guid: 5e79e7363f9924635a6fbf1356d14900,
-        type: 3}
-      propertyPath: m_DefaultBlend.m_Style
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9158186150192737193, guid: 5e79e7363f9924635a6fbf1356d14900,
-        type: 3}
-      propertyPath: m_Antialiasing
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

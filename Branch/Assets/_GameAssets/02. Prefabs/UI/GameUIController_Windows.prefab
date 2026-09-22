@@ -375,6 +375,7 @@ GameObject:
   - component: {fileID: 801621872526480977}
   - component: {fileID: 6242182105219022332}
   - component: {fileID: 5931499100721367433}
+  - component: {fileID: 9079970663532709759}
   m_Layer: 0
   m_Name: GameUIController_Windows
   m_TagString: Untagged
@@ -507,6 +508,13 @@ MonoBehaviour:
   - {fileID: 4769420808510441981}
   - {fileID: 2028072585849555212}
   - {fileID: 3227217262097859076}
+  hitConfirmClip: {fileID: 8300000, guid: b7ec6b248f1d72648ac6aef71fe447e9, type: 3}
+  hitConfirmMixerGroup: {fileID: -3255133022743001703, guid: 61a5faa6522bc9b4a9fde3fa6711f734,
+    type: 2}
+  hitConfirmVolume: 0.3
+  hitConfirmMinInterval: 0.06
+  hitConfirmPitchRange: 0.05
+  tutorialHighlight: {fileID: 0}
   redDot: {fileID: 3198023047221315475}
   messageObject: {fileID: 6289060211119957212}
   messageImage: {fileID: 5936950889563445933}
@@ -547,6 +555,68 @@ MonoBehaviour:
   defaultTarget: {fileID: 0}
   distanceText: {fileID: 5033716738225312398}
   edgeMargin: 80
+--- !u!114 &9079970663532709759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147244201293411302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f99a289a2dce640a0a2f2dc84fad08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiTargets:
+  - key: SkillLegs
+    target: {fileID: 5549389555425030212}
+  - key: SkillBack
+    target: {fileID: 8224416243306382244}
+  - key: SkillLegsButton
+    target: {fileID: 8547849009905343471}
+  - key: SkillBackButton
+    target: {fileID: 4372139815626575132}
+  - key: Object
+    target: {fileID: 1437313098512229670}
+  - key: ObjectText
+    target: {fileID: 8924720854258003397}
+  - key: PartChange
+    target: {fileID: 1982592028437823527}
+  - key: PartBack
+    target: {fileID: 1796414413499674926}
+  - key: PartArmL
+    target: {fileID: 1972913103431512570}
+  - key: PartArmR
+    target: {fileID: 4115473364431750579}
+  - key: PartLegs
+    target: {fileID: 8318677531724232818}
+  - key: LaserSet
+    target: {fileID: 1220085614832373026}
+  - key: LaserBack
+    target: {fileID: 6898570381672147775}
+  - key: LaserArmL
+    target: {fileID: 4164789904227103367}
+  - key: LaserArmR
+    target: {fileID: 1561808106974441805}
+  - key: LaserLegs
+    target: {fileID: 8224359424318757417}
+  - key: ButtonUp
+    target: {fileID: 286201482080592700}
+  - key: ButtonDown
+    target: {fileID: 5718503221196884388}
+  - key: ButtonLeft
+    target: {fileID: 4041001871476111179}
+  - key: ButtonRight
+    target: {fileID: 466988261688327855}
+  dimColor: {r: 0, g: 0, b: 0, a: 0.72}
+  padding: 24
+  arrowSprite: {fileID: -2057507399, guid: 49f057e7636481942b8f89e0b64407ad, type: 3}
+  arrowColor: {r: 1, g: 0.15, b: 0.15, a: 1}
+  arrowSize: 72
+  arrowAngleOffset: 180
+  blinkCycle: 1
+  dimSortingOrder: 3
+  fadeTime: 0.25
 --- !u!1 &177295628859647516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,7 +1602,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!114 &4029676661483012178
 MonoBehaviour:
@@ -2904,7 +2974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4981932160474960630
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3025,7 +3095,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -1
+  m_SortingOrder: -2
   m_TargetDisplay: 0
 --- !u!114 &2420748919667834744
 MonoBehaviour:
@@ -4438,7 +4508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8362235837679935971
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5361,7 +5431,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &326577754635890674
 MonoBehaviour:
@@ -7581,7 +7651,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &6468559100269471376
 MonoBehaviour:
@@ -14158,7 +14228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4058019432748315075
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17786,7 +17856,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &3279906510301256102
 MonoBehaviour:
@@ -18177,7 +18247,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &1617027443653694628
 MonoBehaviour:
@@ -18644,7 +18714,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 5, y: -45}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 400, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &6394645720431928843
 CanvasRenderer:
@@ -19125,16 +19195,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: System Failure
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 37975d8f16eaad4439b1655643aed226, type: 2}
-  m_sharedMaterial: {fileID: -4315167006756659453, guid: 37975d8f16eaad4439b1655643aed226,
+  m_fontAsset: {fileID: 11400000, guid: adf1b113218ee6446b29bc3c3f1d0568, type: 2}
+  m_sharedMaterial: {fileID: 7003283874107307069, guid: adf1b113218ee6446b29bc3c3f1d0568,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190167
-  m_fontColor: {r: 0.33962262, g: 0, b: 0, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -22022,7 +22092,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!114 &5231995385525032386
 MonoBehaviour:
@@ -22131,16 +22201,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: System Restored
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 312b6dccd3b22c84aaf053c9638cf9bd, type: 2}
-  m_sharedMaterial: {fileID: -3810899502807574125, guid: 312b6dccd3b22c84aaf053c9638cf9bd,
+  m_fontAsset: {fileID: 11400000, guid: adf1b113218ee6446b29bc3c3f1d0568, type: 2}
+  m_sharedMaterial: {fileID: 7003283874107307069, guid: adf1b113218ee6446b29bc3c3f1d0568,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294960515
-  m_fontColor: {r: 0.514151, g: 0.89968467, b: 1, a: 1}
+    rgba: 4294961295
+  m_fontColor: {r: 0.5613208, g: 0.90801877, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -24895,7 +24965,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &8902668412003692095
 MonoBehaviour:
@@ -25192,7 +25262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1422762594296017167
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26976,7 +27046,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &8172228836328997625
 MonoBehaviour:

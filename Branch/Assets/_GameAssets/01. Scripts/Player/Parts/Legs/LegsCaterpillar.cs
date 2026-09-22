@@ -11,6 +11,9 @@ public class LegsCaterpillar : PartBaseLegs
     [Header("캐터필러 설정")]
     [SerializeField] protected GameObject subWheelObject;
     [SerializeField] protected GameObject impactEffectPrefab;
+    // 시즈 모드 포격 이펙트 유지 시간. 이펙트 프리팹에 AudioSource를 붙여 소리를 낼 때,
+    // 소리가 이보다 길면 이펙트와 함께 제거되면서 끊기므로 소리 길이에 맞춰 늘린다.
+    [SerializeField] protected float impactEffectLifetime = 1.0f;
     [SerializeField] protected Material caterpillarMaterial;
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] private float turnMoveSpeed = 120.0f;
@@ -319,7 +322,7 @@ public class LegsCaterpillar : PartBaseLegs
                         impactEffectPrefab,
                         startPoint,
                         Quaternion.LookRotation(-_owner.transform.forward)),
-                    1.0f
+                    impactEffectLifetime
                     );
                 _owner.FollowCamera.ApplyShake(source);
 

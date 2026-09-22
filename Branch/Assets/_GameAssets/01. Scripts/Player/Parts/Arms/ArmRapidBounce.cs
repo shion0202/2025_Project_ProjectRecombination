@@ -20,7 +20,7 @@ public class ArmRapidBounce : PartBaseArm
         _owner.FollowCamera.ApplyAimAssist();
 
         Vector3 targetPoint = GetTargetPoint(out RaycastHit hit);
-        Vector3 camShootDirection = (targetPoint - bulletSpawnPoint.position).normalized;
+        Vector3 camShootDirection = GetShootDirection(targetPoint);
         Vector3 randomDir = GetRandomDirection(camShootDirection);
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
