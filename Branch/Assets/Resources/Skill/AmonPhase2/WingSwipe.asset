@@ -23,6 +23,9 @@ MonoBehaviour:
   cooldown: 3
   castTime: 1.2
   animSpeed: 1
+  castNotice: 
+  enCastNotice: 
+  castNoticeDuration: 5
   meleeCollisionPrefab: {fileID: 4070606023755049407, guid: 9738e5f867811414da87d99f8ce56023,
     type: 3}
   collisionScale: {x: 4, y: 2.2, z: 4}
@@ -32,3 +35,4 @@ MonoBehaviour:
   - {fileID: 1827226128182048838, guid: 008671a3573377942b9939ada5144771, type: 3}
   - {fileID: 1827226128182048838, guid: 9a495e2479821824b878416c2489e2f1, type: 3}
   - {fileID: 1827226128182048838, guid: c633c774ed56a62418e7500456dc9d4b, type: 3}
+  _audioClip: {fileID: 8300000, guid: ca3652dbd618744b2bd35df9cf36772b, type: 3}

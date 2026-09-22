@@ -349,5 +349,15 @@ public class AmonPaseTwoFSM : FSM
         GUIManager.Instance.GameUIController.UpdateBossHpBar(LocalizationManager.IsKorean ? "해방된 아몬" : "Amon Unbound", blackboard.CurrentHealth, blackboard.MaxHealth);
     }
 
-    private void AnimationEvent_WalkSound() => blackboard.AudioSource.PlayOneShot(walkClip);
+    // 현재는 애니메이션 이벤트가 아니라 ActChase()가 매 프레임 호출한다.
+    // 가드가 없으면 2.8초짜리 이동 클립이 프레임마다 겹쳐 쌓여 소리가 뭉개진다.
+    // 걷기 애니메이션에 이벤트를 걸면 ExcutionerFSM.AnimationEvent_PlayWalkSound()처럼
+    // ActChase()의 호출을 지우고 이 가드도 뺄 수 있다.
+    private void AnimationEvent_WalkSound()
+    {
+        if (blackboard.AudioSource == null || walkClip == null) return;
+        if (blackboard.AudioSource.isPlaying) return;
+
+        blackboard.AudioSource.PlayOneShot(walkClip);
+    }
 }
