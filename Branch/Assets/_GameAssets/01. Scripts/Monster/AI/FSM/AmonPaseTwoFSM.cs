@@ -32,6 +32,8 @@ public class AmonPaseTwoFSM : FSM
     // 사망 처리를 한 번만 실행하기 위한 플래그.
     // Act()는 매 프레임 돌기 때문에 없으면 사망 연출 코루틴이 프레임마다 쌓인다.
     private bool _isDying;
+    // [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip walkClip;
 
     private void OnDisable()
     {
@@ -281,11 +283,11 @@ public class AmonPaseTwoFSM : FSM
     {
         if (blackboard.Target is null) return;
 
-        Vector3 direction = (blackboard.Target.transform.position - blackboard.transform.position).normalized;
-        Vector3 chasePosition = blackboard.transform.position + direction * (blackboard.RunSpeed * Time.deltaTime);
+        var direction = (blackboard.Target.transform.position - blackboard.transform.position).normalized;
+        var chasePosition = blackboard.transform.position + direction * (blackboard.RunSpeed * Time.deltaTime);
 
         // NavMeshAgent를 사용하여 이동
-        if (blackboard.NavMeshAgent != null)
+        if (blackboard.NavMeshAgent is not null)
         {
             blackboard.NavMeshAgent.isStopped = false;
             blackboard.NavMeshAgent.SetDestination(chasePosition);
@@ -293,6 +295,9 @@ public class AmonPaseTwoFSM : FSM
 
         // 애니메이션 설정
         blackboard.AnimatorParameterSetter.Animator.SetBool(IsMoving, true);
+        
+        // 이동 사운드 재생
+        AnimationEvent_WalkSound();
     }
 
     protected override void EnterState(string stateName)
@@ -343,4 +348,6 @@ public class AmonPaseTwoFSM : FSM
         
         GUIManager.Instance.GameUIController.UpdateBossHpBar(LocalizationManager.IsKorean ? "해방된 아몬" : "Amon Unbound", blackboard.CurrentHealth, blackboard.MaxHealth);
     }
+
+    private void AnimationEvent_WalkSound() => blackboard.AudioSource.PlayOneShot(walkClip);
 }

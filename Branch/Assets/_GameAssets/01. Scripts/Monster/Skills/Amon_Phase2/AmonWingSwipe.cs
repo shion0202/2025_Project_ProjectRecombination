@@ -24,6 +24,8 @@ namespace _Test.Skills
         [SerializeField] private Vector3 collisionOffset;                       // 근접 공격 위치
         [SerializeField] private List<AnimationClip> wingAttackclips = new();   // 근접 공격 캐스팅 및 공격 애니메이션
                                                                                 // 0: 왼쪽 캐스팅, 1: 왼쪽 공격, 2: 오른쪽 캐스팅, 3: 오른쪽 공격
+        [SerializeField] private AudioClip _audioClip;
+        
         private GameObject meleeCollisionObject;
         private bool isLeftAttack = false;
 
@@ -33,23 +35,19 @@ namespace _Test.Skills
 
             // 3. 공격 애니메이션 재생 및 공격 판정 활성화
             data.AnimatorParameterSetter.Animator.speed = 1.0f;
-            if (isLeftAttack)
-            {
-                data.AnimatorParameterSetter.Animator.SetTrigger("AttackLeftTrigger");
-            }
-            else
-            {
-                data.AnimatorParameterSetter.Animator.SetTrigger("AttackRightTrigger");
-            }
+            data.AnimatorParameterSetter.Animator.SetTrigger(isLeftAttack ? "AttackLeftTrigger" : "AttackRightTrigger");
 
             //meleeCollision.gameObject.SetActive(true);
             meleeCollisionObject = Utils.Instantiate(meleeCollisionPrefab, data.Agent.transform);
-            AmonMeleeCollision meleeCollision = meleeCollisionObject.GetComponent<AmonMeleeCollision>();
+            var meleeCollision = meleeCollisionObject.GetComponent<AmonMeleeCollision>();
             if (meleeCollision)
             {
                 meleeCollision.Init(damage, collisionScale, collisionOffset);
             }
-
+            
+            // 근접 공격 사운드 재생
+            data.AudioSource.PlayOneShot(_audioClip);
+            
             // Attack Time
             yield return new WaitForSeconds(wingAttackclips[isLeftAttack ? 2 : 3].length);
 

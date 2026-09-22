@@ -1,0 +1,8 @@
+# 디폴트 무시된 파일
+/shelf/
+/workspace.xml
+# Rider에서 무시된 파일
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+/.idea.Branch.iml
