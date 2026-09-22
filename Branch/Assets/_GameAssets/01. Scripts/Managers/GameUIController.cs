@@ -900,6 +900,72 @@ namespace Managers
             Time.timeScale = 0.0f;
         }
 
+        // 패턴 설명은 플레이당 한 번만 띄운다.
+        // 이 플래그를 SkillData(ScriptableObject)에 두면 에디터에서 플레이모드를 끝내도 값이 남아
+        // 두 번째 테스트부터 설명이 안 뜨므로, 씬과 함께 새로 만들어지는 이쪽에 둔다.
+        private readonly HashSet<string> _shownPatternGuides = new();
+
+        /// <summary>
+        /// 보스 패턴이 처음 나올 때 게임을 멈추고 해당 key의 도움말을 띄운다. 같은 key는 플레이당 한 번만 뜬다.
+        /// 쓰는 UI는 일시정지 메뉴의 도움말(tutorial)이다. helpUI는 F1 키 가이드라 다른 것이니 헷갈리지 말 것.
+        /// 닫는 것은 도움말 UI의 기존 버튼이 그대로 처리하고, 여기서는 그걸 기다렸다가 일시정지를 푼다.
+        /// 호출한 쪽(스킬 코루틴)은 기다릴 필요가 없다. timeScale이 0이면 그 코루틴도 같이 멈추기 때문이다.
+        /// </summary>
+        public void ShowPatternGuideOnce(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key) || Tutorial == null) return;
+            if (!isActiveAndEnabled) return;    // 비활성 상태에서는 코루틴을 시작할 수 없다
+
+            // 플레이어가 일시정지 메뉴나 키 가이드를 보는 중이면 끼어들지 않는다.
+            if (PauseUI != null && PauseUI.activeSelf) return;
+            if (HelpUI != null && HelpUI.activeSelf) return;
+
+            UI_Tutorial tutorial = Tutorial.GetComponent<UI_Tutorial>();
+            if (tutorial == null)
+            {
+                Debug.LogWarning($"[GameUIController] tutorial 오브젝트에 UI_Tutorial이 없어 패턴 설명을 건너뜀: {key}");
+                return;
+            }
+
+            // 실제로 띄울 수 있다고 확인한 뒤에 '봤음'으로 기록한다.
+            // 먼저 기록하면 배선이 어긋나 한 번 실패했을 때 그 패턴 설명이 그 판 내내 다시 안 뜬다.
+            if (!_shownPatternGuides.Add(key)) return;
+
+            StartCoroutine(CoShowPatternGuide(tutorial, key));
+        }
+
+        private IEnumerator CoShowPatternGuide(UI_Tutorial tutorial, string key)
+        {
+            var player = MonsterManager.Instance.Player != null
+                ? MonsterManager.Instance.Player.GetComponent<PlayerController>()
+                : null;
+            if (player)
+            {
+                player.FollowCamera.OnUIOpen();
+            }
+
+            // 켜기 전에 내용을 먼저 채운다. 반대로 하면 OnEnable이 이전 패턴 내용으로 한 프레임 그린다.
+            tutorial.ShowPatternGuide(key);
+            Tutorial.SetActive(true);
+            HUD.SetActive(false);
+            Time.timeScale = 0.0f;
+
+            // 닫기는 ESC가 처리한다(PlayerController.CoProcessPauseInput이 Tutorial을 비활성화).
+            // timeScale이 0이라 WaitForSeconds는 돌지 않으므로 프레임 단위로 기다려야 한다.
+            yield return new WaitWhile(() => Tutorial.activeSelf);
+
+            // 일시정지 메뉴에서 여는 도움말은 ShowTutorialByKey를 거치지 않고 SetActive만 하므로,
+            // 여기서 풀어두지 않으면 다음에 열었을 때 좌측 메뉴가 사라진 채로 뜬다.
+            tutorial.SetPatternMode(false);
+
+            Time.timeScale = 1.0f;
+            RestoreHUD();
+            if (player)
+            {
+                player.FollowCamera.OnUIClose();
+            }
+        }
+
         public void OpenKeyGuide()
         {
             var player = MonsterManager.Instance.Player.GetComponent<PlayerController>();

@@ -25,6 +25,7 @@ MonoBehaviour:
     \uD130\uC9C0\uAE30 \uC804\uC5D0 \uD30C\uAD34\uD558\uC138\uC694!"
   enCastNotice: Destroy the soul spheres before they burst!
   castNoticeDuration: 3
+  patternGuideKey: SoulSphere
   originMaterial: {fileID: 2100000, guid: f91727232c3b4ba45bd0416871448a2e, type: 2}
   glowMaterial: {fileID: 2100000, guid: 364b8529442ba3d449425f58173b1dd2, type: 2}
   soulSpherePrefab: {fileID: 5321323443577561300, guid: 665ca049fcfec274bb4df2ef0748326f,

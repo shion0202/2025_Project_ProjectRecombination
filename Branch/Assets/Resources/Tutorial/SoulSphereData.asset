@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ebfc1867d3921f4d9fbf05c56abfc5e, type: 3}
+  m_Name: SoulSphereData
+  m_EditorClassIdentifier: 
+  key: SoulSphere
+  title: "\uC601\uD63C \uAD6C\uCCB4"
+  descriptions:
+  - "\uC544\uBAAC\uC774 \uC8FC\uBCC0\uC5D0 \uC601\uD63C \uAD6C\uCCB4 3\uAC1C\uB97C
+    \uC0DD\uC131\uD558\uBA70, \uC77C\uC815 \uC2DC\uAC04 \uD6C4 \uD3ED\uBC1C\uD569\uB2C8\uB2E4.\n\n\uC601\uD63C
+    \uAD6C\uCCB4\uAC00 \uD3ED\uBC1C\uD558\uAE30 \uC804\uC5D0 \uACF5\uACA9\uD574 \uD30C\uAD34\uD558\uC138\uC694."
+  enTitle: Soul Sphere
+  enDescriptions:
+  - 'Amon creates three soul spheres nearby, and they detonate after a time.
+
+
+
+    Shoot
+    the soul spheres down before they explode.'
+  exampleImage: {fileID: 21300000, guid: c0a4dcd2f89304c4f99287e309719947, type: 3}
+  videoName: Tutorial_SoulSphere.mp4

@@ -21,13 +21,14 @@ MonoBehaviour:
     \uCCB4\uB825 \uD761\uC218."
   damage: 200
   range: 4
-  cooldown: 30
+  cooldown: 20
   castTime: 10
   animSpeed: 1
   castNotice: "\uC801\uC774 \uD0DC\uC138\uB97C \uAC16\uCD94\uACE0 \uC788\uC2B5\uB2C8\uB2E4.
     \uBCF4\uD638\uB9C9\uC744 \uD30C\uAD34\uD574 \uC800\uC9C0\uD558\uC138\uC694!"
   enCastNotice: Break the barrier to stop the attack!
   castNoticeDuration: 3
+  patternGuideKey: SoulAbsorb
   barrierPrefab: {fileID: 3292751394904765131, guid: 98b0d9632f236354b886205f3e1350bb,
     type: 3}
   raiseClip: {fileID: 1827226128182048838, guid: 995956e9ab54a2044a0eb7ed617a0766,

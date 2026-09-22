@@ -30,6 +30,7 @@ MonoBehaviour:
     \uAD6C\uC5ED\uC73C\uB85C \uD53C\uD558\uC138\uC694!"
   enCastNotice: Heavy attack incoming, get to the safe zone!
   castNoticeDuration: 3
+  patternGuideKey: Lockdown
   defaultPosition: {x: 0, y: 0, z: 0}
   warpPosition: {x: 0, y: 0, z: 0}
   warpHeight: 10

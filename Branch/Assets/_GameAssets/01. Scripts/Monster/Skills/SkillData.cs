@@ -29,6 +29,11 @@ namespace _Test.Skills
         [Tooltip("메시지를 보여주는 시간(초). 앞뒤로 페이드 인/아웃이 각각 1초씩 더 붙는다.")]
         public float castNoticeDuration = 5.0f;
 
+        [Header("패턴 설명")]
+        [Tooltip("이 패턴이 처음 시전될 때 게임을 멈추고 띄울 도움말(TutorialDataSO)의 key. " +
+                 "비워두면 아무것도 띄우지 않는다. 플레이당 한 번만 뜬다.")]
+        public string patternGuideKey;
+
         /// <summary>
         /// 시전 안내 메시지를 띄운다. 문구가 비어 있으면 아무 일도 하지 않는다.
         /// 튜토리얼의 SetNoticeMessage 노드와 같은 UI 경로를 쓴다.

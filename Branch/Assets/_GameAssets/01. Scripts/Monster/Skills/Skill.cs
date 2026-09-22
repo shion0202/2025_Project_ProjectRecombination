@@ -46,6 +46,17 @@ namespace _Test.Skills
         {
             CurrentState = SkillState.isCasting;
             OnCast?.Invoke();
+
+            // 파훼가 필요한 패턴은 처음 나올 때 한 번 게임을 멈추고 설명을 띄운다.
+            // 여기서 기다리지 않아도 되는 이유: 설명이 뜨면 timeScale이 0이 되어
+            // 아래 Casting()의 대기와 회전 연산이 같이 멈추기 때문이다.
+            // 이 코루틴은 모든 몬스터 스킬이 지나가는 길목이므로, 설명 키가 없는 스킬은
+            // GUIManager를 건드리지도 않게 해서 UI가 없는 상황에서도 스킬이 죽지 않게 한다.
+            if (!string.IsNullOrWhiteSpace(skillData.patternGuideKey))
+            {
+                Managers.GUIManager.Instance?.GameUIController?.ShowPatternGuideOnce(skillData.patternGuideKey);
+            }
+
             yield return skillData.Casting(blackboard);
             
             try

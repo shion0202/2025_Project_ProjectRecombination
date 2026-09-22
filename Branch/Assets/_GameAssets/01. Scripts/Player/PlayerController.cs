@@ -1381,6 +1381,12 @@ public class PlayerController : MonoBehaviour, PlayerActions.IPlayerActionMapAct
     private void HandleMove()
     {
         if (!_canMove) return;
+
+        // 일시정지, 키 가이드, 보스 패턴 설명처럼 시간이 멈춘 동안에는 이동을 반영하지 않는다.
+        // 다른 전투 조작은 입력 콜백에서 걸러내지만, 이동은 매 프레임 여기서 처리되므로
+        // OnMove가 아니라 이쪽에 걸어야 이미 누르고 있던 키까지 막힌다.
+        if (IsTimeStopped) return;
+
         if ((_currentPlayerState & movementBlockMask) != 0) return;
 
         // Lerp 블렌딩 적용 (0.1f는 변화 속도, 필요에 따라 수정)
