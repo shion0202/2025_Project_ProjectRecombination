@@ -78,6 +78,12 @@ public class SoulSphereObject : MonoBehaviour
         if (rangeIndicatorPrefab)
         {
             indicator = Utils.Instantiate(rangeIndicatorPrefab, transform.position, Quaternion.identity);
+
+            // 수명을 생성 시점에 걸어 구체의 생사와 분리한다.
+            // 아래 코루틴은 이 구체 위에서 돌기 때문에, 확장 도중 구체가 파괴되거나
+            // 풀로 반환되면(플레이어가 폭발 중인 구체를 쏘는 경우, 보스 사망 정리 등)
+            // 코루틴이 멈춰 장판이 화면에 영영 남는다.
+            Utils.Destroy(indicator, explosionGrowDuration);
         }
         else
         {
@@ -120,10 +126,8 @@ public class SoulSphereObject : MonoBehaviour
             yield return null;
         }
 
-        if (indicator)
-        {
-            Utils.Destroy(indicator);
-        }
+        // 장판 파괴는 생성 시점에 예약해 두었으므로 여기서 다시 치우지 않는다.
+        // (같은 타이밍에 두 번 반환하면 풀이 "이미 풀에 있음" 경고를 낸다)
         Utils.Destroy(gameObject);
     }
 

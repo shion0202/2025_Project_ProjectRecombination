@@ -66,6 +66,16 @@ public class ArmLaserCharge : PartBaseArm
             if (_currentAmmo >= maxAmmo)
             {
                 _isOverheat = false;
+
+                // 부모(PartBaseArm.Update)는 여기서 UI도 함께 되돌린다. 이 클래스는 Update를
+                // 재정의하면서 그 호출이 빠져 있어, CoDestroyLaser가 끝까지 돌지 못하면
+                // 배경이 흰색으로 돌아올 방법이 없었다.
+                // 단 _isDelay(발사 간 딜레이) 중에는 그 검정 표시를 덮어쓰면 안 된다.
+                // 딜레이는 코루틴이 스스로 흰색으로 되돌리고, 중단되면 FinishActionForced가 처리한다.
+                if (!_isDelay && GUIManager.IsAliveInstance())
+                {
+                    GUIManager.Instance.GameUIController.SetAmmoColor(partType, false);
+                }
             }
 
             return;
@@ -158,10 +168,19 @@ public class ArmLaserCharge : PartBaseArm
             chargeEffect = null;
         }
 
+        // CoDestroyLaser는 발사 간 딜레이 동안 배경을 검게 했다가 되돌린다(SetAmmoColor true -> false).
+        // 그 코루틴을 여기서 끊으면 되돌리는 호출에 닿지 못해 배경이 검은 채로 굳는다.
+        // 중단한 경우에만 실제 과열 상태로 다시 맞춘다.
+        // (이 연출을 쓰는 것은 이 파츠뿐이라 공용 부모가 아니라 여기서 처리한다)
         if (fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
             fadeCoroutine = null;
+
+            if (GUIManager.IsAliveInstance())
+            {
+                GUIManager.Instance.GameUIController.SetAmmoColor(partType, _isOverheat);
+            }
         }
 
         if (currentLaserObject)

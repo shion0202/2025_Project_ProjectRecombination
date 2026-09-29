@@ -174,8 +174,14 @@ public class FollowCameraController : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+    // 기획자가 SO 값을 바꾸면 플레이하지 않고도 바로 보이게 하는 에디터 전용 갱신이다.
+    // 플레이 중에는 UpdateFollowCamera -> SmoothChangeCamera가 이미 매 프레임
+    // ApplyCameraSettings를 부르므로 중복이고, 플레이 종료 시점에 여기서 다시 쓰면
+    // 그 값이 씬에 남아 Bootstrap의 카메라 설정이 계속 수정된 것으로 잡힌다.
     private void Update()
     {
+        if (Application.isPlaying) return;
+
         foreach (ECameraState state in Enum.GetValues(typeof(ECameraState)))
         {
             _cameraSettings[state] = Resources.Load<FollowCameraData>($"Camera/FollowCameraData_{state}");

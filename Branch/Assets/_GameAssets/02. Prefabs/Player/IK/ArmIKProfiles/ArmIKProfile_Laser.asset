@@ -16,3 +16,4 @@ MonoBehaviour:
   spreadAngle: 10
   elbowHintOffset: {x: 0.3, y: -0.2, z: -0.1}
   shoulderOffset: {x: 0, y: 0, z: 0}
+  ikHoldTime: 0.35
