@@ -16,4 +16,10 @@ MonoBehaviour:
   spreadAngle: 10
   elbowHintOffset: {x: 0.3, y: -0.2, z: -0.1}
   shoulderOffset: {x: 0, y: 0, z: 0}
+  raiseIKOnInput: 0
+  ikRaiseSpeed: 20
   ikHoldTime: 0.35
+  torsoWeightScale: 1
+  recoilDistance: 0.09
+  recoilPitch: 7.5
+  recoilRecoverSpeed: 14
